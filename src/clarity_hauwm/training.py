@@ -253,6 +253,7 @@ def train_model(
                         "latent_dim": metadata["latent_dim"],
                         "action_dim": metadata["action_dim"],
                         "action_vocab": metadata["action_vocab"],
+                        "provenance": metadata.get("provenance"),
                     },
                     "best_validation_mse": best_validation,
                 },

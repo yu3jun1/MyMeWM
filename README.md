@@ -36,6 +36,8 @@ clarity-hauwm ablate \
 
 合成数据只用于检查数据流、训练、四组消融、direct/recursive 评估和报告是否工作，不能作为迁移有效性的证据。
 
+MRI-CORE 现已作为可选 encoder 接入，并支持与 BrainIAC 做严格对齐的双层消融。完整命令与可比性限制见 [MRI_CORE_COMPARISON.md](docs/MRI_CORE_COMPARISON.md)。
+
 ## 准备真实 CLARITY 数据
 
 ### 1. 一次性抽取冻结 BrainIAC latent

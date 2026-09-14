@@ -59,7 +59,11 @@ uncertainty = mean_D Var_m(z_hat_m)
 
 报告 normalized-latent MSE、cosine distance、uncertainty、error-vs-uncertainty Spearman、上下 uncertainty 五分位误差比及 MSE-horizon 线性斜率。统计单位是患者；paired bootstrap 先在患者内平均，再对患者重采样，避免把同一患者的多个窗口误当独立样本。
 
-## 6. 最小闭环的后续接口（不在本阶段实现）
+## 6. Encoder 对照轴
+
+BrainIAC 与 MRI-CORE 必须分别抽取、分别标准化、分别完成四组消融。只比较每个 encoder 内 `HS+ensemble` 相对自身 baseline 的改善和不确定性排序；由于 latent 维度及几何不同，不比较跨 encoder 的绝对 latent MSE。`compare-encoders` 在训练前强制核对 patient、timepoint、action 与时间间隔完全对齐。
+
+## 7. 最小闭环的后续接口（不在本阶段实现）
 
 Stage 1 通过后，下一阶段才把 GT action 替换为候选治疗序列：
 

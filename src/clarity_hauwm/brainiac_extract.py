@@ -95,12 +95,14 @@ def extract_brainiac_latents(
         if limit is not None and extracted >= limit:
             break
     summary = {
+        "encoder": "brainiac",
         "brainiac_checkpoint": str(Path(brainiac_checkpoint).resolve()),
         "clarity_checkpoint": str(Path(clarity_checkpoint).resolve()) if clarity_checkpoint else None,
         "timeline": str(Path(timeline_path).resolve()),
         "mri_root": str(Path(mri_root).resolve()),
         "tokens_per_modality": tokens_per_modality,
         "output_kind": output_kind,
+        "output_dim": 768,
         "loaded_clarity_encoder_tensors": loaded_lora_tensors,
         "extracted": extracted,
         "skipped_existing": skipped_existing,

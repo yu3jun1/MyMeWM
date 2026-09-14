@@ -8,7 +8,9 @@ from .ablation import VARIANTS, run_ablation
 from .brainiac_extract import extract_brainiac_latents
 from .clarity_adapter import build_clarity_trajectories
 from .data import validate_dataset
+from .encoder_comparison import parse_encoder_datasets, run_encoder_comparison
 from .evaluation import evaluate_checkpoint
+from .mri_core_extract import extract_mri_core_latents
 from .synthetic import generate_synthetic_dataset
 from .training import TrainingConfig, train_model
 
@@ -56,6 +58,23 @@ def build_parser() -> argparse.ArgumentParser:
     extract.add_argument("--output-kind", choices=("mean", "tokens"), default="mean")
     extract.add_argument("--limit", type=int)
 
+    extract_mri_core = subparsers.add_parser(
+        "extract-mri-core", help="Extract MRI-CORE 2D slice-token latent vectors"
+    )
+    extract_mri_core.add_argument("--mri-core-root", required=True)
+    extract_mri_core.add_argument("--timeline", required=True)
+    extract_mri_core.add_argument("--mri-root", required=True)
+    extract_mri_core.add_argument("--checkpoint", required=True)
+    extract_mri_core.add_argument("--output", required=True)
+    extract_mri_core.add_argument("--device", default="auto")
+    extract_mri_core.add_argument("--image-size", type=int, default=1024)
+    extract_mri_core.add_argument("--normalization", choices=("minmax", "sam"), default="minmax")
+    extract_mri_core.add_argument("--slice-policy", choices=("all", "uniform"), default="all")
+    extract_mri_core.add_argument("--slices-per-modality", type=int, default=16)
+    extract_mri_core.add_argument("--slice-batch-size", type=int, default=2)
+    extract_mri_core.add_argument("--output-kind", choices=("mean", "tokens"), default="mean")
+    extract_mri_core.add_argument("--limit", type=int)
+
     train = subparsers.add_parser("train", help="Train one ablation variant")
     train.add_argument("--data", required=True)
     train.add_argument("--config", required=True)
@@ -75,6 +94,17 @@ def build_parser() -> argparse.ArgumentParser:
     ablate.add_argument("--output", required=True)
     ablate.add_argument("--seeds", type=int, nargs="+", default=[7, 17, 29])
     ablate.add_argument("--bootstrap-samples", type=int, default=2000)
+    compare = subparsers.add_parser(
+        "compare-encoders", help="Run aligned Stage 1 ablations for multiple MRI encoders"
+    )
+    compare.add_argument(
+        "--encoder-data", nargs="+", required=True, metavar="NAME=PATH",
+        help="Aligned datasets, e.g. brainiac=data/a mri_core=data/b",
+    )
+    compare.add_argument("--config", required=True)
+    compare.add_argument("--output", required=True)
+    compare.add_argument("--seeds", type=int, nargs="+", default=[7, 17, 29])
+    compare.add_argument("--bootstrap-samples", type=int, default=2000)
     return parser
 
 
@@ -120,6 +150,24 @@ def main(argv: list[str] | None = None) -> None:
                 limit=args.limit,
             )
         )
+    elif args.command == "extract-mri-core":
+        _print(
+            extract_mri_core_latents(
+                mri_core_root=args.mri_core_root,
+                timeline_path=args.timeline,
+                mri_root=args.mri_root,
+                checkpoint_path=args.checkpoint,
+                output_dir=args.output,
+                device_name=args.device,
+                image_size=args.image_size,
+                normalization=args.normalization,
+                slice_policy=args.slice_policy,
+                slices_per_modality=args.slices_per_modality,
+                slice_batch_size=args.slice_batch_size,
+                output_kind=args.output_kind,
+                limit=args.limit,
+            )
+        )
     elif args.command == "train":
         config = TrainingConfig.from_json(args.config)
         checkpoint = train_model(
@@ -137,6 +185,16 @@ def main(argv: list[str] | None = None) -> None:
         _print(
             run_ablation(
                 args.data,
+                args.config,
+                args.output,
+                args.seeds,
+                bootstrap_samples=args.bootstrap_samples,
+            )
+        )
+    elif args.command == "compare-encoders":
+        _print(
+            run_encoder_comparison(
+                parse_encoder_datasets(args.encoder_data),
                 args.config,
                 args.output,
                 args.seeds,

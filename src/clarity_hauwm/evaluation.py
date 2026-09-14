@@ -208,8 +208,8 @@ def evaluate_checkpoint(
     model, checkpoint = load_trained_model(checkpoint_path, device)
     trajectories, metadata = load_dataset(data_dir)
     expected = checkpoint["data_metadata"]
-    for key in ("schema_version", "latent_dim", "action_dim", "action_vocab"):
-        if metadata[key] != expected[key]:
+    for key in ("schema_version", "latent_dim", "action_dim", "action_vocab", "provenance"):
+        if metadata.get(key) != expected.get(key):
             raise ValueError(f"Dataset/checkpoint mismatch for {key}")
     test_trajectories = select_trajectories(trajectories, checkpoint["split"]["test"])
     normalizer = LatentNormalizer.from_state_dict(checkpoint["normalizer"])

@@ -6,8 +6,9 @@
 - 155 位患者至少 2 个 timepoint，110 位至少 3 个，60 位至少 4 个，43 位至少 5 个，最长 6 个；
 - MRI 根目录包含 596 个 timepoint 目录，共 2,978 个 `.nii.gz`；理论完整数为 2,980，说明至少有两个模态或 mask 文件缺失，抽取器会跳过不完整 MRI；
 - BrainIAC 基础权重存在；
+- MRI-CORE 源码存在于 `CLARITY/mri_foundation`，但本地尚未发现 `MRI_CORE_vitb.pth`，需要按官方仓库说明另行放置；
 - CLARITY `exp012_cf_diversity` checkpoint 存在，并包含 MRI encoder LoRA 参数；
-- `features_output.csv` 当前不存在，所以正式 Stage 1 前必须先运行 `extract-brainiac`。
+- `features_output.csv` 当前不存在，所以正式 Stage 1 前必须先运行对应的 `extract-brainiac` 或 `extract-mri-core`。
 
 由此带来的实验约束：
 

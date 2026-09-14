@@ -160,6 +160,7 @@ def build_clarity_trajectories(
             "kind": "clarity",
             "timeline": str(timeline_path.resolve()),
             "latent_dir": str(latent_dir.resolve()),
+            "latent_extraction": json.loads((latent_dir / "extraction_metadata.json").read_text(encoding="utf-8")) if (latent_dir / "extraction_metadata.json").is_file() else None,
             "action_anchor": action_anchor,
             "pooling": pooling,
             "min_token_count": min_token_count,

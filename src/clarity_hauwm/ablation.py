@@ -79,15 +79,20 @@ def _paired_bootstrap(
 ) -> dict:
     patients = sorted(set(baseline) & set(candidate))
     if len(patients) < 2:
-        return {"patients": len(patients), "mean_improvement": None, "ci95": [None, None]}
-    differences = np.asarray([baseline[patient] - candidate[patient] for patient in patients])
+        return {"patients": len(patients), "baseline_mean": None, "candidate_mean": None, "mean_improvement": None, "relative_improvement": None, "ci95": [None, None]}
+    baseline_values = np.asarray([baseline[patient] for patient in patients])
+    candidate_values = np.asarray([candidate[patient] for patient in patients])
+    differences = baseline_values - candidate_values
     rng = np.random.default_rng(seed)
     boot = np.asarray(
         [differences[rng.integers(0, len(differences), size=len(differences))].mean() for _ in range(samples)]
     )
     return {
         "patients": len(patients),
+        "baseline_mean": float(baseline_values.mean()),
+        "candidate_mean": float(candidate_values.mean()),
         "mean_improvement": float(differences.mean()),
+        "relative_improvement": float(differences.mean() / max(abs(baseline_values.mean()), 1e-12)),
         "ci95": [float(np.quantile(boot, 0.025)), float(np.quantile(boot, 0.975))],
         "probability_of_improvement": float(np.mean(boot > 0)),
     }
