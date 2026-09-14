@@ -51,7 +51,7 @@ CLARITY_HAUWM_Minimal/
 └── tests/
 ```
 
-所有生成产物统一写入 `/data/tanyuejun/CLARITY_HAUWM_Minimal/`，不放入代码仓库。仓库内的 `data/`、`outputs/` 和 checkpoint 路径仍由 Git 忽略。
+MRI latent 保存在 `/data/tanyuejun/CLARITY_HAUWM_Minimal/latents/`；trajectory 保存在当前仓库的 `data/`，训练与评估结果保存在当前仓库的 `outputs/`。任何单文件超过 500 MB 时，改存 `/data/tanyuejun/CLARITY_HAUWM_Minimal/large_artifacts/`。仓库内的 `data/`、`outputs/` 和 checkpoint 路径均由 Git 忽略。
 
 ## 1. 环境与数据
 
@@ -71,7 +71,8 @@ MRI_ROOT=/data/tanyuejun/CLARITY/dataset/MU-Glioma-Post
 BRAINIAC_CKPT=/home/tanyuejun/CLARITY/BrainIAC-main/src/checkpoints/BrainIAC.ckpt
 MRI_CORE_ROOT=/home/tanyuejun/CLARITY/mri_foundation
 MRI_CORE_CKPT=/home/tanyuejun/CLARITY/mri_foundation/pretrained_weights/MRI_CORE_vitb.pth
-ARTIFACT_ROOT=/data/tanyuejun/CLARITY_HAUWM_Minimal
+LATENT_ROOT=/data/tanyuejun/CLARITY_HAUWM_Minimal/latents
+LARGE_ARTIFACT_ROOT=/data/tanyuejun/CLARITY_HAUWM_Minimal/large_artifacts
 ```
 
 MRI-CORE 官方实现和权重说明见 [mazurowski-lab/mri_foundation](https://github.com/mazurowski-lab/mri_foundation)。当前本机已有 MRI-CORE 源码，但未发现 `MRI_CORE_vitb.pth`；开始抽取前必须按官方说明下载并放到上面的路径。框架不会用随机权重或普通 SAM 权重代替。
@@ -133,14 +134,14 @@ MRI-CORE 是 2D encoder。每个 axial slice 独立归一化到 `[0,1]`，复制
 clarity-hauwm build-clarity \
   --timeline /home/tanyuejun/CLARITY/Predictor/dataset/MU_Glioma_Post/clinical_latest.json \
   --latents /data/tanyuejun/CLARITY_HAUWM_Minimal/latents/brainiac \
-  --output /data/tanyuejun/CLARITY_HAUWM_Minimal/trajectories/brainiac \
+  --output data/trajectories/brainiac \
   --action-anchor source \
   --pooling mean
 
 clarity-hauwm build-clarity \
   --timeline /home/tanyuejun/CLARITY/Predictor/dataset/MU_Glioma_Post/clinical_latest.json \
   --latents /data/tanyuejun/CLARITY_HAUWM_Minimal/latents/mri_core \
-  --output /data/tanyuejun/CLARITY_HAUWM_Minimal/trajectories/mri_core \
+  --output data/trajectories/mri_core \
   --action-anchor source \
   --pooling mean
 ```
@@ -150,8 +151,8 @@ clarity-hauwm build-clarity \
 检查两套轨迹：
 
 ```bash
-clarity-hauwm validate-data --data /data/tanyuejun/CLARITY_HAUWM_Minimal/trajectories/brainiac
-clarity-hauwm validate-data --data /data/tanyuejun/CLARITY_HAUWM_Minimal/trajectories/mri_core
+clarity-hauwm validate-data --data data/trajectories/brainiac
+clarity-hauwm validate-data --data data/trajectories/mri_core
 ```
 
 每位患者至少需要两个有效 MRI timepoint。模型按患者划分 train/validation/test，不会把同一患者的不同 timepoint 分到不同集合。
@@ -161,10 +162,10 @@ clarity-hauwm validate-data --data /data/tanyuejun/CLARITY_HAUWM_Minimal/traject
 ```bash
 clarity-hauwm compare-encoders \
   --encoder-data \
-    brainiac=/data/tanyuejun/CLARITY_HAUWM_Minimal/trajectories/brainiac \
-    mri_core=/data/tanyuejun/CLARITY_HAUWM_Minimal/trajectories/mri_core \
+    brainiac=data/trajectories/brainiac \
+    mri_core=data/trajectories/mri_core \
   --config configs/stage1.json \
-  --output /data/tanyuejun/CLARITY_HAUWM_Minimal/outputs/encoder_comparison \
+  --output outputs/encoder_comparison \
   --seeds 7 17 29 \
   --bootstrap-samples 2000
 ```
@@ -183,13 +184,13 @@ clarity-hauwm compare-encoders \
 总报告位于：
 
 ```text
-/data/tanyuejun/CLARITY_HAUWM_Minimal/outputs/encoder_comparison/encoder_comparison.json
+outputs/encoder_comparison/encoder_comparison.json
 ```
 
 每个 encoder 还会生成：
 
 ```text
-/data/tanyuejun/CLARITY_HAUWM_Minimal/outputs/encoder_comparison/<encoder>/
+outputs/encoder_comparison/<encoder>/
 ├── stage1_report.json
 └── seed_<seed>/<variant>/
     ├── best.pt
