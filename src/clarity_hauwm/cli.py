@@ -11,7 +11,6 @@ from .data import validate_dataset
 from .encoder_comparison import parse_encoder_datasets, run_encoder_comparison
 from .evaluation import evaluate_checkpoint
 from .mri_core_extract import extract_mri_core_latents
-from .synthetic import generate_synthetic_dataset
 from .training import TrainingConfig, train_model
 
 
@@ -25,15 +24,6 @@ def build_parser() -> argparse.ArgumentParser:
         description="Minimal CLARITY horizon-sampling and ensemble-dynamics validation",
     )
     subparsers = parser.add_subparsers(dest="command", required=True)
-
-    synthesize = subparsers.add_parser("synthesize", help="Generate non-clinical smoke-test trajectories")
-    synthesize.add_argument("--output", required=True)
-    synthesize.add_argument("--patients", type=int, default=80)
-    synthesize.add_argument("--latent-dim", type=int, default=8)
-    synthesize.add_argument("--action-dim", type=int, default=4)
-    synthesize.add_argument("--min-timepoints", type=int, default=3)
-    synthesize.add_argument("--max-timepoints", type=int, default=6)
-    synthesize.add_argument("--seed", type=int, default=7)
 
     validate = subparsers.add_parser("validate-data", help="Validate trajectory schema and print statistics")
     validate.add_argument("--data", required=True)
@@ -51,12 +41,10 @@ def build_parser() -> argparse.ArgumentParser:
     extract.add_argument("--timeline", required=True)
     extract.add_argument("--mri-root", required=True)
     extract.add_argument("--brainiac-checkpoint", required=True)
-    extract.add_argument("--clarity-checkpoint")
     extract.add_argument("--output", required=True)
     extract.add_argument("--device", default="auto")
     extract.add_argument("--tokens-per-modality", type=int, default=8)
     extract.add_argument("--output-kind", choices=("mean", "tokens"), default="mean")
-    extract.add_argument("--limit", type=int)
 
     extract_mri_core = subparsers.add_parser(
         "extract-mri-core", help="Extract MRI-CORE 2D slice-token latent vectors"
@@ -73,7 +61,6 @@ def build_parser() -> argparse.ArgumentParser:
     extract_mri_core.add_argument("--slices-per-modality", type=int, default=16)
     extract_mri_core.add_argument("--slice-batch-size", type=int, default=2)
     extract_mri_core.add_argument("--output-kind", choices=("mean", "tokens"), default="mean")
-    extract_mri_core.add_argument("--limit", type=int)
 
     train = subparsers.add_parser("train", help="Train one ablation variant")
     train.add_argument("--data", required=True)
@@ -110,19 +97,7 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main(argv: list[str] | None = None) -> None:
     args = build_parser().parse_args(argv)
-    if args.command == "synthesize":
-        _print(
-            generate_synthetic_dataset(
-                args.output,
-                patients=args.patients,
-                latent_dim=args.latent_dim,
-                action_dim=args.action_dim,
-                min_timepoints=args.min_timepoints,
-                max_timepoints=args.max_timepoints,
-                seed=args.seed,
-            )
-        )
-    elif args.command == "validate-data":
+    if args.command == "validate-data":
         _print(validate_dataset(args.data))
     elif args.command == "build-clarity":
         _print(
@@ -142,12 +117,10 @@ def main(argv: list[str] | None = None) -> None:
                 timeline_path=args.timeline,
                 mri_root=args.mri_root,
                 brainiac_checkpoint=args.brainiac_checkpoint,
-                clarity_checkpoint=args.clarity_checkpoint,
                 output_dir=args.output,
                 device_name=args.device,
                 tokens_per_modality=args.tokens_per_modality,
                 output_kind=args.output_kind,
-                limit=args.limit,
             )
         )
     elif args.command == "extract-mri-core":
@@ -165,7 +138,6 @@ def main(argv: list[str] | None = None) -> None:
                 slices_per_modality=args.slices_per_modality,
                 slice_batch_size=args.slice_batch_size,
                 output_kind=args.output_kind,
-                limit=args.limit,
             )
         )
     elif args.command == "train":

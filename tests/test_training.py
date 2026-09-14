@@ -1,13 +1,12 @@
 import json
 
 from clarity_hauwm.evaluation import evaluate_checkpoint
-from clarity_hauwm.synthetic import generate_synthetic_dataset
 from clarity_hauwm.training import TrainingConfig, train_model
 
 
-def test_tiny_train_and_evaluate(tmp_path):
+def test_tiny_train_and_evaluate(tmp_path, dataset_factory):
     data_dir = tmp_path / "data"
-    generate_synthetic_dataset(data_dir, patients=12, max_timepoints=4, seed=5)
+    dataset_factory(data_dir, patients=12, max_timepoints=4, seed=5)
     config = TrainingConfig(
         max_horizon=2,
         batch_size=8,

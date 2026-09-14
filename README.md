@@ -1,48 +1,85 @@
 # CLARITY × HAUWM：最小迁移验证框架
 
-这个仓库只回答一个问题：在冻结的 CLARITY MRI latent 上，`Horizon Sampling (HS)` 是否改善长跨度预测，独立动力学 ensemble 的分歧是否能排序预测风险。
+本仓库用于验证：在 CLARITY 的纵向 MRI latent 上，Horizon Sampling（HS）能否改善长跨度状态预测，以及独立 dynamics ensemble 的分歧能否排序预测风险。MRI encoder 支持 MRI-CORE 与 BrainIAC，两者使用完全相同的患者划分、治疗动作、训练配置和评估流程。
 
-它不是治疗推荐器，也不输出临床建议。Stage 1 全程使用数据中的真实治疗序列（ground-truth actions），不训练 Policy、Survival 或 LLM Agent。只有三个预注册判据通过后，才值得进入候选治疗闭环。
+这只是进入治疗方案闭环前的 Stage 1。它不生成治疗建议，也不能证明治疗的因果效应。
 
-## 最小实验
+## 核心约束
 
-四个模型使用完全相同的数据划分、latent 标准化、网络容量和优化器：
+- MRI-CORE 和 BrainIAC 都只使用原始预训练权重，并严格冻结。
+- 不加载 CLARITY 训练后的 LoRA、adapter 或任何任务微调权重。
+- BrainIAC 固定使用 `lora_r=0`；MRI-CORE 显式关闭 encoder/mask-decoder adapter。
+- 抽取过程使用 `torch.inference_mode()`，全部 encoder 参数均为 `requires_grad=False`。
+- 抽取配置会写入 `extraction_metadata.json`，随后进入 trajectory provenance 和训练 checkpoint。
+- 不跨 encoder 比较绝对 latent MSE；只比较每个 encoder 内 HS/ensemble 相对自身 baseline 的改善。
 
-| 名称 | 随机 horizon 训练 | ensemble | 训练跨度 |
+## 实验设计
+
+每个 encoder 独立运行四组消融：
+
+| Variant | Horizon Sampling | Ensemble | 训练目标 |
 |---|---:|---:|---|
-| `baseline` | 否 | 否 | 仅一步 |
-| `hs` | 是 | 否 | `1..K_max` |
-| `ensemble` | 否 | 是 | 仅一步 |
-| `hs_ensemble` | 是 | 是 | `1..K_max` |
+| `baseline` | 否 | 否 | 一步预测 |
+| `hs` | 是 | 否 | 随机采样 `1..K_max` |
+| `ensemble` | 否 | 是 | 一步预测 |
+| `hs_ensemble` | 是 | 是 | 随机采样 `1..K_max` |
 
-HS 模型直接编码完整的真实治疗/时间间隔序列，并预测 `z[t+k]`。递归 rollout 每次只推进一步；ensemble rollout 会让每个 head 延续自己的 latent particle，因而保留随 rollout 累积的 epistemic disagreement。
+HS 模型从当前 latent、完整真实治疗序列和时间间隔直接预测 `z[t+k]`。Recursive rollout 每次推进一步；ensemble 的每个 head 延续自己的 latent particle，以保留随 horizon 累积的 epistemic disagreement。
 
-## 快速验证代码
+正式配置位于 `configs/stage1.json`：最大 horizon 为 5、ensemble size 为 5、患者级固定划分为 70%/15%/15%，默认运行 3 个随机种子。MRI-CORE 与 BrainIAC 合计为 `2 encoders × 4 variants × 3 seeds = 24` 次训练。
 
-推荐复用已有 Python 3.10 环境：
+## 目录
+
+```text
+CLARITY_HAUWM_Minimal/
+├── README.md
+├── LICENSE
+├── pyproject.toml
+├── configs/
+│   └── stage1.json
+├── src/clarity_hauwm/
+│   ├── brainiac_extract.py
+│   ├── mri_core_extract.py
+│   ├── clarity_adapter.py
+│   ├── data.py
+│   ├── model.py
+│   ├── training.py
+│   ├── evaluation.py
+│   ├── ablation.py
+│   ├── encoder_comparison.py
+│   └── cli.py
+└── tests/
+```
+
+`data/`、`outputs/` 和 checkpoint 均被 Git 忽略。
+
+## 1. 环境与数据
+
+推荐复用现有 Python 3.10 环境：
 
 ```bash
 cd /home/tanyuejun/CLARITY_HAUWM_Minimal
-/home/tanyuejun/miniconda3/envs/py310/bin/python -m pip install -e . --no-deps
-
-clarity-hauwm synthesize --output data/synthetic --patients 80 --seed 7
-clarity-hauwm validate-data --data data/synthetic
-clarity-hauwm ablate \
-  --data data/synthetic \
-  --config configs/smoke.json \
-  --output outputs/smoke \
-  --seeds 7
+/home/tanyuejun/miniconda3/envs/py310/bin/python -m pip install -e ".[mri,dev]"
 ```
 
-合成数据只用于检查数据流、训练、四组消融、direct/recursive 评估和报告是否工作，不能作为迁移有效性的证据。
+实验使用以下路径：
 
-MRI-CORE 现已作为可选 encoder 接入，并支持与 BrainIAC 做严格对齐的双层消融。完整命令与可比性限制见 [MRI_CORE_COMPARISON.md](docs/MRI_CORE_COMPARISON.md)。
+```text
+CLARITY_ROOT=/home/tanyuejun/CLARITY
+TIMELINE=/home/tanyuejun/CLARITY/Predictor/dataset/MU_Glioma_Post/clinical_latest.json
+MRI_ROOT=/data/tanyuejun/CLARITY/dataset/MU-Glioma-Post
+BRAINIAC_CKPT=/home/tanyuejun/CLARITY/BrainIAC-main/src/checkpoints/BrainIAC.ckpt
+MRI_CORE_ROOT=/home/tanyuejun/CLARITY/mri_foundation
+MRI_CORE_CKPT=/home/tanyuejun/CLARITY/mri_foundation/pretrained_weights/MRI_CORE_vitb.pth
+```
 
-## 准备真实 CLARITY 数据
+MRI-CORE 官方实现和权重说明见 [mazurowski-lab/mri_foundation](https://github.com/mazurowski-lab/mri_foundation)。当前本机已有 MRI-CORE 源码，但未发现 `MRI_CORE_vitb.pth`；开始抽取前必须按官方说明下载并放到上面的路径。框架不会用随机权重或普通 SAM 权重代替。
 
-### 1. 一次性抽取冻结 BrainIAC latent
+原始 MRI 数据中存在少量不完整 timepoint。两个抽取器都会跳过缺少任一模态的 timepoint；后续 encoder 对比要求最终患者和 timepoint 覆盖完全一致，否则拒绝训练。
 
-脚本会跳过已有 `.npy`，可断点续跑。默认输出每个 timepoint 的 32 个 token 的均值，即 768 维向量。
+为避免误复用历史 LoRA latent，两个抽取命令都要求 `--output` 是空目录；目录中存在任何文件时会立即报错。
+
+## 2. 抽取严格冻结的 BrainIAC latent
 
 ```bash
 clarity-hauwm extract-brainiac \
@@ -50,51 +87,133 @@ clarity-hauwm extract-brainiac \
   --timeline /home/tanyuejun/CLARITY/Predictor/dataset/MU_Glioma_Post/clinical_latest.json \
   --mri-root /data/tanyuejun/CLARITY/dataset/MU-Glioma-Post \
   --brainiac-checkpoint /home/tanyuejun/CLARITY/BrainIAC-main/src/checkpoints/BrainIAC.ckpt \
-  --clarity-checkpoint /home/tanyuejun/CLARITY/experiments/exp012_cf_diversity/checkpoints/best_loss.pth \
-  --output data/brainiac_latents \
-  --device cuda
+  --output data/latents_brainiac \
+  --device cuda \
+  --tokens-per-modality 8 \
+  --output-kind mean
 ```
 
-若要严格冻结原始 BrainIAC（不加载 CLARITY 训练后的 LoRA），删除 `--clarity-checkpoint`。
+输出为每个 timepoint 一个 768 维向量。CLI 不提供 CLARITY checkpoint 或 LoRA 参数，因此不能意外加载任务微调后的 encoder。
 
-### 2. 对齐时间线与 latent
+## 3. 抽取严格冻结的 MRI-CORE latent
+
+```bash
+clarity-hauwm extract-mri-core \
+  --mri-core-root /home/tanyuejun/CLARITY/mri_foundation \
+  --timeline /home/tanyuejun/CLARITY/Predictor/dataset/MU_Glioma_Post/clinical_latest.json \
+  --mri-root /data/tanyuejun/CLARITY/dataset/MU-Glioma-Post \
+  --checkpoint /home/tanyuejun/CLARITY/mri_foundation/pretrained_weights/MRI_CORE_vitb.pth \
+  --output data/latents_mri_core \
+  --device cuda \
+  --image-size 1024 \
+  --normalization minmax \
+  --slice-policy all \
+  --slice-batch-size 2 \
+  --output-kind mean
+```
+
+MRI-CORE 是 2D encoder。每个 axial slice 独立归一化到 `[0,1]`，复制为三通道并送入冻结的 ViT-B `image_encoder`；feature map 经空间平均得到 256 维 slice token，再对四个模态和全部切片求均值得到 timepoint latent。这与官方特征抽取输入规范一致。
+
+如果现有 CLARITY MRI-CORE latent 使用了不同的切片选择、resize 或 normalization，必须用其原始参数重新抽取两边数据，不能把预处理差异归因于 encoder。可选的 `--normalization sam` 会额外施加 ImageNet/SAM mean-std；正式实验应预先固定一种设置。
+
+显存不足时可以降低 `--slice-batch-size`。如果预注册只使用固定数量切片，可改为：
+
+```bash
+--slice-policy uniform --slices-per-modality 16
+```
+
+正式报告必须记录这一变化，并保证所有 MRI-CORE run 完全一致。
+
+## 4. 构建 CLARITY 轨迹
+
+分别把两个 encoder 的 latent 与同一份临床时间线对齐：
 
 ```bash
 clarity-hauwm build-clarity \
   --timeline /home/tanyuejun/CLARITY/Predictor/dataset/MU_Glioma_Post/clinical_latest.json \
-  --latents data/brainiac_latents \
-  --output data/clarity_trajectories \
-  --action-anchor source
+  --latents data/latents_brainiac \
+  --output data/trajectories_brainiac \
+  --action-anchor source \
+  --pooling mean
 
-clarity-hauwm validate-data --data data/clarity_trajectories
+clarity-hauwm build-clarity \
+  --timeline /home/tanyuejun/CLARITY/Predictor/dataset/MU_Glioma_Post/clinical_latest.json \
+  --latents data/latents_mri_core \
+  --output data/trajectories_mri_core \
+  --action-anchor source \
+  --pooling mean
 ```
 
-`source` 明确定义 `A_t` 为从本次 MRI 到下一次 MRI 之间、在源端及其中间记录的治疗；不会把目标 MRI 处才记录的动作泄漏到输入。若数据字典最终确认治疗记录属于结束区间，必须把该参数改为 `destination`，并在所有消融中保持一致。
+`source` 表示 `A_t` 包含从当前 MRI 到下一次 MRI 之间、记录在源端及中间节点的治疗，不把目标 MRI 节点才记录的动作泄漏给模型。只有数据字典明确说明治疗属于目标区间时才使用 `destination`，并且两个 encoder 必须保持一致。
 
-### 3. 运行正式消融
+检查两套轨迹：
 
 ```bash
-clarity-hauwm ablate \
-  --data data/clarity_trajectories \
-  --config configs/stage1.json \
-  --output outputs/clarity_stage1 \
-  --seeds 7 17 29
+clarity-hauwm validate-data --data data/trajectories_brainiac
+clarity-hauwm validate-data --data data/trajectories_mri_core
 ```
 
-主要产物：
+每位患者至少需要两个有效 MRI timepoint。模型按患者划分 train/validation/test，不会把同一患者的不同 timepoint 分到不同集合。
 
-- 每个 run 的 `best.pt`、`history.json`；
-- `direct_records.csv` 与 `rollout_records.csv`；
-- 按 horizon 汇总的 `evaluation.json`；
-- 四组聚合的 `stage1_report.json`，包含 patient-level paired bootstrap 置信区间和是否达到预注册标准。
+## 5. 运行 Encoder × HS/Ensemble 正式实验
 
-## 通过标准
+```bash
+clarity-hauwm compare-encoders \
+  --encoder-data \
+    brainiac=data/trajectories_brainiac \
+    mri_core=data/trajectories_mri_core \
+  --config configs/stage1.json \
+  --output outputs/encoder_comparison \
+  --seeds 7 17 29 \
+  --bootstrap-samples 2000
+```
 
-正式结论只看 held-out patient，不能随机拆 timepoint：
+训练开始前会强制核对：
 
-1. `hs_ensemble` 在 `k >= 2` 的 direct MSE 低于 `baseline`，patient-level paired bootstrap 的 95% CI 不跨 0；
-2. `hs_ensemble` 的 recursive rollout MSE-horizon 斜率低于 `baseline`；
-3. ensemble uncertainty 与真实 squared error 的 Spearman 相关为正，且高不确定性五分位的平均误差高于低五分位。
+- patient 集合；
+- 每位患者的 timepoint 序列；
+- action vocabulary 和逐区间 multi-hot action；
+- 每个区间的 `delta_days`。
 
-若只改善均值误差、但不确定性不排序误差，只能证明 HS 有效，不能声称 uncertainty 已校准。完整设计、风险点和下一阶段闭环接口见 [DESIGN.md](DESIGN.md)。
+任何一项不一致都会报错，不会在不对齐的数据上继续比较。
 
+## 6. 输出与判据
+
+总报告位于：
+
+```text
+outputs/encoder_comparison/encoder_comparison.json
+```
+
+每个 encoder 还会生成：
+
+```text
+outputs/encoder_comparison/<encoder>/
+├── stage1_report.json
+└── seed_<seed>/<variant>/
+    ├── best.pt
+    ├── history.json
+    ├── evaluation.json
+    ├── direct_records.csv
+    └── rollout_records.csv
+```
+
+正式结论只看 held-out patients，并检查三个预注册判据：
+
+1. `hs_ensemble` 的 `k >= 2` direct normalized-latent MSE 低于 `baseline`，患者级 paired bootstrap 的 95% CI 不跨 0；
+2. `hs_ensemble` 的 recursive rollout MSE-horizon slope 低于 `baseline`；
+3. ensemble uncertainty 与真实 squared error 的 Spearman 相关为正，且最高不确定性五分位的误差高于最低五分位。
+
+`stage1_pass=true` 只有在三项同时通过时成立。若仅均值误差改善，只能说明 HS 可能有效，不能声称 uncertainty 已校准。
+
+不同 encoder 的维度和 latent 几何不同，因此不能用绝对 MSE 判断 MRI-CORE 或 BrainIAC 谁更好。`encoder_comparison.json` 比较的是各 encoder 内 `hs_ensemble` 相对自身 baseline 的 direct error 改善比例、recursive slope 改善及 uncertainty ranking。
+
+## 7. 结果边界
+
+Stage 1 使用观测数据中的真实治疗序列，只验证 world-model rollout 和不确定性机制能否迁移到 CLARITY。即使通过，也不能直接进行逐步治疗推荐。下一阶段仍需单独设计候选动作生成、结局/utility 模型、off-policy 或因果评估、安全约束和临床审核。
+
+代码测试：
+
+```bash
+/home/tanyuejun/miniconda3/envs/py310/bin/python -m pytest -q
+```

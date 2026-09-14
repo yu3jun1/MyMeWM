@@ -14,7 +14,7 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = ["pytest>=7.4"]
-mri = ["monai>=1.3", "nibabel>=5.0", "peft>=0.10", "torchvision>=0.16", "einops>=0.7"]
+mri = ["monai>=1.3", "nibabel>=5.0", "torchvision>=0.16", "einops>=0.7"]
 
 [project.scripts]
 clarity-hauwm = "clarity_hauwm.cli:main"

@@ -9,12 +9,11 @@ from clarity_hauwm.data import (
     load_dataset,
     split_patient_ids,
 )
-from clarity_hauwm.synthetic import generate_synthetic_dataset
 
 
-def test_round_trip_split_and_horizon_sampling(tmp_path):
+def test_round_trip_split_and_horizon_sampling(tmp_path, dataset_factory):
     data_dir = tmp_path / "synthetic"
-    generate_synthetic_dataset(data_dir, patients=12, seed=3)
+    dataset_factory(data_dir, patients=12, seed=3)
     trajectories, metadata = load_dataset(data_dir)
     assert metadata["num_patients"] == 12
     split = split_patient_ids([item.patient_id for item in trajectories], 17, 0.7, 0.15)

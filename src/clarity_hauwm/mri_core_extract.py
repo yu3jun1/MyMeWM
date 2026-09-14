@@ -153,23 +153,23 @@ def extract_mri_core_latents(
     slices_per_modality: int = 16,
     slice_batch_size: int = 2,
     output_kind: str = "mean",
-    limit: int | None = None,
 ) -> dict:
     import nibabel as nib
 
     if slice_batch_size < 1:
         raise ValueError("slice_batch_size must be positive")
+    output_dir = Path(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    if any(output_dir.iterdir()):
+        raise FileExistsError(f"Extraction output directory must be empty: {output_dir}")
     device = resolve_device(device_name)
     image_encoder = load_mri_core_image_encoder(mri_core_root, checkpoint_path, image_size).to(device)
     timeline_path = Path(timeline_path)
     mri_root = Path(mri_root)
-    output_dir = Path(output_dir)
-    output_dir.mkdir(parents=True, exist_ok=True)
     with timeline_path.open("r", encoding="utf-8") as handle:
         patients = json.load(handle)["patients"]
 
     extracted = 0
-    skipped_existing = 0
     skipped_missing_mri = 0
     for patient_id, patient in sorted(patients.items()):
         timeline = sorted(patient.get("timeline", []), key=lambda item: float(item.get("mri_day", 0)))
@@ -179,9 +179,6 @@ def extract_mri_core_latents(
                 raise ValueError(f"Cannot parse timepoint: {timepoint['tp_id']}")
             timepoint_number = int(digits)
             output_path = output_dir / latent_filename(patient_id, timepoint["tp_id"])
-            if output_path.exists():
-                skipped_existing += 1
-                continue
             paths = [_volume_path(mri_root, patient_id, timepoint_number, modality) for modality in MODALITIES]
             if not all(path.is_file() for path in paths):
                 skipped_missing_mri += 1
@@ -211,12 +208,10 @@ def extract_mri_core_latents(
             np.save(output_path, value.numpy(), allow_pickle=False)
             extracted += 1
             print(f"extracted MRI-CORE {patient_id} T{timepoint_number} -> {tuple(value.shape)}", flush=True)
-            if limit is not None and extracted >= limit:
-                break
-        if limit is not None and extracted >= limit:
-            break
     summary = {
         "encoder": "mri_core",
+        "frozen": True,
+        "adapter": None,
         "encoder_repository": str(Path(mri_core_root).resolve()),
         "encoder_checkpoint": str(Path(checkpoint_path).resolve()),
         "timeline": str(timeline_path.resolve()),
@@ -229,7 +224,6 @@ def extract_mri_core_latents(
         "output_kind": output_kind,
         "output_dim": 256,
         "extracted": extracted,
-        "skipped_existing": skipped_existing,
         "skipped_missing_mri": skipped_missing_mri,
     }
     with (output_dir / "extraction_metadata.json").open("w", encoding="utf-8") as handle:

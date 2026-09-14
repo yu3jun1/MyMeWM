@@ -3,11 +3,12 @@ from __future__ import annotations
 from pathlib import Path
 
 import numpy as np
+import pytest
 
-from .data import Trajectory, save_dataset
+from clarity_hauwm.data import Trajectory, save_dataset
 
 
-def generate_synthetic_dataset(
+def _make_test_dataset(
     output_dir: str | Path,
     patients: int = 80,
     latent_dim: int = 8,
@@ -16,7 +17,7 @@ def generate_synthetic_dataset(
     max_timepoints: int = 6,
     seed: int = 7,
 ) -> dict:
-    """Generate an action-conditioned stochastic system for pipeline smoke tests."""
+    """Build deterministic trajectories used only by unit tests."""
     if patients < 3:
         raise ValueError("patients must be >= 3")
     if min_timepoints < 2 or max_timepoints < min_timepoints:
@@ -64,6 +65,10 @@ def generate_synthetic_dataset(
         output_dir,
         trajectories,
         [f"synthetic_action_{index}" for index in range(action_dim)],
-        extra_metadata={"kind": "synthetic_smoke_test", "seed": seed},
+        extra_metadata={"kind": "test_fixture", "seed": seed},
     )
 
+
+@pytest.fixture
+def dataset_factory():
+    return _make_test_dataset
