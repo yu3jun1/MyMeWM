@@ -70,12 +70,13 @@ TIMELINE=/home/tanyuejun/CLARITY/Predictor/dataset/MU_Glioma_Post/clinical_lates
 MRI_ROOT=/data/tanyuejun/CLARITY/dataset/MU-Glioma-Post
 BRAINIAC_CKPT=/home/tanyuejun/CLARITY/BrainIAC-main/src/checkpoints/BrainIAC.ckpt
 MRI_CORE_ROOT=/home/tanyuejun/CLARITY/mri_foundation
-MRI_CORE_CKPT=/home/tanyuejun/CLARITY/mri_foundation/pretrained_weights/MRI_CORE_vitb.pth
+MRI_CORE_CKPT=/home/tanyuejun/CLARITY/mri_foundation/pretrained_weights/mri_foundation.pth
+SAM_CKPT="/home/tanyuejun/CLARITY/mri_foundation/SAM weights/sam_vit_b_01ec64.pth"
 LATENT_ROOT=/data/tanyuejun/CLARITY_HAUWM_Minimal/latents
 LARGE_ARTIFACT_ROOT=/data/tanyuejun/CLARITY_HAUWM_Minimal/large_artifacts
 ```
 
-MRI-CORE 官方实现和权重说明见 [mazurowski-lab/mri_foundation](https://github.com/mazurowski-lab/mri_foundation)。当前本机已有 MRI-CORE 源码，但未发现 `MRI_CORE_vitb.pth`；开始抽取前必须按官方说明下载并放到上面的路径。框架不会用随机权重或普通 SAM 权重代替。
+MRI-CORE 官方实现和权重说明见 [mazurowski-lab/mri_foundation](https://github.com/mazurowski-lab/mri_foundation)。本机的 `mri_foundation.pth` 提供 MRI 预训练 ViT backbone；`sam_vit_b_01ec64.pth` 只补齐 MRI checkpoint 未包含的 SAM neck。加载时严格核对 neck 的 6 个张量，随后冻结整个 `image_encoder`。框架不使用随机 neck、mask decoder 或任何 CLARITY 微调权重。
 
 原始 MRI 数据中存在少量不完整 timepoint。两个抽取器都会跳过缺少任一模态的 timepoint；后续 encoder 对比要求最终患者和 timepoint 覆盖完全一致，否则拒绝训练。
 
@@ -104,7 +105,8 @@ clarity-hauwm extract-mri-core \
   --mri-core-root /home/tanyuejun/CLARITY/mri_foundation \
   --timeline /home/tanyuejun/CLARITY/Predictor/dataset/MU_Glioma_Post/clinical_latest.json \
   --mri-root /data/tanyuejun/CLARITY/dataset/MU-Glioma-Post \
-  --checkpoint /home/tanyuejun/CLARITY/mri_foundation/pretrained_weights/MRI_CORE_vitb.pth \
+  --checkpoint /home/tanyuejun/CLARITY/mri_foundation/pretrained_weights/mri_foundation.pth \
+  --sam-checkpoint "/home/tanyuejun/CLARITY/mri_foundation/SAM weights/sam_vit_b_01ec64.pth" \
   --output /data/tanyuejun/CLARITY_HAUWM_Minimal/latents/mri_core \
   --device cuda \
   --image-size 1024 \

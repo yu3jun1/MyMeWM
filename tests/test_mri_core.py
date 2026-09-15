@@ -1,8 +1,13 @@
 import numpy as np
+import pytest
 import torch
 
 from clarity_hauwm.encoder_comparison import parse_encoder_datasets, validate_encoder_alignment
-from clarity_hauwm.mri_core_extract import preprocess_slices, select_slice_indices
+from clarity_hauwm.mri_core_extract import (
+    load_mri_core_image_encoder,
+    preprocess_slices,
+    select_slice_indices,
+)
 
 
 def test_mri_core_slice_preprocessing():
@@ -25,3 +30,12 @@ def test_encoder_dataset_alignment_and_parser(tmp_path, dataset_factory):
     result = validate_encoder_alignment(datasets)
     assert result["aligned"] is True
     assert result["patients"] == 6
+
+
+def test_mri_core_requires_sam_checkpoint(tmp_path):
+    repository = tmp_path / "mri_foundation"
+    (repository / "models" / "sam").mkdir(parents=True)
+    mri_checkpoint = tmp_path / "mri.pth"
+    mri_checkpoint.touch()
+    with pytest.raises(FileNotFoundError, match="SAM checkpoint"):
+        load_mri_core_image_encoder(repository, mri_checkpoint, tmp_path / "sam.pth", 1024)

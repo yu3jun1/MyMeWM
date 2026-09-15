@@ -59,14 +59,18 @@ def preprocess_slices(
 def load_mri_core_image_encoder(
     mri_core_root: str | Path,
     checkpoint_path: str | Path,
+    sam_checkpoint_path: str | Path,
     image_size: int,
 ) -> torch.nn.Module:
     mri_core_root = Path(mri_core_root).resolve()
     checkpoint_path = Path(checkpoint_path).resolve()
+    sam_checkpoint_path = Path(sam_checkpoint_path).resolve()
     if not (mri_core_root / "models" / "sam").is_dir():
         raise FileNotFoundError(f"MRI-CORE repository not found at {mri_core_root}")
     if not checkpoint_path.is_file():
         raise FileNotFoundError(f"MRI-CORE checkpoint not found: {checkpoint_path}")
+    if not sam_checkpoint_path.is_file():
+        raise FileNotFoundError(f"SAM checkpoint not found: {sam_checkpoint_path}")
     if not mri_core_root.name.isidentifier():
         raise ValueError(
             "MRI-CORE repository directory name must be a valid Python identifier "
@@ -98,6 +102,37 @@ def load_mri_core_image_encoder(
         pretrained_sam=False,
     )
     encoder = model.image_encoder
+    sam_state = torch.load(
+        sam_checkpoint_path,
+        map_location="cpu",
+        weights_only=True,
+        mmap=True,
+    )
+    if not isinstance(sam_state, dict):
+        raise ValueError(f"SAM checkpoint must contain a state dict: {sam_checkpoint_path}")
+    prefix = "image_encoder.neck."
+    neck_state = {
+        key.removeprefix(prefix): value
+        for key, value in sam_state.items()
+        if key.startswith(prefix)
+    }
+    expected_neck_state = encoder.neck.state_dict()
+    if neck_state.keys() != expected_neck_state.keys():
+        missing = sorted(expected_neck_state.keys() - neck_state.keys())
+        unexpected = sorted(neck_state.keys() - expected_neck_state.keys())
+        raise ValueError(f"SAM neck keys do not match; missing={missing}, unexpected={unexpected}")
+    mismatched_shapes = {
+        key: (tuple(neck_state[key].shape), tuple(expected_neck_state[key].shape))
+        for key in neck_state
+        if neck_state[key].shape != expected_neck_state[key].shape
+    }
+    if mismatched_shapes:
+        raise ValueError(f"SAM neck tensor shapes do not match: {mismatched_shapes}")
+    encoder.neck.load_state_dict(neck_state, strict=True)
+    print(
+        f"Loaded {len(neck_state)} pretrained SAM neck tensors from {sam_checkpoint_path}",
+        flush=True,
+    )
     encoder.eval()
     for parameter in encoder.parameters():
         parameter.requires_grad_(False)
@@ -145,6 +180,7 @@ def extract_mri_core_latents(
     timeline_path: str | Path,
     mri_root: str | Path,
     checkpoint_path: str | Path,
+    sam_checkpoint_path: str | Path,
     output_dir: str | Path,
     device_name: str = "auto",
     image_size: int = 1024,
@@ -163,7 +199,12 @@ def extract_mri_core_latents(
     if any(output_dir.iterdir()):
         raise FileExistsError(f"Extraction output directory must be empty: {output_dir}")
     device = resolve_device(device_name)
-    image_encoder = load_mri_core_image_encoder(mri_core_root, checkpoint_path, image_size).to(device)
+    image_encoder = load_mri_core_image_encoder(
+        mri_core_root,
+        checkpoint_path,
+        sam_checkpoint_path,
+        image_size,
+    ).to(device)
     timeline_path = Path(timeline_path)
     mri_root = Path(mri_root)
     with timeline_path.open("r", encoding="utf-8") as handle:
@@ -214,6 +255,8 @@ def extract_mri_core_latents(
         "adapter": None,
         "encoder_repository": str(Path(mri_core_root).resolve()),
         "encoder_checkpoint": str(Path(checkpoint_path).resolve()),
+        "sam_checkpoint": str(Path(sam_checkpoint_path).resolve()),
+        "sam_neck_tensors": len(image_encoder.neck.state_dict()),
         "timeline": str(timeline_path.resolve()),
         "mri_root": str(mri_root.resolve()),
         "image_size": image_size,

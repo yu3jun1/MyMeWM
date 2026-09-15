@@ -53,6 +53,7 @@ def build_parser() -> argparse.ArgumentParser:
     extract_mri_core.add_argument("--timeline", required=True)
     extract_mri_core.add_argument("--mri-root", required=True)
     extract_mri_core.add_argument("--checkpoint", required=True)
+    extract_mri_core.add_argument("--sam-checkpoint", required=True)
     extract_mri_core.add_argument("--output", required=True)
     extract_mri_core.add_argument("--device", default="auto")
     extract_mri_core.add_argument("--image-size", type=int, default=1024)
@@ -130,6 +131,7 @@ def main(argv: list[str] | None = None) -> None:
                 timeline_path=args.timeline,
                 mri_root=args.mri_root,
                 checkpoint_path=args.checkpoint,
+                sam_checkpoint_path=args.sam_checkpoint,
                 output_dir=args.output,
                 device_name=args.device,
                 image_size=args.image_size,
