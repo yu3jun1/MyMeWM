@@ -51,7 +51,7 @@ CLARITY_HAUWM_Minimal/
 └── tests/
 ```
 
-MRI latent 保存在 `/data/tanyuejun/CLARITY_HAUWM_Minimal/latents/`；trajectory 保存在当前仓库的 `data/`，训练与评估结果保存在当前仓库的 `outputs/`。任何单文件超过 500 MB 时，改存 `/data/tanyuejun/CLARITY_HAUWM_Minimal/large_artifacts/`。仓库内的 `data/`、`outputs/` 和 checkpoint 路径均由 Git 忽略。
+MRI latent 保存在 `/data/tanyuejun/CLARITY_HAUWM_Minimal/latents/`；trajectory 保存在当前仓库的 `data/`，训练与评估结果保存在当前仓库的 `outputs/`，运行日志保存在当前仓库的 `logs/`。任何单文件超过 500 MB 时，改存 `/data/tanyuejun/CLARITY_HAUWM_Minimal/large_artifacts/`。仓库内的 `data/`、`outputs/` 和 checkpoint 路径均由 Git 忽略。
 
 ## 1. 环境与数据
 
