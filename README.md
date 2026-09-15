@@ -55,7 +55,7 @@ MRI latent 保存在 `/data/tanyuejun/CLARITY_HAUWM_Minimal/latents/`；trajecto
 
 ## 1. 环境与数据
 
-推荐复用现有 Python 3.10 环境：
+推荐复用现有 Python 3.10 环境。本机运行实验时默认只在 GPU 4–7 中按实时负载选卡，除非用户明确指定，否则避免使用 GPU 0–3：
 
 ```bash
 cd /home/tanyuejun/CLARITY_HAUWM_Minimal
