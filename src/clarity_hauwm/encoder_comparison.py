@@ -1,12 +1,10 @@
 from __future__ import annotations
 
-import json
 from pathlib import Path
 from typing import Mapping, Sequence
 
 import numpy as np
 
-from .ablation import run_ablation
 from .data import Trajectory, load_dataset
 
 
@@ -58,46 +56,3 @@ def validate_encoder_alignment(dataset_paths: Mapping[str, Path]) -> dict:
         "patients": len(reference_trajectories),
         "aligned": True,
     }
-
-
-def run_encoder_comparison(
-    dataset_paths: Mapping[str, Path],
-    config_path: str | Path,
-    output_dir: str | Path,
-    seeds: Sequence[int],
-    bootstrap_samples: int = 2000,
-) -> dict:
-    alignment = validate_encoder_alignment(dataset_paths)
-    output_dir = Path(output_dir)
-    encoder_reports = {}
-    for name, data_path in dataset_paths.items():
-        encoder_reports[name] = run_ablation(
-            data_dir=data_path,
-            config_path=config_path,
-            output_dir=output_dir / name,
-            seeds=seeds,
-            bootstrap_samples=bootstrap_samples,
-        )
-    within_encoder = {}
-    for name, report in encoder_reports.items():
-        direct = report["confirmatory_tests"]["direct_long_horizon_mse"]
-        rollout = report["confirmatory_tests"]["recursive_mse_horizon_slope"]
-        within_encoder[name] = {
-            "stage1_pass": report["criteria"]["stage1_pass"],
-            "direct_relative_improvement": direct.get("relative_improvement"),
-            "recursive_slope_relative_improvement": rollout.get("relative_improvement"),
-            **report["confirmatory_tests"]["uncertainty_ranking"],
-        }
-    comparison = {
-        "alignment": alignment,
-        "within_encoder_results": within_encoder,
-        "reports": encoder_reports,
-        "interpretation": (
-            "Compare relative HS/ensemble gains and calibration within each encoder. "
-            "Do not rank encoders by absolute latent MSE because their latent spaces and dimensions differ."
-        ),
-    }
-    output_dir.mkdir(parents=True, exist_ok=True)
-    with (output_dir / "encoder_comparison.json").open("w", encoding="utf-8") as handle:
-        json.dump(comparison, handle, indent=2)
-    return comparison

@@ -20,6 +20,9 @@ def test_round_trip_split_and_horizon_sampling(tmp_path, dataset_factory):
     assert not (set(split["train"]) & set(split["test"]))
     normalizer = LatentNormalizer.fit(trajectories)
     dataset = TrainingHorizonDataset(trajectories, normalizer, 4, True, seed=9)
+    assert len(dataset) == sum(len(item.latents) - 1 for item in trajectories)
+    for index, (trajectory_index, start) in enumerate(dataset.starts):
+        assert 1 <= dataset[index]["horizon"] <= min(4, len(trajectories[trajectory_index].latents) - 1 - start)
     first_epoch = [dataset[index]["horizon"] for index in range(len(dataset))]
     dataset.set_epoch(1)
     second_epoch = [dataset[index]["horizon"] for index in range(len(dataset))]

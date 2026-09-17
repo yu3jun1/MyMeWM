@@ -11,7 +11,7 @@ import torch.nn as nn
 class ModelConfig:
     latent_dim: int
     action_dim: int
-    max_horizon: int = 5
+    max_horizon: int = 3
     hidden_dim: int = 128
     action_embed_dim: int = 32
     time_embed_dim: int = 16
@@ -23,163 +23,93 @@ class ModelConfig:
         return asdict(self)
 
 
-class ActionSequenceEncoder(nn.Module):
-    def __init__(
-        self,
-        action_dim: int,
-        action_embed_dim: int,
-        time_embed_dim: int,
-        hidden_dim: int,
-        delta_scale_days: float,
-    ) -> None:
+class OneStepDynamics(nn.Module):
+    """The same residual dynamics architecture is applied once per transition."""
+
+    def __init__(self, config: ModelConfig) -> None:
         super().__init__()
-        self.delta_scale_days = delta_scale_days
+        self.delta_scale_days = config.delta_scale_days
         self.action_projection = nn.Sequential(
-            nn.Linear(action_dim, action_embed_dim),
-            nn.LayerNorm(action_embed_dim),
+            nn.Linear(config.action_dim, config.action_embed_dim),
+            nn.LayerNorm(config.action_embed_dim),
             nn.SiLU(),
         )
         self.time_projection = nn.Sequential(
-            nn.Linear(1, time_embed_dim),
+            nn.Linear(1, config.time_embed_dim),
             nn.SiLU(),
-            nn.Linear(time_embed_dim, time_embed_dim),
+            nn.Linear(config.time_embed_dim, config.time_embed_dim),
         )
-        self.gru = nn.GRU(action_embed_dim + time_embed_dim, hidden_dim, batch_first=True)
-
-    def forward(
-        self,
-        actions: torch.Tensor,
-        delta_days: torch.Tensor,
-        lengths: torch.Tensor,
-    ) -> torch.Tensor:
-        action_embedding = self.action_projection(actions)
-        scaled_delta = torch.log1p(delta_days.clamp_min(0.0)) / math.log1p(self.delta_scale_days)
-        time_embedding = self.time_projection(scaled_delta.unsqueeze(-1))
-        sequence = torch.cat([action_embedding, time_embedding], dim=-1)
-        packed = nn.utils.rnn.pack_padded_sequence(
-            sequence,
-            lengths.detach().cpu(),
-            batch_first=True,
-            enforce_sorted=False,
-        )
-        _, hidden = self.gru(packed)
-        return hidden[-1]
-
-
-class HorizonEncoder(nn.Module):
-    def __init__(self, max_horizon: int, horizon_embed_dim: int, delta_scale_days: float) -> None:
-        super().__init__()
-        self.delta_scale_days = delta_scale_days
-        self.embedding = nn.Embedding(max_horizon + 1, horizon_embed_dim)
+        self.gru = nn.GRU(config.action_embed_dim + config.time_embed_dim, config.hidden_dim, batch_first=True)
+        self.horizon_embedding = nn.Embedding(config.max_horizon + 1, config.horizon_embed_dim)
         self.elapsed_projection = nn.Sequential(
-            nn.Linear(1, horizon_embed_dim),
+            nn.Linear(1, config.horizon_embed_dim),
             nn.SiLU(),
-            nn.Linear(horizon_embed_dim, horizon_embed_dim),
+            nn.Linear(config.horizon_embed_dim, config.horizon_embed_dim),
         )
-        self.output = nn.Sequential(
-            nn.Linear(horizon_embed_dim * 2, horizon_embed_dim),
-            nn.LayerNorm(horizon_embed_dim),
+        self.horizon_output = nn.Sequential(
+            nn.Linear(config.horizon_embed_dim * 2, config.horizon_embed_dim),
+            nn.LayerNorm(config.horizon_embed_dim),
             nn.SiLU(),
         )
-
-    def forward(self, horizons: torch.Tensor, delta_days: torch.Tensor) -> torch.Tensor:
-        mask = torch.arange(delta_days.shape[1], device=delta_days.device)[None, :] < horizons[:, None]
-        total_days = (delta_days * mask).sum(dim=1, keepdim=True)
-        total_days = torch.log1p(total_days) / math.log1p(self.delta_scale_days)
-        return self.output(torch.cat([self.embedding(horizons), self.elapsed_projection(total_days)], dim=-1))
-
-
-class DynamicsHead(nn.Module):
-    def __init__(self, input_dim: int, hidden_dim: int, latent_dim: int) -> None:
-        super().__init__()
+        context_dim = config.hidden_dim + config.horizon_embed_dim
         self.network = nn.Sequential(
-            nn.LayerNorm(input_dim),
-            nn.Linear(input_dim, hidden_dim),
+            nn.LayerNorm(config.latent_dim + context_dim),
+            nn.Linear(config.latent_dim + context_dim, config.hidden_dim),
             nn.SiLU(),
-            nn.Linear(hidden_dim, hidden_dim),
+            nn.Linear(config.hidden_dim, config.hidden_dim),
             nn.SiLU(),
-            nn.Linear(hidden_dim, latent_dim),
+            nn.Linear(config.hidden_dim, config.latent_dim),
         )
         nn.init.normal_(self.network[-1].weight, std=0.01)
         nn.init.zeros_(self.network[-1].bias)
 
-    def forward(self, z_start: torch.Tensor, context: torch.Tensor) -> torch.Tensor:
-        residual = self.network(torch.cat([z_start, context], dim=-1))
-        return z_start + residual
+    def forward(self, z: torch.Tensor, action: torch.Tensor, delta_days: torch.Tensor) -> torch.Tensor:
+        # Inputs are [B,D], [B,A], [B]. The GRU sees exactly one action.
+        scaled = torch.log1p(delta_days.clamp_min(0.0)) / math.log1p(self.delta_scale_days)
+        sequence = torch.cat((self.action_projection(action), self.time_projection(scaled[:, None])), dim=-1)
+        _, hidden = self.gru(sequence[:, None, :])
+        ones = torch.ones(len(z), dtype=torch.long, device=z.device)
+        horizon = self.horizon_output(torch.cat((self.horizon_embedding(ones), self.elapsed_projection(scaled[:, None])), dim=-1))
+        context = torch.cat((hidden[-1], horizon), dim=-1)
+        return z + self.network(torch.cat((z, context), dim=-1))
 
 
 class EnsembleDynamics(nn.Module):
+    """Independent dynamics members, each maintaining its own rollout state."""
+
     def __init__(self, config: ModelConfig) -> None:
         super().__init__()
-        if config.ensemble_size < 1:
-            raise ValueError("ensemble_size must be positive")
+        if config.ensemble_size < 1 or config.max_horizon < 1:
+            raise ValueError("ensemble_size and max_horizon must be positive")
         self.config = config
-        self.action_encoder = ActionSequenceEncoder(
-            action_dim=config.action_dim,
-            action_embed_dim=config.action_embed_dim,
-            time_embed_dim=config.time_embed_dim,
-            hidden_dim=config.hidden_dim,
-            delta_scale_days=config.delta_scale_days,
-        )
-        self.horizon_encoder = HorizonEncoder(
-            config.max_horizon,
-            config.horizon_embed_dim,
-            config.delta_scale_days,
-        )
-        context_dim = config.hidden_dim + config.horizon_embed_dim
-        self.heads = nn.ModuleList(
-            DynamicsHead(config.latent_dim + context_dim, config.hidden_dim, config.latent_dim)
-            for _ in range(config.ensemble_size)
-        )
+        self.members = nn.ModuleList(OneStepDynamics(config) for _ in range(config.ensemble_size))
 
     @property
     def ensemble_size(self) -> int:
-        return len(self.heads)
+        return len(self.members)
 
-    def encode_context(
-        self,
-        actions: torch.Tensor,
-        delta_days: torch.Tensor,
-        horizons: torch.Tensor,
-    ) -> torch.Tensor:
-        action_context = self.action_encoder(actions, delta_days, horizons)
-        horizon_context = self.horizon_encoder(horizons, delta_days)
-        return torch.cat([action_context, horizon_context], dim=-1)
+    def forward_memberwise(self, member_states: torch.Tensor, actions: torch.Tensor, delta_days: torch.Tensor) -> torch.Tensor:
+        """Advance [M,B,D] states using a common [B,A] action and [B] elapsed days."""
+        if member_states.ndim != 3 or member_states.shape[0] != self.ensemble_size:
+            raise ValueError("member_states must be [M,B,D]")
+        return torch.stack([
+            member(member_states[index], actions, delta_days)
+            for index, member in enumerate(self.members)
+        ])
 
-    def forward(
-        self,
-        z_start: torch.Tensor,
-        actions: torch.Tensor,
-        delta_days: torch.Tensor,
-        horizons: torch.Tensor,
-    ) -> torch.Tensor:
-        """Return member predictions with shape [M,B,D]."""
-        context = self.encode_context(actions, delta_days, horizons)
-        return torch.stack([head(z_start, context) for head in self.heads], dim=0)
-
-    def forward_memberwise(
-        self,
-        member_states: torch.Tensor,
-        actions: torch.Tensor,
-        delta_days: torch.Tensor,
-    ) -> torch.Tensor:
-        """Advance ensemble particles; member_states is [M,D] and actions is [1,1,A]."""
-        if member_states.shape[0] != self.ensemble_size:
-            raise ValueError("member_states does not match ensemble size")
-        horizons = torch.ones(1, dtype=torch.long, device=member_states.device)
-        context = self.encode_context(actions, delta_days, horizons).expand(self.ensemble_size, -1)
-        return torch.stack(
-            [head(member_states[index : index + 1], context[index : index + 1]).squeeze(0)
-             for index, head in enumerate(self.heads)],
-            dim=0,
-        )
+    def forward(self, z_start: torch.Tensor, actions: torch.Tensor, delta_days: torch.Tensor, horizons: torch.Tensor) -> torch.Tensor:
+        """Recursive terminal predictions [M,B,D], with no teacher forcing."""
+        if torch.any(horizons < 1) or torch.any(horizons > actions.shape[1]):
+            raise ValueError("horizons must be within the action sequence")
+        states = z_start.unsqueeze(0).expand(self.ensemble_size, -1, -1)
+        for step in range(int(horizons.max().item())):
+            advanced = self.forward_memberwise(states, actions[:, step], delta_days[:, step])
+            states = torch.where((horizons > step)[None, :, None], advanced, states)
+        return states
 
 
 def ensemble_mean_and_uncertainty(predictions: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
     mean = predictions.mean(dim=0)
-    if predictions.shape[0] == 1:
-        uncertainty = torch.zeros(predictions.shape[1], device=predictions.device, dtype=predictions.dtype)
-    else:
-        uncertainty = predictions.var(dim=0, unbiased=True).mean(dim=-1)
+    # Definition in the protocol is 1/M, including M=1 where disagreement is zero.
+    uncertainty = (predictions - mean.unsqueeze(0)).square().mean(dim=0).mean(dim=-1)
     return mean, uncertainty
-

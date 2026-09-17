@@ -4,14 +4,14 @@ import argparse
 import json
 from pathlib import Path
 
-from .ablation import VARIANTS, run_ablation
+from .ablation import evaluate_stage1, train_stage1
 from .brainiac_extract import extract_brainiac_latents
 from .clarity_adapter import build_clarity_trajectories
 from .data import validate_dataset
-from .encoder_comparison import parse_encoder_datasets, run_encoder_comparison
-from .evaluation import evaluate_checkpoint
+from .encoder_comparison import parse_encoder_datasets, validate_encoder_alignment
 from .mri_core_extract import extract_mri_core_latents
-from .training import TrainingConfig, train_model
+from .reporting import summarize_stage1
+from .training import VARIANTS
 
 
 def _print(value: dict) -> None:
@@ -20,15 +20,14 @@ def _print(value: dict) -> None:
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        prog="clarity-hauwm",
-        description="Minimal CLARITY horizon-sampling and ensemble-dynamics validation",
+        prog="clarity-hauwm", description="CLARITY random-horizon recursive Stage 1 experiments"
     )
     subparsers = parser.add_subparsers(dest="command", required=True)
 
-    validate = subparsers.add_parser("validate-data", help="Validate trajectory schema and print statistics")
+    validate = subparsers.add_parser("validate-data", help="Validate trajectory schema")
     validate.add_argument("--data", required=True)
 
-    build = subparsers.add_parser("build-clarity", help="Align CLARITY timeline with extracted latent files")
+    build = subparsers.add_parser("build-clarity", help="Align CLARITY timeline with frozen MRI latents")
     build.add_argument("--timeline", required=True)
     build.add_argument("--latents", required=True)
     build.add_argument("--output", required=True)
@@ -46,53 +45,40 @@ def build_parser() -> argparse.ArgumentParser:
     extract.add_argument("--tokens-per-modality", type=int, default=8)
     extract.add_argument("--output-kind", choices=("mean", "tokens"), default="mean")
 
-    extract_mri_core = subparsers.add_parser(
-        "extract-mri-core", help="Extract MRI-CORE 2D slice-token latent vectors"
-    )
-    extract_mri_core.add_argument("--mri-core-root", required=True)
-    extract_mri_core.add_argument("--timeline", required=True)
-    extract_mri_core.add_argument("--mri-root", required=True)
-    extract_mri_core.add_argument("--checkpoint", required=True)
-    extract_mri_core.add_argument("--sam-checkpoint", required=True)
-    extract_mri_core.add_argument("--output", required=True)
-    extract_mri_core.add_argument("--device", default="auto")
-    extract_mri_core.add_argument("--image-size", type=int, default=1024)
-    extract_mri_core.add_argument("--normalization", choices=("minmax", "sam"), default="minmax")
-    extract_mri_core.add_argument("--slice-policy", choices=("all", "uniform"), default="all")
-    extract_mri_core.add_argument("--slices-per-modality", type=int, default=16)
-    extract_mri_core.add_argument("--slice-batch-size", type=int, default=2)
-    extract_mri_core.add_argument("--output-kind", choices=("mean", "tokens"), default="mean")
+    mri = subparsers.add_parser("extract-mri-core", help="Extract frozen MRI-CORE latent vectors")
+    mri.add_argument("--mri-core-root", required=True)
+    mri.add_argument("--timeline", required=True)
+    mri.add_argument("--mri-root", required=True)
+    mri.add_argument("--checkpoint", required=True)
+    mri.add_argument("--sam-checkpoint", required=True)
+    mri.add_argument("--output", required=True)
+    mri.add_argument("--device", default="auto")
+    mri.add_argument("--image-size", type=int, default=1024)
+    mri.add_argument("--normalization", choices=("minmax", "sam"), default="minmax")
+    mri.add_argument("--slice-policy", choices=("all", "uniform"), default="all")
+    mri.add_argument("--slices-per-modality", type=int, default=16)
+    mri.add_argument("--slice-batch-size", type=int, default=2)
+    mri.add_argument("--output-kind", choices=("mean", "tokens"), default="mean")
 
-    train = subparsers.add_parser("train", help="Train one ablation variant")
+    align = subparsers.add_parser("validate-encoder-alignment", help="Check matched encoder trajectories")
+    align.add_argument("--encoder-data", nargs="+", required=True, metavar="NAME=PATH")
+
+    train = subparsers.add_parser("train-stage1", help="Train independent Stage 1 variants")
     train.add_argument("--data", required=True)
     train.add_argument("--config", required=True)
     train.add_argument("--output", required=True)
-    train.add_argument("--variant", choices=tuple(VARIANTS), required=True)
-    train.add_argument("--seed", type=int, default=7)
+    train.add_argument("--variants", nargs="+", choices=tuple(VARIANTS), default=list(VARIANTS))
+    train.add_argument("--seeds", type=int, nargs="+", default=None)
 
-    evaluate = subparsers.add_parser("evaluate", help="Evaluate direct prediction and recursive rollout")
-    evaluate.add_argument("--data", required=True)
-    evaluate.add_argument("--checkpoint", required=True)
-    evaluate.add_argument("--output", required=True)
-    evaluate.add_argument("--device", default="auto")
+    for name in ("evaluate-recursive", "evaluate-uncertainty"):
+        evaluate = subparsers.add_parser(name, help=f"Run {name.split('-')[1]} evaluation")
+        evaluate.add_argument("--input", required=True)
+        evaluate.add_argument("--max-horizon", type=int, default=3)
+        evaluate.add_argument("--device", default="auto")
 
-    ablate = subparsers.add_parser("ablate", help="Run all four Stage 1 variants")
-    ablate.add_argument("--data", required=True)
-    ablate.add_argument("--config", required=True)
-    ablate.add_argument("--output", required=True)
-    ablate.add_argument("--seeds", type=int, nargs="+", default=[7, 17, 29])
-    ablate.add_argument("--bootstrap-samples", type=int, default=2000)
-    compare = subparsers.add_parser(
-        "compare-encoders", help="Run aligned Stage 1 ablations for multiple MRI encoders"
-    )
-    compare.add_argument(
-        "--encoder-data", nargs="+", required=True, metavar="NAME=PATH",
-        help="Aligned datasets, e.g. brainiac=data/a mri_core=data/b",
-    )
-    compare.add_argument("--config", required=True)
-    compare.add_argument("--output", required=True)
-    compare.add_argument("--seeds", type=int, nargs="+", default=[7, 17, 29])
-    compare.add_argument("--bootstrap-samples", type=int, default=2000)
+    summary = subparsers.add_parser("summarize-stage1", help="Patient-level bootstrap and final criteria")
+    summary.add_argument("--input", required=True)
+    summary.add_argument("--bootstrap-samples", type=int, default=2000)
     return parser
 
 
@@ -101,80 +87,34 @@ def main(argv: list[str] | None = None) -> None:
     if args.command == "validate-data":
         _print(validate_dataset(args.data))
     elif args.command == "build-clarity":
-        _print(
-            build_clarity_trajectories(
-                args.timeline,
-                args.latents,
-                args.output,
-                action_anchor=args.action_anchor,
-                pooling=args.pooling,
-                min_token_count=args.min_token_count,
-            )
-        )
+        _print(build_clarity_trajectories(args.timeline, args.latents, args.output,
+                                         action_anchor=args.action_anchor, pooling=args.pooling,
+                                         min_token_count=args.min_token_count))
     elif args.command == "extract-brainiac":
-        _print(
-            extract_brainiac_latents(
-                clarity_root=args.clarity_root,
-                timeline_path=args.timeline,
-                mri_root=args.mri_root,
-                brainiac_checkpoint=args.brainiac_checkpoint,
-                output_dir=args.output,
-                device_name=args.device,
-                tokens_per_modality=args.tokens_per_modality,
-                output_kind=args.output_kind,
-            )
-        )
+        _print(extract_brainiac_latents(
+            clarity_root=args.clarity_root, timeline_path=args.timeline, mri_root=args.mri_root,
+            brainiac_checkpoint=args.brainiac_checkpoint, output_dir=args.output,
+            device_name=args.device, tokens_per_modality=args.tokens_per_modality,
+            output_kind=args.output_kind))
     elif args.command == "extract-mri-core":
-        _print(
-            extract_mri_core_latents(
-                mri_core_root=args.mri_core_root,
-                timeline_path=args.timeline,
-                mri_root=args.mri_root,
-                checkpoint_path=args.checkpoint,
-                sam_checkpoint_path=args.sam_checkpoint,
-                output_dir=args.output,
-                device_name=args.device,
-                image_size=args.image_size,
-                normalization=args.normalization,
-                slice_policy=args.slice_policy,
-                slices_per_modality=args.slices_per_modality,
-                slice_batch_size=args.slice_batch_size,
-                output_kind=args.output_kind,
-            )
-        )
-    elif args.command == "train":
-        config = TrainingConfig.from_json(args.config)
-        checkpoint = train_model(
-            data_dir=args.data,
-            output_dir=args.output,
-            config=config,
-            seed=args.seed,
-            variant=args.variant,
-            **VARIANTS[args.variant],
-        )
-        print(Path(checkpoint).resolve())
-    elif args.command == "evaluate":
-        _print(evaluate_checkpoint(args.data, args.checkpoint, args.output, args.device))
-    elif args.command == "ablate":
-        _print(
-            run_ablation(
-                args.data,
-                args.config,
-                args.output,
-                args.seeds,
-                bootstrap_samples=args.bootstrap_samples,
-            )
-        )
-    elif args.command == "compare-encoders":
-        _print(
-            run_encoder_comparison(
-                parse_encoder_datasets(args.encoder_data),
-                args.config,
-                args.output,
-                args.seeds,
-                bootstrap_samples=args.bootstrap_samples,
-            )
-        )
+        _print(extract_mri_core_latents(
+            mri_core_root=args.mri_core_root, timeline_path=args.timeline, mri_root=args.mri_root,
+            checkpoint_path=args.checkpoint, sam_checkpoint_path=args.sam_checkpoint,
+            output_dir=args.output, device_name=args.device, image_size=args.image_size,
+            normalization=args.normalization, slice_policy=args.slice_policy,
+            slices_per_modality=args.slices_per_modality, slice_batch_size=args.slice_batch_size,
+            output_kind=args.output_kind))
+    elif args.command == "validate-encoder-alignment":
+        _print(validate_encoder_alignment(parse_encoder_datasets(args.encoder_data)))
+    elif args.command == "train-stage1":
+        checkpoints = train_stage1(args.data, args.config, args.output, args.variants, args.seeds)
+        print(f"Trained {len(checkpoints)} runs under {Path(args.output).resolve()}")
+    elif args.command == "evaluate-recursive":
+        evaluate_stage1(args.input, "recursive", args.max_horizon, args.device)
+    elif args.command == "evaluate-uncertainty":
+        evaluate_stage1(args.input, "uncertainty", args.max_horizon, args.device)
+    elif args.command == "summarize-stage1":
+        summary = summarize_stage1(args.input, args.bootstrap_samples)
+        print(f"Stage 1: RHRT={summary['rhrt_pass']} ensemble={summary['ensemble_pass']} overall={summary['stage1_pass']}")
     else:
         raise AssertionError(f"Unhandled command: {args.command}")
-

@@ -1,21 +1,31 @@
 import torch
+from torch import nn
 
 from clarity_hauwm.model import EnsembleDynamics, ModelConfig, ensemble_mean_and_uncertainty
 
 
-def test_ensemble_shapes_and_memberwise_rollout():
-    config = ModelConfig(latent_dim=6, action_dim=3, max_horizon=4, hidden_dim=12, ensemble_size=3)
-    model = EnsembleDynamics(config)
-    z_start = torch.randn(5, 6)
-    actions = torch.zeros(5, 4, 3)
-    delta_days = torch.ones(5, 4) * 30
-    horizons = torch.tensor([1, 2, 3, 4, 2])
-    predictions = model(z_start, actions, delta_days, horizons)
-    mean, uncertainty = ensemble_mean_and_uncertainty(predictions)
-    assert predictions.shape == (3, 5, 6)
-    assert mean.shape == (5, 6)
-    assert uncertainty.shape == (5,)
-    member_states = z_start[0].repeat(3, 1)
-    next_states = model.forward_memberwise(member_states, actions[:1, :1], delta_days[:1, :1])
-    assert next_states.shape == (3, 6)
+class AddAction(nn.Module):
+    def __init__(self, scale):
+        super().__init__()
+        self.scale = nn.Parameter(torch.tensor(float(scale)))
 
+    def forward(self, z, action, delta_days):
+        return z + self.scale * action
+
+
+def test_recursive_rollout_uses_each_members_own_state_and_population_disagreement():
+    model = EnsembleDynamics(ModelConfig(latent_dim=1, action_dim=1, ensemble_size=2))
+    model.members = nn.ModuleList([AddAction(1), AddAction(2)])
+    start = torch.zeros(2, 1)
+    actions = torch.ones(2, 3, 1)
+    deltas = torch.ones(2, 3)
+    horizons = torch.tensor([1, 3])
+    predictions = model(start, actions, deltas, horizons)
+    assert torch.allclose(predictions[:, 0, 0], torch.tensor([1.0, 2.0]))
+    assert torch.allclose(predictions[:, 1, 0], torch.tensor([3.0, 6.0]))
+    mean, uncertainty = ensemble_mean_and_uncertainty(predictions)
+    assert torch.allclose(mean[:, 0], torch.tensor([1.5, 4.5]))
+    assert torch.allclose(uncertainty, torch.tensor([0.25, 2.25]))
+    predictions[:, 1].mean().backward()
+    assert model.members[0].scale.grad is not None
+    assert model.members[1].scale.grad is not None

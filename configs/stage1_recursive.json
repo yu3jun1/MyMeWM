@@ -1,5 +1,5 @@
 {
-  "max_horizon": 5,
+  "max_horizon": 3,
   "batch_size": 32,
   "epochs": 100,
   "learning_rate": 0.001,
@@ -9,8 +9,6 @@
   "time_embed_dim": 16,
   "horizon_embed_dim": 16,
   "ensemble_size": 5,
-  "bootstrap_keep_probability": 0.8,
-  "cosine_loss_weight": 0.1,
   "gradient_clip_norm": 1.0,
   "early_stopping_patience": 15,
   "num_workers": 0,
@@ -18,6 +16,12 @@
   "train_fraction": 0.7,
   "validation_fraction": 0.15,
   "delta_scale_days": 365.0,
-  "device": "auto"
+  "device": "auto",
+  "recursive_training": true,
+  "terminal_loss_only": true,
+  "teacher_forcing": false,
+  "experiment_seeds": [7, 17, 29],
+  "bootstrap_samples": 2000,
+  "primary_metric": "normalized_latent_mse",
+  "checkpoint_metric": "val_recursive_mse_k2_k3"
 }
-
