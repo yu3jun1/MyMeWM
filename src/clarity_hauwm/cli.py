@@ -4,7 +4,7 @@ import argparse
 import json
 from pathlib import Path
 
-from .ablation import evaluate_stage1, train_split_robustness, train_stage1
+from .ablation import evaluate_stage1, train_horizon_ablation, train_split_robustness, train_stage1
 from .brainiac_extract import extract_brainiac_latents
 from .clarity_adapter import build_clarity_trajectories
 from .data import validate_dataset
@@ -20,7 +20,7 @@ def _print(value: dict) -> None:
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        prog="clarity-hauwm", description="CLARITY random-horizon recursive Stage 1 experiments"
+        prog="clarity-hauwm", description="CLARITY RRT and ensemble dynamics Stage 1 experiments"
     )
     subparsers = parser.add_subparsers(dest="command", required=True)
 
@@ -80,6 +80,15 @@ def build_parser() -> argparse.ArgumentParser:
     robustness.add_argument("--config", required=True)
     robustness.add_argument("--output", required=True)
 
+    horizon = subparsers.add_parser("train-horizon-ablation", help="Train K=1/2/3 ablation runs")
+    horizon.add_argument("--data", required=True)
+    horizon.add_argument("--config", required=True)
+    horizon.add_argument("--output", required=True)
+    horizon.add_argument("--include-stress", action="store_true",
+                         help="Also train K=5 when H4/H5 windows pass the audit threshold")
+    horizon.add_argument("--min-stress-windows", type=int, default=30,
+                         help="Minimum H4 and H5 windows in each patient split (default: 30)")
+
     for name in ("evaluate-recursive", "evaluate-uncertainty"):
         evaluate = subparsers.add_parser(name, help=f"Run {name.split('-')[1]} evaluation")
         evaluate.add_argument("--input", required=True)
@@ -126,6 +135,10 @@ def main(argv: list[str] | None = None) -> None:
     elif args.command == "train-split-robustness":
         checkpoints = train_split_robustness(args.data, args.config, args.output)
         print(f"Trained and evaluated {len(checkpoints)} robustness runs under {Path(args.output).resolve()}")
+    elif args.command == "train-horizon-ablation":
+        checkpoints = train_horizon_ablation(args.data, args.config, args.output,
+                                             args.include_stress, args.min_stress_windows)
+        print(f"Trained and evaluated {len(checkpoints)} ablation runs under {Path(args.output).resolve()}")
     elif args.command == "evaluate-recursive":
         evaluate_stage1(args.input, "recursive", args.max_horizon, args.device)
     elif args.command == "evaluate-uncertainty":

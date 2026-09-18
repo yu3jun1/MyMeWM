@@ -1,7 +1,7 @@
 import torch
 from torch import nn
 
-from clarity_hauwm.model import EnsembleDynamics, ModelConfig, ensemble_mean_and_uncertainty
+from clarity_hauwm.model import EnsembleDynamics, ModelConfig, ensemble_mean_and_disagreement
 
 
 class AddAction(nn.Module):
@@ -23,9 +23,9 @@ def test_recursive_rollout_uses_each_members_own_state_and_population_disagreeme
     predictions = model(start, actions, deltas, horizons)
     assert torch.allclose(predictions[:, 0, 0], torch.tensor([1.0, 2.0]))
     assert torch.allclose(predictions[:, 1, 0], torch.tensor([3.0, 6.0]))
-    mean, uncertainty = ensemble_mean_and_uncertainty(predictions)
+    mean, disagreement = ensemble_mean_and_disagreement(predictions)
     assert torch.allclose(mean[:, 0], torch.tensor([1.5, 4.5]))
-    assert torch.allclose(uncertainty, torch.tensor([0.25, 2.25]))
+    assert torch.allclose(disagreement, torch.tensor([0.25, 2.25]))
     predictions[:, 1].mean().backward()
     assert model.members[0].scale.grad is not None
     assert model.members[1].scale.grad is not None

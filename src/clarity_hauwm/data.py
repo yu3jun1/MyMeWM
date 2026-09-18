@@ -200,26 +200,20 @@ class TrainingHorizonDataset(Dataset):
         normalizer: LatentNormalizer,
         max_horizon: int,
         horizon_strategy: str,
-        seed: int,
     ) -> None:
         self.trajectories = list(trajectories)
         self.normalizer = normalizer
         self.max_horizon = max_horizon
-        if horizon_strategy not in ("one_step", "max_available", "random_available"):
+        if horizon_strategy not in ("one_step", "max_available"):
             raise ValueError(f"Unknown horizon strategy: {horizon_strategy}")
         if max_horizon < 1:
             raise ValueError("max_horizon must be positive")
         self.horizon_strategy = horizon_strategy
-        self.seed = seed
-        self.epoch = 0
         self.starts = [
             (trajectory_index, start)
             for trajectory_index, trajectory in enumerate(self.trajectories)
             for start in range(len(trajectory.latents) - 1)
         ]
-
-    def set_epoch(self, epoch: int) -> None:
-        self.epoch = epoch
 
     def __len__(self) -> int:
         return len(self.starts)
@@ -229,10 +223,15 @@ class TrainingHorizonDataset(Dataset):
             return 1
         trajectory = self.trajectories[trajectory_index]
         upper = min(self.max_horizon, len(trajectory.latents) - 1 - start)
-        if self.horizon_strategy == "max_available":
-            return upper
-        digest = hashlib.sha256(f"{self.seed}:{self.epoch}:{trajectory_index}:{start}".encode()).digest()
-        return 1 + int.from_bytes(digest[:8], "little") % upper
+        return upper
+
+    def available_horizon_counts(self, through: int) -> dict[str, int]:
+        return {str(h): sum(len(self.trajectories[ti].latents) - 1 - start >= h
+                            for ti, start in self.starts) for h in range(1, through + 1)}
+
+    def training_horizon_counts(self) -> dict[str, int]:
+        return {str(h): sum(self._horizon(ti, start) == h for ti, start in self.starts)
+                for h in range(1, self.max_horizon + 1)}
 
     def __getitem__(self, index: int) -> dict:
         trajectory_index, start = self.starts[index]

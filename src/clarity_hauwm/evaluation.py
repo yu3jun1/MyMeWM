@@ -10,7 +10,7 @@ import torch.nn.functional as F
 from torch.utils.data import DataLoader
 
 from .data import EvaluationHorizonDataset, LatentNormalizer, collate_windows, load_dataset, select_trajectories
-from .model import EnsembleDynamics, ensemble_mean_and_uncertainty
+from .model import EnsembleDynamics, ensemble_mean_and_disagreement
 from .training import load_trained_model, resolve_device
 
 
@@ -48,8 +48,8 @@ def _load_run(run_dir: Path, requested_device: str, max_horizon: int) -> tuple[E
         training = json.load(handle)
     device = resolve_device(requested_device)
     model, checkpoint = load_trained_model(training["checkpoint"], device)
-    if max_horizon != 3 or max_horizon > model.config.max_horizon:
-        raise ValueError("Stage 1 evaluation requires max_horizon=3")
+    if max_horizon not in (3, 5):
+        raise ValueError("Stage 1 evaluation supports H1-H3, or H1-H5 for the optional stress test")
     trajectories, metadata = load_dataset(training["data_dir"])
     for key, expected in checkpoint["data_metadata"].items():
         if metadata.get(key) != expected:
@@ -70,22 +70,23 @@ def evaluate_records(model: EnsembleDynamics, loader: DataLoader, device: torch.
         batch = {key: value.to(device) if isinstance(value, torch.Tensor) else value
                  for key, value in raw.items()}
         predictions = model(batch["z_start"], batch["actions"], batch["delta_days"], batch["horizon"])
-        mean, uncertainty = ensemble_mean_and_uncertainty(predictions)
+        mean, disagreement = ensemble_mean_and_disagreement(predictions)
         mse = (mean - batch["target"]).square().mean(dim=-1)
         cosine = 1.0 - F.cosine_similarity(mean, batch["target"], dim=-1)
         for index, patient_id in enumerate(batch["patient_id"]):
             records.append({
                 "patient_id": patient_id, "start": int(batch["start"][index]),
                 "horizon": int(batch["horizon"][index]), "mse": float(mse[index]),
-                "cosine_distance": float(cosine[index]), "uncertainty": float(uncertainty[index]),
+                "cosine_distance": float(cosine[index]), "disagreement": float(disagreement[index]),
             })
     return records
 
 
-def recursive_metrics(records: Sequence[dict], variant: str, seed: int) -> dict:
+def recursive_metrics(records: Sequence[dict], variant: str, seed: int,
+                      max_horizon: int = 3) -> dict:
     by_horizon = []
     mse_by_horizon = {}
-    for horizon in (1, 2, 3):
+    for horizon in range(1, max_horizon + 1):
         subset = [row for row in records if row["horizon"] == horizon]
         mse = float(np.mean([row["mse"] for row in subset])) if subset else None
         mse_by_horizon[horizon] = mse
@@ -116,15 +117,15 @@ def uncertainty_metrics(records: Sequence[dict], variant: str, seed: int) -> dic
     by_horizon = []
     for horizon in (1, 2, 3):
         subset = [row for row in records if row["horizon"] == horizon]
-        uncertainties = [row["uncertainty"] for row in subset]
+        disagreements = [row["disagreement"] for row in subset]
         errors = [row["mse"] for row in subset]
         by_horizon.append({
             "horizon": horizon, "n_predictions": len(subset),
-            "mean_uncertainty": float(np.mean(uncertainties)) if subset else None,
-            "uncertainty_error_spearman": spearman(uncertainties, errors),
-            "high_low_tertile_error_ratio": _tertile_ratio(uncertainties, errors),
+            "mean_disagreement": float(np.mean(disagreements)) if subset else None,
+            "disagreement_error_spearman": spearman(disagreements, errors),
+            "high_low_tertile_error_ratio": _tertile_ratio(disagreements, errors),
         })
-    rhos = [row["uncertainty_error_spearman"] for row in by_horizon]
+    rhos = [row["disagreement_error_spearman"] for row in by_horizon]
     ratios = [row["high_low_tertile_error_ratio"] for row in by_horizon]
     return {
         "variant": variant, "seed": seed, "by_horizon": by_horizon,
@@ -140,7 +141,7 @@ def selective_risk_metrics(records: Sequence[dict], variant: str, seed: int) -> 
         count = len(subset)
         keep = int(np.floor(count * 0.8))
         risk_100 = float(np.mean([row["mse"] for row in subset])) if count else None
-        ranked = sorted(subset, key=lambda row: row["uncertainty"])
+        ranked = sorted(subset, key=lambda row: row["disagreement"])
         risk_80 = float(np.mean([row["mse"] for row in ranked[:keep]])) if keep else None
         reduction = ((risk_100 - risk_80) / risk_100 * 100
                      if risk_100 not in (None, 0) and risk_80 is not None else None)
@@ -157,18 +158,20 @@ def evaluate_run(run_dir: str | Path, kind: str, max_horizon: int = 3, device: s
     model, checkpoint, loader, resolved_device = _load_run(run_dir, device, max_horizon)
     records = evaluate_records(model, loader, resolved_device)
     if kind == "recursive":
-        report = recursive_metrics(records, checkpoint["variant"], checkpoint["seed"])
+        report = recursive_metrics(records, checkpoint["variant"], checkpoint["seed"], max_horizon)
         write_json(run_dir / "recursive_records.json", [
             {key: row[key] for key in ("patient_id", "start", "horizon", "mse", "cosine_distance")}
             for row in records
         ])
         write_json(run_dir / "recursive_metrics.json", report)
     elif kind == "uncertainty":
+        if max_horizon != 3:
+            raise ValueError("Reliability evaluation is restricted to H1-H3")
         if model.ensemble_size < 2:
             raise ValueError("Uncertainty evaluation requires an ensemble variant")
         report = uncertainty_metrics(records, checkpoint["variant"], checkpoint["seed"])
         write_json(run_dir / "uncertainty_records.json", [
-            {key: row[key] for key in ("patient_id", "start", "horizon", "mse", "uncertainty")}
+            {key: row[key] for key in ("patient_id", "start", "horizon", "mse", "disagreement")}
             for row in records
         ])
         write_json(run_dir / "uncertainty_metrics.json", report)

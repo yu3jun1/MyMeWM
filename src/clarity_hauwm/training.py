@@ -20,16 +20,17 @@ from .model import EnsembleDynamics, ModelConfig
 
 VARIANTS = {
     "baseline": {"horizon_strategy": "one_step", "use_ensemble": False},
-    "recursive_max": {"horizon_strategy": "max_available", "use_ensemble": False},
-    "rhrt": {"horizon_strategy": "random_available", "use_ensemble": False},
+    "rrt": {"horizon_strategy": "max_available", "use_ensemble": False},
     "ensemble": {"horizon_strategy": "one_step", "use_ensemble": True},
-    "rhrt_ensemble": {"horizon_strategy": "random_available", "use_ensemble": True},
+    "rrt_ensemble": {"horizon_strategy": "max_available", "use_ensemble": True},
 }
 
 
 @dataclass(frozen=True)
 class TrainingConfig:
-    max_horizon: int = 3
+    main_max_horizon: int = 3
+    horizon_ablation: list[int] = field(default_factory=lambda: [1, 2, 3])
+    optional_stress_horizon: int = 5
     batch_size: int = 32
     epochs: int = 100
     learning_rate: float = 1e-3
@@ -37,7 +38,6 @@ class TrainingConfig:
     hidden_dim: int = 128
     action_embed_dim: int = 32
     time_embed_dim: int = 16
-    horizon_embed_dim: int = 16
     ensemble_size: int = 5
     gradient_clip_norm: float = 1.0
     early_stopping_patience: int = 15
@@ -46,6 +46,7 @@ class TrainingConfig:
     training_seeds: list[int] = field(default_factory=lambda: [7, 17, 29])
     robustness_split_seeds: list[int] = field(default_factory=lambda: [23, 41, 59])
     robustness_training_seed: int = 17
+    horizon_ablation_training_seed: int = 17
     train_fraction: float = 0.7
     validation_fraction: float = 0.15
     delta_scale_days: float = 365.0
@@ -56,8 +57,10 @@ class TrainingConfig:
     checkpoint_metric: str = "val_recursive_mse_k2_k3"
 
     def __post_init__(self) -> None:
-        if self.max_horizon != 3:
-            raise ValueError("Stage 1 requires max_horizon=3")
+        if self.main_max_horizon != 3:
+            raise ValueError("Stage 1 main experiment requires main_max_horizon=3")
+        if self.horizon_ablation != [1, 2, 3] or self.optional_stress_horizon <= 3:
+            raise ValueError("Expected horizon_ablation=[1,2,3] and optional_stress_horizon>3")
         if not self.terminal_loss_only or self.teacher_forcing:
             raise ValueError("Stage 1 requires terminal MSE and no teacher forcing")
         if self.primary_metric != "normalized_latent_mse" or self.checkpoint_metric != "val_recursive_mse_k2_k3":
@@ -121,10 +124,13 @@ def validation_recursive_mse(model: EnsembleDynamics, loader: DataLoader, device
 
 
 def train_model(data_dir: str | Path, output_dir: str | Path, config: TrainingConfig, seed: int, variant: str,
-                split_seed: int | None = None) -> Path:
+                split_seed: int | None = None, max_horizon: int | None = None) -> Path:
     if variant not in VARIANTS:
         raise ValueError(f"Unknown variant: {variant}")
     switches = VARIANTS[variant]
+    training_max_horizon = config.main_max_horizon if max_horizon is None else max_horizon
+    if training_max_horizon not in (*config.horizon_ablation, config.optional_stress_horizon):
+        raise ValueError(f"Unsupported training max_horizon: {training_max_horizon}")
     device = resolve_device(config.device)
     trajectories, metadata = load_dataset(data_dir)
     provenance = metadata.get("provenance") or {}
@@ -136,26 +142,25 @@ def train_model(data_dir: str | Path, output_dir: str | Path, config: TrainingCo
     train_trajectories = select_trajectories(trajectories, split["train"])
     val_trajectories = select_trajectories(trajectories, split["validation"])
     normalizer = LatentNormalizer.fit(train_trajectories)
-    validation_dataset = EvaluationHorizonDataset(val_trajectories, normalizer, config.max_horizon)
+    validation_dataset = EvaluationHorizonDataset(val_trajectories, normalizer, config.main_max_horizon)
     validation_loader = DataLoader(validation_dataset, batch_size=config.batch_size, shuffle=False,
                                    collate_fn=collate_windows)
     members = config.ensemble_size if switches["use_ensemble"] else 1
     model_config = ModelConfig(
-        latent_dim=metadata["latent_dim"], action_dim=metadata["action_dim"], max_horizon=3,
+        latent_dim=metadata["latent_dim"], action_dim=metadata["action_dim"],
         hidden_dim=config.hidden_dim, action_embed_dim=config.action_embed_dim,
-        time_embed_dim=config.time_embed_dim, horizon_embed_dim=config.horizon_embed_dim,
+        time_embed_dim=config.time_embed_dim,
         ensemble_size=members, delta_scale_days=config.delta_scale_days,
     )
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
     member_states = []
     member_reports = []
-    total_counts = {str(k): 0 for k in (1, 2, 3)}
     for member_index in range(members):
         member_seed = seed if members == 1 else seed * 1000 + member_index
         seed_everything(member_seed)
-        train_dataset = TrainingHorizonDataset(train_trajectories, normalizer, 3,
-                                               switches["horizon_strategy"], member_seed)
+        train_dataset = TrainingHorizonDataset(train_trajectories, normalizer, training_max_horizon,
+                                               switches["horizon_strategy"])
         train_loader = DataLoader(train_dataset, batch_size=config.batch_size, shuffle=True,
                                   num_workers=config.num_workers, collate_fn=collate_windows,
                                   generator=torch.Generator().manual_seed(member_seed))
@@ -168,15 +173,11 @@ def train_model(data_dir: str | Path, output_dir: str | Path, config: TrainingCo
         best_epoch = 0
         best_train_loss = None
         stale_epochs = 0
-        counts = {str(k): 0 for k in (1, 2, 3)}
         for epoch in range(config.epochs):
-            train_dataset.set_epoch(epoch)
             model.train()
             losses = []
             for raw in train_loader:
                 batch = _move_batch(raw, device)
-                for horizon in (1, 2, 3):
-                    counts[str(horizon)] += int((batch["horizon"] == horizon).sum())
                 optimizer.zero_grad(set_to_none=True)
                 prediction = model(batch["z_start"], batch["actions"], batch["delta_days"], batch["horizon"])[0]
                 loss = F.mse_loss(prediction, batch["target"])
@@ -203,12 +204,10 @@ def train_model(data_dir: str | Path, output_dir: str | Path, config: TrainingCo
         member_states.append(best_state)
         member_reports.append({"member": member_index, "member_seed": member_seed, "best_epoch": best_epoch,
                                "train_loss": best_train_loss, "validation_loss": best_validation,
-                               "horizon_sampling_counts": counts})
-        for horizon in (1, 2, 3):
-            total_counts[str(horizon)] += counts[str(horizon)]
+                               "training_horizon_counts": train_dataset.training_horizon_counts()})
     checkpoint_path = output_dir / "best.pt"
     torch.save({
-        "schema_version": "3.0", "variant": variant, "seed": seed,
+        "schema_version": "4.0", "variant": variant, "seed": seed,
         "model_config": model_config.to_dict(), "training_config": asdict(config),
         "member_state_dicts": member_states, "normalizer": normalizer.state_dict(),
         "split": split,
@@ -223,10 +222,14 @@ def train_model(data_dir: str | Path, output_dir: str | Path, config: TrainingCo
         "best_epoch": [member["best_epoch"] for member in member_reports],
         "train_loss": [member["train_loss"] for member in member_reports],
         "validation_loss": [member["validation_loss"] for member in member_reports],
-        "num_training_windows": len(train_dataset), "horizon_sampling_counts": total_counts,
+        "max_horizon": training_max_horizon,
+        "num_training_windows": len(train_dataset),
+        "available_horizon_counts": train_dataset.available_horizon_counts(
+            max(config.optional_stress_horizon, training_max_horizon)),
+        "training_horizon_counts": train_dataset.training_horizon_counts(),
         "checkpoint": str(checkpoint_path.resolve()), "members": member_reports,
         "checkpoint_metric": config.checkpoint_metric,
-        "protocol": {"max_horizon": config.max_horizon, "ensemble_size": members,
+        "protocol": {"main_max_horizon": config.main_max_horizon, "ensemble_size": members,
                      "split_seed": split_seed, "train_fraction": config.train_fraction,
                      "validation_fraction": config.validation_fraction},
     }
@@ -237,7 +240,7 @@ def train_model(data_dir: str | Path, output_dir: str | Path, config: TrainingCo
 
 def load_trained_model(checkpoint_path: str | Path, device: torch.device) -> tuple[EnsembleDynamics, dict]:
     checkpoint = torch.load(checkpoint_path, map_location="cpu", weights_only=True)
-    if checkpoint.get("schema_version") != "3.0":
+    if checkpoint.get("schema_version") != "4.0":
         raise ValueError("Checkpoint is from an older Stage 1 protocol; retrain with train-stage1")
     model = EnsembleDynamics(ModelConfig(**checkpoint["model_config"]))
     if len(checkpoint["member_state_dicts"]) != model.ensemble_size:

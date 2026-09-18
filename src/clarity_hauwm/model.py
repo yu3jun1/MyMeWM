@@ -11,11 +11,9 @@ import torch.nn as nn
 class ModelConfig:
     latent_dim: int
     action_dim: int
-    max_horizon: int = 3
     hidden_dim: int = 128
     action_embed_dim: int = 32
     time_embed_dim: int = 16
-    horizon_embed_dim: int = 16
     ensemble_size: int = 5
     delta_scale_days: float = 365.0
 
@@ -40,18 +38,7 @@ class OneStepDynamics(nn.Module):
             nn.Linear(config.time_embed_dim, config.time_embed_dim),
         )
         self.gru = nn.GRU(config.action_embed_dim + config.time_embed_dim, config.hidden_dim, batch_first=True)
-        self.horizon_embedding = nn.Embedding(config.max_horizon + 1, config.horizon_embed_dim)
-        self.elapsed_projection = nn.Sequential(
-            nn.Linear(1, config.horizon_embed_dim),
-            nn.SiLU(),
-            nn.Linear(config.horizon_embed_dim, config.horizon_embed_dim),
-        )
-        self.horizon_output = nn.Sequential(
-            nn.Linear(config.horizon_embed_dim * 2, config.horizon_embed_dim),
-            nn.LayerNorm(config.horizon_embed_dim),
-            nn.SiLU(),
-        )
-        context_dim = config.hidden_dim + config.horizon_embed_dim
+        context_dim = config.hidden_dim
         self.network = nn.Sequential(
             nn.LayerNorm(config.latent_dim + context_dim),
             nn.Linear(config.latent_dim + context_dim, config.hidden_dim),
@@ -68,10 +55,7 @@ class OneStepDynamics(nn.Module):
         scaled = torch.log1p(delta_days.clamp_min(0.0)) / math.log1p(self.delta_scale_days)
         sequence = torch.cat((self.action_projection(action), self.time_projection(scaled[:, None])), dim=-1)
         _, hidden = self.gru(sequence[:, None, :])
-        ones = torch.ones(len(z), dtype=torch.long, device=z.device)
-        horizon = self.horizon_output(torch.cat((self.horizon_embedding(ones), self.elapsed_projection(scaled[:, None])), dim=-1))
-        context = torch.cat((hidden[-1], horizon), dim=-1)
-        return z + self.network(torch.cat((z, context), dim=-1))
+        return z + self.network(torch.cat((z, hidden[-1]), dim=-1))
 
 
 class EnsembleDynamics(nn.Module):
@@ -79,8 +63,8 @@ class EnsembleDynamics(nn.Module):
 
     def __init__(self, config: ModelConfig) -> None:
         super().__init__()
-        if config.ensemble_size < 1 or config.max_horizon < 1:
-            raise ValueError("ensemble_size and max_horizon must be positive")
+        if config.ensemble_size < 1:
+            raise ValueError("ensemble_size must be positive")
         self.config = config
         self.members = nn.ModuleList(OneStepDynamics(config) for _ in range(config.ensemble_size))
 
@@ -108,8 +92,8 @@ class EnsembleDynamics(nn.Module):
         return states
 
 
-def ensemble_mean_and_uncertainty(predictions: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
+def ensemble_mean_and_disagreement(predictions: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
     mean = predictions.mean(dim=0)
     # Definition in the protocol is 1/M, including M=1 where disagreement is zero.
-    uncertainty = (predictions - mean.unsqueeze(0)).square().mean(dim=0).mean(dim=-1)
-    return mean, uncertainty
+    disagreement = (predictions - mean.unsqueeze(0)).square().mean(dim=0).mean(dim=-1)
+    return mean, disagreement

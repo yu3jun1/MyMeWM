@@ -13,8 +13,7 @@ from .training import TrainingConfig, VARIANTS
 
 METRICS = ("mse@1", "mse@2", "mse@3", "long_mse")
 RI_METRICS = {"mse@1": "RI@1", "mse@2": "RI@2", "mse@3": "RI@3", "long_mse": "RI_long"}
-COMPARISONS = (("baseline", "recursive_max"), ("baseline", "rhrt"),
-               ("recursive_max", "rhrt"), ("ensemble", "rhrt_ensemble"))
+COMPARISONS = (("baseline", "rrt"), ("ensemble", "rrt_ensemble"))
 
 
 def run_directories(root: str | Path, variants: Sequence[str] | None = None) -> list[Path]:
@@ -54,7 +53,8 @@ def _main_runs(root: Path) -> dict[str, dict[int, dict]]:
         training = _read(path / "training.json")
         seed = int(training["seed"])
         variant = training["variant"]
-        if variant != path.name or training["horizon_strategy"] != VARIANTS[variant]["horizon_strategy"]:
+        if (variant != path.name or training["horizon_strategy"] != VARIANTS[variant]["horizon_strategy"]
+                or training["max_horizon"] != 3):
             raise ValueError(f"Run metadata does not match variant directory: {path}")
         if seed in runs.setdefault(variant, {}):
             raise ValueError(f"Duplicate run for {variant} seed {seed}")
@@ -86,12 +86,12 @@ def _dataset_stats(training: dict) -> dict:
     normalizer = LatentNormalizer.fit(select_trajectories(trajectories, split["train"]))
     for name, ids in split.items():
         selected = select_trajectories(trajectories, ids)
-        windows = EvaluationHorizonDataset(selected, normalizer, 3).windows
-        counts = {str(h): sum(window[2] == h for window in windows) for h in (1, 2, 3)}
+        windows = EvaluationHorizonDataset(selected, normalizer, 5).windows
+        counts = {str(h): sum(window[2] == h for window in windows) for h in (1, 2, 3, 4, 5)}
         result[f"{name}_patient_count"] = len(selected)
         result[f"{name}_timepoint_count"] = sum(len(item.latents) for item in selected)
         result["window_counts"][name] = counts
-    for h in (1, 2, 3):
+    for h in (1, 2, 3, 4, 5):
         result[f"H{h}_window_count"] = result["window_counts"]["test"][str(h)]
     return result
 
@@ -133,22 +133,23 @@ def _training_summary(runs: dict[str, dict[int, dict]]) -> dict:
         for seed, run in sorted(seeds.items()):
             training = run["training"]
             result[variant][str(seed)] = {
+                "variant": variant,
                 "training_seed": seed,
+                "max_horizon": training["max_horizon"],
                 "horizon_strategy": training["horizon_strategy"],
                 "best_epoch": training["best_epoch"],
                 "best_validation_score": training["validation_loss"],
-                "H1_sampling_count": training["horizon_sampling_counts"]["1"],
-                "H2_sampling_count": training["horizon_sampling_counts"]["2"],
-                "H3_sampling_count": training["horizon_sampling_counts"]["3"],
-                "horizon_sampling_percentage": {str(h): (training["horizon_sampling_counts"][str(h)] /
-                    sum(training["horizon_sampling_counts"].values()) * 100) for h in (1, 2, 3)},
+                "available_horizon_counts": training["available_horizon_counts"],
+                "training_horizon_counts": training["training_horizon_counts"],
+                **{f"H{h}_training_count": training["training_horizon_counts"].get(str(h), 0)
+                   for h in range(1, 6)},
             }
     return result
 
 
 def _reliability(runs: dict[str, dict[int, dict]]) -> tuple[dict, dict]:
     uncertainty, selective = {}, {}
-    for variant in ("ensemble", "rhrt_ensemble"):
+    for variant in ("ensemble", "rrt_ensemble"):
         if variant not in runs:
             continue
         uncertainty_runs, risk_runs = {}, {}
@@ -162,7 +163,7 @@ def _reliability(runs: dict[str, dict[int, dict]]) -> tuple[dict, dict]:
         selective[variant] = {"seeds": risk_runs}
         for h in (1, 2, 3):
             uncertainty[variant][f"rho@{h}"] = _stats([
-                row["by_horizon"][h - 1]["uncertainty_error_spearman"] for row in uncertainty_runs.values()])
+                row["by_horizon"][h - 1]["disagreement_error_spearman"] for row in uncertainty_runs.values()])
             uncertainty[variant][f"high_low_ratio@{h}"] = _stats([
                 row["by_horizon"][h - 1]["high_low_tertile_error_ratio"] for row in uncertainty_runs.values()])
             selective[variant][str(h)] = {metric: _stats([
@@ -184,7 +185,7 @@ def _robustness(root: Path, runs: dict[str, dict[int, dict]]) -> list[dict]:
     for split_seed in [main_split, *sorted(int(path.name.removeprefix("split_"))
                                           for path in (root / "robustness").glob("split_*"))]:
         values = {}
-        for variant in ("baseline", "recursive_max", "rhrt"):
+        for variant in ("baseline", "rrt"):
             if split_seed == main_split:
                 run = runs.get(variant, {}).get(robustness_seed)
                 values[variant] = run["prediction"]["long_mse"] if run else None
@@ -193,7 +194,8 @@ def _robustness(root: Path, runs: dict[str, dict[int, dict]]) -> list[dict]:
                 if (path / "recursive_metrics.json").exists():
                     training = _read(path / "training.json")
                     if (training["split_seed"] != split_seed or training["seed"] != robustness_seed or
-                            training["data_dir"] != first["data_dir"]):
+                            training["data_dir"] != first["data_dir"] or
+                            training["max_horizon"] != first["max_horizon"]):
                         raise ValueError(f"Robustness run metadata mismatch: {path}")
                     values[variant] = _prediction_values(_read(path / "recursive_metrics.json"))["long_mse"]
                 else:
@@ -201,9 +203,8 @@ def _robustness(root: Path, runs: dict[str, dict[int, dict]]) -> list[dict]:
         if any(value is not None for value in values.values()):
             rows.append({"split_seed": split_seed, "training_seed": robustness_seed,
                          "baseline_long_mse": values["baseline"],
-                         "recursive_max_long_mse": values["recursive_max"],
-                         "rhrt_long_mse": values["rhrt"],
-                         "rhrt_relative_improvement": _relative_percent(values["baseline"], values["rhrt"])})
+                         "rrt_long_mse": values["rrt"],
+                         "rrt_relative_improvement": _relative_percent(values["baseline"], values["rrt"])})
     return rows
 
 
@@ -214,6 +215,42 @@ def audit_stage1_dataset(data_dir: str | Path, config: TrainingConfig) -> dict:
                                          "validation_fraction": config.validation_fraction}})
     return stats
 
+
+
+def summarize_horizon_ablation(input_dir: str | Path,
+                               config: TrainingConfig | None = None) -> dict:
+    root = Path(input_dir)
+    report = {}
+    reference = None
+    for path in sorted((root / "horizon_ablation").glob("k*")):
+        if not path.is_dir() or not (path / "training.json").exists():
+            continue
+        training = _read(path / "training.json")
+        horizon = training["max_horizon"]
+        if path.name != f"k{horizon}" or training["variant"] != ("baseline" if horizon == 1 else "rrt"):
+            raise ValueError(f"Horizon ablation metadata mismatch: {path}")
+        if config is not None and (training["seed"] != config.horizon_ablation_training_seed or
+                                    training["split_seed"] != config.main_split_seed):
+            raise ValueError(f"Horizon ablation seed or split mismatch: {path}")
+        identity = (training["data_dir"], training["split_seed"], training["seed"])
+        if reference is not None and identity != reference:
+            raise ValueError(f"Horizon ablation runs must share data, split and seed: {path}")
+        reference = identity
+        metrics_path = path / "recursive_metrics.json"
+        if not metrics_path.exists():
+            raise ValueError(f"Missing recursive evaluation for {path}")
+        metrics = _read(metrics_path)
+        by_horizon = {item["horizon"]: item for item in metrics["by_horizon"]}
+        if any(h not in by_horizon for h in (1, 2, 3)):
+            raise ValueError(f"H1-H3 evaluation missing for {path}")
+        row = {"training_seed": training["seed"], "split_seed": training["split_seed"],
+               "variant": training["variant"], "max_horizon": horizon,
+               "training_horizon_counts": training["training_horizon_counts"],
+               **{f"mse@{h}": item["mse"] for h, item in by_horizon.items()},
+               "long_mse": metrics["long_horizon_mse"]}
+        report[path.name.upper()] = row
+    write_json(root / "reports" / "horizon_ablation.json", report)
+    return report
 
 def summarize_stage1(input_dir: str | Path) -> dict:
     root = Path(input_dir)
@@ -228,14 +265,16 @@ def summarize_stage1(input_dir: str | Path) -> dict:
     summary = {
         "main_encoder": root.name,
         "main_split_seed": first["split_seed"],
+        "main_max_horizon": first["max_horizon"],
         "baseline_long_mse": prediction.get("baseline", {}).get("long_mse", {}).get("mean"),
-        "recursive_max_long_mse": prediction.get("recursive_max", {}).get("long_mse", {}).get("mean"),
-        "rhrt_long_mse": prediction.get("rhrt", {}).get("long_mse", {}).get("mean"),
-        "rhrt_relative_improvement": comparisons.get("baseline_vs_rhrt", {}).get("RI_long", {}).get("mean"),
-        "rhrt_vs_recursive_max_improvement": comparisons.get("recursive_max_vs_rhrt", {}).get("RI_long", {}).get("mean"),
-        "macro_uncertainty_spearman": uncertainty.get("rhrt_ensemble", {}).get("macro_rho", {}).get("mean"),
-        "macro_high_low_ratio": uncertainty.get("rhrt_ensemble", {}).get("macro_high_low_ratio", {}).get("mean"),
-        "risk_reduction_80": selective.get("rhrt_ensemble", {}).get("macro_risk_reduction", {}).get("mean"),
+        "rrt_long_mse": prediction.get("rrt", {}).get("long_mse", {}).get("mean"),
+        "rrt_relative_improvement": comparisons.get("baseline_vs_rrt", {}).get("RI_long", {}).get("mean"),
+        "ensemble_long_mse": prediction.get("ensemble", {}).get("long_mse", {}).get("mean"),
+        "rrt_ensemble_long_mse": prediction.get("rrt_ensemble", {}).get("long_mse", {}).get("mean"),
+        "rrt_ensemble_relative_improvement": comparisons.get("ensemble_vs_rrt_ensemble", {}).get("RI_long", {}).get("mean"),
+        "macro_uncertainty_spearman": uncertainty.get("rrt_ensemble", {}).get("macro_rho", {}).get("mean"),
+        "macro_high_low_ratio": uncertainty.get("rrt_ensemble", {}).get("macro_high_low_ratio", {}).get("mean"),
+        "risk_reduction_80": selective.get("rrt_ensemble", {}).get("macro_risk_reduction", {}).get("mean"),
     }
     reports = {
         "dataset_stats": _dataset_stats(first), "training_summary": training_summary,
@@ -245,7 +284,8 @@ def summarize_stage1(input_dir: str | Path) -> dict:
     }
     for name, value in reports.items():
         write_json(report_dir / f"{name}.json", value)
-    tables = format_tables(prediction, comparisons, uncertainty, selective, robustness, training_summary)
+    ablation = summarize_horizon_ablation(root)
+    tables = format_tables(prediction, comparisons, uncertainty, selective, robustness, training_summary, ablation)
     (report_dir / "stage1.log").write_text(tables + "\n", encoding="utf-8")
     print(tables)
     return summary
@@ -260,7 +300,8 @@ def _fmt_stats(value: dict) -> str:
 
 
 def format_tables(prediction: dict, comparisons: dict, uncertainty: dict,
-                  selective: dict, robustness: list[dict], training_summary: dict) -> str:
+                  selective: dict, robustness: list[dict], training_summary: dict,
+                  ablation: dict | None = None) -> str:
     lines = ["Recursive Rollout Performance (mean ± std across training seeds)",
              "| Variant | MSE@1 | MSE@2 | MSE@3 | Long MSE |",
              "|---|---:|---:|---:|---:|"]
@@ -272,12 +313,12 @@ def format_tables(prediction: dict, comparisons: dict, uncertainty: dict,
                   "|---|---:|---:|---:|---:|"])
     for name, row in comparisons.items():
         lines.append(f"| {name} | " + " | ".join(_fmt_stats(row[label]) for label in RI_METRICS.values()) + " |")
-    if "baseline_vs_rhrt" in comparisons:
-        lines.extend(["", "Baseline → RHRT by training seed", "| Seed | Baseline Long | RHRT Long | RI Long (%) |",
+    if "baseline_vs_rrt" in comparisons:
+        lines.extend(["", "Baseline → RRT by training seed", "| Seed | Baseline Long | RRT Long | RI Long (%) |",
                       "|---:|---:|---:|---:|"])
-        for seed, row in comparisons["baseline_vs_rhrt"]["seeds"].items():
+        for seed, row in comparisons["baseline_vs_rrt"]["seeds"].items():
             lines.append(f"| {seed} | {_fmt(prediction['baseline']['seeds'][seed]['long_mse'])} | "
-                         f"{_fmt(prediction['rhrt']['seeds'][seed]['long_mse'])} | {_fmt(row['RI_long'])} |")
+                         f"{_fmt(prediction['rrt']['seeds'][seed]['long_mse'])} | {_fmt(row['RI_long'])} |")
     for variant, row in uncertainty.items():
         lines.extend(["", f"Ensemble Reliability: {variant}",
                       "| Horizon | Spearman rho | High/Low Ratio | Risk@100 | Risk@80 | Risk Reduction (%) |",
@@ -289,20 +330,24 @@ def format_tables(prediction: dict, comparisons: dict, uncertainty: dict,
                          f"{_fmt_stats(risk['risk_reduction'])} |")
         lines.append(f"| Macro | {_fmt_stats(row['macro_rho'])} | {_fmt_stats(row['macro_high_low_ratio'])} | "
                      f" | | {_fmt_stats(selective[variant]['macro_risk_reduction'])} |")
-    if any(variant in training_summary for variant in ("rhrt", "rhrt_ensemble")):
-        lines.extend(["", "RHRT Horizon Sampling", "| Variant | Seed | H1 Count (%) | H2 Count (%) | H3 Count (%) |",
-                      "|---|---:|---:|---:|---:|"])
-        for variant in ("rhrt", "rhrt_ensemble"):
-            for seed, row in training_summary.get(variant, {}).items():
-                cells = [f"{row[f'H{h}_sampling_count']} ({row['horizon_sampling_percentage'][str(h)]:.1f}%)"
-                         for h in (1, 2, 3)]
-                lines.append(f"| {variant} | {seed} | " + " | ".join(cells) + " |")
+    if training_summary:
+        lines.extend(["", "Training Horizon Counts", "| Variant | Seed | Kmax | H1 | H2 | H3 |",
+                      "|---|---:|---:|---:|---:|---:|"])
+        for variant, seeds in training_summary.items():
+            for seed, row in seeds.items():
+                lines.append(f"| {variant} | {seed} | {row['max_horizon']} | " +
+                             " | ".join(str(row[f'H{h}_training_count']) for h in (1, 2, 3)) + " |")
     if robustness:
         lines.extend(["", f"Patient Split Robustness (training seed {robustness[0]['training_seed']})",
-                      "| Split Seed | Baseline Long | Recursive-Max Long | RHRT Long | RHRT RI (%) |",
-                      "|---:|---:|---:|---:|---:|"])
+                      "| Split Seed | Baseline Long | RRT Long | RRT RI (%) |",
+                      "|---:|---:|---:|---:|"])
         for row in robustness:
             lines.append(f"| {row['split_seed']} | {_fmt(row['baseline_long_mse'])} | "
-                         f"{_fmt(row['recursive_max_long_mse'])} | {_fmt(row['rhrt_long_mse'])} | "
-                         f"{_fmt(row['rhrt_relative_improvement'])} |")
+                         f"{_fmt(row['rrt_long_mse'])} | {_fmt(row['rrt_relative_improvement'])} |")
+    if ablation:
+        lines.extend(["", "Training Horizon Ablation", "| Kmax | MSE@1 | MSE@2 | MSE@3 | Long MSE |",
+                      "|---:|---:|---:|---:|---:|"])
+        for key, row in sorted(ablation.items(), key=lambda item: int(item[0][1:])):
+            lines.append(f"| {key[1:]} | " + " | ".join(_fmt(row[metric])
+                         for metric in METRICS) + " |")
     return "\n".join(lines)
