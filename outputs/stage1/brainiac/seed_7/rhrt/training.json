@@ -1,0 +1,46 @@
+{
+  "variant": "rhrt",
+  "seed": 7,
+  "split_seed": 17,
+  "horizon_strategy": "random_available",
+  "robustness_training_seed": 17,
+  "data_dir": "/home/tanyuejun/CLARITY_HAUWM_Minimal/data/trajectories/brainiac",
+  "best_epoch": [
+    6
+  ],
+  "train_loss": [
+    0.6650979055298699
+  ],
+  "validation_loss": [
+    0.7536854516892206
+  ],
+  "num_training_windows": 262,
+  "horizon_sampling_counts": {
+    "1": 3556,
+    "2": 1410,
+    "3": 536
+  },
+  "checkpoint": "/home/tanyuejun/CLARITY_HAUWM_Minimal/outputs/stage1/brainiac/seed_7/rhrt/best.pt",
+  "members": [
+    {
+      "member": 0,
+      "member_seed": 7,
+      "best_epoch": 6,
+      "train_loss": 0.6650979055298699,
+      "validation_loss": 0.7536854516892206,
+      "horizon_sampling_counts": {
+        "1": 3556,
+        "2": 1410,
+        "3": 536
+      }
+    }
+  ],
+  "checkpoint_metric": "val_recursive_mse_k2_k3",
+  "protocol": {
+    "max_horizon": 3,
+    "ensemble_size": 1,
+    "split_seed": 17,
+    "train_fraction": 0.7,
+    "validation_fraction": 0.15
+  }
+}

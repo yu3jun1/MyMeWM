@@ -19,10 +19,11 @@ from .model import EnsembleDynamics, ModelConfig
 
 
 VARIANTS = {
-    "baseline": {"recursive_training": False, "use_ensemble": False},
-    "rhrt": {"recursive_training": True, "use_ensemble": False},
-    "ensemble": {"recursive_training": False, "use_ensemble": True},
-    "rhrt_ensemble": {"recursive_training": True, "use_ensemble": True},
+    "baseline": {"horizon_strategy": "one_step", "use_ensemble": False},
+    "recursive_max": {"horizon_strategy": "max_available", "use_ensemble": False},
+    "rhrt": {"horizon_strategy": "random_available", "use_ensemble": False},
+    "ensemble": {"horizon_strategy": "one_step", "use_ensemble": True},
+    "rhrt_ensemble": {"horizon_strategy": "random_available", "use_ensemble": True},
 }
 
 
@@ -41,28 +42,32 @@ class TrainingConfig:
     gradient_clip_norm: float = 1.0
     early_stopping_patience: int = 15
     num_workers: int = 0
-    split_seed: int = 17
+    main_split_seed: int = 17
+    training_seeds: list[int] = field(default_factory=lambda: [7, 17, 29])
+    robustness_split_seeds: list[int] = field(default_factory=lambda: [23, 41, 59])
+    robustness_training_seed: int = 17
     train_fraction: float = 0.7
     validation_fraction: float = 0.15
     delta_scale_days: float = 365.0
     device: str = "auto"
-    recursive_training: bool = True
     terminal_loss_only: bool = True
     teacher_forcing: bool = False
     primary_metric: str = "normalized_latent_mse"
     checkpoint_metric: str = "val_recursive_mse_k2_k3"
-    experiment_seeds: list[int] = field(default_factory=lambda: [7, 17, 29])
-    bootstrap_samples: int = 2000
 
     def __post_init__(self) -> None:
         if self.max_horizon != 3:
             raise ValueError("Stage 1 requires max_horizon=3")
-        if not self.recursive_training or not self.terminal_loss_only or self.teacher_forcing:
-            raise ValueError("Stage 1 requires recursive training, terminal MSE, and no teacher forcing")
+        if not self.terminal_loss_only or self.teacher_forcing:
+            raise ValueError("Stage 1 requires terminal MSE and no teacher forcing")
         if self.primary_metric != "normalized_latent_mse" or self.checkpoint_metric != "val_recursive_mse_k2_k3":
             raise ValueError("Unsupported Stage 1 metric")
-        if self.ensemble_size < 1 or self.batch_size < 1 or self.epochs < 1 or self.bootstrap_samples < 1:
+        if self.ensemble_size < 1 or self.batch_size < 1 or self.epochs < 1:
             raise ValueError("Invalid positive training parameter")
+        if not self.training_seeds or len(set(self.training_seeds)) != len(self.training_seeds):
+            raise ValueError("training_seeds must be nonempty and unique")
+        if len(set(self.robustness_split_seeds)) != len(self.robustness_split_seeds) or self.main_split_seed in self.robustness_split_seeds:
+            raise ValueError("robustness split seeds must be unique and exclude the main split")
 
     @classmethod
     def from_json(cls, path: str | Path) -> "TrainingConfig":
@@ -115,7 +120,8 @@ def validation_recursive_mse(model: EnsembleDynamics, loader: DataLoader, device
     return (means[2] + means[3]) / 2, means
 
 
-def train_model(data_dir: str | Path, output_dir: str | Path, config: TrainingConfig, seed: int, variant: str) -> Path:
+def train_model(data_dir: str | Path, output_dir: str | Path, config: TrainingConfig, seed: int, variant: str,
+                split_seed: int | None = None) -> Path:
     if variant not in VARIANTS:
         raise ValueError(f"Unknown variant: {variant}")
     switches = VARIANTS[variant]
@@ -124,7 +130,8 @@ def train_model(data_dir: str | Path, output_dir: str | Path, config: TrainingCo
     provenance = metadata.get("provenance") or {}
     if provenance.get("kind") == "clarity" and provenance.get("action_anchor") != "source":
         raise ValueError("Stage 1 requires CLARITY trajectories with action_anchor=source")
-    split = split_patient_ids([item.patient_id for item in trajectories], config.split_seed,
+    split_seed = config.main_split_seed if split_seed is None else split_seed
+    split = split_patient_ids([item.patient_id for item in trajectories], split_seed,
                               config.train_fraction, config.validation_fraction)
     train_trajectories = select_trajectories(trajectories, split["train"])
     val_trajectories = select_trajectories(trajectories, split["validation"])
@@ -148,7 +155,7 @@ def train_model(data_dir: str | Path, output_dir: str | Path, config: TrainingCo
         member_seed = seed if members == 1 else seed * 1000 + member_index
         seed_everything(member_seed)
         train_dataset = TrainingHorizonDataset(train_trajectories, normalizer, 3,
-                                               switches["recursive_training"], member_seed)
+                                               switches["horizon_strategy"], member_seed)
         train_loader = DataLoader(train_dataset, batch_size=config.batch_size, shuffle=True,
                                   num_workers=config.num_workers, collate_fn=collate_windows,
                                   generator=torch.Generator().manual_seed(member_seed))
@@ -201,7 +208,7 @@ def train_model(data_dir: str | Path, output_dir: str | Path, config: TrainingCo
             total_counts[str(horizon)] += counts[str(horizon)]
     checkpoint_path = output_dir / "best.pt"
     torch.save({
-        "schema_version": "2.0", "variant": variant, "seed": seed,
+        "schema_version": "3.0", "variant": variant, "seed": seed,
         "model_config": model_config.to_dict(), "training_config": asdict(config),
         "member_state_dicts": member_states, "normalizer": normalizer.state_dict(),
         "split": split,
@@ -209,7 +216,10 @@ def train_model(data_dir: str | Path, output_dir: str | Path, config: TrainingCo
                           ("schema_version", "latent_dim", "action_dim", "action_vocab", "provenance")},
     }, checkpoint_path)
     training = {
-        "variant": variant, "seed": seed, "data_dir": str(Path(data_dir).resolve()),
+        "variant": variant, "seed": seed, "split_seed": split_seed,
+        "horizon_strategy": switches["horizon_strategy"],
+        "robustness_training_seed": config.robustness_training_seed,
+        "data_dir": str(Path(data_dir).resolve()),
         "best_epoch": [member["best_epoch"] for member in member_reports],
         "train_loss": [member["train_loss"] for member in member_reports],
         "validation_loss": [member["validation_loss"] for member in member_reports],
@@ -217,7 +227,7 @@ def train_model(data_dir: str | Path, output_dir: str | Path, config: TrainingCo
         "checkpoint": str(checkpoint_path.resolve()), "members": member_reports,
         "checkpoint_metric": config.checkpoint_metric,
         "protocol": {"max_horizon": config.max_horizon, "ensemble_size": members,
-                     "split_seed": config.split_seed, "train_fraction": config.train_fraction,
+                     "split_seed": split_seed, "train_fraction": config.train_fraction,
                      "validation_fraction": config.validation_fraction},
     }
     with (output_dir / "training.json").open("w", encoding="utf-8") as handle:
@@ -227,7 +237,7 @@ def train_model(data_dir: str | Path, output_dir: str | Path, config: TrainingCo
 
 def load_trained_model(checkpoint_path: str | Path, device: torch.device) -> tuple[EnsembleDynamics, dict]:
     checkpoint = torch.load(checkpoint_path, map_location="cpu", weights_only=True)
-    if checkpoint.get("schema_version") != "2.0":
+    if checkpoint.get("schema_version") != "3.0":
         raise ValueError("Checkpoint is from an older Stage 1 protocol; retrain with train-stage1")
     model = EnsembleDynamics(ModelConfig(**checkpoint["model_config"]))
     if len(checkpoint["member_state_dicts"]) != model.ensemble_size:

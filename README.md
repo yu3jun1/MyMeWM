@@ -2,11 +2,9 @@
 
 本仓库验证两个问题：随机 horizon 的递归训练能否减少多步 MRI latent 预测误差；独立 dynamics ensemble 的分歧能否识别高误差轨迹。主实验使用冻结的 BrainIAC encoder，MRI-CORE 采用相同协议作为稳健性实验。两个 latent space 只比较各自内部的相对改善，不比较绝对 MSE。
 
-四个 variant 是 baseline、rhrt、ensemble、rhrt_ensemble。Baseline 用真实起始 latent 进行一步训练。RHRT 在每个合法起点均匀采样 1 到 min(3, 剩余步数)，逐步把预测状态送回模型，并只对最终状态计算标准化 latent MSE。Ensemble 的 5 个 member 各自初始化、采样、打乱 batch、训练并维护自己的 rollout 状态；不做 patient bootstrap。所有模型使用相同的 validation recursive MSE@2/@3 平均值选 checkpoint。
+五个 variant 是 baseline、recursive_max、rhrt、ensemble、rhrt_ensemble。Baseline 和 Ensemble 用一步训练；Recursive-Max 在每个起点使用最大可用 horizon；RHRT 在 1 到 min(3, 剩余步数) 中均匀采样，递归回灌预测 latent，只对终点计算 loss。Recursive-Max 用来检验随机 horizon 的作用，不作为独立 contribution。Ensemble 的 5 个 member 独立初始化、打乱 batch 和采样 horizon，且各自维护 rollout 状态。所有方法均以 validation MSE@2 和 MSE@3 的平均值选择 checkpoint。
 
-正式比较限定 horizon 1、2、3。患者划分固定为 70%/15%/15%，split seed 为 17；实验 seed 为 7、17、29。主判据为 baseline 对 rhrt 的 long-horizon MSE 与 matched H3 slope 改善，以及 rhrt_ensemble 的 within-horizon uncertainty-error Spearman 与患者级 bootstrap CI。Stage 1 只评价观测治疗序列下的预测与风险排序，不给出治疗建议。
-
-训练配置在 configs/stage1_recursive.json。旧 Stage 1 checkpoint 使用不同目标和模型结构，必须重新训练。
+正式比较限定 horizon 1、2、3。主实验以患者级 70%/15%/15% 划分，split seed 为 17；training seeds 为 7、17、29。主指标是 MSE@1、MSE@2、MSE@3 和 Long MSE = (MSE@2 + MSE@3)/2，报告跨 seed 的 mean ± std 及相对改善百分比。患者划分稳健性使用 split seeds 23、41、59，并固定 training seed 17。风险信号使用逐 horizon Spearman、最高/最低 uncertainty 三分位误差比和 selective risk。程序只报告结果，不给实验自动判定。Stage 1 只评价观测治疗序列下的预测与风险排序。
 
 ## 1. 环境与数据
 
@@ -116,30 +114,41 @@ clarity-hauwm validate-data --data data/trajectories/mri_core
 
 ## 5. 运行 Stage 1
 
-建议先运行 BrainIAC，再用同样命令和配置运行 MRI-CORE。若两套轨迹都可用，先确认 patient、timepoint、action 与 delta_days 对齐：
+先确认两套 encoder 的患者、timepoint、action 和 delta_days 对齐：
 
-    clarity-hauwm validate-encoder-alignment --encoder-data brainiac=data/trajectories/brainiac mri_core=data/trajectories/mri_core
+```bash
+clarity-hauwm validate-encoder-alignment --encoder-data brainiac=data/trajectories/brainiac mri_core=data/trajectories/mri_core
+```
 
-BrainIAC 主实验。使用 GPU 时，先根据实时负载把 CUDA_VISIBLE_DEVICES 设为 4–7 中的一张卡：
+BrainIAC 是主实验。使用 GPU 时，先根据实时负载把 `CUDA_VISIBLE_DEVICES` 设为 4–7 中的一张卡。先运行数据审计，核对患者数、timepoint 数和各 horizon 的合法窗口数：
 
-    clarity-hauwm train-stage1 --data data/trajectories/brainiac --config configs/stage1_recursive.json --variants baseline rhrt ensemble rhrt_ensemble --seeds 7 17 29 --output outputs/stage1/brainiac
-    clarity-hauwm evaluate-recursive --input outputs/stage1/brainiac --max-horizon 3
-    clarity-hauwm evaluate-uncertainty --input outputs/stage1/brainiac --max-horizon 3
-    clarity-hauwm summarize-stage1 --input outputs/stage1/brainiac --bootstrap-samples 2000
+```bash
+clarity-hauwm audit-stage1 --data data/trajectories/brainiac --config configs/stage1_recursive.json --output outputs/stage1/brainiac
+clarity-hauwm train-stage1 --data data/trajectories/brainiac --config configs/stage1_recursive.json --output outputs/stage1/brainiac
+clarity-hauwm evaluate-recursive --input outputs/stage1/brainiac
+clarity-hauwm evaluate-uncertainty --input outputs/stage1/brainiac
+clarity-hauwm train-split-robustness --data data/trajectories/brainiac --config configs/stage1_recursive.json --output outputs/stage1/brainiac
+clarity-hauwm summarize-stage1 --input outputs/stage1/brainiac
+```
 
-MRI-CORE 稳健性实验：
+`train-stage1` 默认运行五个 variant × seeds 7、17、29。`train-split-robustness` 运行三个新增 patient split，各运行 baseline、recursive_max、rhrt × seed 17，并自动评估。长时间实验可以用 `--variants` 和 `--seeds` 分批运行主实验。完成后再运行汇总。
 
-    clarity-hauwm train-stage1 --data data/trajectories/mri_core --config configs/stage1_recursive.json --variants baseline rhrt ensemble rhrt_ensemble --seeds 7 17 29 --output outputs/stage1/mri_core
-    clarity-hauwm evaluate-recursive --input outputs/stage1/mri_core --max-horizon 3
-    clarity-hauwm evaluate-uncertainty --input outputs/stage1/mri_core --max-horizon 3
-    clarity-hauwm summarize-stage1 --input outputs/stage1/mri_core --bootstrap-samples 2000
+MRI-CORE 作为 representation robustness，先运行 baseline、rhrt、rhrt_ensemble。它使用自己的 dynamics 模型，不与 BrainIAC 比绝对 MSE：
 
-每个 seed/variant 目录含 best.pt、training.json 和 recursive_metrics.json；ensemble variant 还含 uncertainty_metrics.json。递归与不确定性评估各自保存记录级 JSON，供患者级 bootstrap 使用，不生成 CSV。reports 目录分开保存 rhrt_summary.json、rhrt_bootstrap.json、ensemble_summary.json、ensemble_bootstrap.json 和精简的 stage1_summary.json。终端表格同时写入 reports 下的 .log 文件。
+```bash
+clarity-hauwm audit-stage1 --data data/trajectories/mri_core --config configs/stage1_recursive.json --output outputs/stage1/mri_core
+clarity-hauwm train-stage1 --data data/trajectories/mri_core --config configs/stage1_recursive.json --variants baseline rhrt rhrt_ensemble --output outputs/stage1/mri_core
+clarity-hauwm evaluate-recursive --input outputs/stage1/mri_core
+clarity-hauwm evaluate-uncertainty --input outputs/stage1/mri_core
+clarity-hauwm summarize-stage1 --input outputs/stage1/mri_core
+```
 
-单次 recursive_metrics.json 的 MSE@k 是该 horizon 全部合法窗口的均值。跨 seed 的正式比较先对每位患者聚合，再平均患者指标；long-horizon MSE 是 MSE@2 与 MSE@3 的平均值。H3 slope 仅使用同一患者中可以完整展开三步的起点，先拟合患者 slope 再汇总。Spearman 在每个 horizon 内基于患者平均 uncertainty 与 error 计算，再跨 horizon 取宏平均；患者级 bootstrap 同时复采样所有实验 seed 的相同患者。
+每次 run 保存在 `seed_<training_seed>/<variant>/`，包含 checkpoint、训练记录和逐窗口评估结果。汇总写入 `reports/`：`dataset_stats.json`、`training_summary.json`、`prediction_metrics.json`、`prediction_comparison.json`、`uncertainty_metrics.json`、`selective_risk.json`、`split_robustness.json` 和 `stage1_summary.json`。终端同时打印表格；不生成 CSV。
 
-RQ1 的通过标准是 rhrt 的 long-horizon MSE 更低，改善量的 95% paired-bootstrap CI 下界大于零，并且 matched H3 slope 下降、改善量为正，bootstrap 改善概率大于 0.5。RQ2 使用 rhrt_ensemble：macro Spearman 大于零、bootstrap CI 下界大于零，且最高/最低 uncertainty 三分位误差比的宏平均大于一。该指标只支持风险排序，不代表概率校准。正式通过判定还要求四个 variant 均完成 seed 7、17、29，ensemble 各有 5 个 member，并使用固定患者划分；探索性少量运行仍输出指标，但不会标记通过。若数据不足以计算某指标，JSON 写 null，判据不通过。
+MSE@k 是该 horizon 所有合法测试窗口的平均误差；每个 seed 独立计算，跨 seed 使用样本标准差。相对改善按同一 seed 的两种方法计算，再汇总 mean ± std，单位为百分比。Spearman 和最高/最低三分位误差比在每个 horizon 的预测窗口内计算。Selective risk 删除 uncertainty 最高的 20% 窗口，对剩余窗口计算平均 MSE；Risk Reduction 的单位也是百分比。缺少有效数据时相应 JSON 值为 `null`。
 
-代码测试：
+旧 checkpoint 属于上一版实验协议，需要重新训练。代码测试：
 
-    /home/tanyuejun/miniconda3/envs/py310/bin/python -m pytest -q
+```bash
+/home/tanyuejun/miniconda3/envs/py310/bin/python -m pytest -q
+```

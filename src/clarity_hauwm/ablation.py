@@ -12,7 +12,7 @@ def train_stage1(data_dir: str | Path, config_path: str | Path, output_dir: str 
                  variants: Sequence[str] | None = None, seeds: Sequence[int] | None = None) -> list[Path]:
     config = TrainingConfig.from_json(config_path)
     variants = list(variants or VARIANTS)
-    seeds = list(seeds or config.experiment_seeds)
+    seeds = list(seeds or config.training_seeds)
     if not seeds or len(set(seeds)) != len(seeds):
         raise ValueError("Seeds must be nonempty and unique")
     if not variants or len(set(variants)) != len(variants) or set(variants) - set(VARIANTS):
@@ -22,6 +22,20 @@ def train_stage1(data_dir: str | Path, config_path: str | Path, output_dir: str 
         for variant in variants:
             path = Path(output_dir) / f"seed_{seed}" / variant
             checkpoints.append(train_model(data_dir, path, config, seed, variant))
+    return checkpoints
+
+
+def train_split_robustness(data_dir: str | Path, config_path: str | Path,
+                           output_dir: str | Path) -> list[Path]:
+    config = TrainingConfig.from_json(config_path)
+    checkpoints = []
+    for split_seed in config.robustness_split_seeds:
+        root = Path(output_dir) / "robustness" / f"split_{split_seed}"
+        for variant in ("baseline", "recursive_max", "rhrt"):
+            path = root / f"seed_{config.robustness_training_seed}" / variant
+            checkpoints.append(train_model(data_dir, path, config, config.robustness_training_seed,
+                                           variant, split_seed=split_seed))
+        evaluate_stage1(root, "recursive", device=config.device)
     return checkpoints
 
 
@@ -35,12 +49,12 @@ def evaluate_stage1(input_dir: str | Path, kind: str, max_horizon: int = 3,
         raise ValueError(f"No trained runs under {input_dir}")
     reports = [evaluate_run(path, kind, max_horizon, device) for path in directories]
     if kind == "recursive":
-        lines = ["Recursive Rollout Performance", "| Seed | Variant | MSE@1 | MSE@2 | MSE@3 | Long MSE | H3 Slope |",
-                 "|---:|---|---:|---:|---:|---:|---:|"]
+        lines = ["Recursive Rollout Performance", "| Seed | Variant | MSE@1 | MSE@2 | MSE@3 | Long MSE |",
+                 "|---:|---|---:|---:|---:|---:|"]
         for row in reports:
             h = {item["horizon"]: item["mse"] for item in row["by_horizon"]}
             lines.append(f"| {row['seed']} | {row['variant']} | {_fmt(h[1])} | {_fmt(h[2])} | {_fmt(h[3])} | "
-                         f"{_fmt(row['long_horizon_mse'])} | {_fmt(row['matched_h3_slope'])} |")
+                         f"{_fmt(row['long_horizon_mse'])} |")
     else:
         lines = ["Ensemble Reliability", "| Seed | Variant | rho@1 | rho@2 | rho@3 | Macro rho | Macro High/Low |",
                  "|---:|---|---:|---:|---:|---:|---:|"]

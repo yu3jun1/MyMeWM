@@ -1,0 +1,29 @@
+{
+  "variant": "rhrt_ensemble",
+  "seed": 17,
+  "by_horizon": [
+    {
+      "horizon": 1,
+      "n_predictions": 70,
+      "mean_uncertainty": 0.03002425919819091,
+      "uncertainty_error_spearman": 0.40988539935263757,
+      "high_low_tertile_error_ratio": 2.2012989588602063
+    },
+    {
+      "horizon": 2,
+      "n_predictions": 46,
+      "mean_uncertainty": 0.04535604770416799,
+      "uncertainty_error_spearman": 0.5294480419364784,
+      "high_low_tertile_error_ratio": 1.8964297065534472
+    },
+    {
+      "horizon": 3,
+      "n_predictions": 28,
+      "mean_uncertainty": 0.05403226288035512,
+      "uncertainty_error_spearman": 0.5670498084291188,
+      "high_low_tertile_error_ratio": 2.3127999904462375
+    }
+  ],
+  "macro_spearman": 0.5021277499060782,
+  "macro_high_low_ratio": 2.13684288528663
+}

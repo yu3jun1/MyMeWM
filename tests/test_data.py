@@ -19,15 +19,23 @@ def test_round_trip_split_and_horizon_sampling(tmp_path, dataset_factory):
     split = split_patient_ids([item.patient_id for item in trajectories], 17, 0.7, 0.15)
     assert not (set(split["train"]) & set(split["test"]))
     normalizer = LatentNormalizer.fit(trajectories)
-    dataset = TrainingHorizonDataset(trajectories, normalizer, 4, True, seed=9)
+    dataset = TrainingHorizonDataset(trajectories, normalizer, 3, "random_available", seed=9)
     assert len(dataset) == sum(len(item.latents) - 1 for item in trajectories)
     for index, (trajectory_index, start) in enumerate(dataset.starts):
-        assert 1 <= dataset[index]["horizon"] <= min(4, len(trajectories[trajectory_index].latents) - 1 - start)
+        assert 1 <= dataset[index]["horizon"] <= min(3, len(trajectories[trajectory_index].latents) - 1 - start)
     first_epoch = [dataset[index]["horizon"] for index in range(len(dataset))]
     dataset.set_epoch(1)
     second_epoch = [dataset[index]["horizon"] for index in range(len(dataset))]
-    assert all(1 <= horizon <= 4 for horizon in first_epoch + second_epoch)
+    assert all(1 <= horizon <= 3 for horizon in first_epoch + second_epoch)
     assert first_epoch != second_epoch
+    max_dataset = TrainingHorizonDataset(trajectories, normalizer, 3, "max_available", seed=9)
+    one_step = TrainingHorizonDataset(trajectories, normalizer, 3, "one_step", seed=9)
+    assert all(one_step[index]["horizon"] == 1 for index in range(len(one_step)))
+    assert all(max_dataset[index]["horizon"] == min(3, len(trajectories[ti].latents) - 1 - start)
+               for index, (ti, start) in enumerate(max_dataset.starts))
+    max_dataset.set_epoch(2)
+    assert [max_dataset[index]["horizon"] for index in range(len(max_dataset))] == [
+        min(3, len(trajectories[ti].latents) - 1 - start) for ti, start in max_dataset.starts]
 
 
 def test_clarity_source_anchor_excludes_destination_action(tmp_path):

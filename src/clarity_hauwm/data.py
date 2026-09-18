@@ -192,20 +192,24 @@ def select_trajectories(trajectories: Sequence[Trajectory], patient_ids: Sequenc
 
 
 class TrainingHorizonDataset(Dataset):
-    """One item per valid start; a deterministic uniform horizon is redrawn each epoch."""
+    """One item per valid start, with the variant's training horizon strategy."""
 
     def __init__(
         self,
         trajectories: Sequence[Trajectory],
         normalizer: LatentNormalizer,
         max_horizon: int,
-        horizon_sampling: bool,
+        horizon_strategy: str,
         seed: int,
     ) -> None:
         self.trajectories = list(trajectories)
         self.normalizer = normalizer
         self.max_horizon = max_horizon
-        self.horizon_sampling = horizon_sampling
+        if horizon_strategy not in ("one_step", "max_available", "random_available"):
+            raise ValueError(f"Unknown horizon strategy: {horizon_strategy}")
+        if max_horizon < 1:
+            raise ValueError("max_horizon must be positive")
+        self.horizon_strategy = horizon_strategy
         self.seed = seed
         self.epoch = 0
         self.starts = [
@@ -221,10 +225,12 @@ class TrainingHorizonDataset(Dataset):
         return len(self.starts)
 
     def _horizon(self, trajectory_index: int, start: int) -> int:
-        if not self.horizon_sampling:
+        if self.horizon_strategy == "one_step":
             return 1
         trajectory = self.trajectories[trajectory_index]
         upper = min(self.max_horizon, len(trajectory.latents) - 1 - start)
+        if self.horizon_strategy == "max_available":
+            return upper
         digest = hashlib.sha256(f"{self.seed}:{self.epoch}:{trajectory_index}:{start}".encode()).digest()
         return 1 + int.from_bytes(digest[:8], "little") % upper
 

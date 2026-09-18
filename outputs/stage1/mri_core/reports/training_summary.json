@@ -1,0 +1,194 @@
+{
+  "baseline": {
+    "7": {
+      "training_seed": 7,
+      "horizon_strategy": "one_step",
+      "best_epoch": [
+        5
+      ],
+      "best_validation_score": [
+        0.42426831281936916
+      ],
+      "H1_sampling_count": 5240,
+      "H2_sampling_count": 0,
+      "H3_sampling_count": 0,
+      "horizon_sampling_percentage": {
+        "1": 100.0,
+        "2": 0.0,
+        "3": 0.0
+      }
+    },
+    "17": {
+      "training_seed": 17,
+      "horizon_strategy": "one_step",
+      "best_epoch": [
+        5
+      ],
+      "best_validation_score": [
+        0.41934387541185475
+      ],
+      "H1_sampling_count": 5240,
+      "H2_sampling_count": 0,
+      "H3_sampling_count": 0,
+      "horizon_sampling_percentage": {
+        "1": 100.0,
+        "2": 0.0,
+        "3": 0.0
+      }
+    },
+    "29": {
+      "training_seed": 29,
+      "horizon_strategy": "one_step",
+      "best_epoch": [
+        4
+      ],
+      "best_validation_score": [
+        0.4277054527858356
+      ],
+      "H1_sampling_count": 4978,
+      "H2_sampling_count": 0,
+      "H3_sampling_count": 0,
+      "horizon_sampling_percentage": {
+        "1": 100.0,
+        "2": 0.0,
+        "3": 0.0
+      }
+    }
+  },
+  "rhrt": {
+    "7": {
+      "training_seed": 7,
+      "horizon_strategy": "random_available",
+      "best_epoch": [
+        15
+      ],
+      "best_validation_score": [
+        0.3941393779971885
+      ],
+      "H1_sampling_count": 5128,
+      "H2_sampling_count": 1975,
+      "H3_sampling_count": 757,
+      "horizon_sampling_percentage": {
+        "1": 65.2417302798982,
+        "2": 25.127226463104325,
+        "3": 9.631043256997456
+      }
+    },
+    "17": {
+      "training_seed": 17,
+      "horizon_strategy": "random_available",
+      "best_epoch": [
+        11
+      ],
+      "best_validation_score": [
+        0.40052394317690776
+      ],
+      "H1_sampling_count": 4475,
+      "H2_sampling_count": 1639,
+      "H3_sampling_count": 698,
+      "horizon_sampling_percentage": {
+        "1": 65.69289489136817,
+        "2": 24.060481503229596,
+        "3": 10.246623605402231
+      }
+    },
+    "29": {
+      "training_seed": 29,
+      "horizon_strategy": "random_available",
+      "best_epoch": [
+        11
+      ],
+      "best_validation_score": [
+        0.4185608166678685
+      ],
+      "H1_sampling_count": 4534,
+      "H2_sampling_count": 1582,
+      "H3_sampling_count": 696,
+      "horizon_sampling_percentage": {
+        "1": 66.55901350557839,
+        "2": 23.223722842043454,
+        "3": 10.217263652378156
+      }
+    }
+  },
+  "rhrt_ensemble": {
+    "7": {
+      "training_seed": 7,
+      "horizon_strategy": "random_available",
+      "best_epoch": [
+        10,
+        12,
+        15,
+        9,
+        22
+      ],
+      "best_validation_score": [
+        0.41112277329811875,
+        0.4073502951453858,
+        0.418434984742291,
+        0.4388689252247068,
+        0.4192112183325386
+      ],
+      "H1_sampling_count": 24577,
+      "H2_sampling_count": 9139,
+      "H3_sampling_count": 3750,
+      "horizon_sampling_percentage": {
+        "1": 65.59814231569958,
+        "2": 24.392782789729356,
+        "3": 10.009074894571079
+      }
+    },
+    "17": {
+      "training_seed": 17,
+      "horizon_strategy": "random_available",
+      "best_epoch": [
+        8,
+        11,
+        38,
+        16,
+        8
+      ],
+      "best_validation_score": [
+        0.42129480186729973,
+        0.41207830233923715,
+        0.40642426112136937,
+        0.41624355024659343,
+        0.41457625529327297
+      ],
+      "H1_sampling_count": 26766,
+      "H2_sampling_count": 10039,
+      "H3_sampling_count": 4067,
+      "horizon_sampling_percentage": {
+        "1": 65.48737522019965,
+        "2": 24.56204736739088,
+        "3": 9.950577412409475
+      }
+    },
+    "29": {
+      "training_seed": 29,
+      "horizon_strategy": "random_available",
+      "best_epoch": [
+        15,
+        6,
+        12,
+        14,
+        7
+      ],
+      "best_validation_score": [
+        0.42384936903127524,
+        0.4169361025210053,
+        0.41908060184930435,
+        0.42532651557885537,
+        0.4186303460613334
+      ],
+      "H1_sampling_count": 22184,
+      "H2_sampling_count": 8208,
+      "H3_sampling_count": 3406,
+      "horizon_sampling_percentage": {
+        "1": 65.63701994200841,
+        "2": 24.285460678146638,
+        "3": 10.077519379844961
+      }
+    }
+  }
+}

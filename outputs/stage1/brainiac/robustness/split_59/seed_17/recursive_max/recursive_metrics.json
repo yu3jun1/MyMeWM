@@ -1,0 +1,28 @@
+{
+  "variant": "recursive_max",
+  "seed": 17,
+  "by_horizon": [
+    {
+      "horizon": 1,
+      "n_predictions": 55,
+      "n_patients": 24,
+      "mse": 0.5540202078494159,
+      "cosine_distance": 0.36976383165879684
+    },
+    {
+      "horizon": 2,
+      "n_predictions": 31,
+      "n_patients": 15,
+      "mse": 0.5147572866370601,
+      "cosine_distance": 0.40855603256533224
+    },
+    {
+      "horizon": 3,
+      "n_predictions": 16,
+      "n_patients": 7,
+      "mse": 0.5844532130286098,
+      "cosine_distance": 0.47844333201646805
+    }
+  ],
+  "long_horizon_mse": 0.549605249832835
+}

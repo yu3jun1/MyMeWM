@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import json
-from collections import defaultdict
 from pathlib import Path
 from typing import Sequence
 
@@ -83,28 +82,6 @@ def evaluate_records(model: EnsembleDynamics, loader: DataLoader, device: torch.
     return records
 
 
-def patient_horizon_means(records: Sequence[dict], field: str) -> dict[str, dict[int, float]]:
-    grouped: dict[str, dict[int, list[float]]] = defaultdict(lambda: defaultdict(list))
-    for row in records:
-        grouped[row["patient_id"]][int(row["horizon"])].append(float(row[field]))
-    return {patient: {horizon: float(np.mean(values)) for horizon, values in by_horizon.items()}
-            for patient, by_horizon in grouped.items()}
-
-
-def matched_h3_slopes(records: Sequence[dict]) -> dict[str, float]:
-    # Use only starts with all three targets, so both horizon and window composition are matched.
-    grouped: dict[str, dict[int, dict[int, float]]] = defaultdict(lambda: defaultdict(dict))
-    for row in records:
-        grouped[row["patient_id"]][int(row["start"])][int(row["horizon"])] = float(row["mse"])
-    slopes = {}
-    for patient, starts in grouped.items():
-        complete = [values for values in starts.values() if all(horizon in values for horizon in (1, 2, 3))]
-        if complete:
-            means = [float(np.mean([values[horizon] for values in complete])) for horizon in (1, 2, 3)]
-            slopes[patient] = float(np.polyfit([1, 2, 3], means, deg=1)[0])
-    return slopes
-
-
 def recursive_metrics(records: Sequence[dict], variant: str, seed: int) -> dict:
     by_horizon = []
     mse_by_horizon = {}
@@ -118,15 +95,10 @@ def recursive_metrics(records: Sequence[dict], variant: str, seed: int) -> dict:
             "mse": mse,
             "cosine_distance": float(np.mean([row["cosine_distance"] for row in subset])) if subset else None,
         })
-    slopes = matched_h3_slopes(records)
     long_mse = ((mse_by_horizon[2] + mse_by_horizon[3]) / 2
                 if mse_by_horizon[2] is not None and mse_by_horizon[3] is not None else None)
-    return {
-        "variant": variant, "seed": seed, "by_horizon": by_horizon,
-        "long_horizon_mse": long_mse,
-        "matched_h3_slope": float(np.mean(list(slopes.values()))) if slopes else None,
-        "matched_h3_patients": len(slopes),
-    }
+    return {"variant": variant, "seed": seed, "by_horizon": by_horizon,
+            "long_horizon_mse": long_mse}
 
 
 def _tertile_ratio(uncertainties: Sequence[float], errors: Sequence[float]) -> float | None:
@@ -141,29 +113,43 @@ def _tertile_ratio(uncertainties: Sequence[float], errors: Sequence[float]) -> f
 
 
 def uncertainty_metrics(records: Sequence[dict], variant: str, seed: int) -> dict:
-    patient_u = patient_horizon_means(records, "uncertainty")
-    patient_e = patient_horizon_means(records, "mse")
     by_horizon = []
     for horizon in (1, 2, 3):
-        patients = sorted(patient for patient in patient_u if horizon in patient_u[patient])
-        uncertainties = [patient_u[patient][horizon] for patient in patients]
-        errors = [patient_e[patient][horizon] for patient in patients]
+        subset = [row for row in records if row["horizon"] == horizon]
+        uncertainties = [row["uncertainty"] for row in subset]
+        errors = [row["mse"] for row in subset]
         by_horizon.append({
-            "horizon": horizon, "n_patients": len(patients),
-            "mean_uncertainty": float(np.mean(uncertainties)) if patients else None,
+            "horizon": horizon, "n_predictions": len(subset),
+            "mean_uncertainty": float(np.mean(uncertainties)) if subset else None,
             "uncertainty_error_spearman": spearman(uncertainties, errors),
             "high_low_tertile_error_ratio": _tertile_ratio(uncertainties, errors),
         })
     rhos = [row["uncertainty_error_spearman"] for row in by_horizon]
     ratios = [row["high_low_tertile_error_ratio"] for row in by_horizon]
-    horizons = [horizon for patient in patient_u.values() for horizon in patient]
-    uncertainty_values = [value for patient in patient_u.values() for value in patient.values()]
     return {
         "variant": variant, "seed": seed, "by_horizon": by_horizon,
         "macro_spearman": float(np.mean(rhos)) if all(value is not None for value in rhos) else None,
         "macro_high_low_ratio": float(np.mean(ratios)) if all(value is not None for value in ratios) else None,
-        "uncertainty_horizon_spearman": spearman(uncertainty_values, horizons),
     }
+
+
+def selective_risk_metrics(records: Sequence[dict], variant: str, seed: int) -> dict:
+    by_horizon = []
+    for horizon in (1, 2, 3):
+        subset = [row for row in records if row["horizon"] == horizon]
+        count = len(subset)
+        keep = int(np.floor(count * 0.8))
+        risk_100 = float(np.mean([row["mse"] for row in subset])) if count else None
+        ranked = sorted(subset, key=lambda row: row["uncertainty"])
+        risk_80 = float(np.mean([row["mse"] for row in ranked[:keep]])) if keep else None
+        reduction = ((risk_100 - risk_80) / risk_100 * 100
+                     if risk_100 not in (None, 0) and risk_80 is not None else None)
+        by_horizon.append({"horizon": horizon, "n_predictions": count, "n_retained": keep,
+                           "risk_100": risk_100, "risk_80": risk_80,
+                           "risk_reduction": reduction})
+    reductions = [row["risk_reduction"] for row in by_horizon]
+    return {"variant": variant, "seed": seed, "by_horizon": by_horizon,
+            "macro_risk_reduction": float(np.mean(reductions)) if all(value is not None for value in reductions) else None}
 
 
 def evaluate_run(run_dir: str | Path, kind: str, max_horizon: int = 3, device: str = "auto") -> dict:
@@ -186,6 +172,7 @@ def evaluate_run(run_dir: str | Path, kind: str, max_horizon: int = 3, device: s
             for row in records
         ])
         write_json(run_dir / "uncertainty_metrics.json", report)
+        write_json(run_dir / "selective_risk.json", selective_risk_metrics(records, checkpoint["variant"], checkpoint["seed"]))
     else:
         raise ValueError(f"Unknown evaluation kind: {kind}")
     return report

@@ -4,14 +4,14 @@ import argparse
 import json
 from pathlib import Path
 
-from .ablation import evaluate_stage1, train_stage1
+from .ablation import evaluate_stage1, train_split_robustness, train_stage1
 from .brainiac_extract import extract_brainiac_latents
 from .clarity_adapter import build_clarity_trajectories
 from .data import validate_dataset
 from .encoder_comparison import parse_encoder_datasets, validate_encoder_alignment
 from .mri_core_extract import extract_mri_core_latents
-from .reporting import summarize_stage1
-from .training import VARIANTS
+from .reporting import audit_stage1_dataset, summarize_stage1
+from .training import TrainingConfig, VARIANTS
 
 
 def _print(value: dict) -> None:
@@ -63,6 +63,11 @@ def build_parser() -> argparse.ArgumentParser:
     align = subparsers.add_parser("validate-encoder-alignment", help="Check matched encoder trajectories")
     align.add_argument("--encoder-data", nargs="+", required=True, metavar="NAME=PATH")
 
+    audit = subparsers.add_parser("audit-stage1", help="Audit the main patient split and horizon windows")
+    audit.add_argument("--data", required=True)
+    audit.add_argument("--config", required=True)
+    audit.add_argument("--output", required=True)
+
     train = subparsers.add_parser("train-stage1", help="Train independent Stage 1 variants")
     train.add_argument("--data", required=True)
     train.add_argument("--config", required=True)
@@ -70,15 +75,19 @@ def build_parser() -> argparse.ArgumentParser:
     train.add_argument("--variants", nargs="+", choices=tuple(VARIANTS), default=list(VARIANTS))
     train.add_argument("--seeds", type=int, nargs="+", default=None)
 
+    robustness = subparsers.add_parser("train-split-robustness", help="Train and evaluate repeated patient splits")
+    robustness.add_argument("--data", required=True)
+    robustness.add_argument("--config", required=True)
+    robustness.add_argument("--output", required=True)
+
     for name in ("evaluate-recursive", "evaluate-uncertainty"):
         evaluate = subparsers.add_parser(name, help=f"Run {name.split('-')[1]} evaluation")
         evaluate.add_argument("--input", required=True)
         evaluate.add_argument("--max-horizon", type=int, default=3)
         evaluate.add_argument("--device", default="auto")
 
-    summary = subparsers.add_parser("summarize-stage1", help="Patient-level bootstrap and final criteria")
+    summary = subparsers.add_parser("summarize-stage1", help="Summarize prediction, reliability, and split robustness")
     summary.add_argument("--input", required=True)
-    summary.add_argument("--bootstrap-samples", type=int, default=2000)
     return parser
 
 
@@ -106,15 +115,22 @@ def main(argv: list[str] | None = None) -> None:
             output_kind=args.output_kind))
     elif args.command == "validate-encoder-alignment":
         _print(validate_encoder_alignment(parse_encoder_datasets(args.encoder_data)))
+    elif args.command == "audit-stage1":
+        from .evaluation import write_json
+        stats = audit_stage1_dataset(args.data, TrainingConfig.from_json(args.config))
+        write_json(Path(args.output) / "reports" / "dataset_stats.json", stats)
+        _print(stats)
     elif args.command == "train-stage1":
         checkpoints = train_stage1(args.data, args.config, args.output, args.variants, args.seeds)
         print(f"Trained {len(checkpoints)} runs under {Path(args.output).resolve()}")
+    elif args.command == "train-split-robustness":
+        checkpoints = train_split_robustness(args.data, args.config, args.output)
+        print(f"Trained and evaluated {len(checkpoints)} robustness runs under {Path(args.output).resolve()}")
     elif args.command == "evaluate-recursive":
         evaluate_stage1(args.input, "recursive", args.max_horizon, args.device)
     elif args.command == "evaluate-uncertainty":
         evaluate_stage1(args.input, "uncertainty", args.max_horizon, args.device)
     elif args.command == "summarize-stage1":
-        summary = summarize_stage1(args.input, args.bootstrap_samples)
-        print(f"Stage 1: RHRT={summary['rhrt_pass']} ensemble={summary['ensemble_pass']} overall={summary['stage1_pass']}")
+        summarize_stage1(args.input)
     else:
         raise AssertionError(f"Unhandled command: {args.command}")

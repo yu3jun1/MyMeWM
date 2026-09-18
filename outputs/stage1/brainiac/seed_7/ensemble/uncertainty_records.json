@@ -1,0 +1,1010 @@
+[
+  {
+    "patient_id": "PatientID_0013",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.6145641803741455,
+    "uncertainty": 0.023484935984015465
+  },
+  {
+    "patient_id": "PatientID_0013",
+    "start": 0,
+    "horizon": 2,
+    "mse": 0.4557322859764099,
+    "uncertainty": 0.03418360650539398
+  },
+  {
+    "patient_id": "PatientID_0013",
+    "start": 0,
+    "horizon": 3,
+    "mse": 0.4061642587184906,
+    "uncertainty": 0.04387684166431427
+  },
+  {
+    "patient_id": "PatientID_0013",
+    "start": 1,
+    "horizon": 1,
+    "mse": 0.4786977469921112,
+    "uncertainty": 0.012760805897414684
+  },
+  {
+    "patient_id": "PatientID_0013",
+    "start": 1,
+    "horizon": 2,
+    "mse": 0.24042457342147827,
+    "uncertainty": 0.027787288650870323
+  },
+  {
+    "patient_id": "PatientID_0013",
+    "start": 1,
+    "horizon": 3,
+    "mse": 0.5816173553466797,
+    "uncertainty": 0.03822939842939377
+  },
+  {
+    "patient_id": "PatientID_0013",
+    "start": 2,
+    "horizon": 1,
+    "mse": 0.2523290514945984,
+    "uncertainty": 0.014521276578307152
+  },
+  {
+    "patient_id": "PatientID_0013",
+    "start": 2,
+    "horizon": 2,
+    "mse": 0.3285748064517975,
+    "uncertainty": 0.03736742585897446
+  },
+  {
+    "patient_id": "PatientID_0013",
+    "start": 3,
+    "horizon": 1,
+    "mse": 0.3512582778930664,
+    "uncertainty": 0.009548229165375233
+  },
+  {
+    "patient_id": "PatientID_0026",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.3013729453086853,
+    "uncertainty": 0.014610020443797112
+  },
+  {
+    "patient_id": "PatientID_0031",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.2946474254131317,
+    "uncertainty": 0.023367781192064285
+  },
+  {
+    "patient_id": "PatientID_0031",
+    "start": 0,
+    "horizon": 2,
+    "mse": 0.19628122448921204,
+    "uncertainty": 0.032768115401268005
+  },
+  {
+    "patient_id": "PatientID_0031",
+    "start": 0,
+    "horizon": 3,
+    "mse": 0.22288772463798523,
+    "uncertainty": 0.048189446330070496
+  },
+  {
+    "patient_id": "PatientID_0031",
+    "start": 1,
+    "horizon": 1,
+    "mse": 0.15839874744415283,
+    "uncertainty": 0.028232231736183167
+  },
+  {
+    "patient_id": "PatientID_0031",
+    "start": 1,
+    "horizon": 2,
+    "mse": 0.3062414824962616,
+    "uncertainty": 0.030789656564593315
+  },
+  {
+    "patient_id": "PatientID_0031",
+    "start": 2,
+    "horizon": 1,
+    "mse": 0.2025647759437561,
+    "uncertainty": 0.025634881108999252
+  },
+  {
+    "patient_id": "PatientID_0034",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.560579240322113,
+    "uncertainty": 0.025323061272501945
+  },
+  {
+    "patient_id": "PatientID_0034",
+    "start": 0,
+    "horizon": 2,
+    "mse": 0.28314608335494995,
+    "uncertainty": 0.026609128341078758
+  },
+  {
+    "patient_id": "PatientID_0034",
+    "start": 0,
+    "horizon": 3,
+    "mse": 0.35211366415023804,
+    "uncertainty": 0.035599034279584885
+  },
+  {
+    "patient_id": "PatientID_0034",
+    "start": 1,
+    "horizon": 1,
+    "mse": 0.8943262100219727,
+    "uncertainty": 0.018157755956053734
+  },
+  {
+    "patient_id": "PatientID_0034",
+    "start": 1,
+    "horizon": 2,
+    "mse": 0.9587900638580322,
+    "uncertainty": 0.02791578695178032
+  },
+  {
+    "patient_id": "PatientID_0034",
+    "start": 1,
+    "horizon": 3,
+    "mse": 0.9017914533615112,
+    "uncertainty": 0.03834543377161026
+  },
+  {
+    "patient_id": "PatientID_0034",
+    "start": 2,
+    "horizon": 1,
+    "mse": 0.17707888782024384,
+    "uncertainty": 0.028849175199866295
+  },
+  {
+    "patient_id": "PatientID_0034",
+    "start": 2,
+    "horizon": 2,
+    "mse": 0.272699236869812,
+    "uncertainty": 0.03527183085680008
+  },
+  {
+    "patient_id": "PatientID_0034",
+    "start": 2,
+    "horizon": 3,
+    "mse": 0.30754178762435913,
+    "uncertainty": 0.0454287976026535
+  },
+  {
+    "patient_id": "PatientID_0034",
+    "start": 3,
+    "horizon": 1,
+    "mse": 0.2326623648405075,
+    "uncertainty": 0.015070222318172455
+  },
+  {
+    "patient_id": "PatientID_0034",
+    "start": 3,
+    "horizon": 2,
+    "mse": 0.19330507516860962,
+    "uncertainty": 0.02678523026406765
+  },
+  {
+    "patient_id": "PatientID_0034",
+    "start": 4,
+    "horizon": 1,
+    "mse": 0.1882551610469818,
+    "uncertainty": 0.027879219502210617
+  },
+  {
+    "patient_id": "PatientID_0074",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.5162180662155151,
+    "uncertainty": 0.018809543922543526
+  },
+  {
+    "patient_id": "PatientID_0074",
+    "start": 0,
+    "horizon": 2,
+    "mse": 0.5297581553459167,
+    "uncertainty": 0.03264112398028374
+  },
+  {
+    "patient_id": "PatientID_0074",
+    "start": 0,
+    "horizon": 3,
+    "mse": 0.4373043477535248,
+    "uncertainty": 0.029714977368712425
+  },
+  {
+    "patient_id": "PatientID_0074",
+    "start": 1,
+    "horizon": 1,
+    "mse": 0.5551649332046509,
+    "uncertainty": 0.013033377937972546
+  },
+  {
+    "patient_id": "PatientID_0074",
+    "start": 1,
+    "horizon": 2,
+    "mse": 0.3528072237968445,
+    "uncertainty": 0.026914527639746666
+  },
+  {
+    "patient_id": "PatientID_0074",
+    "start": 1,
+    "horizon": 3,
+    "mse": 0.9700359106063843,
+    "uncertainty": 0.03129073232412338
+  },
+  {
+    "patient_id": "PatientID_0074",
+    "start": 2,
+    "horizon": 1,
+    "mse": 0.24437770247459412,
+    "uncertainty": 0.04838411509990692
+  },
+  {
+    "patient_id": "PatientID_0074",
+    "start": 2,
+    "horizon": 2,
+    "mse": 0.5311567187309265,
+    "uncertainty": 0.050275690853595734
+  },
+  {
+    "patient_id": "PatientID_0074",
+    "start": 2,
+    "horizon": 3,
+    "mse": 0.25503310561180115,
+    "uncertainty": 0.05164968967437744
+  },
+  {
+    "patient_id": "PatientID_0074",
+    "start": 3,
+    "horizon": 1,
+    "mse": 0.7223167419433594,
+    "uncertainty": 0.011800328269600868
+  },
+  {
+    "patient_id": "PatientID_0074",
+    "start": 3,
+    "horizon": 2,
+    "mse": 0.3052919805049896,
+    "uncertainty": 0.019006218761205673
+  },
+  {
+    "patient_id": "PatientID_0074",
+    "start": 4,
+    "horizon": 1,
+    "mse": 0.2509573996067047,
+    "uncertainty": 0.08510254323482513
+  },
+  {
+    "patient_id": "PatientID_0078",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.4141581952571869,
+    "uncertainty": 0.021854689344763756
+  },
+  {
+    "patient_id": "PatientID_0078",
+    "start": 0,
+    "horizon": 2,
+    "mse": 0.4262715280056,
+    "uncertainty": 0.025659268721938133
+  },
+  {
+    "patient_id": "PatientID_0078",
+    "start": 1,
+    "horizon": 1,
+    "mse": 0.6065950393676758,
+    "uncertainty": 0.04234818369150162
+  },
+  {
+    "patient_id": "PatientID_0079",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.26438450813293457,
+    "uncertainty": 0.017231721431016922
+  },
+  {
+    "patient_id": "PatientID_0079",
+    "start": 0,
+    "horizon": 2,
+    "mse": 0.3602880835533142,
+    "uncertainty": 0.0319981724023819
+  },
+  {
+    "patient_id": "PatientID_0079",
+    "start": 0,
+    "horizon": 3,
+    "mse": 0.8127720355987549,
+    "uncertainty": 0.03984816372394562
+  },
+  {
+    "patient_id": "PatientID_0079",
+    "start": 1,
+    "horizon": 1,
+    "mse": 0.22475896775722504,
+    "uncertainty": 0.016007889062166214
+  },
+  {
+    "patient_id": "PatientID_0079",
+    "start": 1,
+    "horizon": 2,
+    "mse": 0.6355520486831665,
+    "uncertainty": 0.03269032761454582
+  },
+  {
+    "patient_id": "PatientID_0079",
+    "start": 1,
+    "horizon": 3,
+    "mse": 2.0208687782287598,
+    "uncertainty": 0.03757212311029434
+  },
+  {
+    "patient_id": "PatientID_0079",
+    "start": 2,
+    "horizon": 1,
+    "mse": 0.8224660754203796,
+    "uncertainty": 0.034003328531980515
+  },
+  {
+    "patient_id": "PatientID_0079",
+    "start": 2,
+    "horizon": 2,
+    "mse": 2.016416549682617,
+    "uncertainty": 0.04230440780520439
+  },
+  {
+    "patient_id": "PatientID_0079",
+    "start": 2,
+    "horizon": 3,
+    "mse": 1.5996959209442139,
+    "uncertainty": 0.048068009316921234
+  },
+  {
+    "patient_id": "PatientID_0079",
+    "start": 3,
+    "horizon": 1,
+    "mse": 1.857936143875122,
+    "uncertainty": 0.04120399057865143
+  },
+  {
+    "patient_id": "PatientID_0079",
+    "start": 3,
+    "horizon": 2,
+    "mse": 1.5411806106567383,
+    "uncertainty": 0.04144418239593506
+  },
+  {
+    "patient_id": "PatientID_0079",
+    "start": 4,
+    "horizon": 1,
+    "mse": 0.42628106474876404,
+    "uncertainty": 0.15951919555664062
+  },
+  {
+    "patient_id": "PatientID_0080",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.24630320072174072,
+    "uncertainty": 0.0070867701433598995
+  },
+  {
+    "patient_id": "PatientID_0082",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.50779128074646,
+    "uncertainty": 0.017320968210697174
+  },
+  {
+    "patient_id": "PatientID_0089",
+    "start": 0,
+    "horizon": 1,
+    "mse": 7.078162670135498,
+    "uncertainty": 0.35839173197746277
+  },
+  {
+    "patient_id": "PatientID_0089",
+    "start": 0,
+    "horizon": 2,
+    "mse": 5.283067226409912,
+    "uncertainty": 0.5135030746459961
+  },
+  {
+    "patient_id": "PatientID_0089",
+    "start": 0,
+    "horizon": 3,
+    "mse": 5.037812232971191,
+    "uncertainty": 0.5239267349243164
+  },
+  {
+    "patient_id": "PatientID_0089",
+    "start": 1,
+    "horizon": 1,
+    "mse": 0.5054434537887573,
+    "uncertainty": 0.028635596856474876
+  },
+  {
+    "patient_id": "PatientID_0089",
+    "start": 1,
+    "horizon": 2,
+    "mse": 1.1007399559020996,
+    "uncertainty": 0.06622134149074554
+  },
+  {
+    "patient_id": "PatientID_0089",
+    "start": 1,
+    "horizon": 3,
+    "mse": 1.0903171300888062,
+    "uncertainty": 0.09091949462890625
+  },
+  {
+    "patient_id": "PatientID_0089",
+    "start": 2,
+    "horizon": 1,
+    "mse": 0.9445506930351257,
+    "uncertainty": 0.02634463459253311
+  },
+  {
+    "patient_id": "PatientID_0089",
+    "start": 2,
+    "horizon": 2,
+    "mse": 0.7197257280349731,
+    "uncertainty": 0.05189914628863335
+  },
+  {
+    "patient_id": "PatientID_0089",
+    "start": 2,
+    "horizon": 3,
+    "mse": 1.2716457843780518,
+    "uncertainty": 0.0664248913526535
+  },
+  {
+    "patient_id": "PatientID_0089",
+    "start": 3,
+    "horizon": 1,
+    "mse": 0.8517765998840332,
+    "uncertainty": 0.03293449804186821
+  },
+  {
+    "patient_id": "PatientID_0089",
+    "start": 3,
+    "horizon": 2,
+    "mse": 1.573183298110962,
+    "uncertainty": 0.0762837827205658
+  },
+  {
+    "patient_id": "PatientID_0089",
+    "start": 4,
+    "horizon": 1,
+    "mse": 0.48616212606430054,
+    "uncertainty": 0.03674766421318054
+  },
+  {
+    "patient_id": "PatientID_0091",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.8385820388793945,
+    "uncertainty": 0.010276326909661293
+  },
+  {
+    "patient_id": "PatientID_0125",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.28693732619285583,
+    "uncertainty": 0.011484849266707897
+  },
+  {
+    "patient_id": "PatientID_0156",
+    "start": 0,
+    "horizon": 1,
+    "mse": 4.180202484130859,
+    "uncertainty": 0.03906118497252464
+  },
+  {
+    "patient_id": "PatientID_0156",
+    "start": 0,
+    "horizon": 2,
+    "mse": 1.7374262809753418,
+    "uncertainty": 0.04047182947397232
+  },
+  {
+    "patient_id": "PatientID_0156",
+    "start": 1,
+    "horizon": 1,
+    "mse": 2.3405447006225586,
+    "uncertainty": 0.12523949146270752
+  },
+  {
+    "patient_id": "PatientID_0157",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.30609795451164246,
+    "uncertainty": 0.02415659837424755
+  },
+  {
+    "patient_id": "PatientID_0157",
+    "start": 0,
+    "horizon": 2,
+    "mse": 0.40951651334762573,
+    "uncertainty": 0.02061963453888893
+  },
+  {
+    "patient_id": "PatientID_0157",
+    "start": 0,
+    "horizon": 3,
+    "mse": 0.8572925925254822,
+    "uncertainty": 0.034168705344200134
+  },
+  {
+    "patient_id": "PatientID_0157",
+    "start": 1,
+    "horizon": 1,
+    "mse": 0.17260770499706268,
+    "uncertainty": 0.011147018522024155
+  },
+  {
+    "patient_id": "PatientID_0157",
+    "start": 1,
+    "horizon": 2,
+    "mse": 0.9071323275566101,
+    "uncertainty": 0.012952758930623531
+  },
+  {
+    "patient_id": "PatientID_0157",
+    "start": 1,
+    "horizon": 3,
+    "mse": 0.25975221395492554,
+    "uncertainty": 0.014688754454255104
+  },
+  {
+    "patient_id": "PatientID_0157",
+    "start": 2,
+    "horizon": 1,
+    "mse": 1.072033166885376,
+    "uncertainty": 0.013130923733115196
+  },
+  {
+    "patient_id": "PatientID_0157",
+    "start": 2,
+    "horizon": 2,
+    "mse": 0.1967751383781433,
+    "uncertainty": 0.013158446177840233
+  },
+  {
+    "patient_id": "PatientID_0157",
+    "start": 2,
+    "horizon": 3,
+    "mse": 3.706441879272461,
+    "uncertainty": 0.01670914888381958
+  },
+  {
+    "patient_id": "PatientID_0157",
+    "start": 3,
+    "horizon": 1,
+    "mse": 0.6410201787948608,
+    "uncertainty": 0.07464377582073212
+  },
+  {
+    "patient_id": "PatientID_0157",
+    "start": 3,
+    "horizon": 2,
+    "mse": 2.795491933822632,
+    "uncertainty": 0.049474477767944336
+  },
+  {
+    "patient_id": "PatientID_0157",
+    "start": 4,
+    "horizon": 1,
+    "mse": 3.88800311088562,
+    "uncertainty": 0.02346567064523697
+  },
+  {
+    "patient_id": "PatientID_0164",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.33983203768730164,
+    "uncertainty": 0.02059280313551426
+  },
+  {
+    "patient_id": "PatientID_0164",
+    "start": 0,
+    "horizon": 2,
+    "mse": 0.41332945227622986,
+    "uncertainty": 0.03660915419459343
+  },
+  {
+    "patient_id": "PatientID_0164",
+    "start": 0,
+    "horizon": 3,
+    "mse": 0.5228068828582764,
+    "uncertainty": 0.040336571633815765
+  },
+  {
+    "patient_id": "PatientID_0164",
+    "start": 1,
+    "horizon": 1,
+    "mse": 0.3362925052642822,
+    "uncertainty": 0.027847787365317345
+  },
+  {
+    "patient_id": "PatientID_0164",
+    "start": 1,
+    "horizon": 2,
+    "mse": 0.4588916301727295,
+    "uncertainty": 0.05534478276968002
+  },
+  {
+    "patient_id": "PatientID_0164",
+    "start": 1,
+    "horizon": 3,
+    "mse": 0.4434806704521179,
+    "uncertainty": 0.060595616698265076
+  },
+  {
+    "patient_id": "PatientID_0164",
+    "start": 2,
+    "horizon": 1,
+    "mse": 0.1347406953573227,
+    "uncertainty": 0.0205305814743042
+  },
+  {
+    "patient_id": "PatientID_0164",
+    "start": 2,
+    "horizon": 2,
+    "mse": 0.23476669192314148,
+    "uncertainty": 0.04148270934820175
+  },
+  {
+    "patient_id": "PatientID_0164",
+    "start": 3,
+    "horizon": 1,
+    "mse": 0.21910254657268524,
+    "uncertainty": 0.009975260123610497
+  },
+  {
+    "patient_id": "PatientID_0171",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.6133177280426025,
+    "uncertainty": 0.024314679205417633
+  },
+  {
+    "patient_id": "PatientID_0171",
+    "start": 0,
+    "horizon": 2,
+    "mse": 0.3702165484428406,
+    "uncertainty": 0.036163799464702606
+  },
+  {
+    "patient_id": "PatientID_0171",
+    "start": 1,
+    "horizon": 1,
+    "mse": 0.6861786842346191,
+    "uncertainty": 0.05734262987971306
+  },
+  {
+    "patient_id": "PatientID_0188",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.5432431101799011,
+    "uncertainty": 0.004183472599834204
+  },
+  {
+    "patient_id": "PatientID_0191",
+    "start": 0,
+    "horizon": 1,
+    "mse": 2.271705150604248,
+    "uncertainty": 0.042817436158657074
+  },
+  {
+    "patient_id": "PatientID_0191",
+    "start": 0,
+    "horizon": 2,
+    "mse": 3.0471091270446777,
+    "uncertainty": 0.11538064479827881
+  },
+  {
+    "patient_id": "PatientID_0191",
+    "start": 0,
+    "horizon": 3,
+    "mse": 2.0198020935058594,
+    "uncertainty": 0.17904911935329437
+  },
+  {
+    "patient_id": "PatientID_0191",
+    "start": 1,
+    "horizon": 1,
+    "mse": 0.5440441370010376,
+    "uncertainty": 0.005317370407283306
+  },
+  {
+    "patient_id": "PatientID_0191",
+    "start": 1,
+    "horizon": 2,
+    "mse": 0.41035279631614685,
+    "uncertainty": 0.01660342887043953
+  },
+  {
+    "patient_id": "PatientID_0191",
+    "start": 2,
+    "horizon": 1,
+    "mse": 0.39319872856140137,
+    "uncertainty": 0.013503055088222027
+  },
+  {
+    "patient_id": "PatientID_0196",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.8986265063285828,
+    "uncertainty": 0.0014111443888396025
+  },
+  {
+    "patient_id": "PatientID_0196",
+    "start": 0,
+    "horizon": 2,
+    "mse": 1.0804977416992188,
+    "uncertainty": 0.0036313096061348915
+  },
+  {
+    "patient_id": "PatientID_0196",
+    "start": 1,
+    "horizon": 1,
+    "mse": 0.9817556142807007,
+    "uncertainty": 0.017858734354376793
+  },
+  {
+    "patient_id": "PatientID_0205",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.24961280822753906,
+    "uncertainty": 0.025255698710680008
+  },
+  {
+    "patient_id": "PatientID_0205",
+    "start": 0,
+    "horizon": 2,
+    "mse": 0.5629330277442932,
+    "uncertainty": 0.017559681087732315
+  },
+  {
+    "patient_id": "PatientID_0205",
+    "start": 0,
+    "horizon": 3,
+    "mse": 0.46005719900131226,
+    "uncertainty": 0.020377453416585922
+  },
+  {
+    "patient_id": "PatientID_0205",
+    "start": 1,
+    "horizon": 1,
+    "mse": 0.5633683204650879,
+    "uncertainty": 0.020687352865934372
+  },
+  {
+    "patient_id": "PatientID_0205",
+    "start": 1,
+    "horizon": 2,
+    "mse": 0.5001680850982666,
+    "uncertainty": 0.014181733131408691
+  },
+  {
+    "patient_id": "PatientID_0205",
+    "start": 1,
+    "horizon": 3,
+    "mse": 0.4953309893608093,
+    "uncertainty": 0.024083204567432404
+  },
+  {
+    "patient_id": "PatientID_0205",
+    "start": 2,
+    "horizon": 1,
+    "mse": 0.3351692855358124,
+    "uncertainty": 0.025830697268247604
+  },
+  {
+    "patient_id": "PatientID_0205",
+    "start": 2,
+    "horizon": 2,
+    "mse": 0.841028094291687,
+    "uncertainty": 0.01742692105472088
+  },
+  {
+    "patient_id": "PatientID_0205",
+    "start": 3,
+    "horizon": 1,
+    "mse": 0.6703881025314331,
+    "uncertainty": 0.05364767462015152
+  },
+  {
+    "patient_id": "PatientID_0213",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.3857843279838562,
+    "uncertainty": 0.04256020113825798
+  },
+  {
+    "patient_id": "PatientID_0213",
+    "start": 0,
+    "horizon": 2,
+    "mse": 0.4305456578731537,
+    "uncertainty": 0.03981636464595795
+  },
+  {
+    "patient_id": "PatientID_0213",
+    "start": 0,
+    "horizon": 3,
+    "mse": 0.4692460894584656,
+    "uncertainty": 0.04254268854856491
+  },
+  {
+    "patient_id": "PatientID_0213",
+    "start": 1,
+    "horizon": 1,
+    "mse": 0.4021099805831909,
+    "uncertainty": 0.029471715912222862
+  },
+  {
+    "patient_id": "PatientID_0213",
+    "start": 1,
+    "horizon": 2,
+    "mse": 0.5180097818374634,
+    "uncertainty": 0.02389114908874035
+  },
+  {
+    "patient_id": "PatientID_0213",
+    "start": 1,
+    "horizon": 3,
+    "mse": 0.7168115377426147,
+    "uncertainty": 0.023151002824306488
+  },
+  {
+    "patient_id": "PatientID_0213",
+    "start": 2,
+    "horizon": 1,
+    "mse": 0.15569137036800385,
+    "uncertainty": 0.02686304599046707
+  },
+  {
+    "patient_id": "PatientID_0213",
+    "start": 2,
+    "horizon": 2,
+    "mse": 0.6342182159423828,
+    "uncertainty": 0.02691914513707161
+  },
+  {
+    "patient_id": "PatientID_0213",
+    "start": 3,
+    "horizon": 1,
+    "mse": 0.8019009828567505,
+    "uncertainty": 0.009018398821353912
+  },
+  {
+    "patient_id": "PatientID_0215",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.662617564201355,
+    "uncertainty": 0.015006652101874352
+  },
+  {
+    "patient_id": "PatientID_0215",
+    "start": 0,
+    "horizon": 2,
+    "mse": 0.6592617034912109,
+    "uncertainty": 0.023212319239974022
+  },
+  {
+    "patient_id": "PatientID_0215",
+    "start": 0,
+    "horizon": 3,
+    "mse": 0.5893943905830383,
+    "uncertainty": 0.029289856553077698
+  },
+  {
+    "patient_id": "PatientID_0215",
+    "start": 1,
+    "horizon": 1,
+    "mse": 0.20270782709121704,
+    "uncertainty": 0.0024347156286239624
+  },
+  {
+    "patient_id": "PatientID_0215",
+    "start": 1,
+    "horizon": 2,
+    "mse": 0.2648392915725708,
+    "uncertainty": 0.005555474665015936
+  },
+  {
+    "patient_id": "PatientID_0215",
+    "start": 1,
+    "horizon": 3,
+    "mse": 0.5114498138427734,
+    "uncertainty": 0.007953127846121788
+  },
+  {
+    "patient_id": "PatientID_0215",
+    "start": 2,
+    "horizon": 1,
+    "mse": 0.34288328886032104,
+    "uncertainty": 0.016477501019835472
+  },
+  {
+    "patient_id": "PatientID_0215",
+    "start": 2,
+    "horizon": 2,
+    "mse": 0.5593820810317993,
+    "uncertainty": 0.012764080427587032
+  },
+  {
+    "patient_id": "PatientID_0215",
+    "start": 2,
+    "horizon": 3,
+    "mse": 0.6248406767845154,
+    "uncertainty": 0.01670878194272518
+  },
+  {
+    "patient_id": "PatientID_0215",
+    "start": 3,
+    "horizon": 1,
+    "mse": 0.273288369178772,
+    "uncertainty": 0.006089221686124802
+  },
+  {
+    "patient_id": "PatientID_0215",
+    "start": 3,
+    "horizon": 2,
+    "mse": 0.5391444563865662,
+    "uncertainty": 0.013384398072957993
+  },
+  {
+    "patient_id": "PatientID_0215",
+    "start": 4,
+    "horizon": 1,
+    "mse": 0.5470700263977051,
+    "uncertainty": 0.02811378799378872
+  },
+  {
+    "patient_id": "PatientID_0236",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.6389999389648438,
+    "uncertainty": 0.0058356719091534615
+  },
+  {
+    "patient_id": "PatientID_0236",
+    "start": 0,
+    "horizon": 2,
+    "mse": 1.2356593608856201,
+    "uncertainty": 0.008831895887851715
+  },
+  {
+    "patient_id": "PatientID_0236",
+    "start": 1,
+    "horizon": 1,
+    "mse": 1.1178491115570068,
+    "uncertainty": 0.03708059713244438
+  },
+  {
+    "patient_id": "PatientID_0242",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.9500634074211121,
+    "uncertainty": 0.04548579454421997
+  },
+  {
+    "patient_id": "PatientID_0242",
+    "start": 0,
+    "horizon": 2,
+    "mse": 2.080491065979004,
+    "uncertainty": 0.1088554710149765
+  },
+  {
+    "patient_id": "PatientID_0242",
+    "start": 1,
+    "horizon": 1,
+    "mse": 2.0894200801849365,
+    "uncertainty": 0.013428027741611004
+  }
+]
