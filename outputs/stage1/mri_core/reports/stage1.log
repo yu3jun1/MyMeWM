@@ -1,0 +1,39 @@
+Recursive Rollout Performance
+| Variant | MSE@1 | MSE@2 | MSE@3 | Long MSE | H3 Slope |
+|---|---:|---:|---:|---:|---:|
+| baseline | 0.4462 | 0.5816 | 0.4302 | 0.5059 | -0.0090 |
+| rhrt | 0.4917 | 0.5988 | 0.4425 | 0.5207 | 0.0197 |
+| ensemble | 0.4352 | 0.5558 | 0.4096 | 0.4827 | -0.0093 |
+| rhrt_ensemble | 0.4561 | 0.5269 | 0.4020 | 0.4644 | 0.0030 |
+
+RHRT Paired Bootstrap: baseline_vs_rhrt
+| Metric | Improvement | Relative | 95% CI | P(Improve) |
+|---|---:|---:|---|---:|
+| mse@2 | -0.0172 | -0.0296 | [-0.0822, 0.0447] | 0.3040 |
+| mse@3 | -0.0124 | -0.0288 | [-0.1071, 0.0741] | 0.4090 |
+| long_horizon_mse | -0.0148 | -0.0292 | [-0.0861, 0.0509] | 0.3445 |
+| matched_h3_slope | -0.0288 | -3.1831 | [-0.0723, 0.0134] | 0.1005 |
+
+RHRT Paired Bootstrap: ensemble_vs_rhrt_ensemble
+| Metric | Improvement | Relative | 95% CI | P(Improve) |
+|---|---:|---:|---|---:|
+| mse@2 | 0.0289 | 0.0520 | [-0.0114, 0.0662] | 0.9310 |
+| mse@3 | 0.0077 | 0.0187 | [-0.0702, 0.0784] | 0.5865 |
+| long_horizon_mse | 0.0183 | 0.0379 | [-0.0352, 0.0679] | 0.7625 |
+| matched_h3_slope | -0.0123 | -1.3207 | [-0.0554, 0.0264] | 0.2945 |
+
+Ensemble Reliability: ensemble
+| Horizon | Spearman rho | High/Low Tertile Ratio |
+|---:|---:|---:|
+| 1 | 0.0983 | 1.0434 |
+| 2 | 0.0458 | 1.0796 |
+| 3 | -0.0093 | 0.8940 |
+| Macro | 0.0449 | 1.0057 |
+
+Ensemble Reliability: rhrt_ensemble
+| Horizon | Spearman rho | High/Low Tertile Ratio |
+|---:|---:|---:|
+| 1 | 0.3522 | 1.5770 |
+| 2 | 0.1668 | 1.0677 |
+| 3 | 0.3147 | 1.4393 |
+| Macro | 0.2779 | 1.3613 |

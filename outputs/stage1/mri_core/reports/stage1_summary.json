@@ -1,0 +1,9 @@
+{
+  "protocol_complete": true,
+  "rhrt_pass": false,
+  "ensemble_pass": false,
+  "stage1_pass": false,
+  "long_horizon_relative_improvement": -0.0292479721978347,
+  "recursive_slope_relative_improvement": -3.183113203856339,
+  "macro_uncertainty_spearman": 0.2778992976731569
+}

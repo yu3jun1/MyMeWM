@@ -1,0 +1,103 @@
+{
+  "variant": "rhrt_ensemble",
+  "seed": 7,
+  "data_dir": "/home/tanyuejun/CLARITY_HAUWM_Minimal/data/trajectories/mri_core",
+  "best_epoch": [
+    10,
+    12,
+    15,
+    9,
+    22
+  ],
+  "train_loss": [
+    0.3456280132134755,
+    0.344757369822926,
+    0.28069816695319283,
+    0.353106505341,
+    0.23964747455384997
+  ],
+  "validation_loss": [
+    0.41112277329811875,
+    0.4073502951453858,
+    0.418434984742291,
+    0.4388689252247068,
+    0.4192112183325386
+  ],
+  "num_training_windows": 262,
+  "horizon_sampling_counts": {
+    "1": 24577,
+    "2": 9139,
+    "3": 3750
+  },
+  "checkpoint": "/home/tanyuejun/CLARITY_HAUWM_Minimal/outputs/stage1/mri_core/seed_7/rhrt_ensemble/best.pt",
+  "members": [
+    {
+      "member": 0,
+      "member_seed": 7000,
+      "best_epoch": 10,
+      "train_loss": 0.3456280132134755,
+      "validation_loss": 0.41112277329811875,
+      "horizon_sampling_counts": {
+        "1": 4245,
+        "2": 1646,
+        "3": 659
+      }
+    },
+    {
+      "member": 1,
+      "member_seed": 7001,
+      "best_epoch": 12,
+      "train_loss": 0.344757369822926,
+      "validation_loss": 0.4073502951453858,
+      "horizon_sampling_counts": {
+        "1": 4683,
+        "2": 1686,
+        "3": 705
+      }
+    },
+    {
+      "member": 2,
+      "member_seed": 7002,
+      "best_epoch": 15,
+      "train_loss": 0.28069816695319283,
+      "validation_loss": 0.418434984742291,
+      "horizon_sampling_counts": {
+        "1": 5121,
+        "2": 1964,
+        "3": 775
+      }
+    },
+    {
+      "member": 3,
+      "member_seed": 7003,
+      "best_epoch": 9,
+      "train_loss": 0.353106505341,
+      "validation_loss": 0.4388689252247068,
+      "horizon_sampling_counts": {
+        "1": 4129,
+        "2": 1546,
+        "3": 613
+      }
+    },
+    {
+      "member": 4,
+      "member_seed": 7004,
+      "best_epoch": 22,
+      "train_loss": 0.23964747455384997,
+      "validation_loss": 0.4192112183325386,
+      "horizon_sampling_counts": {
+        "1": 6399,
+        "2": 2297,
+        "3": 998
+      }
+    }
+  ],
+  "checkpoint_metric": "val_recursive_mse_k2_k3",
+  "protocol": {
+    "max_horizon": 3,
+    "ensemble_size": 5,
+    "split_seed": 17,
+    "train_fraction": 0.7,
+    "validation_fraction": 0.15
+  }
+}

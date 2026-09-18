@@ -1,0 +1,110 @@
+{
+  "baseline_vs_rhrt": {
+    "mse@2": {
+      "n_patients": 24,
+      "baseline_mean": 0.5815603268091326,
+      "candidate_mean": 0.5987635837683891,
+      "mean_improvement": -0.017203256959256508,
+      "relative_improvement": -0.02958120794388816,
+      "ci95": [
+        -0.08223966354467088,
+        0.04474735710675655
+      ],
+      "probability_of_improvement": 0.304,
+      "valid_bootstrap_samples": 2000
+    },
+    "mse@3": {
+      "n_patients": 24,
+      "baseline_mean": 0.4301584059786466,
+      "candidate_mean": 0.44254587038799564,
+      "mean_improvement": -0.01238746440934907,
+      "relative_improvement": -0.028797448189270054,
+      "ci95": [
+        -0.10711617879776485,
+        0.07409041538138425
+      ],
+      "probability_of_improvement": 0.409,
+      "valid_bootstrap_samples": 2000
+    },
+    "long_horizon_mse": {
+      "n_patients": 24,
+      "baseline_mean": 0.5058593663938896,
+      "candidate_mean": 0.5206547270781924,
+      "mean_improvement": -0.01479536068430276,
+      "relative_improvement": -0.0292479721978347,
+      "ci95": [
+        -0.0861064136735883,
+        0.05085800842319097
+      ],
+      "probability_of_improvement": 0.3445,
+      "valid_bootstrap_samples": 2000
+    },
+    "matched_h3_slope": {
+      "n_patients": 12,
+      "baseline_mean": -0.009042909248145709,
+      "candidate_mean": 0.019741694580901494,
+      "mean_improvement": -0.028784603829047205,
+      "relative_improvement": -3.183113203856339,
+      "ci95": [
+        -0.0723154704672871,
+        0.01344624753584383
+      ],
+      "probability_of_improvement": 0.1005,
+      "valid_bootstrap_samples": 2000
+    }
+  },
+  "ensemble_vs_rhrt_ensemble": {
+    "mse@2": {
+      "n_patients": 24,
+      "baseline_mean": 0.5558375317925289,
+      "candidate_mean": 0.5269158153714221,
+      "mean_improvement": 0.028921716421106858,
+      "relative_improvement": 0.052032679995243886,
+      "ci95": [
+        -0.011360953392254017,
+        0.06623873483872744
+      ],
+      "probability_of_improvement": 0.931,
+      "valid_bootstrap_samples": 2000
+    },
+    "mse@3": {
+      "n_patients": 24,
+      "baseline_mean": 0.409639338462579,
+      "candidate_mean": 0.40195998866800914,
+      "mean_improvement": 0.007679349794569856,
+      "relative_improvement": 0.018746612137865694,
+      "ci95": [
+        -0.07017932186223035,
+        0.07837150112208395
+      ],
+      "probability_of_improvement": 0.5865,
+      "valid_bootstrap_samples": 2000
+    },
+    "long_horizon_mse": {
+      "n_patients": 24,
+      "baseline_mean": 0.482738435127554,
+      "candidate_mean": 0.4644379020197156,
+      "mean_improvement": 0.018300533107838413,
+      "relative_improvement": 0.037909832273874906,
+      "ci95": [
+        -0.03523022850788388,
+        0.06785410434782513
+      ],
+      "probability_of_improvement": 0.7625,
+      "valid_bootstrap_samples": 2000
+    },
+    "matched_h3_slope": {
+      "n_patients": 12,
+      "baseline_mean": -0.009322259083597271,
+      "candidate_mean": 0.0029896796094597868,
+      "mean_improvement": -0.012311938693057058,
+      "relative_improvement": -1.3207033383914633,
+      "ci95": [
+        -0.05540012372054022,
+        0.026366780725678555
+      ],
+      "probability_of_improvement": 0.2945,
+      "valid_bootstrap_samples": 2000
+    }
+  }
+}

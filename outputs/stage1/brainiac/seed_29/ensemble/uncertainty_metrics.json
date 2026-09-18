@@ -1,0 +1,30 @@
+{
+  "variant": "ensemble",
+  "seed": 29,
+  "by_horizon": [
+    {
+      "horizon": 1,
+      "n_patients": 24,
+      "mean_uncertainty": 0.04101486782860269,
+      "uncertainty_error_spearman": 0.37739130434782603,
+      "high_low_tertile_error_ratio": 2.1460907621809677
+    },
+    {
+      "horizon": 2,
+      "n_patients": 18,
+      "mean_uncertainty": 0.05769202163813774,
+      "uncertainty_error_spearman": 0.2549019607843137,
+      "high_low_tertile_error_ratio": 1.8855773634347155
+    },
+    {
+      "horizon": 3,
+      "n_patients": 12,
+      "mean_uncertainty": 0.0864148838704245,
+      "uncertainty_error_spearman": 0.3076923076923077,
+      "high_low_tertile_error_ratio": 1.962805207766535
+    }
+  ],
+  "macro_spearman": 0.31332852427481583,
+  "macro_high_low_ratio": 1.9981577777940727,
+  "uncertainty_horizon_spearman": 0.2563049005469917
+}

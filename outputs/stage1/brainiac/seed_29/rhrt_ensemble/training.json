@@ -1,0 +1,103 @@
+{
+  "variant": "rhrt_ensemble",
+  "seed": 29,
+  "data_dir": "/home/tanyuejun/CLARITY_HAUWM_Minimal/data/trajectories/brainiac",
+  "best_epoch": [
+    5,
+    5,
+    7,
+    6,
+    4
+  ],
+  "train_loss": [
+    0.68529079357783,
+    0.6955542696846856,
+    0.593091564046012,
+    0.6353414754072825,
+    0.7772709197468228
+  ],
+  "validation_loss": [
+    0.7559193248454208,
+    0.7706622025681278,
+    0.7630143078137548,
+    0.765794652385908,
+    0.7771958752488537
+  ],
+  "num_training_windows": 262,
+  "horizon_sampling_counts": {
+    "1": 17530,
+    "2": 6500,
+    "3": 2694
+  },
+  "checkpoint": "/home/tanyuejun/CLARITY_HAUWM_Minimal/outputs/stage1/brainiac/seed_29/rhrt_ensemble/best.pt",
+  "members": [
+    {
+      "member": 0,
+      "member_seed": 29000,
+      "best_epoch": 5,
+      "train_loss": 0.68529079357783,
+      "validation_loss": 0.7559193248454208,
+      "horizon_sampling_counts": {
+        "1": 3437,
+        "2": 1293,
+        "3": 510
+      }
+    },
+    {
+      "member": 1,
+      "member_seed": 29001,
+      "best_epoch": 5,
+      "train_loss": 0.6955542696846856,
+      "validation_loss": 0.7706622025681278,
+      "horizon_sampling_counts": {
+        "1": 3402,
+        "2": 1300,
+        "3": 538
+      }
+    },
+    {
+      "member": 2,
+      "member_seed": 29002,
+      "best_epoch": 7,
+      "train_loss": 0.593091564046012,
+      "validation_loss": 0.7630143078137548,
+      "horizon_sampling_counts": {
+        "1": 3772,
+        "2": 1394,
+        "3": 598
+      }
+    },
+    {
+      "member": 3,
+      "member_seed": 29003,
+      "best_epoch": 6,
+      "train_loss": 0.6353414754072825,
+      "validation_loss": 0.765794652385908,
+      "horizon_sampling_counts": {
+        "1": 3623,
+        "2": 1303,
+        "3": 576
+      }
+    },
+    {
+      "member": 4,
+      "member_seed": 29004,
+      "best_epoch": 4,
+      "train_loss": 0.7772709197468228,
+      "validation_loss": 0.7771958752488537,
+      "horizon_sampling_counts": {
+        "1": 3296,
+        "2": 1210,
+        "3": 472
+      }
+    }
+  ],
+  "checkpoint_metric": "val_recursive_mse_k2_k3",
+  "protocol": {
+    "max_horizon": 3,
+    "ensemble_size": 5,
+    "split_seed": 17,
+    "train_fraction": 0.7,
+    "validation_fraction": 0.15
+  }
+}
