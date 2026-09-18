@@ -1,0 +1,142 @@
+{
+  "encoder": "brainiac",
+  "split_seed": 17,
+  "training_seed": 17,
+  "comparison": "K1/K2/K3/K5 trained on the same patient split; all evaluated on identical H1-H5 test windows",
+  "interpretation": "H4/H5 results are descriptive because test windows are sparse",
+  "models": {
+    "K1": {
+      "training_max_horizon": 1,
+      "mse": {
+        "1": 0.8504480562039785,
+        "2": 0.9382075510271217,
+        "3": 1.1147419890122754,
+        "4": 1.4831528328359127,
+        "5": 2.520299712816874
+      },
+      "n_predictions": {
+        "1": 70,
+        "2": 46,
+        "3": 28,
+        "4": 16,
+        "5": 6
+      },
+      "n_patients": {
+        "1": 24,
+        "2": 18,
+        "3": 12,
+        "4": 10,
+        "5": 6
+      },
+      "long_mse": 1.0264747700196986
+    },
+    "K2": {
+      "training_max_horizon": 2,
+      "mse": {
+        "1": 0.762187318290983,
+        "2": 0.8338175869506338,
+        "3": 0.9898654924971717,
+        "4": 1.238677952438593,
+        "5": 1.6606573710838954
+      },
+      "n_predictions": {
+        "1": 70,
+        "2": 46,
+        "3": 28,
+        "4": 16,
+        "5": 6
+      },
+      "n_patients": {
+        "1": 24,
+        "2": 18,
+        "3": 12,
+        "4": 10,
+        "5": 6
+      },
+      "long_mse": 0.9118415397239028
+    },
+    "K3": {
+      "training_max_horizon": 3,
+      "mse": {
+        "1": 0.7483576439321041,
+        "2": 0.7955797117041505,
+        "3": 0.9463309901101249,
+        "4": 1.1962810270488262,
+        "5": 1.5895548363526661
+      },
+      "n_predictions": {
+        "1": 70,
+        "2": 46,
+        "3": 28,
+        "4": 16,
+        "5": 6
+      },
+      "n_patients": {
+        "1": 24,
+        "2": 18,
+        "3": 12,
+        "4": 10,
+        "5": 6
+      },
+      "long_mse": 0.8709553509071377
+    },
+    "K5": {
+      "training_max_horizon": 5,
+      "mse": {
+        "1": 0.7416935918586595,
+        "2": 0.8093442861800608,
+        "3": 1.0061962311821324,
+        "4": 1.2741030678153038,
+        "5": 1.6461403866608937
+      },
+      "n_predictions": {
+        "1": 70,
+        "2": 46,
+        "3": 28,
+        "4": 16,
+        "5": 6
+      },
+      "n_patients": {
+        "1": 24,
+        "2": 18,
+        "3": 12,
+        "4": 10,
+        "5": 6
+      },
+      "long_mse": 0.9077702586810966
+    }
+  },
+  "k3_vs_k5_by_horizon": {
+    "1": {
+      "n_windows": 70,
+      "k5_lower_error_windows": 34,
+      "ties": 0,
+      "k5_relative_improvement_percent": 0.8904902792773873
+    },
+    "2": {
+      "n_windows": 46,
+      "k5_lower_error_windows": 20,
+      "ties": 0,
+      "k5_relative_improvement_percent": -1.7301314090107
+    },
+    "3": {
+      "n_windows": 28,
+      "k5_lower_error_windows": 9,
+      "ties": 0,
+      "k5_relative_improvement_percent": -6.326036206955559
+    },
+    "4": {
+      "n_windows": 16,
+      "k5_lower_error_windows": 4,
+      "ties": 0,
+      "k5_relative_improvement_percent": -6.5053310222984315
+    },
+    "5": {
+      "n_windows": 6,
+      "k5_lower_error_windows": 1,
+      "ties": 0,
+      "k5_relative_improvement_percent": -3.559836314805386
+    }
+  },
+  "k5_vs_k3_long_relative_improvement_percent": -4.226956954293303
+}

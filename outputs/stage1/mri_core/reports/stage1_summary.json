@@ -1,0 +1,14 @@
+{
+  "main_encoder": "mri_core",
+  "main_split_seed": 17,
+  "main_max_horizon": 3,
+  "baseline_long_mse": 0.4482378416673491,
+  "rrt_long_mse": 0.45601261960917133,
+  "rrt_relative_improvement": -1.7250742474372647,
+  "ensemble_long_mse": null,
+  "rrt_ensemble_long_mse": 0.4469519034298002,
+  "rrt_ensemble_relative_improvement": null,
+  "macro_uncertainty_spearman": 0.39131303788546634,
+  "macro_high_low_ratio": 1.8988313550299634,
+  "risk_reduction_80": 8.252935083215915
+}

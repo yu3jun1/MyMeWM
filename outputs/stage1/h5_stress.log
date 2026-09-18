@@ -1,0 +1,103 @@
+K5 stress started at 2026-09-18T13:08:29Z
+[rrt seed=17 member=0] epoch 001/100 train=1.032068 val_recursive_mse_2_3=0.813884
+[rrt seed=17 member=0] epoch 002/100 train=0.863590 val_recursive_mse_2_3=0.826348
+[rrt seed=17 member=0] epoch 003/100 train=0.815014 val_recursive_mse_2_3=0.820632
+[rrt seed=17 member=0] epoch 004/100 train=0.723300 val_recursive_mse_2_3=0.797910
+[rrt seed=17 member=0] epoch 005/100 train=0.651780 val_recursive_mse_2_3=0.846835
+[rrt seed=17 member=0] epoch 006/100 train=0.612504 val_recursive_mse_2_3=0.835580
+[rrt seed=17 member=0] epoch 007/100 train=0.635033 val_recursive_mse_2_3=0.853482
+[rrt seed=17 member=0] epoch 008/100 train=0.510300 val_recursive_mse_2_3=0.884542
+[rrt seed=17 member=0] epoch 009/100 train=0.445905 val_recursive_mse_2_3=0.880046
+[rrt seed=17 member=0] epoch 010/100 train=0.422296 val_recursive_mse_2_3=0.885340
+[rrt seed=17 member=0] epoch 011/100 train=0.375344 val_recursive_mse_2_3=0.928325
+[rrt seed=17 member=0] epoch 012/100 train=0.363062 val_recursive_mse_2_3=0.886538
+[rrt seed=17 member=0] epoch 013/100 train=0.354972 val_recursive_mse_2_3=0.954535
+[rrt seed=17 member=0] epoch 014/100 train=0.330826 val_recursive_mse_2_3=0.984505
+[rrt seed=17 member=0] epoch 015/100 train=0.308491 val_recursive_mse_2_3=0.934085
+[rrt seed=17 member=0] epoch 016/100 train=0.298661 val_recursive_mse_2_3=0.899345
+[rrt seed=17 member=0] epoch 017/100 train=0.275545 val_recursive_mse_2_3=0.967145
+[rrt seed=17 member=0] epoch 018/100 train=0.256903 val_recursive_mse_2_3=0.943597
+[rrt seed=17 member=0] epoch 019/100 train=0.232880 val_recursive_mse_2_3=0.974634
+K5 evaluation: {'variant': 'rrt', 'seed': 17, 'by_horizon': [{'horizon': 1, 'n_predictions': 70, 'n_patients': 24, 'mse': 0.7416935918586595, 'cosine_distance': 0.4312228943620409}, {'horizon': 2, 'n_predictions': 46, 'n_patients': 18, 'mse': 0.8093442861800608, 'cosine_distance': 0.48465794454450195}, {'horizon': 3, 'n_predictions': 28, 'n_patients': 12, 'mse': 1.0061962311821324, 'cosine_distance': 0.547680567417826}, {'horizon': 4, 'n_predictions': 16, 'n_patients': 10, 'mse': 1.2741030678153038, 'cosine_distance': 0.6554807499051094}, {'horizon': 5, 'n_predictions': 6, 'n_patients': 6, 'mse': 1.6461403866608937, 'cosine_distance': 0.614158978064855}], 'long_horizon_mse': 0.9077702586810966}
+Recursive Rollout Performance (mean ± std across training seeds)
+| Variant | MSE@1 | MSE@2 | MSE@3 | Long MSE |
+|---|---:|---:|---:|---:|
+| baseline | 0.8012 ± 0.0426 | 0.8960 ± 0.0366 | 1.0482 ± 0.0673 | 0.9721 ± 0.0501 |
+| rrt | 0.7550 ± 0.0073 | 0.7866 ± 0.0080 | 0.9365 ± 0.0086 | 0.8616 ± 0.0082 |
+| ensemble | 0.7616 ± 0.0067 | 0.8457 ± 0.0097 | 0.9907 ± 0.0100 | 0.9182 ± 0.0099 |
+| rrt_ensemble | 0.7503 ± 0.0183 | 0.7823 ± 0.0143 | 0.9242 ± 0.0177 | 0.8533 ± 0.0160 |
+
+Secondary Cosine Distance (mean ± std)
+| Variant | Cos@1 | Cos@2 | Cos@3 |
+|---|---:|---:|---:|
+| baseline | 0.4318 ± 0.0257 | 0.4912 ± 0.0338 | 0.5276 ± 0.0308 |
+| rrt | 0.4317 ± 0.0072 | 0.4661 ± 0.0073 | 0.5100 ± 0.0035 |
+| ensemble | 0.4209 ± 0.0074 | 0.4742 ± 0.0074 | 0.5163 ± 0.0119 |
+| rrt_ensemble | 0.4219 ± 0.0097 | 0.4573 ± 0.0094 | 0.4943 ± 0.0131 |
+
+Relative Improvement (%)
+| Comparison | RI@1 | RI@2 | RI@3 | RI Long |
+|---|---:|---:|---:|---:|
+| baseline_vs_rrt | 5.5772 ± 5.5806 | 12.1309 ± 2.6715 | 10.4378 ± 5.1788 | 11.2419 ± 3.7441 |
+| ensemble_vs_rrt_ensemble | 1.4756 ± 2.6377 | 7.4871 ± 1.9457 | 6.7028 ± 2.0150 | 7.0641 ± 1.9805 |
+
+Baseline → RRT by training seed
+| Seed | Baseline Long | RRT Long | RI Long (%) |
+|---:|---:|---:|---:|
+| 7 | 0.9277 | 0.8564 | 7.6880 |
+| 17 | 1.0265 | 0.8710 | 15.1508 |
+| 29 | 0.9621 | 0.8573 | 10.8867 |
+
+Ensemble Reliability: ensemble
+| Horizon | Spearman rho | High/Low Ratio | Risk@100 | Risk@80 | Risk Reduction (%) |
+|---:|---:|---:|---:|---:|---:|
+| 1 | 0.2988 ± 0.0413 | 2.3122 ± 0.1343 | 0.7616 ± 0.0067 | 0.5935 ± 0.0118 | 22.0760 ± 0.8974 |
+| 2 | 0.3484 ± 0.0573 | 2.6735 ± 0.3117 | 0.8457 ± 0.0097 | 0.5894 ± 0.0303 | 30.3024 ± 3.6640 |
+| 3 | 0.2501 ± 0.1017 | 1.3909 ± 0.2899 | 0.9907 ± 0.0100 | 0.7927 ± 0.0495 | 19.9622 ± 5.4609 |
+| Macro | 0.2991 ± 0.0410 | 2.1255 ± 0.2085 |  | | 24.1135 ± 1.1577 |
+
+Ensemble Reliability: rrt_ensemble
+| Horizon | Spearman rho | High/Low Ratio | Risk@100 | Risk@80 | Risk Reduction (%) |
+|---:|---:|---:|---:|---:|---:|
+| 1 | 0.3325 ± 0.0620 | 2.4690 ± 0.2126 | 0.7503 ± 0.0183 | 0.6071 ± 0.0174 | 19.0321 ± 3.7494 |
+| 2 | 0.3391 ± 0.0319 | 2.0841 ± 0.0951 | 0.7823 ± 0.0143 | 0.6074 ± 0.0416 | 22.2859 ± 6.5208 |
+| 3 | 0.1792 ± 0.0679 | 0.9742 ± 0.0424 | 0.9242 ± 0.0177 | 0.8346 ± 0.0164 | 9.6484 ± 3.4588 |
+| Macro | 0.2836 ± 0.0517 | 1.8425 ± 0.0891 |  | | 16.9888 ± 4.4680 |
+
+Training Horizon Counts
+| Variant | Seed | Kmax | H1 | H2 | H3 |
+|---|---:|---:|---:|---:|---:|
+| baseline | 7 | 3 | 262 | 0 | 0 |
+| baseline | 17 | 3 | 262 | 0 | 0 |
+| baseline | 29 | 3 | 262 | 0 | 0 |
+| ensemble | 7 | 3 | 262 | 0 | 0 |
+| ensemble | 17 | 3 | 262 | 0 | 0 |
+| ensemble | 29 | 3 | 262 | 0 | 0 |
+| rrt | 7 | 3 | 107 | 76 | 79 |
+| rrt | 17 | 3 | 107 | 76 | 79 |
+| rrt | 29 | 3 | 107 | 76 | 79 |
+| rrt_ensemble | 7 | 3 | 107 | 76 | 79 |
+| rrt_ensemble | 17 | 3 | 107 | 76 | 79 |
+| rrt_ensemble | 29 | 3 | 107 | 76 | 79 |
+
+Patient Split Robustness (training seed 17)
+| Split Seed | Baseline Long | RRT Long | RRT RI (%) |
+|---:|---:|---:|---:|
+| 17 | 1.0265 | 0.8710 | 15.1508 |
+| 23 | 0.9188 | 0.8928 | 2.8213 |
+| 41 | 0.8632 | 0.8452 | 2.0772 |
+| 59 | 0.5741 | 0.5505 | 4.1090 |
+
+Training Horizon Ablation
+| Kmax | MSE@1 | MSE@2 | MSE@3 | Long MSE |
+|---:|---:|---:|---:|---:|
+| 1 | 0.8504 | 0.9382 | 1.1147 | 1.0265 |
+| 2 | 0.7622 | 0.8338 | 0.9899 | 0.9118 |
+| 3 | 0.7484 | 0.7956 | 0.9463 | 0.8710 |
+| 5 | 0.7417 | 0.8093 | 1.0062 | 0.9078 |
+
+Optional K5 Stress Test (descriptive)
+| MSE@4 | MSE@5 |
+|---:|---:|
+| 1.2741 | 1.6461 |
+K5 stress finished with exit status 0 at 2026-09-18T13:08:36Z

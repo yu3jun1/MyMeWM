@@ -1,0 +1,6 @@
+Ensemble Reliability
+| Seed | Variant | rho@1 | rho@2 | rho@3 | Macro rho | Macro High/Low |
+|---:|---|---:|---:|---:|---:|---:|
+| 17 | rrt_ensemble | 0.3654 | 0.4311 | 0.3903 | 0.3956 | 1.7149 |
+| 29 | rrt_ensemble | 0.3836 | 0.4699 | 0.5085 | 0.4540 | 2.1655 |
+| 7 | rrt_ensemble | 0.3243 | 0.2448 | 0.4039 | 0.3243 | 1.8161 |

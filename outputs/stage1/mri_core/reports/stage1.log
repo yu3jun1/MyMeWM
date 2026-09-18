@@ -1,0 +1,51 @@
+Recursive Rollout Performance (mean ± std across training seeds)
+| Variant | MSE@1 | MSE@2 | MSE@3 | Long MSE |
+|---|---:|---:|---:|---:|
+| baseline | 0.4322 ± 0.0047 | 0.4862 ± 0.0049 | 0.4102 ± 0.0093 | 0.4482 ± 0.0071 |
+| rrt | 0.4629 ± 0.0145 | 0.4810 ± 0.0095 | 0.4310 ± 0.0137 | 0.4560 ± 0.0115 |
+| rrt_ensemble | 0.4494 ± 0.0028 | 0.4700 ± 0.0084 | 0.4239 ± 0.0137 | 0.4470 ± 0.0094 |
+
+Secondary Cosine Distance (mean ± std)
+| Variant | Cos@1 | Cos@2 | Cos@3 |
+|---|---:|---:|---:|
+| baseline | 0.2942 ± 0.0083 | 0.3633 ± 0.0101 | 0.3543 ± 0.0116 |
+| rrt | 0.3239 ± 0.0144 | 0.3744 ± 0.0127 | 0.3542 ± 0.0235 |
+| rrt_ensemble | 0.3069 ± 0.0043 | 0.3601 ± 0.0091 | 0.3528 ± 0.0054 |
+
+Relative Improvement (%)
+| Comparison | RI@1 | RI@2 | RI@3 | RI Long |
+|---|---:|---:|---:|---:|
+| baseline_vs_rrt | -7.1040 ± 3.2198 | 1.0906 ± 0.9864 | -5.0633 ± 1.2452 | -1.7251 ± 1.0806 |
+
+Baseline → RRT by training seed
+| Seed | Baseline Long | RRT Long | RI Long (%) |
+|---:|---:|---:|---:|
+| 7 | 0.4559 | 0.4670 | -2.4421 |
+| 17 | 0.4419 | 0.4440 | -0.4822 |
+| 29 | 0.4469 | 0.4570 | -2.2509 |
+
+Ensemble Reliability: rrt_ensemble
+| Horizon | Spearman rho | High/Low Ratio | Risk@100 | Risk@80 | Risk Reduction (%) |
+|---:|---:|---:|---:|---:|---:|
+| 1 | 0.3578 ± 0.0304 | 2.2074 ± 0.4247 | 0.4494 ± 0.0028 | 0.3830 ± 0.0048 | 14.7791 ± 0.6666 |
+| 2 | 0.3819 ± 0.1203 | 1.7159 ± 0.2581 | 0.4700 ± 0.0084 | 0.4341 ± 0.0178 | 7.5828 ± 5.1709 |
+| 3 | 0.4342 ± 0.0647 | 1.7732 ± 0.3875 | 0.4239 ± 0.0137 | 0.4137 ± 0.0149 | 2.3969 ± 0.3559 |
+| Macro | 0.3913 ± 0.0649 | 1.8988 ± 0.2364 |  | | 8.2529 ± 1.4884 |
+
+Training Horizon Counts
+| Variant | Seed | Kmax | H1 | H2 | H3 |
+|---|---:|---:|---:|---:|---:|
+| baseline | 7 | 3 | 262 | 0 | 0 |
+| baseline | 17 | 3 | 262 | 0 | 0 |
+| baseline | 29 | 3 | 262 | 0 | 0 |
+| rrt | 7 | 3 | 107 | 76 | 79 |
+| rrt | 17 | 3 | 107 | 76 | 79 |
+| rrt | 29 | 3 | 107 | 76 | 79 |
+| rrt_ensemble | 7 | 3 | 107 | 76 | 79 |
+| rrt_ensemble | 17 | 3 | 107 | 76 | 79 |
+| rrt_ensemble | 29 | 3 | 107 | 76 | 79 |
+
+Patient Split Robustness (training seed 17)
+| Split Seed | Baseline Long | RRT Long | RRT RI (%) |
+|---:|---:|---:|---:|
+| 17 | 0.4419 | 0.4440 | -0.4822 |

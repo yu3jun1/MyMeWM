@@ -1,0 +1,29 @@
+{
+  "variant": "ensemble",
+  "seed": 7,
+  "by_horizon": [
+    {
+      "horizon": 1,
+      "n_predictions": 70,
+      "mean_disagreement": 0.03116449549727674,
+      "disagreement_error_spearman": 0.30340302685679293,
+      "high_low_tertile_error_ratio": 2.1636125808344726
+    },
+    {
+      "horizon": 2,
+      "n_predictions": 46,
+      "mean_disagreement": 0.04278969352700464,
+      "disagreement_error_spearman": 0.3909343200740055,
+      "high_low_tertile_error_ratio": 2.785262305149237
+    },
+    {
+      "horizon": 3,
+      "n_predictions": 28,
+      "mean_disagreement": 0.058904580638876984,
+      "disagreement_error_spearman": 0.2868089764641488,
+      "high_low_tertile_error_ratio": 1.3895557471195508
+    }
+  ],
+  "macro_spearman": 0.32704877446498243,
+  "macro_high_low_ratio": 2.1128102110344202
+}

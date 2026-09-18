@@ -1,0 +1,293 @@
+{
+  "baseline": {
+    "7": {
+      "variant": "baseline",
+      "training_seed": 7,
+      "max_horizon": 3,
+      "horizon_strategy": "one_step",
+      "best_epoch": [
+        5
+      ],
+      "best_validation_score": [
+        0.4299546078211859
+      ],
+      "available_horizon_counts": {
+        "1": 262,
+        "2": 155,
+        "3": 79,
+        "4": 39,
+        "5": 14
+      },
+      "training_horizon_counts": {
+        "1": 262,
+        "2": 0,
+        "3": 0
+      },
+      "H1_training_count": 262,
+      "H2_training_count": 0,
+      "H3_training_count": 0,
+      "H4_training_count": 0,
+      "H5_training_count": 0
+    },
+    "17": {
+      "variant": "baseline",
+      "training_seed": 17,
+      "max_horizon": 3,
+      "horizon_strategy": "one_step",
+      "best_epoch": [
+        5
+      ],
+      "best_validation_score": [
+        0.41690448705140537
+      ],
+      "available_horizon_counts": {
+        "1": 262,
+        "2": 155,
+        "3": 79,
+        "4": 39,
+        "5": 14
+      },
+      "training_horizon_counts": {
+        "1": 262,
+        "2": 0,
+        "3": 0
+      },
+      "H1_training_count": 262,
+      "H2_training_count": 0,
+      "H3_training_count": 0,
+      "H4_training_count": 0,
+      "H5_training_count": 0
+    },
+    "29": {
+      "variant": "baseline",
+      "training_seed": 29,
+      "max_horizon": 3,
+      "horizon_strategy": "one_step",
+      "best_epoch": [
+        4
+      ],
+      "best_validation_score": [
+        0.42364038494409584
+      ],
+      "available_horizon_counts": {
+        "1": 262,
+        "2": 155,
+        "3": 79,
+        "4": 39,
+        "5": 14
+      },
+      "training_horizon_counts": {
+        "1": 262,
+        "2": 0,
+        "3": 0
+      },
+      "H1_training_count": 262,
+      "H2_training_count": 0,
+      "H3_training_count": 0,
+      "H4_training_count": 0,
+      "H5_training_count": 0
+    }
+  },
+  "rrt": {
+    "7": {
+      "variant": "rrt",
+      "training_seed": 7,
+      "max_horizon": 3,
+      "horizon_strategy": "max_available",
+      "best_epoch": [
+        14
+      ],
+      "best_validation_score": [
+        0.42887604896319576
+      ],
+      "available_horizon_counts": {
+        "1": 262,
+        "2": 155,
+        "3": 79,
+        "4": 39,
+        "5": 14
+      },
+      "training_horizon_counts": {
+        "1": 107,
+        "2": 76,
+        "3": 79
+      },
+      "H1_training_count": 107,
+      "H2_training_count": 76,
+      "H3_training_count": 79,
+      "H4_training_count": 0,
+      "H5_training_count": 0
+    },
+    "17": {
+      "variant": "rrt",
+      "training_seed": 17,
+      "max_horizon": 3,
+      "horizon_strategy": "max_available",
+      "best_epoch": [
+        14
+      ],
+      "best_validation_score": [
+        0.4230649076987111
+      ],
+      "available_horizon_counts": {
+        "1": 262,
+        "2": 155,
+        "3": 79,
+        "4": 39,
+        "5": 14
+      },
+      "training_horizon_counts": {
+        "1": 107,
+        "2": 76,
+        "3": 79
+      },
+      "H1_training_count": 107,
+      "H2_training_count": 76,
+      "H3_training_count": 79,
+      "H4_training_count": 0,
+      "H5_training_count": 0
+    },
+    "29": {
+      "variant": "rrt",
+      "training_seed": 29,
+      "max_horizon": 3,
+      "horizon_strategy": "max_available",
+      "best_epoch": [
+        10
+      ],
+      "best_validation_score": [
+        0.42374055066470784
+      ],
+      "available_horizon_counts": {
+        "1": 262,
+        "2": 155,
+        "3": 79,
+        "4": 39,
+        "5": 14
+      },
+      "training_horizon_counts": {
+        "1": 107,
+        "2": 76,
+        "3": 79
+      },
+      "H1_training_count": 107,
+      "H2_training_count": 76,
+      "H3_training_count": 79,
+      "H4_training_count": 0,
+      "H5_training_count": 0
+    }
+  },
+  "rrt_ensemble": {
+    "7": {
+      "variant": "rrt_ensemble",
+      "training_seed": 7,
+      "max_horizon": 3,
+      "horizon_strategy": "max_available",
+      "best_epoch": [
+        10,
+        10,
+        12,
+        5,
+        16
+      ],
+      "best_validation_score": [
+        0.4302356055958084,
+        0.42588683053793597,
+        0.40954888818193436,
+        0.4271701388684326,
+        0.4066287389593235
+      ],
+      "available_horizon_counts": {
+        "1": 262,
+        "2": 155,
+        "3": 79,
+        "4": 39,
+        "5": 14
+      },
+      "training_horizon_counts": {
+        "1": 107,
+        "2": 76,
+        "3": 79
+      },
+      "H1_training_count": 107,
+      "H2_training_count": 76,
+      "H3_training_count": 79,
+      "H4_training_count": 0,
+      "H5_training_count": 0
+    },
+    "17": {
+      "variant": "rrt_ensemble",
+      "training_seed": 17,
+      "max_horizon": 3,
+      "horizon_strategy": "max_available",
+      "best_epoch": [
+        12,
+        11,
+        14,
+        10,
+        9
+      ],
+      "best_validation_score": [
+        0.4208214840680322,
+        0.42383213416029586,
+        0.4207239590556465,
+        0.41386001834231145,
+        0.42078178699105556
+      ],
+      "available_horizon_counts": {
+        "1": 262,
+        "2": 155,
+        "3": 79,
+        "4": 39,
+        "5": 14
+      },
+      "training_horizon_counts": {
+        "1": 107,
+        "2": 76,
+        "3": 79
+      },
+      "H1_training_count": 107,
+      "H2_training_count": 76,
+      "H3_training_count": 79,
+      "H4_training_count": 0,
+      "H5_training_count": 0
+    },
+    "29": {
+      "variant": "rrt_ensemble",
+      "training_seed": 29,
+      "max_horizon": 3,
+      "horizon_strategy": "max_available",
+      "best_epoch": [
+        17,
+        9,
+        12,
+        12,
+        8
+      ],
+      "best_validation_score": [
+        0.41101886460526416,
+        0.431990862122834,
+        0.41699862902075474,
+        0.4237440826042892,
+        0.41910987402021194
+      ],
+      "available_horizon_counts": {
+        "1": 262,
+        "2": 155,
+        "3": 79,
+        "4": 39,
+        "5": 14
+      },
+      "training_horizon_counts": {
+        "1": 107,
+        "2": 76,
+        "3": 79
+      },
+      "H1_training_count": 107,
+      "H2_training_count": 76,
+      "H3_training_count": 79,
+      "H4_training_count": 0,
+      "H5_training_count": 0
+    }
+  }
+}

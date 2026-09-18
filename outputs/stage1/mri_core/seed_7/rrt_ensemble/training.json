@@ -1,0 +1,114 @@
+{
+  "variant": "rrt_ensemble",
+  "seed": 7,
+  "split_seed": 17,
+  "horizon_strategy": "max_available",
+  "robustness_training_seed": 17,
+  "data_dir": "/home/tanyuejun/CLARITY_HAUWM_Minimal/data/trajectories/mri_core",
+  "best_epoch": [
+    10,
+    10,
+    12,
+    5,
+    16
+  ],
+  "train_loss": [
+    0.3260777062839932,
+    0.333336525493198,
+    0.2926231589582231,
+    0.41381871700286865,
+    0.2322034239768982
+  ],
+  "validation_loss": [
+    0.4302356055958084,
+    0.42588683053793597,
+    0.40954888818193436,
+    0.4271701388684326,
+    0.4066287389593235
+  ],
+  "max_horizon": 3,
+  "num_training_windows": 262,
+  "available_horizon_counts": {
+    "1": 262,
+    "2": 155,
+    "3": 79,
+    "4": 39,
+    "5": 14
+  },
+  "training_horizon_counts": {
+    "1": 107,
+    "2": 76,
+    "3": 79
+  },
+  "checkpoint": "/home/tanyuejun/CLARITY_HAUWM_Minimal/outputs/stage1/mri_core/seed_7/rrt_ensemble/best.pt",
+  "members": [
+    {
+      "member": 0,
+      "member_seed": 7000,
+      "best_epoch": 10,
+      "train_loss": 0.3260777062839932,
+      "validation_loss": 0.4302356055958084,
+      "training_horizon_counts": {
+        "1": 107,
+        "2": 76,
+        "3": 79
+      }
+    },
+    {
+      "member": 1,
+      "member_seed": 7001,
+      "best_epoch": 10,
+      "train_loss": 0.333336525493198,
+      "validation_loss": 0.42588683053793597,
+      "training_horizon_counts": {
+        "1": 107,
+        "2": 76,
+        "3": 79
+      }
+    },
+    {
+      "member": 2,
+      "member_seed": 7002,
+      "best_epoch": 12,
+      "train_loss": 0.2926231589582231,
+      "validation_loss": 0.40954888818193436,
+      "training_horizon_counts": {
+        "1": 107,
+        "2": 76,
+        "3": 79
+      }
+    },
+    {
+      "member": 3,
+      "member_seed": 7003,
+      "best_epoch": 5,
+      "train_loss": 0.41381871700286865,
+      "validation_loss": 0.4271701388684326,
+      "training_horizon_counts": {
+        "1": 107,
+        "2": 76,
+        "3": 79
+      }
+    },
+    {
+      "member": 4,
+      "member_seed": 7004,
+      "best_epoch": 16,
+      "train_loss": 0.2322034239768982,
+      "validation_loss": 0.4066287389593235,
+      "training_horizon_counts": {
+        "1": 107,
+        "2": 76,
+        "3": 79
+      }
+    }
+  ],
+  "checkpoint_metric": "val_recursive_mse_k2_k3",
+  "protocol": {
+    "main_max_horizon": 3,
+    "ensemble_size": 5,
+    "split_seed": 17,
+    "train_fraction": 0.7,
+    "validation_fraction": 0.15
+  }
+}

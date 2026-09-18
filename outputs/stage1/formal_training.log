@@ -1,0 +1,1659 @@
+Formal Stage 1 started at 2026-09-18T12:57:22Z
+Using physical GPU 5, source snapshot /tmp/clarity_rrt_formal_20260918
+Phase A: Data audit
+{
+  "split_seed": 17,
+  "latent_dim": 768,
+  "action_dim": 28,
+  "action_anchor": "source",
+  "window_counts": {
+    "train": {
+      "1": 262,
+      "2": 155,
+      "3": 79,
+      "4": 39,
+      "5": 14
+    },
+    "validation": {
+      "1": 60,
+      "2": 37,
+      "3": 21,
+      "4": 13,
+      "5": 5
+    },
+    "test": {
+      "1": 70,
+      "2": 46,
+      "3": 28,
+      "4": 16,
+      "5": 6
+    }
+  },
+  "train_patient_count": 107,
+  "train_timepoint_count": 369,
+  "validation_patient_count": 23,
+  "validation_timepoint_count": 83,
+  "test_patient_count": 24,
+  "test_timepoint_count": 94,
+  "H1_window_count": 70,
+  "H2_window_count": 46,
+  "H3_window_count": 28,
+  "H4_window_count": 16,
+  "H5_window_count": 6
+}
+{
+  "split_seed": 17,
+  "latent_dim": 256,
+  "action_dim": 28,
+  "action_anchor": "source",
+  "window_counts": {
+    "train": {
+      "1": 262,
+      "2": 155,
+      "3": 79,
+      "4": 39,
+      "5": 14
+    },
+    "validation": {
+      "1": 60,
+      "2": 37,
+      "3": 21,
+      "4": 13,
+      "5": 5
+    },
+    "test": {
+      "1": 70,
+      "2": 46,
+      "3": 28,
+      "4": 16,
+      "5": 6
+    }
+  },
+  "train_patient_count": 107,
+  "train_timepoint_count": 369,
+  "validation_patient_count": 23,
+  "validation_timepoint_count": 83,
+  "test_patient_count": 24,
+  "test_timepoint_count": 94,
+  "H1_window_count": 70,
+  "H2_window_count": 46,
+  "H3_window_count": 28,
+  "H4_window_count": 16,
+  "H5_window_count": 6
+}
+Phase B: BrainIAC main experiment
+[baseline seed=7 member=0] epoch 001/100 train=0.946720 val_recursive_mse_2_3=0.812917
+[baseline seed=7 member=0] epoch 002/100 train=0.918454 val_recursive_mse_2_3=0.838814
+[baseline seed=7 member=0] epoch 003/100 train=0.739187 val_recursive_mse_2_3=0.815943
+[baseline seed=7 member=0] epoch 004/100 train=0.771879 val_recursive_mse_2_3=0.806167
+[baseline seed=7 member=0] epoch 005/100 train=0.656379 val_recursive_mse_2_3=0.811392
+[baseline seed=7 member=0] epoch 006/100 train=0.603571 val_recursive_mse_2_3=0.793426
+[baseline seed=7 member=0] epoch 007/100 train=0.566274 val_recursive_mse_2_3=0.816505
+[baseline seed=7 member=0] epoch 008/100 train=0.549998 val_recursive_mse_2_3=0.824538
+[baseline seed=7 member=0] epoch 009/100 train=0.514628 val_recursive_mse_2_3=0.856084
+[baseline seed=7 member=0] epoch 010/100 train=0.489985 val_recursive_mse_2_3=0.890834
+[baseline seed=7 member=0] epoch 011/100 train=0.453863 val_recursive_mse_2_3=0.867293
+[baseline seed=7 member=0] epoch 012/100 train=0.428312 val_recursive_mse_2_3=0.880612
+[baseline seed=7 member=0] epoch 013/100 train=0.425660 val_recursive_mse_2_3=0.895925
+[baseline seed=7 member=0] epoch 014/100 train=0.400321 val_recursive_mse_2_3=0.887769
+[baseline seed=7 member=0] epoch 015/100 train=0.381997 val_recursive_mse_2_3=0.933773
+[baseline seed=7 member=0] epoch 016/100 train=0.348038 val_recursive_mse_2_3=0.948806
+[baseline seed=7 member=0] epoch 017/100 train=0.348848 val_recursive_mse_2_3=0.938835
+[baseline seed=7 member=0] epoch 018/100 train=0.330146 val_recursive_mse_2_3=0.942794
+[baseline seed=7 member=0] epoch 019/100 train=0.310918 val_recursive_mse_2_3=0.955421
+[baseline seed=7 member=0] epoch 020/100 train=0.309893 val_recursive_mse_2_3=0.948200
+[baseline seed=7 member=0] epoch 021/100 train=0.293499 val_recursive_mse_2_3=0.965705
+[rrt seed=7 member=0] epoch 001/100 train=1.036153 val_recursive_mse_2_3=0.816335
+[rrt seed=7 member=0] epoch 002/100 train=0.943717 val_recursive_mse_2_3=0.823565
+[rrt seed=7 member=0] epoch 003/100 train=0.765706 val_recursive_mse_2_3=0.805966
+[rrt seed=7 member=0] epoch 004/100 train=0.824525 val_recursive_mse_2_3=0.779435
+[rrt seed=7 member=0] epoch 005/100 train=0.673219 val_recursive_mse_2_3=0.794764
+[rrt seed=7 member=0] epoch 006/100 train=0.642230 val_recursive_mse_2_3=0.800981
+[rrt seed=7 member=0] epoch 007/100 train=0.564632 val_recursive_mse_2_3=0.813577
+[rrt seed=7 member=0] epoch 008/100 train=0.528340 val_recursive_mse_2_3=0.855961
+[rrt seed=7 member=0] epoch 009/100 train=0.482649 val_recursive_mse_2_3=0.837861
+[rrt seed=7 member=0] epoch 010/100 train=0.456764 val_recursive_mse_2_3=0.863254
+[rrt seed=7 member=0] epoch 011/100 train=0.410086 val_recursive_mse_2_3=0.827684
+[rrt seed=7 member=0] epoch 012/100 train=0.393005 val_recursive_mse_2_3=0.909076
+[rrt seed=7 member=0] epoch 013/100 train=0.400801 val_recursive_mse_2_3=0.887396
+[rrt seed=7 member=0] epoch 014/100 train=0.355993 val_recursive_mse_2_3=0.917012
+[rrt seed=7 member=0] epoch 015/100 train=0.341453 val_recursive_mse_2_3=0.934872
+[rrt seed=7 member=0] epoch 016/100 train=0.292602 val_recursive_mse_2_3=0.892378
+[rrt seed=7 member=0] epoch 017/100 train=0.288613 val_recursive_mse_2_3=0.931031
+[rrt seed=7 member=0] epoch 018/100 train=0.282170 val_recursive_mse_2_3=0.927048
+[rrt seed=7 member=0] epoch 019/100 train=0.267827 val_recursive_mse_2_3=0.946492
+[ensemble seed=7 member=0] epoch 001/100 train=1.044287 val_recursive_mse_2_3=0.804053
+[ensemble seed=7 member=0] epoch 002/100 train=0.894538 val_recursive_mse_2_3=0.830243
+[ensemble seed=7 member=0] epoch 003/100 train=0.780112 val_recursive_mse_2_3=0.813183
+[ensemble seed=7 member=0] epoch 004/100 train=0.681087 val_recursive_mse_2_3=0.798440
+[ensemble seed=7 member=0] epoch 005/100 train=0.631513 val_recursive_mse_2_3=0.788472
+[ensemble seed=7 member=0] epoch 006/100 train=0.718890 val_recursive_mse_2_3=0.806749
+[ensemble seed=7 member=0] epoch 007/100 train=0.616128 val_recursive_mse_2_3=0.820339
+[ensemble seed=7 member=0] epoch 008/100 train=0.564805 val_recursive_mse_2_3=0.807665
+[ensemble seed=7 member=0] epoch 009/100 train=0.530260 val_recursive_mse_2_3=0.809248
+[ensemble seed=7 member=0] epoch 010/100 train=0.486707 val_recursive_mse_2_3=0.837421
+[ensemble seed=7 member=0] epoch 011/100 train=0.466581 val_recursive_mse_2_3=0.845295
+[ensemble seed=7 member=0] epoch 012/100 train=0.453829 val_recursive_mse_2_3=0.878301
+[ensemble seed=7 member=0] epoch 013/100 train=0.419382 val_recursive_mse_2_3=0.913344
+[ensemble seed=7 member=0] epoch 014/100 train=0.404952 val_recursive_mse_2_3=0.879594
+[ensemble seed=7 member=0] epoch 015/100 train=0.377284 val_recursive_mse_2_3=0.910998
+[ensemble seed=7 member=0] epoch 016/100 train=0.350487 val_recursive_mse_2_3=0.927443
+[ensemble seed=7 member=0] epoch 017/100 train=0.331588 val_recursive_mse_2_3=0.913329
+[ensemble seed=7 member=0] epoch 018/100 train=0.324127 val_recursive_mse_2_3=0.951715
+[ensemble seed=7 member=0] epoch 019/100 train=0.306853 val_recursive_mse_2_3=0.961992
+[ensemble seed=7 member=0] epoch 020/100 train=0.306905 val_recursive_mse_2_3=0.925530
+[ensemble seed=7 member=1] epoch 001/100 train=0.993899 val_recursive_mse_2_3=0.805971
+[ensemble seed=7 member=1] epoch 002/100 train=0.937764 val_recursive_mse_2_3=0.837687
+[ensemble seed=7 member=1] epoch 003/100 train=0.822699 val_recursive_mse_2_3=0.835293
+[ensemble seed=7 member=1] epoch 004/100 train=0.713655 val_recursive_mse_2_3=0.815978
+[ensemble seed=7 member=1] epoch 005/100 train=0.665413 val_recursive_mse_2_3=0.820966
+[ensemble seed=7 member=1] epoch 006/100 train=0.695842 val_recursive_mse_2_3=0.819365
+[ensemble seed=7 member=1] epoch 007/100 train=0.599570 val_recursive_mse_2_3=0.809166
+[ensemble seed=7 member=1] epoch 008/100 train=0.553073 val_recursive_mse_2_3=0.835504
+[ensemble seed=7 member=1] epoch 009/100 train=0.561543 val_recursive_mse_2_3=0.851301
+[ensemble seed=7 member=1] epoch 010/100 train=0.492786 val_recursive_mse_2_3=0.888892
+[ensemble seed=7 member=1] epoch 011/100 train=0.463275 val_recursive_mse_2_3=0.900654
+[ensemble seed=7 member=1] epoch 012/100 train=0.448302 val_recursive_mse_2_3=0.851731
+[ensemble seed=7 member=1] epoch 013/100 train=0.405527 val_recursive_mse_2_3=0.905020
+[ensemble seed=7 member=1] epoch 014/100 train=0.393327 val_recursive_mse_2_3=0.917418
+[ensemble seed=7 member=1] epoch 015/100 train=0.382317 val_recursive_mse_2_3=0.926049
+[ensemble seed=7 member=1] epoch 016/100 train=0.354243 val_recursive_mse_2_3=0.900075
+[ensemble seed=7 member=2] epoch 001/100 train=0.974500 val_recursive_mse_2_3=0.794463
+[ensemble seed=7 member=2] epoch 002/100 train=0.842638 val_recursive_mse_2_3=0.822755
+[ensemble seed=7 member=2] epoch 003/100 train=0.779189 val_recursive_mse_2_3=0.819640
+[ensemble seed=7 member=2] epoch 004/100 train=0.685859 val_recursive_mse_2_3=0.812211
+[ensemble seed=7 member=2] epoch 005/100 train=0.626617 val_recursive_mse_2_3=0.791477
+[ensemble seed=7 member=2] epoch 006/100 train=0.602088 val_recursive_mse_2_3=0.808148
+[ensemble seed=7 member=2] epoch 007/100 train=0.595336 val_recursive_mse_2_3=0.812030
+[ensemble seed=7 member=2] epoch 008/100 train=0.548771 val_recursive_mse_2_3=0.813187
+[ensemble seed=7 member=2] epoch 009/100 train=0.502117 val_recursive_mse_2_3=0.799887
+[ensemble seed=7 member=2] epoch 010/100 train=0.494112 val_recursive_mse_2_3=0.856417
+[ensemble seed=7 member=2] epoch 011/100 train=0.498595 val_recursive_mse_2_3=0.854384
+[ensemble seed=7 member=2] epoch 012/100 train=0.432511 val_recursive_mse_2_3=0.858803
+[ensemble seed=7 member=2] epoch 013/100 train=0.423966 val_recursive_mse_2_3=0.847354
+[ensemble seed=7 member=2] epoch 014/100 train=0.423805 val_recursive_mse_2_3=0.879147
+[ensemble seed=7 member=2] epoch 015/100 train=0.391642 val_recursive_mse_2_3=0.831983
+[ensemble seed=7 member=2] epoch 016/100 train=0.384741 val_recursive_mse_2_3=0.884922
+[ensemble seed=7 member=2] epoch 017/100 train=0.377563 val_recursive_mse_2_3=0.869822
+[ensemble seed=7 member=2] epoch 018/100 train=0.337902 val_recursive_mse_2_3=0.909467
+[ensemble seed=7 member=2] epoch 019/100 train=0.303953 val_recursive_mse_2_3=0.896552
+[ensemble seed=7 member=2] epoch 020/100 train=0.305795 val_recursive_mse_2_3=0.889345
+[ensemble seed=7 member=3] epoch 001/100 train=0.968983 val_recursive_mse_2_3=0.801515
+[ensemble seed=7 member=3] epoch 002/100 train=0.845879 val_recursive_mse_2_3=0.840520
+[ensemble seed=7 member=3] epoch 003/100 train=0.746396 val_recursive_mse_2_3=0.814953
+[ensemble seed=7 member=3] epoch 004/100 train=0.725571 val_recursive_mse_2_3=0.779871
+[ensemble seed=7 member=3] epoch 005/100 train=0.654903 val_recursive_mse_2_3=0.785569
+[ensemble seed=7 member=3] epoch 006/100 train=0.634673 val_recursive_mse_2_3=0.797191
+[ensemble seed=7 member=3] epoch 007/100 train=0.610185 val_recursive_mse_2_3=0.820458
+[ensemble seed=7 member=3] epoch 008/100 train=0.552080 val_recursive_mse_2_3=0.811073
+[ensemble seed=7 member=3] epoch 009/100 train=0.583824 val_recursive_mse_2_3=0.841333
+[ensemble seed=7 member=3] epoch 010/100 train=0.504852 val_recursive_mse_2_3=0.853670
+[ensemble seed=7 member=3] epoch 011/100 train=0.473948 val_recursive_mse_2_3=0.855616
+[ensemble seed=7 member=3] epoch 012/100 train=0.437745 val_recursive_mse_2_3=0.867954
+[ensemble seed=7 member=3] epoch 013/100 train=0.411263 val_recursive_mse_2_3=0.900125
+[ensemble seed=7 member=3] epoch 014/100 train=0.408636 val_recursive_mse_2_3=0.941059
+[ensemble seed=7 member=3] epoch 015/100 train=0.402666 val_recursive_mse_2_3=0.928162
+[ensemble seed=7 member=3] epoch 016/100 train=0.371099 val_recursive_mse_2_3=1.021633
+[ensemble seed=7 member=3] epoch 017/100 train=0.361684 val_recursive_mse_2_3=0.950450
+[ensemble seed=7 member=3] epoch 018/100 train=0.354025 val_recursive_mse_2_3=0.975482
+[ensemble seed=7 member=3] epoch 019/100 train=0.341833 val_recursive_mse_2_3=1.011433
+[ensemble seed=7 member=4] epoch 001/100 train=0.956557 val_recursive_mse_2_3=0.804308
+[ensemble seed=7 member=4] epoch 002/100 train=0.829153 val_recursive_mse_2_3=0.825005
+[ensemble seed=7 member=4] epoch 003/100 train=0.769579 val_recursive_mse_2_3=0.841570
+[ensemble seed=7 member=4] epoch 004/100 train=0.705306 val_recursive_mse_2_3=0.799460
+[ensemble seed=7 member=4] epoch 005/100 train=0.651452 val_recursive_mse_2_3=0.797886
+[ensemble seed=7 member=4] epoch 006/100 train=0.622428 val_recursive_mse_2_3=0.817974
+[ensemble seed=7 member=4] epoch 007/100 train=0.564065 val_recursive_mse_2_3=0.832329
+[ensemble seed=7 member=4] epoch 008/100 train=0.526977 val_recursive_mse_2_3=0.832944
+[ensemble seed=7 member=4] epoch 009/100 train=0.544968 val_recursive_mse_2_3=0.847923
+[ensemble seed=7 member=4] epoch 010/100 train=0.478657 val_recursive_mse_2_3=0.883951
+[ensemble seed=7 member=4] epoch 011/100 train=0.458221 val_recursive_mse_2_3=0.890148
+[ensemble seed=7 member=4] epoch 012/100 train=0.435483 val_recursive_mse_2_3=0.877254
+[ensemble seed=7 member=4] epoch 013/100 train=0.412913 val_recursive_mse_2_3=0.958429
+[ensemble seed=7 member=4] epoch 014/100 train=0.381375 val_recursive_mse_2_3=0.927662
+[ensemble seed=7 member=4] epoch 015/100 train=0.388617 val_recursive_mse_2_3=0.961716
+[ensemble seed=7 member=4] epoch 016/100 train=0.354139 val_recursive_mse_2_3=0.964605
+[ensemble seed=7 member=4] epoch 017/100 train=0.337710 val_recursive_mse_2_3=0.953090
+[ensemble seed=7 member=4] epoch 018/100 train=0.341461 val_recursive_mse_2_3=0.963410
+[ensemble seed=7 member=4] epoch 019/100 train=0.343242 val_recursive_mse_2_3=0.952952
+[ensemble seed=7 member=4] epoch 020/100 train=0.304086 val_recursive_mse_2_3=0.966439
+[rrt_ensemble seed=7 member=0] epoch 001/100 train=1.099932 val_recursive_mse_2_3=0.808336
+[rrt_ensemble seed=7 member=0] epoch 002/100 train=0.931458 val_recursive_mse_2_3=0.808631
+[rrt_ensemble seed=7 member=0] epoch 003/100 train=0.801210 val_recursive_mse_2_3=0.804510
+[rrt_ensemble seed=7 member=0] epoch 004/100 train=0.695918 val_recursive_mse_2_3=0.802689
+[rrt_ensemble seed=7 member=0] epoch 005/100 train=0.631963 val_recursive_mse_2_3=0.779368
+[rrt_ensemble seed=7 member=0] epoch 006/100 train=0.693302 val_recursive_mse_2_3=0.805185
+[rrt_ensemble seed=7 member=0] epoch 007/100 train=0.554599 val_recursive_mse_2_3=0.839188
+[rrt_ensemble seed=7 member=0] epoch 008/100 train=0.553313 val_recursive_mse_2_3=0.824472
+[rrt_ensemble seed=7 member=0] epoch 009/100 train=0.486494 val_recursive_mse_2_3=0.871140
+[rrt_ensemble seed=7 member=0] epoch 010/100 train=0.436595 val_recursive_mse_2_3=0.871249
+[rrt_ensemble seed=7 member=0] epoch 011/100 train=0.409258 val_recursive_mse_2_3=0.902733
+[rrt_ensemble seed=7 member=0] epoch 012/100 train=0.406328 val_recursive_mse_2_3=0.904134
+[rrt_ensemble seed=7 member=0] epoch 013/100 train=0.372574 val_recursive_mse_2_3=0.958142
+[rrt_ensemble seed=7 member=0] epoch 014/100 train=0.343910 val_recursive_mse_2_3=0.899672
+[rrt_ensemble seed=7 member=0] epoch 015/100 train=0.329523 val_recursive_mse_2_3=0.905949
+[rrt_ensemble seed=7 member=0] epoch 016/100 train=0.297138 val_recursive_mse_2_3=0.991783
+[rrt_ensemble seed=7 member=0] epoch 017/100 train=0.283169 val_recursive_mse_2_3=0.922599
+[rrt_ensemble seed=7 member=0] epoch 018/100 train=0.281479 val_recursive_mse_2_3=0.973680
+[rrt_ensemble seed=7 member=0] epoch 019/100 train=0.268623 val_recursive_mse_2_3=0.958071
+[rrt_ensemble seed=7 member=0] epoch 020/100 train=0.250624 val_recursive_mse_2_3=0.950643
+[rrt_ensemble seed=7 member=1] epoch 001/100 train=1.039393 val_recursive_mse_2_3=0.809473
+[rrt_ensemble seed=7 member=1] epoch 002/100 train=0.957160 val_recursive_mse_2_3=0.824645
+[rrt_ensemble seed=7 member=1] epoch 003/100 train=0.835139 val_recursive_mse_2_3=0.799201
+[rrt_ensemble seed=7 member=1] epoch 004/100 train=0.741037 val_recursive_mse_2_3=0.829838
+[rrt_ensemble seed=7 member=1] epoch 005/100 train=0.668568 val_recursive_mse_2_3=0.818773
+[rrt_ensemble seed=7 member=1] epoch 006/100 train=0.697878 val_recursive_mse_2_3=0.844854
+[rrt_ensemble seed=7 member=1] epoch 007/100 train=0.570321 val_recursive_mse_2_3=0.884086
+[rrt_ensemble seed=7 member=1] epoch 008/100 train=0.530291 val_recursive_mse_2_3=0.882817
+[rrt_ensemble seed=7 member=1] epoch 009/100 train=0.540929 val_recursive_mse_2_3=0.890719
+[rrt_ensemble seed=7 member=1] epoch 010/100 train=0.477024 val_recursive_mse_2_3=0.888151
+[rrt_ensemble seed=7 member=1] epoch 011/100 train=0.434673 val_recursive_mse_2_3=0.924698
+[rrt_ensemble seed=7 member=1] epoch 012/100 train=0.414530 val_recursive_mse_2_3=0.920237
+[rrt_ensemble seed=7 member=1] epoch 013/100 train=0.375323 val_recursive_mse_2_3=0.942088
+[rrt_ensemble seed=7 member=1] epoch 014/100 train=0.372185 val_recursive_mse_2_3=0.948512
+[rrt_ensemble seed=7 member=1] epoch 015/100 train=0.340299 val_recursive_mse_2_3=0.979437
+[rrt_ensemble seed=7 member=1] epoch 016/100 train=0.325122 val_recursive_mse_2_3=0.922986
+[rrt_ensemble seed=7 member=1] epoch 017/100 train=0.347289 val_recursive_mse_2_3=1.002978
+[rrt_ensemble seed=7 member=1] epoch 018/100 train=0.293665 val_recursive_mse_2_3=0.934064
+[rrt_ensemble seed=7 member=2] epoch 001/100 train=1.003634 val_recursive_mse_2_3=0.802207
+[rrt_ensemble seed=7 member=2] epoch 002/100 train=0.876843 val_recursive_mse_2_3=0.809627
+[rrt_ensemble seed=7 member=2] epoch 003/100 train=0.766851 val_recursive_mse_2_3=0.805224
+[rrt_ensemble seed=7 member=2] epoch 004/100 train=0.766907 val_recursive_mse_2_3=0.799567
+[rrt_ensemble seed=7 member=2] epoch 005/100 train=0.623920 val_recursive_mse_2_3=0.796394
+[rrt_ensemble seed=7 member=2] epoch 006/100 train=0.577516 val_recursive_mse_2_3=0.789665
+[rrt_ensemble seed=7 member=2] epoch 007/100 train=0.543768 val_recursive_mse_2_3=0.813479
+[rrt_ensemble seed=7 member=2] epoch 008/100 train=0.505844 val_recursive_mse_2_3=0.805749
+[rrt_ensemble seed=7 member=2] epoch 009/100 train=0.451702 val_recursive_mse_2_3=0.870061
+[rrt_ensemble seed=7 member=2] epoch 010/100 train=0.439112 val_recursive_mse_2_3=0.839784
+[rrt_ensemble seed=7 member=2] epoch 011/100 train=0.430202 val_recursive_mse_2_3=0.865201
+[rrt_ensemble seed=7 member=2] epoch 012/100 train=0.375854 val_recursive_mse_2_3=0.919223
+[rrt_ensemble seed=7 member=2] epoch 013/100 train=0.364466 val_recursive_mse_2_3=0.881531
+[rrt_ensemble seed=7 member=2] epoch 014/100 train=0.369181 val_recursive_mse_2_3=0.920466
+[rrt_ensemble seed=7 member=2] epoch 015/100 train=0.327022 val_recursive_mse_2_3=0.888350
+[rrt_ensemble seed=7 member=2] epoch 016/100 train=0.293585 val_recursive_mse_2_3=0.903784
+[rrt_ensemble seed=7 member=2] epoch 017/100 train=0.307663 val_recursive_mse_2_3=0.908294
+[rrt_ensemble seed=7 member=2] epoch 018/100 train=0.265642 val_recursive_mse_2_3=0.974261
+[rrt_ensemble seed=7 member=2] epoch 019/100 train=0.242220 val_recursive_mse_2_3=0.928885
+[rrt_ensemble seed=7 member=2] epoch 020/100 train=0.241064 val_recursive_mse_2_3=0.941210
+[rrt_ensemble seed=7 member=2] epoch 021/100 train=0.227759 val_recursive_mse_2_3=0.926166
+[rrt_ensemble seed=7 member=3] epoch 001/100 train=1.038375 val_recursive_mse_2_3=0.807321
+[rrt_ensemble seed=7 member=3] epoch 002/100 train=0.885180 val_recursive_mse_2_3=0.810543
+[rrt_ensemble seed=7 member=3] epoch 003/100 train=0.764528 val_recursive_mse_2_3=0.792644
+[rrt_ensemble seed=7 member=3] epoch 004/100 train=0.708727 val_recursive_mse_2_3=0.777250
+[rrt_ensemble seed=7 member=3] epoch 005/100 train=0.636488 val_recursive_mse_2_3=0.767480
+[rrt_ensemble seed=7 member=3] epoch 006/100 train=0.609811 val_recursive_mse_2_3=0.808391
+[rrt_ensemble seed=7 member=3] epoch 007/100 train=0.574896 val_recursive_mse_2_3=0.813803
+[rrt_ensemble seed=7 member=3] epoch 008/100 train=0.525038 val_recursive_mse_2_3=0.809433
+[rrt_ensemble seed=7 member=3] epoch 009/100 train=0.547946 val_recursive_mse_2_3=0.836742
+[rrt_ensemble seed=7 member=3] epoch 010/100 train=0.469477 val_recursive_mse_2_3=0.852715
+[rrt_ensemble seed=7 member=3] epoch 011/100 train=0.439467 val_recursive_mse_2_3=0.831575
+[rrt_ensemble seed=7 member=3] epoch 012/100 train=0.389968 val_recursive_mse_2_3=0.864262
+[rrt_ensemble seed=7 member=3] epoch 013/100 train=0.384473 val_recursive_mse_2_3=0.863560
+[rrt_ensemble seed=7 member=3] epoch 014/100 train=0.351097 val_recursive_mse_2_3=0.899290
+[rrt_ensemble seed=7 member=3] epoch 015/100 train=0.354297 val_recursive_mse_2_3=0.893130
+[rrt_ensemble seed=7 member=3] epoch 016/100 train=0.316451 val_recursive_mse_2_3=0.899604
+[rrt_ensemble seed=7 member=3] epoch 017/100 train=0.300286 val_recursive_mse_2_3=0.930584
+[rrt_ensemble seed=7 member=3] epoch 018/100 train=0.292686 val_recursive_mse_2_3=0.887534
+[rrt_ensemble seed=7 member=3] epoch 019/100 train=0.266411 val_recursive_mse_2_3=0.923966
+[rrt_ensemble seed=7 member=3] epoch 020/100 train=0.258166 val_recursive_mse_2_3=0.939190
+[rrt_ensemble seed=7 member=4] epoch 001/100 train=1.039544 val_recursive_mse_2_3=0.799397
+[rrt_ensemble seed=7 member=4] epoch 002/100 train=0.868043 val_recursive_mse_2_3=0.793404
+[rrt_ensemble seed=7 member=4] epoch 003/100 train=0.781475 val_recursive_mse_2_3=0.810579
+[rrt_ensemble seed=7 member=4] epoch 004/100 train=0.719273 val_recursive_mse_2_3=0.785885
+[rrt_ensemble seed=7 member=4] epoch 005/100 train=0.653826 val_recursive_mse_2_3=0.773763
+[rrt_ensemble seed=7 member=4] epoch 006/100 train=0.613919 val_recursive_mse_2_3=0.833474
+[rrt_ensemble seed=7 member=4] epoch 007/100 train=0.565802 val_recursive_mse_2_3=0.844969
+[rrt_ensemble seed=7 member=4] epoch 008/100 train=0.505260 val_recursive_mse_2_3=0.862893
+[rrt_ensemble seed=7 member=4] epoch 009/100 train=0.511598 val_recursive_mse_2_3=0.923037
+[rrt_ensemble seed=7 member=4] epoch 010/100 train=0.434839 val_recursive_mse_2_3=0.888204
+[rrt_ensemble seed=7 member=4] epoch 011/100 train=0.405351 val_recursive_mse_2_3=0.959496
+[rrt_ensemble seed=7 member=4] epoch 012/100 train=0.382558 val_recursive_mse_2_3=0.954718
+[rrt_ensemble seed=7 member=4] epoch 013/100 train=0.366396 val_recursive_mse_2_3=0.992436
+[rrt_ensemble seed=7 member=4] epoch 014/100 train=0.344596 val_recursive_mse_2_3=0.984516
+[rrt_ensemble seed=7 member=4] epoch 015/100 train=0.338194 val_recursive_mse_2_3=0.925382
+[rrt_ensemble seed=7 member=4] epoch 016/100 train=0.324575 val_recursive_mse_2_3=1.036694
+[rrt_ensemble seed=7 member=4] epoch 017/100 train=0.303391 val_recursive_mse_2_3=0.926614
+[rrt_ensemble seed=7 member=4] epoch 018/100 train=0.286054 val_recursive_mse_2_3=1.019149
+[rrt_ensemble seed=7 member=4] epoch 019/100 train=0.282808 val_recursive_mse_2_3=0.996386
+[rrt_ensemble seed=7 member=4] epoch 020/100 train=0.251445 val_recursive_mse_2_3=1.069585
+[baseline seed=17 member=0] epoch 001/100 train=0.969484 val_recursive_mse_2_3=0.799235
+[baseline seed=17 member=0] epoch 002/100 train=0.881507 val_recursive_mse_2_3=0.841431
+[baseline seed=17 member=0] epoch 003/100 train=0.796818 val_recursive_mse_2_3=0.859157
+[baseline seed=17 member=0] epoch 004/100 train=0.715384 val_recursive_mse_2_3=0.831330
+[baseline seed=17 member=0] epoch 005/100 train=0.695691 val_recursive_mse_2_3=0.813952
+[baseline seed=17 member=0] epoch 006/100 train=0.660902 val_recursive_mse_2_3=0.832028
+[baseline seed=17 member=0] epoch 007/100 train=0.710371 val_recursive_mse_2_3=0.820892
+[baseline seed=17 member=0] epoch 008/100 train=0.579668 val_recursive_mse_2_3=0.848017
+[baseline seed=17 member=0] epoch 009/100 train=0.532740 val_recursive_mse_2_3=0.860763
+[baseline seed=17 member=0] epoch 010/100 train=0.521721 val_recursive_mse_2_3=0.865606
+[baseline seed=17 member=0] epoch 011/100 train=0.458997 val_recursive_mse_2_3=0.910374
+[baseline seed=17 member=0] epoch 012/100 train=0.474630 val_recursive_mse_2_3=0.930315
+[baseline seed=17 member=0] epoch 013/100 train=0.455115 val_recursive_mse_2_3=0.948507
+[baseline seed=17 member=0] epoch 014/100 train=0.417984 val_recursive_mse_2_3=0.972959
+[baseline seed=17 member=0] epoch 015/100 train=0.399217 val_recursive_mse_2_3=0.988753
+[baseline seed=17 member=0] epoch 016/100 train=0.376031 val_recursive_mse_2_3=1.008413
+[rrt seed=17 member=0] epoch 001/100 train=1.051110 val_recursive_mse_2_3=0.807217
+[rrt seed=17 member=0] epoch 002/100 train=0.866210 val_recursive_mse_2_3=0.824817
+[rrt seed=17 member=0] epoch 003/100 train=0.810704 val_recursive_mse_2_3=0.811241
+[rrt seed=17 member=0] epoch 004/100 train=0.740622 val_recursive_mse_2_3=0.793217
+[rrt seed=17 member=0] epoch 005/100 train=0.671529 val_recursive_mse_2_3=0.817456
+[rrt seed=17 member=0] epoch 006/100 train=0.653994 val_recursive_mse_2_3=0.815228
+[rrt seed=17 member=0] epoch 007/100 train=0.673660 val_recursive_mse_2_3=0.852659
+[rrt seed=17 member=0] epoch 008/100 train=0.549936 val_recursive_mse_2_3=0.846880
+[rrt seed=17 member=0] epoch 009/100 train=0.484182 val_recursive_mse_2_3=0.894469
+[rrt seed=17 member=0] epoch 010/100 train=0.464617 val_recursive_mse_2_3=0.844637
+[rrt seed=17 member=0] epoch 011/100 train=0.409528 val_recursive_mse_2_3=0.890925
+[rrt seed=17 member=0] epoch 012/100 train=0.423265 val_recursive_mse_2_3=0.973043
+[rrt seed=17 member=0] epoch 013/100 train=0.411278 val_recursive_mse_2_3=0.873722
+[rrt seed=17 member=0] epoch 014/100 train=0.360814 val_recursive_mse_2_3=0.925809
+[rrt seed=17 member=0] epoch 015/100 train=0.344402 val_recursive_mse_2_3=0.968743
+[rrt seed=17 member=0] epoch 016/100 train=0.337727 val_recursive_mse_2_3=0.879240
+[rrt seed=17 member=0] epoch 017/100 train=0.309691 val_recursive_mse_2_3=0.960951
+[rrt seed=17 member=0] epoch 018/100 train=0.283405 val_recursive_mse_2_3=0.925689
+[rrt seed=17 member=0] epoch 019/100 train=0.263370 val_recursive_mse_2_3=0.932501
+[ensemble seed=17 member=0] epoch 001/100 train=0.898612 val_recursive_mse_2_3=0.806091
+[ensemble seed=17 member=0] epoch 002/100 train=0.913964 val_recursive_mse_2_3=0.843769
+[ensemble seed=17 member=0] epoch 003/100 train=0.750851 val_recursive_mse_2_3=0.823158
+[ensemble seed=17 member=0] epoch 004/100 train=0.696130 val_recursive_mse_2_3=0.803413
+[ensemble seed=17 member=0] epoch 005/100 train=0.652302 val_recursive_mse_2_3=0.816904
+[ensemble seed=17 member=0] epoch 006/100 train=0.647880 val_recursive_mse_2_3=0.836113
+[ensemble seed=17 member=0] epoch 007/100 train=0.585651 val_recursive_mse_2_3=0.811021
+[ensemble seed=17 member=0] epoch 008/100 train=0.544838 val_recursive_mse_2_3=0.844778
+[ensemble seed=17 member=0] epoch 009/100 train=0.546214 val_recursive_mse_2_3=0.855337
+[ensemble seed=17 member=0] epoch 010/100 train=0.521245 val_recursive_mse_2_3=0.896157
+[ensemble seed=17 member=0] epoch 011/100 train=0.475212 val_recursive_mse_2_3=0.891646
+[ensemble seed=17 member=0] epoch 012/100 train=0.458325 val_recursive_mse_2_3=0.909575
+[ensemble seed=17 member=0] epoch 013/100 train=0.431896 val_recursive_mse_2_3=0.897559
+[ensemble seed=17 member=0] epoch 014/100 train=0.407242 val_recursive_mse_2_3=0.916843
+[ensemble seed=17 member=0] epoch 015/100 train=0.408020 val_recursive_mse_2_3=0.978795
+[ensemble seed=17 member=0] epoch 016/100 train=0.363950 val_recursive_mse_2_3=0.986807
+[ensemble seed=17 member=0] epoch 017/100 train=0.345363 val_recursive_mse_2_3=0.955947
+[ensemble seed=17 member=0] epoch 018/100 train=0.329136 val_recursive_mse_2_3=1.000664
+[ensemble seed=17 member=0] epoch 019/100 train=0.327021 val_recursive_mse_2_3=1.013817
+[ensemble seed=17 member=1] epoch 001/100 train=0.908098 val_recursive_mse_2_3=0.801697
+[ensemble seed=17 member=1] epoch 002/100 train=0.878613 val_recursive_mse_2_3=0.834185
+[ensemble seed=17 member=1] epoch 003/100 train=0.747850 val_recursive_mse_2_3=0.836560
+[ensemble seed=17 member=1] epoch 004/100 train=0.709480 val_recursive_mse_2_3=0.829608
+[ensemble seed=17 member=1] epoch 005/100 train=0.705801 val_recursive_mse_2_3=0.775845
+[ensemble seed=17 member=1] epoch 006/100 train=0.634184 val_recursive_mse_2_3=0.792395
+[ensemble seed=17 member=1] epoch 007/100 train=0.581384 val_recursive_mse_2_3=0.829400
+[ensemble seed=17 member=1] epoch 008/100 train=0.534184 val_recursive_mse_2_3=0.841125
+[ensemble seed=17 member=1] epoch 009/100 train=0.531478 val_recursive_mse_2_3=0.836696
+[ensemble seed=17 member=1] epoch 010/100 train=0.480960 val_recursive_mse_2_3=0.869885
+[ensemble seed=17 member=1] epoch 011/100 train=0.463961 val_recursive_mse_2_3=0.874069
+[ensemble seed=17 member=1] epoch 012/100 train=0.426853 val_recursive_mse_2_3=0.874014
+[ensemble seed=17 member=1] epoch 013/100 train=0.396117 val_recursive_mse_2_3=0.878544
+[ensemble seed=17 member=1] epoch 014/100 train=0.377833 val_recursive_mse_2_3=0.922004
+[ensemble seed=17 member=1] epoch 015/100 train=0.408642 val_recursive_mse_2_3=0.934459
+[ensemble seed=17 member=1] epoch 016/100 train=0.347215 val_recursive_mse_2_3=0.952453
+[ensemble seed=17 member=1] epoch 017/100 train=0.324348 val_recursive_mse_2_3=0.956078
+[ensemble seed=17 member=1] epoch 018/100 train=0.319007 val_recursive_mse_2_3=0.973604
+[ensemble seed=17 member=1] epoch 019/100 train=0.295880 val_recursive_mse_2_3=0.948029
+[ensemble seed=17 member=1] epoch 020/100 train=0.289867 val_recursive_mse_2_3=0.991640
+[ensemble seed=17 member=2] epoch 001/100 train=0.938475 val_recursive_mse_2_3=0.810783
+[ensemble seed=17 member=2] epoch 002/100 train=0.923188 val_recursive_mse_2_3=0.837242
+[ensemble seed=17 member=2] epoch 003/100 train=0.807459 val_recursive_mse_2_3=0.821982
+[ensemble seed=17 member=2] epoch 004/100 train=0.711494 val_recursive_mse_2_3=0.816666
+[ensemble seed=17 member=2] epoch 005/100 train=0.724663 val_recursive_mse_2_3=0.789166
+[ensemble seed=17 member=2] epoch 006/100 train=0.647318 val_recursive_mse_2_3=0.802841
+[ensemble seed=17 member=2] epoch 007/100 train=0.587596 val_recursive_mse_2_3=0.814724
+[ensemble seed=17 member=2] epoch 008/100 train=0.569270 val_recursive_mse_2_3=0.835219
+[ensemble seed=17 member=2] epoch 009/100 train=0.526024 val_recursive_mse_2_3=0.844833
+[ensemble seed=17 member=2] epoch 010/100 train=0.491632 val_recursive_mse_2_3=0.883675
+[ensemble seed=17 member=2] epoch 011/100 train=0.479859 val_recursive_mse_2_3=0.892490
+[ensemble seed=17 member=2] epoch 012/100 train=0.462757 val_recursive_mse_2_3=0.872361
+[ensemble seed=17 member=2] epoch 013/100 train=0.407542 val_recursive_mse_2_3=0.883065
+[ensemble seed=17 member=2] epoch 014/100 train=0.408123 val_recursive_mse_2_3=0.898093
+[ensemble seed=17 member=2] epoch 015/100 train=0.390011 val_recursive_mse_2_3=0.922175
+[ensemble seed=17 member=2] epoch 016/100 train=0.374519 val_recursive_mse_2_3=0.922966
+[ensemble seed=17 member=2] epoch 017/100 train=0.347262 val_recursive_mse_2_3=0.928961
+[ensemble seed=17 member=2] epoch 018/100 train=0.327942 val_recursive_mse_2_3=0.965080
+[ensemble seed=17 member=2] epoch 019/100 train=0.312592 val_recursive_mse_2_3=0.935711
+[ensemble seed=17 member=2] epoch 020/100 train=0.295062 val_recursive_mse_2_3=1.032710
+[ensemble seed=17 member=3] epoch 001/100 train=0.981836 val_recursive_mse_2_3=0.813317
+[ensemble seed=17 member=3] epoch 002/100 train=0.806686 val_recursive_mse_2_3=0.831276
+[ensemble seed=17 member=3] epoch 003/100 train=0.782672 val_recursive_mse_2_3=0.834407
+[ensemble seed=17 member=3] epoch 004/100 train=0.700420 val_recursive_mse_2_3=0.816525
+[ensemble seed=17 member=3] epoch 005/100 train=0.658474 val_recursive_mse_2_3=0.804284
+[ensemble seed=17 member=3] epoch 006/100 train=0.639840 val_recursive_mse_2_3=0.819068
+[ensemble seed=17 member=3] epoch 007/100 train=0.603321 val_recursive_mse_2_3=0.850752
+[ensemble seed=17 member=3] epoch 008/100 train=0.584335 val_recursive_mse_2_3=0.857229
+[ensemble seed=17 member=3] epoch 009/100 train=0.508734 val_recursive_mse_2_3=0.876611
+[ensemble seed=17 member=3] epoch 010/100 train=0.466202 val_recursive_mse_2_3=0.888209
+[ensemble seed=17 member=3] epoch 011/100 train=0.437601 val_recursive_mse_2_3=0.922713
+[ensemble seed=17 member=3] epoch 012/100 train=0.424236 val_recursive_mse_2_3=0.927748
+[ensemble seed=17 member=3] epoch 013/100 train=0.411636 val_recursive_mse_2_3=0.920923
+[ensemble seed=17 member=3] epoch 014/100 train=0.384260 val_recursive_mse_2_3=0.957482
+[ensemble seed=17 member=3] epoch 015/100 train=0.360254 val_recursive_mse_2_3=0.930974
+[ensemble seed=17 member=3] epoch 016/100 train=0.348982 val_recursive_mse_2_3=0.959426
+[ensemble seed=17 member=3] epoch 017/100 train=0.330478 val_recursive_mse_2_3=0.968663
+[ensemble seed=17 member=3] epoch 018/100 train=0.319479 val_recursive_mse_2_3=0.939556
+[ensemble seed=17 member=3] epoch 019/100 train=0.322912 val_recursive_mse_2_3=0.967469
+[ensemble seed=17 member=3] epoch 020/100 train=0.300395 val_recursive_mse_2_3=1.055001
+[ensemble seed=17 member=4] epoch 001/100 train=0.927502 val_recursive_mse_2_3=0.793882
+[ensemble seed=17 member=4] epoch 002/100 train=0.844840 val_recursive_mse_2_3=0.816416
+[ensemble seed=17 member=4] epoch 003/100 train=0.756187 val_recursive_mse_2_3=0.817299
+[ensemble seed=17 member=4] epoch 004/100 train=0.745804 val_recursive_mse_2_3=0.832523
+[ensemble seed=17 member=4] epoch 005/100 train=0.671147 val_recursive_mse_2_3=0.815992
+[ensemble seed=17 member=4] epoch 006/100 train=0.643027 val_recursive_mse_2_3=0.820023
+[ensemble seed=17 member=4] epoch 007/100 train=0.618217 val_recursive_mse_2_3=0.813191
+[ensemble seed=17 member=4] epoch 008/100 train=0.528564 val_recursive_mse_2_3=0.830576
+[ensemble seed=17 member=4] epoch 009/100 train=0.501560 val_recursive_mse_2_3=0.867522
+[ensemble seed=17 member=4] epoch 010/100 train=0.486133 val_recursive_mse_2_3=0.868729
+[ensemble seed=17 member=4] epoch 011/100 train=0.449134 val_recursive_mse_2_3=0.890514
+[ensemble seed=17 member=4] epoch 012/100 train=0.418544 val_recursive_mse_2_3=0.921246
+[ensemble seed=17 member=4] epoch 013/100 train=0.406732 val_recursive_mse_2_3=0.906299
+[ensemble seed=17 member=4] epoch 014/100 train=0.395500 val_recursive_mse_2_3=0.952122
+[ensemble seed=17 member=4] epoch 015/100 train=0.382312 val_recursive_mse_2_3=0.953824
+[ensemble seed=17 member=4] epoch 016/100 train=0.366506 val_recursive_mse_2_3=0.936273
+[rrt_ensemble seed=17 member=0] epoch 001/100 train=0.976280 val_recursive_mse_2_3=0.808291
+[rrt_ensemble seed=17 member=0] epoch 002/100 train=0.977522 val_recursive_mse_2_3=0.809933
+[rrt_ensemble seed=17 member=0] epoch 003/100 train=0.786706 val_recursive_mse_2_3=0.819640
+[rrt_ensemble seed=17 member=0] epoch 004/100 train=0.704878 val_recursive_mse_2_3=0.801797
+[rrt_ensemble seed=17 member=0] epoch 005/100 train=0.654479 val_recursive_mse_2_3=0.828479
+[rrt_ensemble seed=17 member=0] epoch 006/100 train=0.646731 val_recursive_mse_2_3=0.846338
+[rrt_ensemble seed=17 member=0] epoch 007/100 train=0.588731 val_recursive_mse_2_3=0.817789
+[rrt_ensemble seed=17 member=0] epoch 008/100 train=0.533842 val_recursive_mse_2_3=0.846115
+[rrt_ensemble seed=17 member=0] epoch 009/100 train=0.529818 val_recursive_mse_2_3=0.862326
+[rrt_ensemble seed=17 member=0] epoch 010/100 train=0.469409 val_recursive_mse_2_3=0.897301
+[rrt_ensemble seed=17 member=0] epoch 011/100 train=0.423931 val_recursive_mse_2_3=0.894294
+[rrt_ensemble seed=17 member=0] epoch 012/100 train=0.427945 val_recursive_mse_2_3=0.899773
+[rrt_ensemble seed=17 member=0] epoch 013/100 train=0.373004 val_recursive_mse_2_3=0.893737
+[rrt_ensemble seed=17 member=0] epoch 014/100 train=0.361277 val_recursive_mse_2_3=0.905927
+[rrt_ensemble seed=17 member=0] epoch 015/100 train=0.340666 val_recursive_mse_2_3=0.917079
+[rrt_ensemble seed=17 member=0] epoch 016/100 train=0.306730 val_recursive_mse_2_3=0.923202
+[rrt_ensemble seed=17 member=0] epoch 017/100 train=0.296498 val_recursive_mse_2_3=0.932764
+[rrt_ensemble seed=17 member=0] epoch 018/100 train=0.285395 val_recursive_mse_2_3=0.956638
+[rrt_ensemble seed=17 member=0] epoch 019/100 train=0.297767 val_recursive_mse_2_3=0.958250
+[rrt_ensemble seed=17 member=1] epoch 001/100 train=0.978118 val_recursive_mse_2_3=0.813028
+[rrt_ensemble seed=17 member=1] epoch 002/100 train=0.916497 val_recursive_mse_2_3=0.825879
+[rrt_ensemble seed=17 member=1] epoch 003/100 train=0.771443 val_recursive_mse_2_3=0.803599
+[rrt_ensemble seed=17 member=1] epoch 004/100 train=0.746921 val_recursive_mse_2_3=0.808319
+[rrt_ensemble seed=17 member=1] epoch 005/100 train=0.704245 val_recursive_mse_2_3=0.823910
+[rrt_ensemble seed=17 member=1] epoch 006/100 train=0.610406 val_recursive_mse_2_3=0.850280
+[rrt_ensemble seed=17 member=1] epoch 007/100 train=0.554413 val_recursive_mse_2_3=0.878104
+[rrt_ensemble seed=17 member=1] epoch 008/100 train=0.496525 val_recursive_mse_2_3=0.921054
+[rrt_ensemble seed=17 member=1] epoch 009/100 train=0.481822 val_recursive_mse_2_3=0.881851
+[rrt_ensemble seed=17 member=1] epoch 010/100 train=0.438268 val_recursive_mse_2_3=0.877218
+[rrt_ensemble seed=17 member=1] epoch 011/100 train=0.426924 val_recursive_mse_2_3=0.867398
+[rrt_ensemble seed=17 member=1] epoch 012/100 train=0.400427 val_recursive_mse_2_3=0.958200
+[rrt_ensemble seed=17 member=1] epoch 013/100 train=0.349607 val_recursive_mse_2_3=0.959773
+[rrt_ensemble seed=17 member=1] epoch 014/100 train=0.335936 val_recursive_mse_2_3=0.966790
+[rrt_ensemble seed=17 member=1] epoch 015/100 train=0.325184 val_recursive_mse_2_3=0.970030
+[rrt_ensemble seed=17 member=1] epoch 016/100 train=0.303166 val_recursive_mse_2_3=0.973392
+[rrt_ensemble seed=17 member=1] epoch 017/100 train=0.293488 val_recursive_mse_2_3=0.948141
+[rrt_ensemble seed=17 member=1] epoch 018/100 train=0.279394 val_recursive_mse_2_3=0.974634
+[rrt_ensemble seed=17 member=2] epoch 001/100 train=0.980741 val_recursive_mse_2_3=0.818145
+[rrt_ensemble seed=17 member=2] epoch 002/100 train=0.967716 val_recursive_mse_2_3=0.818436
+[rrt_ensemble seed=17 member=2] epoch 003/100 train=0.817327 val_recursive_mse_2_3=0.789152
+[rrt_ensemble seed=17 member=2] epoch 004/100 train=0.722911 val_recursive_mse_2_3=0.793720
+[rrt_ensemble seed=17 member=2] epoch 005/100 train=0.719020 val_recursive_mse_2_3=0.780318
+[rrt_ensemble seed=17 member=2] epoch 006/100 train=0.619233 val_recursive_mse_2_3=0.790017
+[rrt_ensemble seed=17 member=2] epoch 007/100 train=0.541876 val_recursive_mse_2_3=0.825866
+[rrt_ensemble seed=17 member=2] epoch 008/100 train=0.520252 val_recursive_mse_2_3=0.848402
+[rrt_ensemble seed=17 member=2] epoch 009/100 train=0.463871 val_recursive_mse_2_3=0.819782
+[rrt_ensemble seed=17 member=2] epoch 010/100 train=0.458545 val_recursive_mse_2_3=0.876969
+[rrt_ensemble seed=17 member=2] epoch 011/100 train=0.448082 val_recursive_mse_2_3=0.847551
+[rrt_ensemble seed=17 member=2] epoch 012/100 train=0.415390 val_recursive_mse_2_3=0.952860
+[rrt_ensemble seed=17 member=2] epoch 013/100 train=0.376410 val_recursive_mse_2_3=0.885561
+[rrt_ensemble seed=17 member=2] epoch 014/100 train=0.355635 val_recursive_mse_2_3=0.895801
+[rrt_ensemble seed=17 member=2] epoch 015/100 train=0.335719 val_recursive_mse_2_3=0.930593
+[rrt_ensemble seed=17 member=2] epoch 016/100 train=0.333408 val_recursive_mse_2_3=0.923009
+[rrt_ensemble seed=17 member=2] epoch 017/100 train=0.300550 val_recursive_mse_2_3=0.931391
+[rrt_ensemble seed=17 member=2] epoch 018/100 train=0.276557 val_recursive_mse_2_3=0.949032
+[rrt_ensemble seed=17 member=2] epoch 019/100 train=0.267278 val_recursive_mse_2_3=0.941298
+[rrt_ensemble seed=17 member=2] epoch 020/100 train=0.253748 val_recursive_mse_2_3=0.925658
+[rrt_ensemble seed=17 member=3] epoch 001/100 train=1.035270 val_recursive_mse_2_3=0.817942
+[rrt_ensemble seed=17 member=3] epoch 002/100 train=0.874635 val_recursive_mse_2_3=0.810821
+[rrt_ensemble seed=17 member=3] epoch 003/100 train=0.811753 val_recursive_mse_2_3=0.795207
+[rrt_ensemble seed=17 member=3] epoch 004/100 train=0.711539 val_recursive_mse_2_3=0.802900
+[rrt_ensemble seed=17 member=3] epoch 005/100 train=0.626446 val_recursive_mse_2_3=0.793409
+[rrt_ensemble seed=17 member=3] epoch 006/100 train=0.619404 val_recursive_mse_2_3=0.828223
+[rrt_ensemble seed=17 member=3] epoch 007/100 train=0.571107 val_recursive_mse_2_3=0.822085
+[rrt_ensemble seed=17 member=3] epoch 008/100 train=0.553425 val_recursive_mse_2_3=0.834386
+[rrt_ensemble seed=17 member=3] epoch 009/100 train=0.497426 val_recursive_mse_2_3=0.895448
+[rrt_ensemble seed=17 member=3] epoch 010/100 train=0.438254 val_recursive_mse_2_3=0.898805
+[rrt_ensemble seed=17 member=3] epoch 011/100 train=0.405808 val_recursive_mse_2_3=0.942648
+[rrt_ensemble seed=17 member=3] epoch 012/100 train=0.392116 val_recursive_mse_2_3=0.987496
+[rrt_ensemble seed=17 member=3] epoch 013/100 train=0.375713 val_recursive_mse_2_3=0.939512
+[rrt_ensemble seed=17 member=3] epoch 014/100 train=0.353687 val_recursive_mse_2_3=0.958695
+[rrt_ensemble seed=17 member=3] epoch 015/100 train=0.325237 val_recursive_mse_2_3=0.923352
+[rrt_ensemble seed=17 member=3] epoch 016/100 train=0.320252 val_recursive_mse_2_3=1.023049
+[rrt_ensemble seed=17 member=3] epoch 017/100 train=0.291132 val_recursive_mse_2_3=0.956483
+[rrt_ensemble seed=17 member=3] epoch 018/100 train=0.269318 val_recursive_mse_2_3=0.996744
+[rrt_ensemble seed=17 member=3] epoch 019/100 train=0.262885 val_recursive_mse_2_3=0.953999
+[rrt_ensemble seed=17 member=3] epoch 020/100 train=0.250324 val_recursive_mse_2_3=0.983502
+[rrt_ensemble seed=17 member=4] epoch 001/100 train=1.069808 val_recursive_mse_2_3=0.801728
+[rrt_ensemble seed=17 member=4] epoch 002/100 train=0.900879 val_recursive_mse_2_3=0.805394
+[rrt_ensemble seed=17 member=4] epoch 003/100 train=0.777751 val_recursive_mse_2_3=0.800440
+[rrt_ensemble seed=17 member=4] epoch 004/100 train=0.768674 val_recursive_mse_2_3=0.797774
+[rrt_ensemble seed=17 member=4] epoch 005/100 train=0.659858 val_recursive_mse_2_3=0.806039
+[rrt_ensemble seed=17 member=4] epoch 006/100 train=0.628528 val_recursive_mse_2_3=0.819956
+[rrt_ensemble seed=17 member=4] epoch 007/100 train=0.610735 val_recursive_mse_2_3=0.819174
+[rrt_ensemble seed=17 member=4] epoch 008/100 train=0.507086 val_recursive_mse_2_3=0.833235
+[rrt_ensemble seed=17 member=4] epoch 009/100 train=0.491866 val_recursive_mse_2_3=0.904595
+[rrt_ensemble seed=17 member=4] epoch 010/100 train=0.480346 val_recursive_mse_2_3=0.837884
+[rrt_ensemble seed=17 member=4] epoch 011/100 train=0.429659 val_recursive_mse_2_3=0.843118
+[rrt_ensemble seed=17 member=4] epoch 012/100 train=0.398517 val_recursive_mse_2_3=0.887567
+[rrt_ensemble seed=17 member=4] epoch 013/100 train=0.382894 val_recursive_mse_2_3=0.846300
+[rrt_ensemble seed=17 member=4] epoch 014/100 train=0.365031 val_recursive_mse_2_3=0.911802
+[rrt_ensemble seed=17 member=4] epoch 015/100 train=0.357798 val_recursive_mse_2_3=0.919524
+[rrt_ensemble seed=17 member=4] epoch 016/100 train=0.320455 val_recursive_mse_2_3=0.878741
+[rrt_ensemble seed=17 member=4] epoch 017/100 train=0.296584 val_recursive_mse_2_3=0.920254
+[rrt_ensemble seed=17 member=4] epoch 018/100 train=0.274772 val_recursive_mse_2_3=0.939736
+[rrt_ensemble seed=17 member=4] epoch 019/100 train=0.276429 val_recursive_mse_2_3=0.937588
+[baseline seed=29 member=0] epoch 001/100 train=0.959448 val_recursive_mse_2_3=0.838414
+[baseline seed=29 member=0] epoch 002/100 train=0.872848 val_recursive_mse_2_3=0.832860
+[baseline seed=29 member=0] epoch 003/100 train=0.779955 val_recursive_mse_2_3=0.811662
+[baseline seed=29 member=0] epoch 004/100 train=0.694195 val_recursive_mse_2_3=0.814645
+[baseline seed=29 member=0] epoch 005/100 train=0.683668 val_recursive_mse_2_3=0.801046
+[baseline seed=29 member=0] epoch 006/100 train=0.625103 val_recursive_mse_2_3=0.810347
+[baseline seed=29 member=0] epoch 007/100 train=0.586767 val_recursive_mse_2_3=0.808714
+[baseline seed=29 member=0] epoch 008/100 train=0.578267 val_recursive_mse_2_3=0.837224
+[baseline seed=29 member=0] epoch 009/100 train=0.496434 val_recursive_mse_2_3=0.857061
+[baseline seed=29 member=0] epoch 010/100 train=0.495233 val_recursive_mse_2_3=0.866515
+[baseline seed=29 member=0] epoch 011/100 train=0.503204 val_recursive_mse_2_3=0.858448
+[baseline seed=29 member=0] epoch 012/100 train=0.456215 val_recursive_mse_2_3=0.901771
+[baseline seed=29 member=0] epoch 013/100 train=0.408510 val_recursive_mse_2_3=0.905228
+[baseline seed=29 member=0] epoch 014/100 train=0.386717 val_recursive_mse_2_3=0.921134
+[baseline seed=29 member=0] epoch 015/100 train=0.379095 val_recursive_mse_2_3=0.943585
+[baseline seed=29 member=0] epoch 016/100 train=0.346009 val_recursive_mse_2_3=0.950950
+[baseline seed=29 member=0] epoch 017/100 train=0.344362 val_recursive_mse_2_3=0.963850
+[baseline seed=29 member=0] epoch 018/100 train=0.325414 val_recursive_mse_2_3=0.940892
+[baseline seed=29 member=0] epoch 019/100 train=0.298080 val_recursive_mse_2_3=0.994439
+[baseline seed=29 member=0] epoch 020/100 train=0.314961 val_recursive_mse_2_3=0.969554
+[rrt seed=29 member=0] epoch 001/100 train=1.123779 val_recursive_mse_2_3=0.820995
+[rrt seed=29 member=0] epoch 002/100 train=0.876852 val_recursive_mse_2_3=0.818846
+[rrt seed=29 member=0] epoch 003/100 train=0.785229 val_recursive_mse_2_3=0.803246
+[rrt seed=29 member=0] epoch 004/100 train=0.705860 val_recursive_mse_2_3=0.792095
+[rrt seed=29 member=0] epoch 005/100 train=0.709722 val_recursive_mse_2_3=0.795466
+[rrt seed=29 member=0] epoch 006/100 train=0.603935 val_recursive_mse_2_3=0.836015
+[rrt seed=29 member=0] epoch 007/100 train=0.548873 val_recursive_mse_2_3=0.840406
+[rrt seed=29 member=0] epoch 008/100 train=0.552265 val_recursive_mse_2_3=0.855166
+[rrt seed=29 member=0] epoch 009/100 train=0.469464 val_recursive_mse_2_3=0.882533
+[rrt seed=29 member=0] epoch 010/100 train=0.489179 val_recursive_mse_2_3=0.896208
+[rrt seed=29 member=0] epoch 011/100 train=0.427785 val_recursive_mse_2_3=0.877204
+[rrt seed=29 member=0] epoch 012/100 train=0.418018 val_recursive_mse_2_3=0.897857
+[rrt seed=29 member=0] epoch 013/100 train=0.383686 val_recursive_mse_2_3=0.944025
+[rrt seed=29 member=0] epoch 014/100 train=0.360933 val_recursive_mse_2_3=0.882281
+[rrt seed=29 member=0] epoch 015/100 train=0.328738 val_recursive_mse_2_3=0.986614
+[rrt seed=29 member=0] epoch 016/100 train=0.303324 val_recursive_mse_2_3=0.903185
+[rrt seed=29 member=0] epoch 017/100 train=0.290913 val_recursive_mse_2_3=0.914392
+[rrt seed=29 member=0] epoch 018/100 train=0.291897 val_recursive_mse_2_3=0.944042
+[rrt seed=29 member=0] epoch 019/100 train=0.261369 val_recursive_mse_2_3=0.949875
+[ensemble seed=29 member=0] epoch 001/100 train=0.930677 val_recursive_mse_2_3=0.790697
+[ensemble seed=29 member=0] epoch 002/100 train=0.822017 val_recursive_mse_2_3=0.839548
+[ensemble seed=29 member=0] epoch 003/100 train=0.739782 val_recursive_mse_2_3=0.817171
+[ensemble seed=29 member=0] epoch 004/100 train=0.688410 val_recursive_mse_2_3=0.797802
+[ensemble seed=29 member=0] epoch 005/100 train=0.664423 val_recursive_mse_2_3=0.805591
+[ensemble seed=29 member=0] epoch 006/100 train=0.600868 val_recursive_mse_2_3=0.832725
+[ensemble seed=29 member=0] epoch 007/100 train=0.564759 val_recursive_mse_2_3=0.828788
+[ensemble seed=29 member=0] epoch 008/100 train=0.644400 val_recursive_mse_2_3=0.827983
+[ensemble seed=29 member=0] epoch 009/100 train=0.541950 val_recursive_mse_2_3=0.854924
+[ensemble seed=29 member=0] epoch 010/100 train=0.504854 val_recursive_mse_2_3=0.868312
+[ensemble seed=29 member=0] epoch 011/100 train=0.424523 val_recursive_mse_2_3=0.883632
+[ensemble seed=29 member=0] epoch 012/100 train=0.409302 val_recursive_mse_2_3=0.900889
+[ensemble seed=29 member=0] epoch 013/100 train=0.420388 val_recursive_mse_2_3=0.922296
+[ensemble seed=29 member=0] epoch 014/100 train=0.372483 val_recursive_mse_2_3=0.936339
+[ensemble seed=29 member=0] epoch 015/100 train=0.364213 val_recursive_mse_2_3=0.940668
+[ensemble seed=29 member=0] epoch 016/100 train=0.358931 val_recursive_mse_2_3=0.947568
+[ensemble seed=29 member=1] epoch 001/100 train=0.909593 val_recursive_mse_2_3=0.791691
+[ensemble seed=29 member=1] epoch 002/100 train=0.862926 val_recursive_mse_2_3=0.825201
+[ensemble seed=29 member=1] epoch 003/100 train=0.746630 val_recursive_mse_2_3=0.828326
+[ensemble seed=29 member=1] epoch 004/100 train=0.747859 val_recursive_mse_2_3=0.782987
+[ensemble seed=29 member=1] epoch 005/100 train=0.652906 val_recursive_mse_2_3=0.816933
+[ensemble seed=29 member=1] epoch 006/100 train=0.602016 val_recursive_mse_2_3=0.824631
+[ensemble seed=29 member=1] epoch 007/100 train=0.580876 val_recursive_mse_2_3=0.850439
+[ensemble seed=29 member=1] epoch 008/100 train=0.552896 val_recursive_mse_2_3=0.880681
+[ensemble seed=29 member=1] epoch 009/100 train=0.534053 val_recursive_mse_2_3=0.886737
+[ensemble seed=29 member=1] epoch 010/100 train=0.474443 val_recursive_mse_2_3=0.904090
+[ensemble seed=29 member=1] epoch 011/100 train=0.471778 val_recursive_mse_2_3=0.955434
+[ensemble seed=29 member=1] epoch 012/100 train=0.433059 val_recursive_mse_2_3=0.932370
+[ensemble seed=29 member=1] epoch 013/100 train=0.409974 val_recursive_mse_2_3=0.984650
+[ensemble seed=29 member=1] epoch 014/100 train=0.401045 val_recursive_mse_2_3=0.951790
+[ensemble seed=29 member=1] epoch 015/100 train=0.385574 val_recursive_mse_2_3=1.093622
+[ensemble seed=29 member=1] epoch 016/100 train=0.338249 val_recursive_mse_2_3=0.999368
+[ensemble seed=29 member=1] epoch 017/100 train=0.326303 val_recursive_mse_2_3=0.997843
+[ensemble seed=29 member=1] epoch 018/100 train=0.317438 val_recursive_mse_2_3=1.027721
+[ensemble seed=29 member=1] epoch 019/100 train=0.307145 val_recursive_mse_2_3=1.025822
+[ensemble seed=29 member=2] epoch 001/100 train=0.991885 val_recursive_mse_2_3=0.795441
+[ensemble seed=29 member=2] epoch 002/100 train=0.908216 val_recursive_mse_2_3=0.853036
+[ensemble seed=29 member=2] epoch 003/100 train=0.739260 val_recursive_mse_2_3=0.833143
+[ensemble seed=29 member=2] epoch 004/100 train=0.727845 val_recursive_mse_2_3=0.824685
+[ensemble seed=29 member=2] epoch 005/100 train=0.653657 val_recursive_mse_2_3=0.819815
+[ensemble seed=29 member=2] epoch 006/100 train=0.609197 val_recursive_mse_2_3=0.833913
+[ensemble seed=29 member=2] epoch 007/100 train=0.576252 val_recursive_mse_2_3=0.838183
+[ensemble seed=29 member=2] epoch 008/100 train=0.566307 val_recursive_mse_2_3=0.844664
+[ensemble seed=29 member=2] epoch 009/100 train=0.514119 val_recursive_mse_2_3=0.858164
+[ensemble seed=29 member=2] epoch 010/100 train=0.487827 val_recursive_mse_2_3=0.879219
+[ensemble seed=29 member=2] epoch 011/100 train=0.493115 val_recursive_mse_2_3=0.885917
+[ensemble seed=29 member=2] epoch 012/100 train=0.459063 val_recursive_mse_2_3=0.904688
+[ensemble seed=29 member=2] epoch 013/100 train=0.415924 val_recursive_mse_2_3=0.933278
+[ensemble seed=29 member=2] epoch 014/100 train=0.397820 val_recursive_mse_2_3=0.906110
+[ensemble seed=29 member=2] epoch 015/100 train=0.386785 val_recursive_mse_2_3=0.932191
+[ensemble seed=29 member=2] epoch 016/100 train=0.364149 val_recursive_mse_2_3=0.908369
+[ensemble seed=29 member=3] epoch 001/100 train=0.930504 val_recursive_mse_2_3=0.796255
+[ensemble seed=29 member=3] epoch 002/100 train=0.846620 val_recursive_mse_2_3=0.842790
+[ensemble seed=29 member=3] epoch 003/100 train=0.804946 val_recursive_mse_2_3=0.818372
+[ensemble seed=29 member=3] epoch 004/100 train=0.775315 val_recursive_mse_2_3=0.794281
+[ensemble seed=29 member=3] epoch 005/100 train=0.711769 val_recursive_mse_2_3=0.815870
+[ensemble seed=29 member=3] epoch 006/100 train=0.612952 val_recursive_mse_2_3=0.794261
+[ensemble seed=29 member=3] epoch 007/100 train=0.587967 val_recursive_mse_2_3=0.811944
+[ensemble seed=29 member=3] epoch 008/100 train=0.573460 val_recursive_mse_2_3=0.825925
+[ensemble seed=29 member=3] epoch 009/100 train=0.535929 val_recursive_mse_2_3=0.842396
+[ensemble seed=29 member=3] epoch 010/100 train=0.514096 val_recursive_mse_2_3=0.836819
+[ensemble seed=29 member=3] epoch 011/100 train=0.493131 val_recursive_mse_2_3=0.870101
+[ensemble seed=29 member=3] epoch 012/100 train=0.450722 val_recursive_mse_2_3=0.886591
+[ensemble seed=29 member=3] epoch 013/100 train=0.419049 val_recursive_mse_2_3=0.909420
+[ensemble seed=29 member=3] epoch 014/100 train=0.407300 val_recursive_mse_2_3=0.920847
+[ensemble seed=29 member=3] epoch 015/100 train=0.378039 val_recursive_mse_2_3=0.944563
+[ensemble seed=29 member=3] epoch 016/100 train=0.364368 val_recursive_mse_2_3=0.955865
+[ensemble seed=29 member=3] epoch 017/100 train=0.356421 val_recursive_mse_2_3=0.960662
+[ensemble seed=29 member=3] epoch 018/100 train=0.352480 val_recursive_mse_2_3=0.985843
+[ensemble seed=29 member=3] epoch 019/100 train=0.324549 val_recursive_mse_2_3=1.041149
+[ensemble seed=29 member=3] epoch 020/100 train=0.294501 val_recursive_mse_2_3=1.033706
+[ensemble seed=29 member=3] epoch 021/100 train=0.299779 val_recursive_mse_2_3=1.019725
+[ensemble seed=29 member=4] epoch 001/100 train=0.981042 val_recursive_mse_2_3=0.809463
+[ensemble seed=29 member=4] epoch 002/100 train=0.810714 val_recursive_mse_2_3=0.823395
+[ensemble seed=29 member=4] epoch 003/100 train=0.746969 val_recursive_mse_2_3=0.817116
+[ensemble seed=29 member=4] epoch 004/100 train=0.706557 val_recursive_mse_2_3=0.804186
+[ensemble seed=29 member=4] epoch 005/100 train=0.662524 val_recursive_mse_2_3=0.810894
+[ensemble seed=29 member=4] epoch 006/100 train=0.617311 val_recursive_mse_2_3=0.796811
+[ensemble seed=29 member=4] epoch 007/100 train=0.550543 val_recursive_mse_2_3=0.832628
+[ensemble seed=29 member=4] epoch 008/100 train=0.549244 val_recursive_mse_2_3=0.862820
+[ensemble seed=29 member=4] epoch 009/100 train=0.502185 val_recursive_mse_2_3=0.878451
+[ensemble seed=29 member=4] epoch 010/100 train=0.463589 val_recursive_mse_2_3=0.860586
+[ensemble seed=29 member=4] epoch 011/100 train=0.460692 val_recursive_mse_2_3=0.888295
+[ensemble seed=29 member=4] epoch 012/100 train=0.422727 val_recursive_mse_2_3=0.937831
+[ensemble seed=29 member=4] epoch 013/100 train=0.407873 val_recursive_mse_2_3=0.938708
+[ensemble seed=29 member=4] epoch 014/100 train=0.390718 val_recursive_mse_2_3=0.930189
+[ensemble seed=29 member=4] epoch 015/100 train=0.389410 val_recursive_mse_2_3=0.936979
+[ensemble seed=29 member=4] epoch 016/100 train=0.347011 val_recursive_mse_2_3=0.917081
+[ensemble seed=29 member=4] epoch 017/100 train=0.350114 val_recursive_mse_2_3=0.946494
+[ensemble seed=29 member=4] epoch 018/100 train=0.327320 val_recursive_mse_2_3=0.976728
+[ensemble seed=29 member=4] epoch 019/100 train=0.311078 val_recursive_mse_2_3=0.953437
+[ensemble seed=29 member=4] epoch 020/100 train=0.288195 val_recursive_mse_2_3=0.991840
+[ensemble seed=29 member=4] epoch 021/100 train=0.272261 val_recursive_mse_2_3=0.962386
+[rrt_ensemble seed=29 member=0] epoch 001/100 train=0.987527 val_recursive_mse_2_3=0.798516
+[rrt_ensemble seed=29 member=0] epoch 002/100 train=0.863322 val_recursive_mse_2_3=0.809340
+[rrt_ensemble seed=29 member=0] epoch 003/100 train=0.751345 val_recursive_mse_2_3=0.800977
+[rrt_ensemble seed=29 member=0] epoch 004/100 train=0.709538 val_recursive_mse_2_3=0.802465
+[rrt_ensemble seed=29 member=0] epoch 005/100 train=0.662951 val_recursive_mse_2_3=0.800791
+[rrt_ensemble seed=29 member=0] epoch 006/100 train=0.589733 val_recursive_mse_2_3=0.828557
+[rrt_ensemble seed=29 member=0] epoch 007/100 train=0.518316 val_recursive_mse_2_3=0.875423
+[rrt_ensemble seed=29 member=0] epoch 008/100 train=0.570855 val_recursive_mse_2_3=0.859543
+[rrt_ensemble seed=29 member=0] epoch 009/100 train=0.514456 val_recursive_mse_2_3=0.936346
+[rrt_ensemble seed=29 member=0] epoch 010/100 train=0.445147 val_recursive_mse_2_3=0.891674
+[rrt_ensemble seed=29 member=0] epoch 011/100 train=0.383754 val_recursive_mse_2_3=0.972837
+[rrt_ensemble seed=29 member=0] epoch 012/100 train=0.356944 val_recursive_mse_2_3=0.948966
+[rrt_ensemble seed=29 member=0] epoch 013/100 train=0.363769 val_recursive_mse_2_3=0.933525
+[rrt_ensemble seed=29 member=0] epoch 014/100 train=0.321605 val_recursive_mse_2_3=0.954863
+[rrt_ensemble seed=29 member=0] epoch 015/100 train=0.314210 val_recursive_mse_2_3=0.948615
+[rrt_ensemble seed=29 member=0] epoch 016/100 train=0.308154 val_recursive_mse_2_3=0.946940
+[rrt_ensemble seed=29 member=1] epoch 001/100 train=0.975940 val_recursive_mse_2_3=0.805808
+[rrt_ensemble seed=29 member=1] epoch 002/100 train=0.902125 val_recursive_mse_2_3=0.818690
+[rrt_ensemble seed=29 member=1] epoch 003/100 train=0.773415 val_recursive_mse_2_3=0.800571
+[rrt_ensemble seed=29 member=1] epoch 004/100 train=0.766789 val_recursive_mse_2_3=0.778700
+[rrt_ensemble seed=29 member=1] epoch 005/100 train=0.649359 val_recursive_mse_2_3=0.817931
+[rrt_ensemble seed=29 member=1] epoch 006/100 train=0.598163 val_recursive_mse_2_3=0.804686
+[rrt_ensemble seed=29 member=1] epoch 007/100 train=0.555912 val_recursive_mse_2_3=0.836648
+[rrt_ensemble seed=29 member=1] epoch 008/100 train=0.512502 val_recursive_mse_2_3=0.839547
+[rrt_ensemble seed=29 member=1] epoch 009/100 train=0.474128 val_recursive_mse_2_3=0.861347
+[rrt_ensemble seed=29 member=1] epoch 010/100 train=0.421208 val_recursive_mse_2_3=0.876216
+[rrt_ensemble seed=29 member=1] epoch 011/100 train=0.422807 val_recursive_mse_2_3=0.859823
+[rrt_ensemble seed=29 member=1] epoch 012/100 train=0.394396 val_recursive_mse_2_3=0.900261
+[rrt_ensemble seed=29 member=1] epoch 013/100 train=0.378854 val_recursive_mse_2_3=0.866444
+[rrt_ensemble seed=29 member=1] epoch 014/100 train=0.356263 val_recursive_mse_2_3=0.896043
+[rrt_ensemble seed=29 member=1] epoch 015/100 train=0.327510 val_recursive_mse_2_3=0.849782
+[rrt_ensemble seed=29 member=1] epoch 016/100 train=0.293493 val_recursive_mse_2_3=0.914139
+[rrt_ensemble seed=29 member=1] epoch 017/100 train=0.277528 val_recursive_mse_2_3=0.924631
+[rrt_ensemble seed=29 member=1] epoch 018/100 train=0.266608 val_recursive_mse_2_3=0.919971
+[rrt_ensemble seed=29 member=1] epoch 019/100 train=0.257993 val_recursive_mse_2_3=0.869780
+[rrt_ensemble seed=29 member=2] epoch 001/100 train=1.020321 val_recursive_mse_2_3=0.802420
+[rrt_ensemble seed=29 member=2] epoch 002/100 train=0.906641 val_recursive_mse_2_3=0.817413
+[rrt_ensemble seed=29 member=2] epoch 003/100 train=0.769962 val_recursive_mse_2_3=0.804216
+[rrt_ensemble seed=29 member=2] epoch 004/100 train=0.732277 val_recursive_mse_2_3=0.803621
+[rrt_ensemble seed=29 member=2] epoch 005/100 train=0.654015 val_recursive_mse_2_3=0.807283
+[rrt_ensemble seed=29 member=2] epoch 006/100 train=0.585829 val_recursive_mse_2_3=0.811645
+[rrt_ensemble seed=29 member=2] epoch 007/100 train=0.548259 val_recursive_mse_2_3=0.830401
+[rrt_ensemble seed=29 member=2] epoch 008/100 train=0.534412 val_recursive_mse_2_3=0.854112
+[rrt_ensemble seed=29 member=2] epoch 009/100 train=0.485855 val_recursive_mse_2_3=0.873651
+[rrt_ensemble seed=29 member=2] epoch 010/100 train=0.443772 val_recursive_mse_2_3=0.887213
+[rrt_ensemble seed=29 member=2] epoch 011/100 train=0.426612 val_recursive_mse_2_3=0.912115
+[rrt_ensemble seed=29 member=2] epoch 012/100 train=0.411471 val_recursive_mse_2_3=0.854227
+[rrt_ensemble seed=29 member=2] epoch 013/100 train=0.363051 val_recursive_mse_2_3=0.937041
+[rrt_ensemble seed=29 member=2] epoch 014/100 train=0.345653 val_recursive_mse_2_3=0.907143
+[rrt_ensemble seed=29 member=2] epoch 015/100 train=0.321895 val_recursive_mse_2_3=0.910820
+[rrt_ensemble seed=29 member=2] epoch 016/100 train=0.305812 val_recursive_mse_2_3=0.896086
+[rrt_ensemble seed=29 member=3] epoch 001/100 train=0.981115 val_recursive_mse_2_3=0.802488
+[rrt_ensemble seed=29 member=3] epoch 002/100 train=0.859487 val_recursive_mse_2_3=0.815806
+[rrt_ensemble seed=29 member=3] epoch 003/100 train=0.794599 val_recursive_mse_2_3=0.817419
+[rrt_ensemble seed=29 member=3] epoch 004/100 train=0.806085 val_recursive_mse_2_3=0.799670
+[rrt_ensemble seed=29 member=3] epoch 005/100 train=0.720870 val_recursive_mse_2_3=0.813543
+[rrt_ensemble seed=29 member=3] epoch 006/100 train=0.584403 val_recursive_mse_2_3=0.804176
+[rrt_ensemble seed=29 member=3] epoch 007/100 train=0.548459 val_recursive_mse_2_3=0.833171
+[rrt_ensemble seed=29 member=3] epoch 008/100 train=0.525958 val_recursive_mse_2_3=0.873983
+[rrt_ensemble seed=29 member=3] epoch 009/100 train=0.502555 val_recursive_mse_2_3=0.871271
+[rrt_ensemble seed=29 member=3] epoch 010/100 train=0.449731 val_recursive_mse_2_3=0.867369
+[rrt_ensemble seed=29 member=3] epoch 011/100 train=0.430646 val_recursive_mse_2_3=0.886440
+[rrt_ensemble seed=29 member=3] epoch 012/100 train=0.396419 val_recursive_mse_2_3=0.900759
+[rrt_ensemble seed=29 member=3] epoch 013/100 train=0.367657 val_recursive_mse_2_3=0.973519
+[rrt_ensemble seed=29 member=3] epoch 014/100 train=0.356102 val_recursive_mse_2_3=0.879501
+[rrt_ensemble seed=29 member=3] epoch 015/100 train=0.342664 val_recursive_mse_2_3=1.080216
+[rrt_ensemble seed=29 member=3] epoch 016/100 train=0.328582 val_recursive_mse_2_3=0.895309
+[rrt_ensemble seed=29 member=3] epoch 017/100 train=0.335690 val_recursive_mse_2_3=0.905750
+[rrt_ensemble seed=29 member=3] epoch 018/100 train=0.308223 val_recursive_mse_2_3=1.007914
+[rrt_ensemble seed=29 member=3] epoch 019/100 train=0.283149 val_recursive_mse_2_3=0.939034
+[rrt_ensemble seed=29 member=4] epoch 001/100 train=1.026501 val_recursive_mse_2_3=0.829212
+[rrt_ensemble seed=29 member=4] epoch 002/100 train=0.876332 val_recursive_mse_2_3=0.824824
+[rrt_ensemble seed=29 member=4] epoch 003/100 train=0.781430 val_recursive_mse_2_3=0.783478
+[rrt_ensemble seed=29 member=4] epoch 004/100 train=0.744165 val_recursive_mse_2_3=0.786042
+[rrt_ensemble seed=29 member=4] epoch 005/100 train=0.661528 val_recursive_mse_2_3=0.792957
+[rrt_ensemble seed=29 member=4] epoch 006/100 train=0.606976 val_recursive_mse_2_3=0.830560
+[rrt_ensemble seed=29 member=4] epoch 007/100 train=0.538224 val_recursive_mse_2_3=0.844870
+[rrt_ensemble seed=29 member=4] epoch 008/100 train=0.523794 val_recursive_mse_2_3=0.829110
+[rrt_ensemble seed=29 member=4] epoch 009/100 train=0.467441 val_recursive_mse_2_3=0.876905
+[rrt_ensemble seed=29 member=4] epoch 010/100 train=0.435010 val_recursive_mse_2_3=0.944491
+[rrt_ensemble seed=29 member=4] epoch 011/100 train=0.433585 val_recursive_mse_2_3=0.860733
+[rrt_ensemble seed=29 member=4] epoch 012/100 train=0.415366 val_recursive_mse_2_3=0.872619
+[rrt_ensemble seed=29 member=4] epoch 013/100 train=0.393228 val_recursive_mse_2_3=0.926321
+[rrt_ensemble seed=29 member=4] epoch 014/100 train=0.354017 val_recursive_mse_2_3=0.880156
+[rrt_ensemble seed=29 member=4] epoch 015/100 train=0.345222 val_recursive_mse_2_3=0.875178
+[rrt_ensemble seed=29 member=4] epoch 016/100 train=0.330152 val_recursive_mse_2_3=0.991393
+[rrt_ensemble seed=29 member=4] epoch 017/100 train=0.342419 val_recursive_mse_2_3=0.834091
+[rrt_ensemble seed=29 member=4] epoch 018/100 train=0.311717 val_recursive_mse_2_3=0.929889
+Trained 12 runs under /home/tanyuejun/CLARITY_HAUWM_Minimal/outputs/stage1/brainiac
+Recursive Rollout Performance
+| Seed | Variant | MSE@1 | MSE@2 | MSE@3 | Long MSE |
+|---:|---|---:|---:|---:|---:|
+| 17 | baseline | 0.8504 | 0.9382 | 1.1147 | 1.0265 |
+| 17 | ensemble | 0.7562 | 0.8354 | 0.9803 | 0.9079 |
+| 17 | rrt | 0.7484 | 0.7956 | 0.9463 | 0.8710 |
+| 17 | rrt_ensemble | 0.7367 | 0.7752 | 0.9151 | 0.8452 |
+| 29 | baseline | 0.7780 | 0.8744 | 1.0498 | 0.9621 |
+| 29 | ensemble | 0.7595 | 0.8470 | 0.9913 | 0.9192 |
+| 29 | rrt | 0.7628 | 0.7839 | 0.9307 | 0.8573 |
+| 29 | rrt_ensemble | 0.7712 | 0.7987 | 0.9446 | 0.8717 |
+| 7 | baseline | 0.7752 | 0.8753 | 0.9801 | 0.9277 |
+| 7 | ensemble | 0.7691 | 0.8547 | 1.0004 | 0.9275 |
+| 7 | rrt | 0.7538 | 0.7804 | 0.9324 | 0.8564 |
+| 7 | rrt_ensemble | 0.7431 | 0.7730 | 0.9129 | 0.8429 |
+Ensemble Reliability
+| Seed | Variant | rho@1 | rho@2 | rho@3 | Macro rho | Macro High/Low |
+|---:|---|---:|---:|---:|---:|---:|
+| 17 | ensemble | 0.3375 | 0.2833 | 0.1352 | 0.2520 | 1.9237 |
+| 17 | rrt_ensemble | 0.3891 | 0.3580 | 0.1992 | 0.3154 | 1.8141 |
+| 29 | ensemble | 0.2554 | 0.3711 | 0.3284 | 0.3183 | 2.3401 |
+| 29 | rrt_ensemble | 0.2663 | 0.3023 | 0.1034 | 0.2240 | 1.9423 |
+| 7 | ensemble | 0.3034 | 0.3909 | 0.2868 | 0.3270 | 2.1128 |
+| 7 | rrt_ensemble | 0.3422 | 0.3570 | 0.2348 | 0.3114 | 1.7710 |
+Phase C: BrainIAC patient split robustness
+[baseline seed=17 member=0] epoch 001/100 train=0.943373 val_recursive_mse_2_3=0.689535
+[baseline seed=17 member=0] epoch 002/100 train=0.861444 val_recursive_mse_2_3=0.798391
+[baseline seed=17 member=0] epoch 003/100 train=0.768146 val_recursive_mse_2_3=0.813931
+[baseline seed=17 member=0] epoch 004/100 train=0.700547 val_recursive_mse_2_3=0.848272
+[baseline seed=17 member=0] epoch 005/100 train=0.662413 val_recursive_mse_2_3=0.782312
+[baseline seed=17 member=0] epoch 006/100 train=0.622215 val_recursive_mse_2_3=0.774396
+[baseline seed=17 member=0] epoch 007/100 train=0.584140 val_recursive_mse_2_3=0.806942
+[baseline seed=17 member=0] epoch 008/100 train=0.552538 val_recursive_mse_2_3=0.805145
+[baseline seed=17 member=0] epoch 009/100 train=0.512281 val_recursive_mse_2_3=0.800764
+[baseline seed=17 member=0] epoch 010/100 train=0.482035 val_recursive_mse_2_3=0.795371
+[baseline seed=17 member=0] epoch 011/100 train=0.455184 val_recursive_mse_2_3=0.806447
+[baseline seed=17 member=0] epoch 012/100 train=0.425595 val_recursive_mse_2_3=0.833444
+[baseline seed=17 member=0] epoch 013/100 train=0.405010 val_recursive_mse_2_3=0.842240
+[baseline seed=17 member=0] epoch 014/100 train=0.381718 val_recursive_mse_2_3=0.853640
+[baseline seed=17 member=0] epoch 015/100 train=0.356258 val_recursive_mse_2_3=0.860281
+[baseline seed=17 member=0] epoch 016/100 train=0.335989 val_recursive_mse_2_3=0.860565
+[rrt seed=17 member=0] epoch 001/100 train=1.026136 val_recursive_mse_2_3=0.673174
+[rrt seed=17 member=0] epoch 002/100 train=0.914817 val_recursive_mse_2_3=0.721579
+[rrt seed=17 member=0] epoch 003/100 train=0.798652 val_recursive_mse_2_3=0.703661
+[rrt seed=17 member=0] epoch 004/100 train=0.721434 val_recursive_mse_2_3=0.772763
+[rrt seed=17 member=0] epoch 005/100 train=0.658018 val_recursive_mse_2_3=0.783887
+[rrt seed=17 member=0] epoch 006/100 train=0.599253 val_recursive_mse_2_3=0.758903
+[rrt seed=17 member=0] epoch 007/100 train=0.546785 val_recursive_mse_2_3=0.808637
+[rrt seed=17 member=0] epoch 008/100 train=0.515484 val_recursive_mse_2_3=0.840760
+[rrt seed=17 member=0] epoch 009/100 train=0.480787 val_recursive_mse_2_3=0.781123
+[rrt seed=17 member=0] epoch 010/100 train=0.433924 val_recursive_mse_2_3=0.820107
+[rrt seed=17 member=0] epoch 011/100 train=0.394822 val_recursive_mse_2_3=0.838688
+[rrt seed=17 member=0] epoch 012/100 train=0.369168 val_recursive_mse_2_3=0.841023
+[rrt seed=17 member=0] epoch 013/100 train=0.347088 val_recursive_mse_2_3=0.882160
+[rrt seed=17 member=0] epoch 014/100 train=0.330180 val_recursive_mse_2_3=0.820521
+[rrt seed=17 member=0] epoch 015/100 train=0.328233 val_recursive_mse_2_3=0.851420
+[rrt seed=17 member=0] epoch 016/100 train=0.310766 val_recursive_mse_2_3=0.763300
+Recursive Rollout Performance
+| Seed | Variant | MSE@1 | MSE@2 | MSE@3 | Long MSE |
+|---:|---|---:|---:|---:|---:|
+| 17 | baseline | 1.1280 | 1.0468 | 0.7907 | 0.9188 |
+| 17 | rrt | 1.1328 | 1.0296 | 0.7561 | 0.8928 |
+[baseline seed=17 member=0] epoch 001/100 train=0.850936 val_recursive_mse_2_3=0.796828
+[baseline seed=17 member=0] epoch 002/100 train=0.777784 val_recursive_mse_2_3=0.728247
+[baseline seed=17 member=0] epoch 003/100 train=0.699465 val_recursive_mse_2_3=0.691708
+[baseline seed=17 member=0] epoch 004/100 train=0.657109 val_recursive_mse_2_3=0.705279
+[baseline seed=17 member=0] epoch 005/100 train=0.617254 val_recursive_mse_2_3=0.687410
+[baseline seed=17 member=0] epoch 006/100 train=0.595774 val_recursive_mse_2_3=0.685809
+[baseline seed=17 member=0] epoch 007/100 train=0.543104 val_recursive_mse_2_3=0.687834
+[baseline seed=17 member=0] epoch 008/100 train=0.554091 val_recursive_mse_2_3=0.674734
+[baseline seed=17 member=0] epoch 009/100 train=0.497877 val_recursive_mse_2_3=0.696425
+[baseline seed=17 member=0] epoch 010/100 train=0.488849 val_recursive_mse_2_3=0.710768
+[baseline seed=17 member=0] epoch 011/100 train=0.455631 val_recursive_mse_2_3=0.696022
+[baseline seed=17 member=0] epoch 012/100 train=0.435654 val_recursive_mse_2_3=0.683177
+[baseline seed=17 member=0] epoch 013/100 train=0.406014 val_recursive_mse_2_3=0.713348
+[baseline seed=17 member=0] epoch 014/100 train=0.374203 val_recursive_mse_2_3=0.728069
+[baseline seed=17 member=0] epoch 015/100 train=0.360528 val_recursive_mse_2_3=0.726638
+[baseline seed=17 member=0] epoch 016/100 train=0.324511 val_recursive_mse_2_3=0.738840
+[baseline seed=17 member=0] epoch 017/100 train=0.317629 val_recursive_mse_2_3=0.735851
+[baseline seed=17 member=0] epoch 018/100 train=0.299072 val_recursive_mse_2_3=0.761439
+[baseline seed=17 member=0] epoch 019/100 train=0.275180 val_recursive_mse_2_3=0.717391
+[baseline seed=17 member=0] epoch 020/100 train=0.259115 val_recursive_mse_2_3=0.775205
+[baseline seed=17 member=0] epoch 021/100 train=0.256495 val_recursive_mse_2_3=0.777924
+[baseline seed=17 member=0] epoch 022/100 train=0.261436 val_recursive_mse_2_3=0.780251
+[baseline seed=17 member=0] epoch 023/100 train=0.244574 val_recursive_mse_2_3=0.787790
+[rrt seed=17 member=0] epoch 001/100 train=0.986399 val_recursive_mse_2_3=0.793575
+[rrt seed=17 member=0] epoch 002/100 train=0.875146 val_recursive_mse_2_3=0.703326
+[rrt seed=17 member=0] epoch 003/100 train=0.768030 val_recursive_mse_2_3=0.620540
+[rrt seed=17 member=0] epoch 004/100 train=0.700529 val_recursive_mse_2_3=0.627697
+[rrt seed=17 member=0] epoch 005/100 train=0.650548 val_recursive_mse_2_3=0.626724
+[rrt seed=17 member=0] epoch 006/100 train=0.614214 val_recursive_mse_2_3=0.634205
+[rrt seed=17 member=0] epoch 007/100 train=0.553323 val_recursive_mse_2_3=0.632028
+[rrt seed=17 member=0] epoch 008/100 train=0.532485 val_recursive_mse_2_3=0.643011
+[rrt seed=17 member=0] epoch 009/100 train=0.476239 val_recursive_mse_2_3=0.664292
+[rrt seed=17 member=0] epoch 010/100 train=0.448107 val_recursive_mse_2_3=0.663800
+[rrt seed=17 member=0] epoch 011/100 train=0.402966 val_recursive_mse_2_3=0.686153
+[rrt seed=17 member=0] epoch 012/100 train=0.384719 val_recursive_mse_2_3=0.680870
+[rrt seed=17 member=0] epoch 013/100 train=0.357362 val_recursive_mse_2_3=0.676677
+[rrt seed=17 member=0] epoch 014/100 train=0.354373 val_recursive_mse_2_3=0.716990
+[rrt seed=17 member=0] epoch 015/100 train=0.326181 val_recursive_mse_2_3=0.653354
+[rrt seed=17 member=0] epoch 016/100 train=0.310550 val_recursive_mse_2_3=0.657258
+[rrt seed=17 member=0] epoch 017/100 train=0.293142 val_recursive_mse_2_3=0.669834
+[rrt seed=17 member=0] epoch 018/100 train=0.268643 val_recursive_mse_2_3=0.687307
+Recursive Rollout Performance
+| Seed | Variant | MSE@1 | MSE@2 | MSE@3 | Long MSE |
+|---:|---|---:|---:|---:|---:|
+| 17 | baseline | 0.8054 | 1.0502 | 0.6761 | 0.8632 |
+| 17 | rrt | 0.8821 | 1.0478 | 0.6427 | 0.8452 |
+[baseline seed=17 member=0] epoch 001/100 train=0.933195 val_recursive_mse_2_3=0.846646
+[baseline seed=17 member=0] epoch 002/100 train=0.824981 val_recursive_mse_2_3=0.788625
+[baseline seed=17 member=0] epoch 003/100 train=0.739972 val_recursive_mse_2_3=0.780687
+[baseline seed=17 member=0] epoch 004/100 train=0.696005 val_recursive_mse_2_3=0.788570
+[baseline seed=17 member=0] epoch 005/100 train=0.644172 val_recursive_mse_2_3=0.789454
+[baseline seed=17 member=0] epoch 006/100 train=0.606080 val_recursive_mse_2_3=0.782494
+[baseline seed=17 member=0] epoch 007/100 train=0.565740 val_recursive_mse_2_3=0.819891
+[baseline seed=17 member=0] epoch 008/100 train=0.516186 val_recursive_mse_2_3=0.814009
+[baseline seed=17 member=0] epoch 009/100 train=0.496283 val_recursive_mse_2_3=0.850492
+[baseline seed=17 member=0] epoch 010/100 train=0.472818 val_recursive_mse_2_3=0.873611
+[baseline seed=17 member=0] epoch 011/100 train=0.471428 val_recursive_mse_2_3=0.895805
+[baseline seed=17 member=0] epoch 012/100 train=0.405326 val_recursive_mse_2_3=0.917259
+[baseline seed=17 member=0] epoch 013/100 train=0.382144 val_recursive_mse_2_3=0.929326
+[baseline seed=17 member=0] epoch 014/100 train=0.372260 val_recursive_mse_2_3=0.952891
+[baseline seed=17 member=0] epoch 015/100 train=0.356811 val_recursive_mse_2_3=0.975145
+[baseline seed=17 member=0] epoch 016/100 train=0.323725 val_recursive_mse_2_3=0.980869
+[baseline seed=17 member=0] epoch 017/100 train=0.309819 val_recursive_mse_2_3=0.979180
+[baseline seed=17 member=0] epoch 018/100 train=0.284138 val_recursive_mse_2_3=0.982919
+[rrt seed=17 member=0] epoch 001/100 train=1.070048 val_recursive_mse_2_3=0.873747
+[rrt seed=17 member=0] epoch 002/100 train=0.923412 val_recursive_mse_2_3=0.796529
+[rrt seed=17 member=0] epoch 003/100 train=0.796470 val_recursive_mse_2_3=0.787613
+[rrt seed=17 member=0] epoch 004/100 train=0.717149 val_recursive_mse_2_3=0.819257
+[rrt seed=17 member=0] epoch 005/100 train=0.664038 val_recursive_mse_2_3=0.824967
+[rrt seed=17 member=0] epoch 006/100 train=0.626343 val_recursive_mse_2_3=0.908471
+[rrt seed=17 member=0] epoch 007/100 train=0.615753 val_recursive_mse_2_3=0.865955
+[rrt seed=17 member=0] epoch 008/100 train=0.538354 val_recursive_mse_2_3=0.829555
+[rrt seed=17 member=0] epoch 009/100 train=0.503759 val_recursive_mse_2_3=0.849735
+[rrt seed=17 member=0] epoch 010/100 train=0.461070 val_recursive_mse_2_3=0.876528
+[rrt seed=17 member=0] epoch 011/100 train=0.465327 val_recursive_mse_2_3=0.909842
+[rrt seed=17 member=0] epoch 012/100 train=0.384914 val_recursive_mse_2_3=0.893689
+[rrt seed=17 member=0] epoch 013/100 train=0.362228 val_recursive_mse_2_3=0.894395
+[rrt seed=17 member=0] epoch 014/100 train=0.346930 val_recursive_mse_2_3=0.951623
+[rrt seed=17 member=0] epoch 015/100 train=0.314903 val_recursive_mse_2_3=0.905612
+[rrt seed=17 member=0] epoch 016/100 train=0.299369 val_recursive_mse_2_3=0.934764
+[rrt seed=17 member=0] epoch 017/100 train=0.285978 val_recursive_mse_2_3=0.938895
+[rrt seed=17 member=0] epoch 018/100 train=0.268261 val_recursive_mse_2_3=0.943278
+Recursive Rollout Performance
+| Seed | Variant | MSE@1 | MSE@2 | MSE@3 | Long MSE |
+|---:|---|---:|---:|---:|---:|
+| 17 | baseline | 0.5286 | 0.5329 | 0.6152 | 0.5741 |
+| 17 | rrt | 0.5542 | 0.5162 | 0.5848 | 0.5505 |
+Trained and evaluated 6 robustness runs under /home/tanyuejun/CLARITY_HAUWM_Minimal/outputs/stage1/brainiac
+Phase D: BrainIAC training horizon ablation
+[baseline seed=17 member=0] epoch 001/100 train=0.969484 val_recursive_mse_2_3=0.799235
+[baseline seed=17 member=0] epoch 002/100 train=0.881507 val_recursive_mse_2_3=0.841431
+[baseline seed=17 member=0] epoch 003/100 train=0.796818 val_recursive_mse_2_3=0.859157
+[baseline seed=17 member=0] epoch 004/100 train=0.715384 val_recursive_mse_2_3=0.831330
+[baseline seed=17 member=0] epoch 005/100 train=0.695691 val_recursive_mse_2_3=0.813952
+[baseline seed=17 member=0] epoch 006/100 train=0.660902 val_recursive_mse_2_3=0.832028
+[baseline seed=17 member=0] epoch 007/100 train=0.710371 val_recursive_mse_2_3=0.820892
+[baseline seed=17 member=0] epoch 008/100 train=0.579668 val_recursive_mse_2_3=0.848017
+[baseline seed=17 member=0] epoch 009/100 train=0.532740 val_recursive_mse_2_3=0.860763
+[baseline seed=17 member=0] epoch 010/100 train=0.521721 val_recursive_mse_2_3=0.865606
+[baseline seed=17 member=0] epoch 011/100 train=0.458997 val_recursive_mse_2_3=0.910374
+[baseline seed=17 member=0] epoch 012/100 train=0.474630 val_recursive_mse_2_3=0.930315
+[baseline seed=17 member=0] epoch 013/100 train=0.455115 val_recursive_mse_2_3=0.948507
+[baseline seed=17 member=0] epoch 014/100 train=0.417984 val_recursive_mse_2_3=0.972959
+[baseline seed=17 member=0] epoch 015/100 train=0.399217 val_recursive_mse_2_3=0.988753
+[baseline seed=17 member=0] epoch 016/100 train=0.376031 val_recursive_mse_2_3=1.008413
+[rrt seed=17 member=0] epoch 001/100 train=0.985201 val_recursive_mse_2_3=0.802168
+[rrt seed=17 member=0] epoch 002/100 train=0.886278 val_recursive_mse_2_3=0.821159
+[rrt seed=17 member=0] epoch 003/100 train=0.803380 val_recursive_mse_2_3=0.806045
+[rrt seed=17 member=0] epoch 004/100 train=0.724882 val_recursive_mse_2_3=0.786250
+[rrt seed=17 member=0] epoch 005/100 train=0.669165 val_recursive_mse_2_3=0.796349
+[rrt seed=17 member=0] epoch 006/100 train=0.658658 val_recursive_mse_2_3=0.792354
+[rrt seed=17 member=0] epoch 007/100 train=0.688669 val_recursive_mse_2_3=0.803102
+[rrt seed=17 member=0] epoch 008/100 train=0.565553 val_recursive_mse_2_3=0.795135
+[rrt seed=17 member=0] epoch 009/100 train=0.504271 val_recursive_mse_2_3=0.858625
+[rrt seed=17 member=0] epoch 010/100 train=0.481542 val_recursive_mse_2_3=0.820705
+[rrt seed=17 member=0] epoch 011/100 train=0.423421 val_recursive_mse_2_3=0.838111
+[rrt seed=17 member=0] epoch 012/100 train=0.410181 val_recursive_mse_2_3=0.886255
+[rrt seed=17 member=0] epoch 013/100 train=0.409648 val_recursive_mse_2_3=0.962965
+[rrt seed=17 member=0] epoch 014/100 train=0.379075 val_recursive_mse_2_3=1.023639
+[rrt seed=17 member=0] epoch 015/100 train=0.349172 val_recursive_mse_2_3=0.902490
+[rrt seed=17 member=0] epoch 016/100 train=0.332750 val_recursive_mse_2_3=0.955306
+[rrt seed=17 member=0] epoch 017/100 train=0.311150 val_recursive_mse_2_3=0.954969
+[rrt seed=17 member=0] epoch 018/100 train=0.288327 val_recursive_mse_2_3=0.937257
+[rrt seed=17 member=0] epoch 019/100 train=0.275428 val_recursive_mse_2_3=1.131778
+[rrt seed=17 member=0] epoch 001/100 train=1.051110 val_recursive_mse_2_3=0.807217
+[rrt seed=17 member=0] epoch 002/100 train=0.866210 val_recursive_mse_2_3=0.824817
+[rrt seed=17 member=0] epoch 003/100 train=0.810704 val_recursive_mse_2_3=0.811241
+[rrt seed=17 member=0] epoch 004/100 train=0.740622 val_recursive_mse_2_3=0.793217
+[rrt seed=17 member=0] epoch 005/100 train=0.671529 val_recursive_mse_2_3=0.817456
+[rrt seed=17 member=0] epoch 006/100 train=0.653994 val_recursive_mse_2_3=0.815228
+[rrt seed=17 member=0] epoch 007/100 train=0.673660 val_recursive_mse_2_3=0.852659
+[rrt seed=17 member=0] epoch 008/100 train=0.549936 val_recursive_mse_2_3=0.846880
+[rrt seed=17 member=0] epoch 009/100 train=0.484182 val_recursive_mse_2_3=0.894469
+[rrt seed=17 member=0] epoch 010/100 train=0.464617 val_recursive_mse_2_3=0.844637
+[rrt seed=17 member=0] epoch 011/100 train=0.409528 val_recursive_mse_2_3=0.890925
+[rrt seed=17 member=0] epoch 012/100 train=0.423265 val_recursive_mse_2_3=0.973043
+[rrt seed=17 member=0] epoch 013/100 train=0.411278 val_recursive_mse_2_3=0.873722
+[rrt seed=17 member=0] epoch 014/100 train=0.360814 val_recursive_mse_2_3=0.925809
+[rrt seed=17 member=0] epoch 015/100 train=0.344402 val_recursive_mse_2_3=0.968743
+[rrt seed=17 member=0] epoch 016/100 train=0.337727 val_recursive_mse_2_3=0.879240
+[rrt seed=17 member=0] epoch 017/100 train=0.309691 val_recursive_mse_2_3=0.960951
+[rrt seed=17 member=0] epoch 018/100 train=0.283405 val_recursive_mse_2_3=0.925689
+[rrt seed=17 member=0] epoch 019/100 train=0.263370 val_recursive_mse_2_3=0.932501
+Training Horizon Ablation
+| Kmax | MSE@1 | MSE@2 | MSE@3 | Long MSE |
+|---:|---:|---:|---:|---:|
+| 1 | 0.8504 | 0.9382 | 1.1147 | 1.0265 |
+| 2 | 0.7622 | 0.8338 | 0.9899 | 0.9118 |
+| 3 | 0.7484 | 0.7956 | 0.9463 | 0.8710 |
+Trained and evaluated 3 ablation runs under /home/tanyuejun/CLARITY_HAUWM_Minimal/outputs/stage1/brainiac
+Recursive Rollout Performance (mean ± std across training seeds)
+| Variant | MSE@1 | MSE@2 | MSE@3 | Long MSE |
+|---|---:|---:|---:|---:|
+| baseline | 0.8012 ± 0.0426 | 0.8960 ± 0.0366 | 1.0482 ± 0.0673 | 0.9721 ± 0.0501 |
+| rrt | 0.7550 ± 0.0073 | 0.7866 ± 0.0080 | 0.9365 ± 0.0086 | 0.8616 ± 0.0082 |
+| ensemble | 0.7616 ± 0.0067 | 0.8457 ± 0.0097 | 0.9907 ± 0.0100 | 0.9182 ± 0.0099 |
+| rrt_ensemble | 0.7503 ± 0.0183 | 0.7823 ± 0.0143 | 0.9242 ± 0.0177 | 0.8533 ± 0.0160 |
+
+Secondary Cosine Distance (mean ± std)
+| Variant | Cos@1 | Cos@2 | Cos@3 |
+|---|---:|---:|---:|
+| baseline | 0.4318 ± 0.0257 | 0.4912 ± 0.0338 | 0.5276 ± 0.0308 |
+| rrt | 0.4317 ± 0.0072 | 0.4661 ± 0.0073 | 0.5100 ± 0.0035 |
+| ensemble | 0.4209 ± 0.0074 | 0.4742 ± 0.0074 | 0.5163 ± 0.0119 |
+| rrt_ensemble | 0.4219 ± 0.0097 | 0.4573 ± 0.0094 | 0.4943 ± 0.0131 |
+
+Relative Improvement (%)
+| Comparison | RI@1 | RI@2 | RI@3 | RI Long |
+|---|---:|---:|---:|---:|
+| baseline_vs_rrt | 5.5772 ± 5.5806 | 12.1309 ± 2.6715 | 10.4378 ± 5.1788 | 11.2419 ± 3.7441 |
+| ensemble_vs_rrt_ensemble | 1.4756 ± 2.6377 | 7.4871 ± 1.9457 | 6.7028 ± 2.0150 | 7.0641 ± 1.9805 |
+
+Baseline → RRT by training seed
+| Seed | Baseline Long | RRT Long | RI Long (%) |
+|---:|---:|---:|---:|
+| 7 | 0.9277 | 0.8564 | 7.6880 |
+| 17 | 1.0265 | 0.8710 | 15.1508 |
+| 29 | 0.9621 | 0.8573 | 10.8867 |
+
+Ensemble Reliability: ensemble
+| Horizon | Spearman rho | High/Low Ratio | Risk@100 | Risk@80 | Risk Reduction (%) |
+|---:|---:|---:|---:|---:|---:|
+| 1 | 0.2988 ± 0.0413 | 2.3122 ± 0.1343 | 0.7616 ± 0.0067 | 0.5935 ± 0.0118 | 22.0760 ± 0.8974 |
+| 2 | 0.3484 ± 0.0573 | 2.6735 ± 0.3117 | 0.8457 ± 0.0097 | 0.5894 ± 0.0303 | 30.3024 ± 3.6640 |
+| 3 | 0.2501 ± 0.1017 | 1.3909 ± 0.2899 | 0.9907 ± 0.0100 | 0.7927 ± 0.0495 | 19.9622 ± 5.4609 |
+| Macro | 0.2991 ± 0.0410 | 2.1255 ± 0.2085 |  | | 24.1135 ± 1.1577 |
+
+Ensemble Reliability: rrt_ensemble
+| Horizon | Spearman rho | High/Low Ratio | Risk@100 | Risk@80 | Risk Reduction (%) |
+|---:|---:|---:|---:|---:|---:|
+| 1 | 0.3325 ± 0.0620 | 2.4690 ± 0.2126 | 0.7503 ± 0.0183 | 0.6071 ± 0.0174 | 19.0321 ± 3.7494 |
+| 2 | 0.3391 ± 0.0319 | 2.0841 ± 0.0951 | 0.7823 ± 0.0143 | 0.6074 ± 0.0416 | 22.2859 ± 6.5208 |
+| 3 | 0.1792 ± 0.0679 | 0.9742 ± 0.0424 | 0.9242 ± 0.0177 | 0.8346 ± 0.0164 | 9.6484 ± 3.4588 |
+| Macro | 0.2836 ± 0.0517 | 1.8425 ± 0.0891 |  | | 16.9888 ± 4.4680 |
+
+Training Horizon Counts
+| Variant | Seed | Kmax | H1 | H2 | H3 |
+|---|---:|---:|---:|---:|---:|
+| baseline | 7 | 3 | 262 | 0 | 0 |
+| baseline | 17 | 3 | 262 | 0 | 0 |
+| baseline | 29 | 3 | 262 | 0 | 0 |
+| ensemble | 7 | 3 | 262 | 0 | 0 |
+| ensemble | 17 | 3 | 262 | 0 | 0 |
+| ensemble | 29 | 3 | 262 | 0 | 0 |
+| rrt | 7 | 3 | 107 | 76 | 79 |
+| rrt | 17 | 3 | 107 | 76 | 79 |
+| rrt | 29 | 3 | 107 | 76 | 79 |
+| rrt_ensemble | 7 | 3 | 107 | 76 | 79 |
+| rrt_ensemble | 17 | 3 | 107 | 76 | 79 |
+| rrt_ensemble | 29 | 3 | 107 | 76 | 79 |
+
+Patient Split Robustness (training seed 17)
+| Split Seed | Baseline Long | RRT Long | RRT RI (%) |
+|---:|---:|---:|---:|
+| 17 | 1.0265 | 0.8710 | 15.1508 |
+| 23 | 0.9188 | 0.8928 | 2.8213 |
+| 41 | 0.8632 | 0.8452 | 2.0772 |
+| 59 | 0.5741 | 0.5505 | 4.1090 |
+
+Training Horizon Ablation
+| Kmax | MSE@1 | MSE@2 | MSE@3 | Long MSE |
+|---:|---:|---:|---:|---:|
+| 1 | 0.8504 | 0.9382 | 1.1147 | 1.0265 |
+| 2 | 0.7622 | 0.8338 | 0.9899 | 0.9118 |
+| 3 | 0.7484 | 0.7956 | 0.9463 | 0.8710 |
+Phase F: MRI-CORE representation robustness
+[baseline seed=7 member=0] epoch 001/100 train=0.498561 val_recursive_mse_2_3=0.507816
+[baseline seed=7 member=0] epoch 002/100 train=0.462524 val_recursive_mse_2_3=0.492395
+[baseline seed=7 member=0] epoch 003/100 train=0.422685 val_recursive_mse_2_3=0.455291
+[baseline seed=7 member=0] epoch 004/100 train=0.493441 val_recursive_mse_2_3=0.431453
+[baseline seed=7 member=0] epoch 005/100 train=0.376042 val_recursive_mse_2_3=0.429955
+[baseline seed=7 member=0] epoch 006/100 train=0.356882 val_recursive_mse_2_3=0.433345
+[baseline seed=7 member=0] epoch 007/100 train=0.340200 val_recursive_mse_2_3=0.437479
+[baseline seed=7 member=0] epoch 008/100 train=0.328435 val_recursive_mse_2_3=0.469126
+[baseline seed=7 member=0] epoch 009/100 train=0.317898 val_recursive_mse_2_3=0.446599
+[baseline seed=7 member=0] epoch 010/100 train=0.323195 val_recursive_mse_2_3=0.460576
+[baseline seed=7 member=0] epoch 011/100 train=0.301106 val_recursive_mse_2_3=0.469824
+[baseline seed=7 member=0] epoch 012/100 train=0.282759 val_recursive_mse_2_3=0.475048
+[baseline seed=7 member=0] epoch 013/100 train=0.285057 val_recursive_mse_2_3=0.495348
+[baseline seed=7 member=0] epoch 014/100 train=0.281892 val_recursive_mse_2_3=0.489833
+[baseline seed=7 member=0] epoch 015/100 train=0.278929 val_recursive_mse_2_3=0.487602
+[baseline seed=7 member=0] epoch 016/100 train=0.255407 val_recursive_mse_2_3=0.478676
+[baseline seed=7 member=0] epoch 017/100 train=0.244597 val_recursive_mse_2_3=0.479633
+[baseline seed=7 member=0] epoch 018/100 train=0.237649 val_recursive_mse_2_3=0.492814
+[baseline seed=7 member=0] epoch 019/100 train=0.225029 val_recursive_mse_2_3=0.485074
+[baseline seed=7 member=0] epoch 020/100 train=0.216132 val_recursive_mse_2_3=0.491840
+[rrt seed=7 member=0] epoch 001/100 train=0.597740 val_recursive_mse_2_3=0.507594
+[rrt seed=7 member=0] epoch 002/100 train=0.521578 val_recursive_mse_2_3=0.498397
+[rrt seed=7 member=0] epoch 003/100 train=0.467255 val_recursive_mse_2_3=0.454956
+[rrt seed=7 member=0] epoch 004/100 train=0.546587 val_recursive_mse_2_3=0.439836
+[rrt seed=7 member=0] epoch 005/100 train=0.432367 val_recursive_mse_2_3=0.432081
+[rrt seed=7 member=0] epoch 006/100 train=0.391904 val_recursive_mse_2_3=0.443864
+[rrt seed=7 member=0] epoch 007/100 train=0.368371 val_recursive_mse_2_3=0.435432
+[rrt seed=7 member=0] epoch 008/100 train=0.355934 val_recursive_mse_2_3=0.444977
+[rrt seed=7 member=0] epoch 009/100 train=0.328145 val_recursive_mse_2_3=0.447292
+[rrt seed=7 member=0] epoch 010/100 train=0.332164 val_recursive_mse_2_3=0.455531
+[rrt seed=7 member=0] epoch 011/100 train=0.290045 val_recursive_mse_2_3=0.443957
+[rrt seed=7 member=0] epoch 012/100 train=0.272287 val_recursive_mse_2_3=0.446787
+[rrt seed=7 member=0] epoch 013/100 train=0.272751 val_recursive_mse_2_3=0.456828
+[rrt seed=7 member=0] epoch 014/100 train=0.252161 val_recursive_mse_2_3=0.428876
+[rrt seed=7 member=0] epoch 015/100 train=0.252257 val_recursive_mse_2_3=0.468274
+[rrt seed=7 member=0] epoch 016/100 train=0.212034 val_recursive_mse_2_3=0.448798
+[rrt seed=7 member=0] epoch 017/100 train=0.209622 val_recursive_mse_2_3=0.467120
+[rrt seed=7 member=0] epoch 018/100 train=0.203247 val_recursive_mse_2_3=0.458218
+[rrt seed=7 member=0] epoch 019/100 train=0.210067 val_recursive_mse_2_3=0.455301
+[rrt seed=7 member=0] epoch 020/100 train=0.193356 val_recursive_mse_2_3=0.468136
+[rrt seed=7 member=0] epoch 021/100 train=0.193723 val_recursive_mse_2_3=0.444656
+[rrt seed=7 member=0] epoch 022/100 train=0.168436 val_recursive_mse_2_3=0.460120
+[rrt seed=7 member=0] epoch 023/100 train=0.156782 val_recursive_mse_2_3=0.447620
+[rrt seed=7 member=0] epoch 024/100 train=0.154298 val_recursive_mse_2_3=0.479414
+[rrt seed=7 member=0] epoch 025/100 train=0.143703 val_recursive_mse_2_3=0.462476
+[rrt seed=7 member=0] epoch 026/100 train=0.136897 val_recursive_mse_2_3=0.454941
+[rrt seed=7 member=0] epoch 027/100 train=0.138665 val_recursive_mse_2_3=0.466180
+[rrt seed=7 member=0] epoch 028/100 train=0.133686 val_recursive_mse_2_3=0.477253
+[rrt seed=7 member=0] epoch 029/100 train=0.126973 val_recursive_mse_2_3=0.466474
+[rrt_ensemble seed=7 member=0] epoch 001/100 train=0.623104 val_recursive_mse_2_3=0.501200
+[rrt_ensemble seed=7 member=0] epoch 002/100 train=0.509139 val_recursive_mse_2_3=0.512299
+[rrt_ensemble seed=7 member=0] epoch 003/100 train=0.484767 val_recursive_mse_2_3=0.450831
+[rrt_ensemble seed=7 member=0] epoch 004/100 train=0.465741 val_recursive_mse_2_3=0.442943
+[rrt_ensemble seed=7 member=0] epoch 005/100 train=0.422242 val_recursive_mse_2_3=0.438158
+[rrt_ensemble seed=7 member=0] epoch 006/100 train=0.551751 val_recursive_mse_2_3=0.455985
+[rrt_ensemble seed=7 member=0] epoch 007/100 train=0.375250 val_recursive_mse_2_3=0.453787
+[rrt_ensemble seed=7 member=0] epoch 008/100 train=0.381367 val_recursive_mse_2_3=0.433555
+[rrt_ensemble seed=7 member=0] epoch 009/100 train=0.339526 val_recursive_mse_2_3=0.434813
+[rrt_ensemble seed=7 member=0] epoch 010/100 train=0.326078 val_recursive_mse_2_3=0.430236
+[rrt_ensemble seed=7 member=0] epoch 011/100 train=0.298090 val_recursive_mse_2_3=0.446689
+[rrt_ensemble seed=7 member=0] epoch 012/100 train=0.287536 val_recursive_mse_2_3=0.435382
+[rrt_ensemble seed=7 member=0] epoch 013/100 train=0.261401 val_recursive_mse_2_3=0.449286
+[rrt_ensemble seed=7 member=0] epoch 014/100 train=0.248319 val_recursive_mse_2_3=0.438826
+[rrt_ensemble seed=7 member=0] epoch 015/100 train=0.244375 val_recursive_mse_2_3=0.462579
+[rrt_ensemble seed=7 member=0] epoch 016/100 train=0.232735 val_recursive_mse_2_3=0.448769
+[rrt_ensemble seed=7 member=0] epoch 017/100 train=0.217113 val_recursive_mse_2_3=0.453306
+[rrt_ensemble seed=7 member=0] epoch 018/100 train=0.207590 val_recursive_mse_2_3=0.447256
+[rrt_ensemble seed=7 member=0] epoch 019/100 train=0.195758 val_recursive_mse_2_3=0.498673
+[rrt_ensemble seed=7 member=0] epoch 020/100 train=0.185611 val_recursive_mse_2_3=0.451863
+[rrt_ensemble seed=7 member=0] epoch 021/100 train=0.173480 val_recursive_mse_2_3=0.448853
+[rrt_ensemble seed=7 member=0] epoch 022/100 train=0.168103 val_recursive_mse_2_3=0.481981
+[rrt_ensemble seed=7 member=0] epoch 023/100 train=0.158343 val_recursive_mse_2_3=0.469524
+[rrt_ensemble seed=7 member=0] epoch 024/100 train=0.161234 val_recursive_mse_2_3=0.459375
+[rrt_ensemble seed=7 member=0] epoch 025/100 train=0.163422 val_recursive_mse_2_3=0.447695
+[rrt_ensemble seed=7 member=1] epoch 001/100 train=0.594382 val_recursive_mse_2_3=0.510642
+[rrt_ensemble seed=7 member=1] epoch 002/100 train=0.503784 val_recursive_mse_2_3=0.507889
+[rrt_ensemble seed=7 member=1] epoch 003/100 train=0.481710 val_recursive_mse_2_3=0.448815
+[rrt_ensemble seed=7 member=1] epoch 004/100 train=0.455468 val_recursive_mse_2_3=0.428518
+[rrt_ensemble seed=7 member=1] epoch 005/100 train=0.422076 val_recursive_mse_2_3=0.429038
+[rrt_ensemble seed=7 member=1] epoch 006/100 train=0.468928 val_recursive_mse_2_3=0.432958
+[rrt_ensemble seed=7 member=1] epoch 007/100 train=0.381859 val_recursive_mse_2_3=0.448651
+[rrt_ensemble seed=7 member=1] epoch 008/100 train=0.336357 val_recursive_mse_2_3=0.452034
+[rrt_ensemble seed=7 member=1] epoch 009/100 train=0.339089 val_recursive_mse_2_3=0.480928
+[rrt_ensemble seed=7 member=1] epoch 010/100 train=0.333337 val_recursive_mse_2_3=0.425887
+[rrt_ensemble seed=7 member=1] epoch 011/100 train=0.301988 val_recursive_mse_2_3=0.438274
+[rrt_ensemble seed=7 member=1] epoch 012/100 train=0.290853 val_recursive_mse_2_3=0.427836
+[rrt_ensemble seed=7 member=1] epoch 013/100 train=0.253568 val_recursive_mse_2_3=0.445391
+[rrt_ensemble seed=7 member=1] epoch 014/100 train=0.271576 val_recursive_mse_2_3=0.430355
+[rrt_ensemble seed=7 member=1] epoch 015/100 train=0.236063 val_recursive_mse_2_3=0.452239
+[rrt_ensemble seed=7 member=1] epoch 016/100 train=0.235514 val_recursive_mse_2_3=0.440836
+[rrt_ensemble seed=7 member=1] epoch 017/100 train=0.230345 val_recursive_mse_2_3=0.468596
+[rrt_ensemble seed=7 member=1] epoch 018/100 train=0.204697 val_recursive_mse_2_3=0.482076
+[rrt_ensemble seed=7 member=1] epoch 019/100 train=0.236095 val_recursive_mse_2_3=0.442080
+[rrt_ensemble seed=7 member=1] epoch 020/100 train=0.181335 val_recursive_mse_2_3=0.432786
+[rrt_ensemble seed=7 member=1] epoch 021/100 train=0.177438 val_recursive_mse_2_3=0.453053
+[rrt_ensemble seed=7 member=1] epoch 022/100 train=0.178186 val_recursive_mse_2_3=0.448420
+[rrt_ensemble seed=7 member=1] epoch 023/100 train=0.168314 val_recursive_mse_2_3=0.458009
+[rrt_ensemble seed=7 member=1] epoch 024/100 train=0.154757 val_recursive_mse_2_3=0.452340
+[rrt_ensemble seed=7 member=1] epoch 025/100 train=0.145010 val_recursive_mse_2_3=0.465289
+[rrt_ensemble seed=7 member=2] epoch 001/100 train=0.603037 val_recursive_mse_2_3=0.507720
+[rrt_ensemble seed=7 member=2] epoch 002/100 train=0.508797 val_recursive_mse_2_3=0.510561
+[rrt_ensemble seed=7 member=2] epoch 003/100 train=0.453116 val_recursive_mse_2_3=0.452866
+[rrt_ensemble seed=7 member=2] epoch 004/100 train=0.511173 val_recursive_mse_2_3=0.439808
+[rrt_ensemble seed=7 member=2] epoch 005/100 train=0.441832 val_recursive_mse_2_3=0.431991
+[rrt_ensemble seed=7 member=2] epoch 006/100 train=0.386500 val_recursive_mse_2_3=0.428771
+[rrt_ensemble seed=7 member=2] epoch 007/100 train=0.389417 val_recursive_mse_2_3=0.436470
+[rrt_ensemble seed=7 member=2] epoch 008/100 train=0.351710 val_recursive_mse_2_3=0.440559
+[rrt_ensemble seed=7 member=2] epoch 009/100 train=0.330192 val_recursive_mse_2_3=0.432534
+[rrt_ensemble seed=7 member=2] epoch 010/100 train=0.326858 val_recursive_mse_2_3=0.413158
+[rrt_ensemble seed=7 member=2] epoch 011/100 train=0.325068 val_recursive_mse_2_3=0.411905
+[rrt_ensemble seed=7 member=2] epoch 012/100 train=0.292623 val_recursive_mse_2_3=0.409549
+[rrt_ensemble seed=7 member=2] epoch 013/100 train=0.285479 val_recursive_mse_2_3=0.421428
+[rrt_ensemble seed=7 member=2] epoch 014/100 train=0.261551 val_recursive_mse_2_3=0.415516
+[rrt_ensemble seed=7 member=2] epoch 015/100 train=0.257806 val_recursive_mse_2_3=0.414683
+[rrt_ensemble seed=7 member=2] epoch 016/100 train=0.229226 val_recursive_mse_2_3=0.444022
+[rrt_ensemble seed=7 member=2] epoch 017/100 train=0.225685 val_recursive_mse_2_3=0.441313
+[rrt_ensemble seed=7 member=2] epoch 018/100 train=0.215974 val_recursive_mse_2_3=0.447916
+[rrt_ensemble seed=7 member=2] epoch 019/100 train=0.199603 val_recursive_mse_2_3=0.434703
+[rrt_ensemble seed=7 member=2] epoch 020/100 train=0.201562 val_recursive_mse_2_3=0.453588
+[rrt_ensemble seed=7 member=2] epoch 021/100 train=0.184380 val_recursive_mse_2_3=0.452079
+[rrt_ensemble seed=7 member=2] epoch 022/100 train=0.181355 val_recursive_mse_2_3=0.462267
+[rrt_ensemble seed=7 member=2] epoch 023/100 train=0.168239 val_recursive_mse_2_3=0.428836
+[rrt_ensemble seed=7 member=2] epoch 024/100 train=0.166721 val_recursive_mse_2_3=0.461065
+[rrt_ensemble seed=7 member=2] epoch 025/100 train=0.167287 val_recursive_mse_2_3=0.436103
+[rrt_ensemble seed=7 member=2] epoch 026/100 train=0.156077 val_recursive_mse_2_3=0.479613
+[rrt_ensemble seed=7 member=2] epoch 027/100 train=0.141771 val_recursive_mse_2_3=0.437296
+[rrt_ensemble seed=7 member=3] epoch 001/100 train=0.610262 val_recursive_mse_2_3=0.507217
+[rrt_ensemble seed=7 member=3] epoch 002/100 train=0.501771 val_recursive_mse_2_3=0.507903
+[rrt_ensemble seed=7 member=3] epoch 003/100 train=0.470938 val_recursive_mse_2_3=0.453577
+[rrt_ensemble seed=7 member=3] epoch 004/100 train=0.440740 val_recursive_mse_2_3=0.430544
+[rrt_ensemble seed=7 member=3] epoch 005/100 train=0.413819 val_recursive_mse_2_3=0.427170
+[rrt_ensemble seed=7 member=3] epoch 006/100 train=0.403012 val_recursive_mse_2_3=0.438817
+[rrt_ensemble seed=7 member=3] epoch 007/100 train=0.380641 val_recursive_mse_2_3=0.439598
+[rrt_ensemble seed=7 member=3] epoch 008/100 train=0.369535 val_recursive_mse_2_3=0.446515
+[rrt_ensemble seed=7 member=3] epoch 009/100 train=0.342627 val_recursive_mse_2_3=0.448166
+[rrt_ensemble seed=7 member=3] epoch 010/100 train=0.306396 val_recursive_mse_2_3=0.455010
+[rrt_ensemble seed=7 member=3] epoch 011/100 train=0.310413 val_recursive_mse_2_3=0.457794
+[rrt_ensemble seed=7 member=3] epoch 012/100 train=0.276462 val_recursive_mse_2_3=0.470188
+[rrt_ensemble seed=7 member=3] epoch 013/100 train=0.265955 val_recursive_mse_2_3=0.492795
+[rrt_ensemble seed=7 member=3] epoch 014/100 train=0.250533 val_recursive_mse_2_3=0.458939
+[rrt_ensemble seed=7 member=3] epoch 015/100 train=0.243815 val_recursive_mse_2_3=0.457829
+[rrt_ensemble seed=7 member=3] epoch 016/100 train=0.218855 val_recursive_mse_2_3=0.465168
+[rrt_ensemble seed=7 member=3] epoch 017/100 train=0.202741 val_recursive_mse_2_3=0.461974
+[rrt_ensemble seed=7 member=3] epoch 018/100 train=0.241258 val_recursive_mse_2_3=0.455555
+[rrt_ensemble seed=7 member=3] epoch 019/100 train=0.189958 val_recursive_mse_2_3=0.486269
+[rrt_ensemble seed=7 member=3] epoch 020/100 train=0.178720 val_recursive_mse_2_3=0.467841
+[rrt_ensemble seed=7 member=4] epoch 001/100 train=0.631111 val_recursive_mse_2_3=0.513477
+[rrt_ensemble seed=7 member=4] epoch 002/100 train=0.495294 val_recursive_mse_2_3=0.498359
+[rrt_ensemble seed=7 member=4] epoch 003/100 train=0.477821 val_recursive_mse_2_3=0.455500
+[rrt_ensemble seed=7 member=4] epoch 004/100 train=0.454631 val_recursive_mse_2_3=0.442348
+[rrt_ensemble seed=7 member=4] epoch 005/100 train=0.426438 val_recursive_mse_2_3=0.439672
+[rrt_ensemble seed=7 member=4] epoch 006/100 train=0.403113 val_recursive_mse_2_3=0.437521
+[rrt_ensemble seed=7 member=4] epoch 007/100 train=0.374880 val_recursive_mse_2_3=0.440418
+[rrt_ensemble seed=7 member=4] epoch 008/100 train=0.361941 val_recursive_mse_2_3=0.432378
+[rrt_ensemble seed=7 member=4] epoch 009/100 train=0.343852 val_recursive_mse_2_3=0.435158
+[rrt_ensemble seed=7 member=4] epoch 010/100 train=0.320974 val_recursive_mse_2_3=0.427223
+[rrt_ensemble seed=7 member=4] epoch 011/100 train=0.303387 val_recursive_mse_2_3=0.420547
+[rrt_ensemble seed=7 member=4] epoch 012/100 train=0.280548 val_recursive_mse_2_3=0.433263
+[rrt_ensemble seed=7 member=4] epoch 013/100 train=0.261455 val_recursive_mse_2_3=0.436872
+[rrt_ensemble seed=7 member=4] epoch 014/100 train=0.252921 val_recursive_mse_2_3=0.440633
+[rrt_ensemble seed=7 member=4] epoch 015/100 train=0.247382 val_recursive_mse_2_3=0.422519
+[rrt_ensemble seed=7 member=4] epoch 016/100 train=0.232203 val_recursive_mse_2_3=0.406629
+[rrt_ensemble seed=7 member=4] epoch 017/100 train=0.219394 val_recursive_mse_2_3=0.417488
+[rrt_ensemble seed=7 member=4] epoch 018/100 train=0.208813 val_recursive_mse_2_3=0.417439
+[rrt_ensemble seed=7 member=4] epoch 019/100 train=0.205605 val_recursive_mse_2_3=0.434451
+[rrt_ensemble seed=7 member=4] epoch 020/100 train=0.187359 val_recursive_mse_2_3=0.437303
+[rrt_ensemble seed=7 member=4] epoch 021/100 train=0.184788 val_recursive_mse_2_3=0.427714
+[rrt_ensemble seed=7 member=4] epoch 022/100 train=0.176141 val_recursive_mse_2_3=0.447128
+[rrt_ensemble seed=7 member=4] epoch 023/100 train=0.161558 val_recursive_mse_2_3=0.435853
+[rrt_ensemble seed=7 member=4] epoch 024/100 train=0.161343 val_recursive_mse_2_3=0.467563
+[rrt_ensemble seed=7 member=4] epoch 025/100 train=0.160409 val_recursive_mse_2_3=0.422593
+[rrt_ensemble seed=7 member=4] epoch 026/100 train=0.149450 val_recursive_mse_2_3=0.455879
+[rrt_ensemble seed=7 member=4] epoch 027/100 train=0.137327 val_recursive_mse_2_3=0.448392
+[rrt_ensemble seed=7 member=4] epoch 028/100 train=0.130552 val_recursive_mse_2_3=0.442818
+[rrt_ensemble seed=7 member=4] epoch 029/100 train=0.130315 val_recursive_mse_2_3=0.457612
+[rrt_ensemble seed=7 member=4] epoch 030/100 train=0.119995 val_recursive_mse_2_3=0.477930
+[rrt_ensemble seed=7 member=4] epoch 031/100 train=0.123713 val_recursive_mse_2_3=0.477836
+[baseline seed=17 member=0] epoch 001/100 train=0.461378 val_recursive_mse_2_3=0.503619
+[baseline seed=17 member=0] epoch 002/100 train=0.440779 val_recursive_mse_2_3=0.505192
+[baseline seed=17 member=0] epoch 003/100 train=0.426531 val_recursive_mse_2_3=0.435672
+[baseline seed=17 member=0] epoch 004/100 train=0.425512 val_recursive_mse_2_3=0.421612
+[baseline seed=17 member=0] epoch 005/100 train=0.387018 val_recursive_mse_2_3=0.416904
+[baseline seed=17 member=0] epoch 006/100 train=0.367158 val_recursive_mse_2_3=0.425403
+[baseline seed=17 member=0] epoch 007/100 train=0.428327 val_recursive_mse_2_3=0.419143
+[baseline seed=17 member=0] epoch 008/100 train=0.339985 val_recursive_mse_2_3=0.418519
+[baseline seed=17 member=0] epoch 009/100 train=0.326525 val_recursive_mse_2_3=0.433830
+[baseline seed=17 member=0] epoch 010/100 train=0.298857 val_recursive_mse_2_3=0.453777
+[baseline seed=17 member=0] epoch 011/100 train=0.291274 val_recursive_mse_2_3=0.445321
+[baseline seed=17 member=0] epoch 012/100 train=0.287545 val_recursive_mse_2_3=0.457741
+[baseline seed=17 member=0] epoch 013/100 train=0.275780 val_recursive_mse_2_3=0.467944
+[baseline seed=17 member=0] epoch 014/100 train=0.265037 val_recursive_mse_2_3=0.465222
+[baseline seed=17 member=0] epoch 015/100 train=0.262806 val_recursive_mse_2_3=0.474527
+[baseline seed=17 member=0] epoch 016/100 train=0.252780 val_recursive_mse_2_3=0.476915
+[baseline seed=17 member=0] epoch 017/100 train=0.244506 val_recursive_mse_2_3=0.487982
+[baseline seed=17 member=0] epoch 018/100 train=0.227883 val_recursive_mse_2_3=0.508123
+[baseline seed=17 member=0] epoch 019/100 train=0.223683 val_recursive_mse_2_3=0.529013
+[baseline seed=17 member=0] epoch 020/100 train=0.213288 val_recursive_mse_2_3=0.535064
+[rrt seed=17 member=0] epoch 001/100 train=0.562517 val_recursive_mse_2_3=0.508456
+[rrt seed=17 member=0] epoch 002/100 train=0.517287 val_recursive_mse_2_3=0.507350
+[rrt seed=17 member=0] epoch 003/100 train=0.482019 val_recursive_mse_2_3=0.440808
+[rrt seed=17 member=0] epoch 004/100 train=0.487537 val_recursive_mse_2_3=0.423990
+[rrt seed=17 member=0] epoch 005/100 train=0.431000 val_recursive_mse_2_3=0.424732
+[rrt seed=17 member=0] epoch 006/100 train=0.412301 val_recursive_mse_2_3=0.428996
+[rrt seed=17 member=0] epoch 007/100 train=0.464100 val_recursive_mse_2_3=0.425306
+[rrt seed=17 member=0] epoch 008/100 train=0.370656 val_recursive_mse_2_3=0.439904
+[rrt seed=17 member=0] epoch 009/100 train=0.342595 val_recursive_mse_2_3=0.441672
+[rrt seed=17 member=0] epoch 010/100 train=0.313490 val_recursive_mse_2_3=0.437529
+[rrt seed=17 member=0] epoch 011/100 train=0.298369 val_recursive_mse_2_3=0.427994
+[rrt seed=17 member=0] epoch 012/100 train=0.285521 val_recursive_mse_2_3=0.439135
+[rrt seed=17 member=0] epoch 013/100 train=0.279651 val_recursive_mse_2_3=0.436144
+[rrt seed=17 member=0] epoch 014/100 train=0.258099 val_recursive_mse_2_3=0.423065
+[rrt seed=17 member=0] epoch 015/100 train=0.245084 val_recursive_mse_2_3=0.437707
+[rrt seed=17 member=0] epoch 016/100 train=0.231386 val_recursive_mse_2_3=0.446430
+[rrt seed=17 member=0] epoch 017/100 train=0.218974 val_recursive_mse_2_3=0.442113
+[rrt seed=17 member=0] epoch 018/100 train=0.200165 val_recursive_mse_2_3=0.449225
+[rrt seed=17 member=0] epoch 019/100 train=0.194521 val_recursive_mse_2_3=0.450071
+[rrt seed=17 member=0] epoch 020/100 train=0.187863 val_recursive_mse_2_3=0.456935
+[rrt seed=17 member=0] epoch 021/100 train=0.186940 val_recursive_mse_2_3=0.474517
+[rrt seed=17 member=0] epoch 022/100 train=0.180638 val_recursive_mse_2_3=0.436215
+[rrt seed=17 member=0] epoch 023/100 train=0.171947 val_recursive_mse_2_3=0.480637
+[rrt seed=17 member=0] epoch 024/100 train=0.164195 val_recursive_mse_2_3=0.465190
+[rrt seed=17 member=0] epoch 025/100 train=0.155347 val_recursive_mse_2_3=0.457249
+[rrt seed=17 member=0] epoch 026/100 train=0.150798 val_recursive_mse_2_3=0.496572
+[rrt seed=17 member=0] epoch 027/100 train=0.146432 val_recursive_mse_2_3=0.463632
+[rrt seed=17 member=0] epoch 028/100 train=0.139259 val_recursive_mse_2_3=0.471434
+[rrt seed=17 member=0] epoch 029/100 train=0.140286 val_recursive_mse_2_3=0.492313
+[rrt_ensemble seed=17 member=0] epoch 001/100 train=0.546434 val_recursive_mse_2_3=0.503855
+[rrt_ensemble seed=17 member=0] epoch 002/100 train=0.522902 val_recursive_mse_2_3=0.508343
+[rrt_ensemble seed=17 member=0] epoch 003/100 train=0.463088 val_recursive_mse_2_3=0.453848
+[rrt_ensemble seed=17 member=0] epoch 004/100 train=0.432462 val_recursive_mse_2_3=0.432229
+[rrt_ensemble seed=17 member=0] epoch 005/100 train=0.413140 val_recursive_mse_2_3=0.437024
+[rrt_ensemble seed=17 member=0] epoch 006/100 train=0.420685 val_recursive_mse_2_3=0.427484
+[rrt_ensemble seed=17 member=0] epoch 007/100 train=0.426506 val_recursive_mse_2_3=0.453606
+[rrt_ensemble seed=17 member=0] epoch 008/100 train=0.362438 val_recursive_mse_2_3=0.444696
+[rrt_ensemble seed=17 member=0] epoch 009/100 train=0.359027 val_recursive_mse_2_3=0.424179
+[rrt_ensemble seed=17 member=0] epoch 010/100 train=0.329738 val_recursive_mse_2_3=0.426695
+[rrt_ensemble seed=17 member=0] epoch 011/100 train=0.294989 val_recursive_mse_2_3=0.421408
+[rrt_ensemble seed=17 member=0] epoch 012/100 train=0.316421 val_recursive_mse_2_3=0.420821
+[rrt_ensemble seed=17 member=0] epoch 013/100 train=0.259449 val_recursive_mse_2_3=0.480272
+[rrt_ensemble seed=17 member=0] epoch 014/100 train=0.252291 val_recursive_mse_2_3=0.424859
+[rrt_ensemble seed=17 member=0] epoch 015/100 train=0.282529 val_recursive_mse_2_3=0.442063
+[rrt_ensemble seed=17 member=0] epoch 016/100 train=0.229962 val_recursive_mse_2_3=0.438965
+[rrt_ensemble seed=17 member=0] epoch 017/100 train=0.226384 val_recursive_mse_2_3=0.441383
+[rrt_ensemble seed=17 member=0] epoch 018/100 train=0.212218 val_recursive_mse_2_3=0.462667
+[rrt_ensemble seed=17 member=0] epoch 019/100 train=0.210831 val_recursive_mse_2_3=0.458393
+[rrt_ensemble seed=17 member=0] epoch 020/100 train=0.198635 val_recursive_mse_2_3=0.463880
+[rrt_ensemble seed=17 member=0] epoch 021/100 train=0.192205 val_recursive_mse_2_3=0.457304
+[rrt_ensemble seed=17 member=0] epoch 022/100 train=0.176977 val_recursive_mse_2_3=0.464946
+[rrt_ensemble seed=17 member=0] epoch 023/100 train=0.167634 val_recursive_mse_2_3=0.464726
+[rrt_ensemble seed=17 member=0] epoch 024/100 train=0.156779 val_recursive_mse_2_3=0.481971
+[rrt_ensemble seed=17 member=0] epoch 025/100 train=0.154013 val_recursive_mse_2_3=0.473837
+[rrt_ensemble seed=17 member=0] epoch 026/100 train=0.150578 val_recursive_mse_2_3=0.490290
+[rrt_ensemble seed=17 member=0] epoch 027/100 train=0.146890 val_recursive_mse_2_3=0.474402
+[rrt_ensemble seed=17 member=1] epoch 001/100 train=0.566700 val_recursive_mse_2_3=0.506642
+[rrt_ensemble seed=17 member=1] epoch 002/100 train=0.507068 val_recursive_mse_2_3=0.520194
+[rrt_ensemble seed=17 member=1] epoch 003/100 train=0.468660 val_recursive_mse_2_3=0.455699
+[rrt_ensemble seed=17 member=1] epoch 004/100 train=0.454051 val_recursive_mse_2_3=0.436456
+[rrt_ensemble seed=17 member=1] epoch 005/100 train=0.451475 val_recursive_mse_2_3=0.434855
+[rrt_ensemble seed=17 member=1] epoch 006/100 train=0.410840 val_recursive_mse_2_3=0.438827
+[rrt_ensemble seed=17 member=1] epoch 007/100 train=0.373717 val_recursive_mse_2_3=0.468001
+[rrt_ensemble seed=17 member=1] epoch 008/100 train=0.341869 val_recursive_mse_2_3=0.445790
+[rrt_ensemble seed=17 member=1] epoch 009/100 train=0.347078 val_recursive_mse_2_3=0.447642
+[rrt_ensemble seed=17 member=1] epoch 010/100 train=0.314735 val_recursive_mse_2_3=0.425318
+[rrt_ensemble seed=17 member=1] epoch 011/100 train=0.303222 val_recursive_mse_2_3=0.423832
+[rrt_ensemble seed=17 member=1] epoch 012/100 train=0.324393 val_recursive_mse_2_3=0.441375
+[rrt_ensemble seed=17 member=1] epoch 013/100 train=0.261388 val_recursive_mse_2_3=0.425718
+[rrt_ensemble seed=17 member=1] epoch 014/100 train=0.245400 val_recursive_mse_2_3=0.432116
+[rrt_ensemble seed=17 member=1] epoch 015/100 train=0.244323 val_recursive_mse_2_3=0.433731
+[rrt_ensemble seed=17 member=1] epoch 016/100 train=0.230571 val_recursive_mse_2_3=0.443330
+[rrt_ensemble seed=17 member=1] epoch 017/100 train=0.217899 val_recursive_mse_2_3=0.434504
+[rrt_ensemble seed=17 member=1] epoch 018/100 train=0.205418 val_recursive_mse_2_3=0.460983
+[rrt_ensemble seed=17 member=1] epoch 019/100 train=0.193784 val_recursive_mse_2_3=0.451879
+[rrt_ensemble seed=17 member=1] epoch 020/100 train=0.184001 val_recursive_mse_2_3=0.442398
+[rrt_ensemble seed=17 member=1] epoch 021/100 train=0.171194 val_recursive_mse_2_3=0.469529
+[rrt_ensemble seed=17 member=1] epoch 022/100 train=0.168416 val_recursive_mse_2_3=0.464928
+[rrt_ensemble seed=17 member=1] epoch 023/100 train=0.161240 val_recursive_mse_2_3=0.459441
+[rrt_ensemble seed=17 member=1] epoch 024/100 train=0.152481 val_recursive_mse_2_3=0.471477
+[rrt_ensemble seed=17 member=1] epoch 025/100 train=0.152587 val_recursive_mse_2_3=0.464977
+[rrt_ensemble seed=17 member=1] epoch 026/100 train=0.158533 val_recursive_mse_2_3=0.478220
+[rrt_ensemble seed=17 member=2] epoch 001/100 train=0.552542 val_recursive_mse_2_3=0.505018
+[rrt_ensemble seed=17 member=2] epoch 002/100 train=0.522145 val_recursive_mse_2_3=0.485893
+[rrt_ensemble seed=17 member=2] epoch 003/100 train=0.509208 val_recursive_mse_2_3=0.449633
+[rrt_ensemble seed=17 member=2] epoch 004/100 train=0.439284 val_recursive_mse_2_3=0.435313
+[rrt_ensemble seed=17 member=2] epoch 005/100 train=0.433996 val_recursive_mse_2_3=0.444171
+[rrt_ensemble seed=17 member=2] epoch 006/100 train=0.454078 val_recursive_mse_2_3=0.426703
+[rrt_ensemble seed=17 member=2] epoch 007/100 train=0.365010 val_recursive_mse_2_3=0.427030
+[rrt_ensemble seed=17 member=2] epoch 008/100 train=0.367186 val_recursive_mse_2_3=0.434481
+[rrt_ensemble seed=17 member=2] epoch 009/100 train=0.323846 val_recursive_mse_2_3=0.451143
+[rrt_ensemble seed=17 member=2] epoch 010/100 train=0.309807 val_recursive_mse_2_3=0.431757
+[rrt_ensemble seed=17 member=2] epoch 011/100 train=0.293949 val_recursive_mse_2_3=0.452066
+[rrt_ensemble seed=17 member=2] epoch 012/100 train=0.280540 val_recursive_mse_2_3=0.451112
+[rrt_ensemble seed=17 member=2] epoch 013/100 train=0.267596 val_recursive_mse_2_3=0.447581
+[rrt_ensemble seed=17 member=2] epoch 014/100 train=0.249948 val_recursive_mse_2_3=0.420724
+[rrt_ensemble seed=17 member=2] epoch 015/100 train=0.242894 val_recursive_mse_2_3=0.442652
+[rrt_ensemble seed=17 member=2] epoch 016/100 train=0.262213 val_recursive_mse_2_3=0.432018
+[rrt_ensemble seed=17 member=2] epoch 017/100 train=0.225668 val_recursive_mse_2_3=0.425831
+[rrt_ensemble seed=17 member=2] epoch 018/100 train=0.213705 val_recursive_mse_2_3=0.445932
+[rrt_ensemble seed=17 member=2] epoch 019/100 train=0.195428 val_recursive_mse_2_3=0.456219
+[rrt_ensemble seed=17 member=2] epoch 020/100 train=0.207294 val_recursive_mse_2_3=0.455364
+[rrt_ensemble seed=17 member=2] epoch 021/100 train=0.199212 val_recursive_mse_2_3=0.449883
+[rrt_ensemble seed=17 member=2] epoch 022/100 train=0.180939 val_recursive_mse_2_3=0.433054
+[rrt_ensemble seed=17 member=2] epoch 023/100 train=0.165769 val_recursive_mse_2_3=0.456623
+[rrt_ensemble seed=17 member=2] epoch 024/100 train=0.150910 val_recursive_mse_2_3=0.440413
+[rrt_ensemble seed=17 member=2] epoch 025/100 train=0.147008 val_recursive_mse_2_3=0.437662
+[rrt_ensemble seed=17 member=2] epoch 026/100 train=0.137225 val_recursive_mse_2_3=0.447974
+[rrt_ensemble seed=17 member=2] epoch 027/100 train=0.135519 val_recursive_mse_2_3=0.456196
+[rrt_ensemble seed=17 member=2] epoch 028/100 train=0.135417 val_recursive_mse_2_3=0.455534
+[rrt_ensemble seed=17 member=2] epoch 029/100 train=0.131021 val_recursive_mse_2_3=0.446226
+[rrt_ensemble seed=17 member=3] epoch 001/100 train=0.558779 val_recursive_mse_2_3=0.508548
+[rrt_ensemble seed=17 member=3] epoch 002/100 train=0.500982 val_recursive_mse_2_3=0.510580
+[rrt_ensemble seed=17 member=3] epoch 003/100 train=0.501261 val_recursive_mse_2_3=0.457365
+[rrt_ensemble seed=17 member=3] epoch 004/100 train=0.438621 val_recursive_mse_2_3=0.426037
+[rrt_ensemble seed=17 member=3] epoch 005/100 train=0.412991 val_recursive_mse_2_3=0.430726
+[rrt_ensemble seed=17 member=3] epoch 006/100 train=0.395725 val_recursive_mse_2_3=0.436915
+[rrt_ensemble seed=17 member=3] epoch 007/100 train=0.435812 val_recursive_mse_2_3=0.437313
+[rrt_ensemble seed=17 member=3] epoch 008/100 train=0.361837 val_recursive_mse_2_3=0.426990
+[rrt_ensemble seed=17 member=3] epoch 009/100 train=0.336874 val_recursive_mse_2_3=0.422794
+[rrt_ensemble seed=17 member=3] epoch 010/100 train=0.306791 val_recursive_mse_2_3=0.413860
+[rrt_ensemble seed=17 member=3] epoch 011/100 train=0.296780 val_recursive_mse_2_3=0.417005
+[rrt_ensemble seed=17 member=3] epoch 012/100 train=0.278421 val_recursive_mse_2_3=0.438330
+[rrt_ensemble seed=17 member=3] epoch 013/100 train=0.270766 val_recursive_mse_2_3=0.447337
+[rrt_ensemble seed=17 member=3] epoch 014/100 train=0.256319 val_recursive_mse_2_3=0.457748
+[rrt_ensemble seed=17 member=3] epoch 015/100 train=0.241905 val_recursive_mse_2_3=0.435005
+[rrt_ensemble seed=17 member=3] epoch 016/100 train=0.244305 val_recursive_mse_2_3=0.463375
+[rrt_ensemble seed=17 member=3] epoch 017/100 train=0.220751 val_recursive_mse_2_3=0.453127
+[rrt_ensemble seed=17 member=3] epoch 018/100 train=0.207788 val_recursive_mse_2_3=0.473177
+[rrt_ensemble seed=17 member=3] epoch 019/100 train=0.196120 val_recursive_mse_2_3=0.465162
+[rrt_ensemble seed=17 member=3] epoch 020/100 train=0.189039 val_recursive_mse_2_3=0.484129
+[rrt_ensemble seed=17 member=3] epoch 021/100 train=0.178384 val_recursive_mse_2_3=0.473800
+[rrt_ensemble seed=17 member=3] epoch 022/100 train=0.173971 val_recursive_mse_2_3=0.458248
+[rrt_ensemble seed=17 member=3] epoch 023/100 train=0.168259 val_recursive_mse_2_3=0.461572
+[rrt_ensemble seed=17 member=3] epoch 024/100 train=0.158670 val_recursive_mse_2_3=0.483887
+[rrt_ensemble seed=17 member=3] epoch 025/100 train=0.160912 val_recursive_mse_2_3=0.468628
+[rrt_ensemble seed=17 member=4] epoch 001/100 train=0.557422 val_recursive_mse_2_3=0.511241
+[rrt_ensemble seed=17 member=4] epoch 002/100 train=0.499182 val_recursive_mse_2_3=0.501458
+[rrt_ensemble seed=17 member=4] epoch 003/100 train=0.469334 val_recursive_mse_2_3=0.444253
+[rrt_ensemble seed=17 member=4] epoch 004/100 train=0.445816 val_recursive_mse_2_3=0.433904
+[rrt_ensemble seed=17 member=4] epoch 005/100 train=0.418827 val_recursive_mse_2_3=0.433413
+[rrt_ensemble seed=17 member=4] epoch 006/100 train=0.402747 val_recursive_mse_2_3=0.436095
+[rrt_ensemble seed=17 member=4] epoch 007/100 train=0.399355 val_recursive_mse_2_3=0.433866
+[rrt_ensemble seed=17 member=4] epoch 008/100 train=0.344746 val_recursive_mse_2_3=0.427327
+[rrt_ensemble seed=17 member=4] epoch 009/100 train=0.324715 val_recursive_mse_2_3=0.420782
+[rrt_ensemble seed=17 member=4] epoch 010/100 train=0.316279 val_recursive_mse_2_3=0.454026
+[rrt_ensemble seed=17 member=4] epoch 011/100 train=0.311507 val_recursive_mse_2_3=0.450086
+[rrt_ensemble seed=17 member=4] epoch 012/100 train=0.274248 val_recursive_mse_2_3=0.432361
+[rrt_ensemble seed=17 member=4] epoch 013/100 train=0.258829 val_recursive_mse_2_3=0.426808
+[rrt_ensemble seed=17 member=4] epoch 014/100 train=0.252126 val_recursive_mse_2_3=0.443741
+[rrt_ensemble seed=17 member=4] epoch 015/100 train=0.231958 val_recursive_mse_2_3=0.455963
+[rrt_ensemble seed=17 member=4] epoch 016/100 train=0.220122 val_recursive_mse_2_3=0.444209
+[rrt_ensemble seed=17 member=4] epoch 017/100 train=0.217669 val_recursive_mse_2_3=0.473088
+[rrt_ensemble seed=17 member=4] epoch 018/100 train=0.213273 val_recursive_mse_2_3=0.432587
+[rrt_ensemble seed=17 member=4] epoch 019/100 train=0.198832 val_recursive_mse_2_3=0.444160
+[rrt_ensemble seed=17 member=4] epoch 020/100 train=0.196323 val_recursive_mse_2_3=0.445739
+[rrt_ensemble seed=17 member=4] epoch 021/100 train=0.186259 val_recursive_mse_2_3=0.465210
+[rrt_ensemble seed=17 member=4] epoch 022/100 train=0.203571 val_recursive_mse_2_3=0.456296
+[rrt_ensemble seed=17 member=4] epoch 023/100 train=0.178551 val_recursive_mse_2_3=0.445792
+[rrt_ensemble seed=17 member=4] epoch 024/100 train=0.170160 val_recursive_mse_2_3=0.452512
+[baseline seed=29 member=0] epoch 001/100 train=0.462919 val_recursive_mse_2_3=0.506009
+[baseline seed=29 member=0] epoch 002/100 train=0.431270 val_recursive_mse_2_3=0.475194
+[baseline seed=29 member=0] epoch 003/100 train=0.416753 val_recursive_mse_2_3=0.441303
+[baseline seed=29 member=0] epoch 004/100 train=0.388139 val_recursive_mse_2_3=0.423640
+[baseline seed=29 member=0] epoch 005/100 train=0.370606 val_recursive_mse_2_3=0.426557
+[baseline seed=29 member=0] epoch 006/100 train=0.374431 val_recursive_mse_2_3=0.426787
+[baseline seed=29 member=0] epoch 007/100 train=0.341383 val_recursive_mse_2_3=0.449515
+[baseline seed=29 member=0] epoch 008/100 train=0.351690 val_recursive_mse_2_3=0.448038
+[baseline seed=29 member=0] epoch 009/100 train=0.316536 val_recursive_mse_2_3=0.466226
+[baseline seed=29 member=0] epoch 010/100 train=0.307173 val_recursive_mse_2_3=0.449582
+[baseline seed=29 member=0] epoch 011/100 train=0.303958 val_recursive_mse_2_3=0.452109
+[baseline seed=29 member=0] epoch 012/100 train=0.292275 val_recursive_mse_2_3=0.482334
+[baseline seed=29 member=0] epoch 013/100 train=0.272433 val_recursive_mse_2_3=0.490281
+[baseline seed=29 member=0] epoch 014/100 train=0.274637 val_recursive_mse_2_3=0.499427
+[baseline seed=29 member=0] epoch 015/100 train=0.247669 val_recursive_mse_2_3=0.474496
+[baseline seed=29 member=0] epoch 016/100 train=0.246116 val_recursive_mse_2_3=0.484966
+[baseline seed=29 member=0] epoch 017/100 train=0.237010 val_recursive_mse_2_3=0.520181
+[baseline seed=29 member=0] epoch 018/100 train=0.241273 val_recursive_mse_2_3=0.500122
+[baseline seed=29 member=0] epoch 019/100 train=0.218172 val_recursive_mse_2_3=0.534599
+[rrt seed=29 member=0] epoch 001/100 train=0.574278 val_recursive_mse_2_3=0.504309
+[rrt seed=29 member=0] epoch 002/100 train=0.490196 val_recursive_mse_2_3=0.488874
+[rrt seed=29 member=0] epoch 003/100 train=0.468874 val_recursive_mse_2_3=0.450526
+[rrt seed=29 member=0] epoch 004/100 train=0.433112 val_recursive_mse_2_3=0.439404
+[rrt seed=29 member=0] epoch 005/100 train=0.449784 val_recursive_mse_2_3=0.450112
+[rrt seed=29 member=0] epoch 006/100 train=0.404853 val_recursive_mse_2_3=0.455034
+[rrt seed=29 member=0] epoch 007/100 train=0.365805 val_recursive_mse_2_3=0.452592
+[rrt seed=29 member=0] epoch 008/100 train=0.363263 val_recursive_mse_2_3=0.446984
+[rrt seed=29 member=0] epoch 009/100 train=0.328252 val_recursive_mse_2_3=0.451303
+[rrt seed=29 member=0] epoch 010/100 train=0.376406 val_recursive_mse_2_3=0.423741
+[rrt seed=29 member=0] epoch 011/100 train=0.301142 val_recursive_mse_2_3=0.445105
+[rrt seed=29 member=0] epoch 012/100 train=0.297785 val_recursive_mse_2_3=0.475827
+[rrt seed=29 member=0] epoch 013/100 train=0.264331 val_recursive_mse_2_3=0.446727
+[rrt seed=29 member=0] epoch 014/100 train=0.274661 val_recursive_mse_2_3=0.450420
+[rrt seed=29 member=0] epoch 015/100 train=0.237026 val_recursive_mse_2_3=0.447911
+[rrt seed=29 member=0] epoch 016/100 train=0.230074 val_recursive_mse_2_3=0.455160
+[rrt seed=29 member=0] epoch 017/100 train=0.223737 val_recursive_mse_2_3=0.471043
+[rrt seed=29 member=0] epoch 018/100 train=0.229179 val_recursive_mse_2_3=0.467939
+[rrt seed=29 member=0] epoch 019/100 train=0.197833 val_recursive_mse_2_3=0.486860
+[rrt seed=29 member=0] epoch 020/100 train=0.203854 val_recursive_mse_2_3=0.484305
+[rrt seed=29 member=0] epoch 021/100 train=0.184837 val_recursive_mse_2_3=0.478469
+[rrt seed=29 member=0] epoch 022/100 train=0.173549 val_recursive_mse_2_3=0.485174
+[rrt seed=29 member=0] epoch 023/100 train=0.161072 val_recursive_mse_2_3=0.485584
+[rrt seed=29 member=0] epoch 024/100 train=0.155875 val_recursive_mse_2_3=0.490787
+[rrt seed=29 member=0] epoch 025/100 train=0.149103 val_recursive_mse_2_3=0.516999
+[rrt_ensemble seed=29 member=0] epoch 001/100 train=0.549943 val_recursive_mse_2_3=0.506248
+[rrt_ensemble seed=29 member=0] epoch 002/100 train=0.514557 val_recursive_mse_2_3=0.508624
+[rrt_ensemble seed=29 member=0] epoch 003/100 train=0.486608 val_recursive_mse_2_3=0.457929
+[rrt_ensemble seed=29 member=0] epoch 004/100 train=0.449361 val_recursive_mse_2_3=0.435299
+[rrt_ensemble seed=29 member=0] epoch 005/100 train=0.409434 val_recursive_mse_2_3=0.437571
+[rrt_ensemble seed=29 member=0] epoch 006/100 train=0.402057 val_recursive_mse_2_3=0.429972
+[rrt_ensemble seed=29 member=0] epoch 007/100 train=0.362202 val_recursive_mse_2_3=0.445451
+[rrt_ensemble seed=29 member=0] epoch 008/100 train=0.455241 val_recursive_mse_2_3=0.436566
+[rrt_ensemble seed=29 member=0] epoch 009/100 train=0.371894 val_recursive_mse_2_3=0.447788
+[rrt_ensemble seed=29 member=0] epoch 010/100 train=0.332770 val_recursive_mse_2_3=0.428833
+[rrt_ensemble seed=29 member=0] epoch 011/100 train=0.294167 val_recursive_mse_2_3=0.449432
+[rrt_ensemble seed=29 member=0] epoch 012/100 train=0.285451 val_recursive_mse_2_3=0.443420
+[rrt_ensemble seed=29 member=0] epoch 013/100 train=0.276196 val_recursive_mse_2_3=0.446199
+[rrt_ensemble seed=29 member=0] epoch 014/100 train=0.263216 val_recursive_mse_2_3=0.447358
+[rrt_ensemble seed=29 member=0] epoch 015/100 train=0.244093 val_recursive_mse_2_3=0.424662
+[rrt_ensemble seed=29 member=0] epoch 016/100 train=0.236121 val_recursive_mse_2_3=0.434849
+[rrt_ensemble seed=29 member=0] epoch 017/100 train=0.225526 val_recursive_mse_2_3=0.411019
+[rrt_ensemble seed=29 member=0] epoch 018/100 train=0.214011 val_recursive_mse_2_3=0.436585
+[rrt_ensemble seed=29 member=0] epoch 019/100 train=0.241621 val_recursive_mse_2_3=0.424904
+[rrt_ensemble seed=29 member=0] epoch 020/100 train=0.185430 val_recursive_mse_2_3=0.428638
+[rrt_ensemble seed=29 member=0] epoch 021/100 train=0.186650 val_recursive_mse_2_3=0.448563
+[rrt_ensemble seed=29 member=0] epoch 022/100 train=0.177186 val_recursive_mse_2_3=0.431533
+[rrt_ensemble seed=29 member=0] epoch 023/100 train=0.165471 val_recursive_mse_2_3=0.454884
+[rrt_ensemble seed=29 member=0] epoch 024/100 train=0.163701 val_recursive_mse_2_3=0.454028
+[rrt_ensemble seed=29 member=0] epoch 025/100 train=0.155706 val_recursive_mse_2_3=0.450913
+[rrt_ensemble seed=29 member=0] epoch 026/100 train=0.160254 val_recursive_mse_2_3=0.456281
+[rrt_ensemble seed=29 member=0] epoch 027/100 train=0.149745 val_recursive_mse_2_3=0.489908
+[rrt_ensemble seed=29 member=0] epoch 028/100 train=0.139726 val_recursive_mse_2_3=0.447074
+[rrt_ensemble seed=29 member=0] epoch 029/100 train=0.138445 val_recursive_mse_2_3=0.457409
+[rrt_ensemble seed=29 member=0] epoch 030/100 train=0.127205 val_recursive_mse_2_3=0.465175
+[rrt_ensemble seed=29 member=0] epoch 031/100 train=0.127448 val_recursive_mse_2_3=0.467147
+[rrt_ensemble seed=29 member=0] epoch 032/100 train=0.112276 val_recursive_mse_2_3=0.474540
+[rrt_ensemble seed=29 member=1] epoch 001/100 train=0.557952 val_recursive_mse_2_3=0.507329
+[rrt_ensemble seed=29 member=1] epoch 002/100 train=0.511699 val_recursive_mse_2_3=0.508768
+[rrt_ensemble seed=29 member=1] epoch 003/100 train=0.470754 val_recursive_mse_2_3=0.455946
+[rrt_ensemble seed=29 member=1] epoch 004/100 train=0.445718 val_recursive_mse_2_3=0.433771
+[rrt_ensemble seed=29 member=1] epoch 005/100 train=0.420896 val_recursive_mse_2_3=0.435056
+[rrt_ensemble seed=29 member=1] epoch 006/100 train=0.391216 val_recursive_mse_2_3=0.439943
+[rrt_ensemble seed=29 member=1] epoch 007/100 train=0.381896 val_recursive_mse_2_3=0.434016
+[rrt_ensemble seed=29 member=1] epoch 008/100 train=0.362737 val_recursive_mse_2_3=0.457367
+[rrt_ensemble seed=29 member=1] epoch 009/100 train=0.343663 val_recursive_mse_2_3=0.431991
+[rrt_ensemble seed=29 member=1] epoch 010/100 train=0.306469 val_recursive_mse_2_3=0.454017
+[rrt_ensemble seed=29 member=1] epoch 011/100 train=0.303058 val_recursive_mse_2_3=0.458763
+[rrt_ensemble seed=29 member=1] epoch 012/100 train=0.302977 val_recursive_mse_2_3=0.446459
+[rrt_ensemble seed=29 member=1] epoch 013/100 train=0.283595 val_recursive_mse_2_3=0.519302
+[rrt_ensemble seed=29 member=1] epoch 014/100 train=0.264974 val_recursive_mse_2_3=0.448443
+[rrt_ensemble seed=29 member=1] epoch 015/100 train=0.260153 val_recursive_mse_2_3=0.451059
+[rrt_ensemble seed=29 member=1] epoch 016/100 train=0.229570 val_recursive_mse_2_3=0.455539
+[rrt_ensemble seed=29 member=1] epoch 017/100 train=0.214518 val_recursive_mse_2_3=0.471558
+[rrt_ensemble seed=29 member=1] epoch 018/100 train=0.208459 val_recursive_mse_2_3=0.451226
+[rrt_ensemble seed=29 member=1] epoch 019/100 train=0.199091 val_recursive_mse_2_3=0.476495
+[rrt_ensemble seed=29 member=1] epoch 020/100 train=0.186916 val_recursive_mse_2_3=0.472115
+[rrt_ensemble seed=29 member=1] epoch 021/100 train=0.180943 val_recursive_mse_2_3=0.479550
+[rrt_ensemble seed=29 member=1] epoch 022/100 train=0.168524 val_recursive_mse_2_3=0.494824
+[rrt_ensemble seed=29 member=1] epoch 023/100 train=0.159893 val_recursive_mse_2_3=0.503932
+[rrt_ensemble seed=29 member=1] epoch 024/100 train=0.162278 val_recursive_mse_2_3=0.477758
+[rrt_ensemble seed=29 member=2] epoch 001/100 train=0.622092 val_recursive_mse_2_3=0.503674
+[rrt_ensemble seed=29 member=2] epoch 002/100 train=0.551515 val_recursive_mse_2_3=0.495527
+[rrt_ensemble seed=29 member=2] epoch 003/100 train=0.461712 val_recursive_mse_2_3=0.449407
+[rrt_ensemble seed=29 member=2] epoch 004/100 train=0.439461 val_recursive_mse_2_3=0.434691
+[rrt_ensemble seed=29 member=2] epoch 005/100 train=0.407955 val_recursive_mse_2_3=0.429597
+[rrt_ensemble seed=29 member=2] epoch 006/100 train=0.396861 val_recursive_mse_2_3=0.429340
+[rrt_ensemble seed=29 member=2] epoch 007/100 train=0.375724 val_recursive_mse_2_3=0.433077
+[rrt_ensemble seed=29 member=2] epoch 008/100 train=0.388142 val_recursive_mse_2_3=0.429740
+[rrt_ensemble seed=29 member=2] epoch 009/100 train=0.332431 val_recursive_mse_2_3=0.433294
+[rrt_ensemble seed=29 member=2] epoch 010/100 train=0.318087 val_recursive_mse_2_3=0.439815
+[rrt_ensemble seed=29 member=2] epoch 011/100 train=0.295917 val_recursive_mse_2_3=0.444326
+[rrt_ensemble seed=29 member=2] epoch 012/100 train=0.292968 val_recursive_mse_2_3=0.416999
+[rrt_ensemble seed=29 member=2] epoch 013/100 train=0.260076 val_recursive_mse_2_3=0.455468
+[rrt_ensemble seed=29 member=2] epoch 014/100 train=0.260772 val_recursive_mse_2_3=0.433020
+[rrt_ensemble seed=29 member=2] epoch 015/100 train=0.243095 val_recursive_mse_2_3=0.423452
+[rrt_ensemble seed=29 member=2] epoch 016/100 train=0.225152 val_recursive_mse_2_3=0.439257
+[rrt_ensemble seed=29 member=2] epoch 017/100 train=0.222630 val_recursive_mse_2_3=0.428065
+[rrt_ensemble seed=29 member=2] epoch 018/100 train=0.218225 val_recursive_mse_2_3=0.438952
+[rrt_ensemble seed=29 member=2] epoch 019/100 train=0.202400 val_recursive_mse_2_3=0.423019
+[rrt_ensemble seed=29 member=2] epoch 020/100 train=0.195715 val_recursive_mse_2_3=0.431039
+[rrt_ensemble seed=29 member=2] epoch 021/100 train=0.184708 val_recursive_mse_2_3=0.446003
+[rrt_ensemble seed=29 member=2] epoch 022/100 train=0.177330 val_recursive_mse_2_3=0.428549
+[rrt_ensemble seed=29 member=2] epoch 023/100 train=0.165912 val_recursive_mse_2_3=0.445930
+[rrt_ensemble seed=29 member=2] epoch 024/100 train=0.160623 val_recursive_mse_2_3=0.452114
+[rrt_ensemble seed=29 member=2] epoch 025/100 train=0.175336 val_recursive_mse_2_3=0.448531
+[rrt_ensemble seed=29 member=2] epoch 026/100 train=0.146613 val_recursive_mse_2_3=0.449864
+[rrt_ensemble seed=29 member=2] epoch 027/100 train=0.146120 val_recursive_mse_2_3=0.467857
+[rrt_ensemble seed=29 member=3] epoch 001/100 train=0.568125 val_recursive_mse_2_3=0.517630
+[rrt_ensemble seed=29 member=3] epoch 002/100 train=0.498273 val_recursive_mse_2_3=0.507651
+[rrt_ensemble seed=29 member=3] epoch 003/100 train=0.462755 val_recursive_mse_2_3=0.457531
+[rrt_ensemble seed=29 member=3] epoch 004/100 train=0.518298 val_recursive_mse_2_3=0.433119
+[rrt_ensemble seed=29 member=3] epoch 005/100 train=0.431226 val_recursive_mse_2_3=0.436019
+[rrt_ensemble seed=29 member=3] epoch 006/100 train=0.393425 val_recursive_mse_2_3=0.442102
+[rrt_ensemble seed=29 member=3] epoch 007/100 train=0.371847 val_recursive_mse_2_3=0.430108
+[rrt_ensemble seed=29 member=3] epoch 008/100 train=0.416864 val_recursive_mse_2_3=0.433596
+[rrt_ensemble seed=29 member=3] epoch 009/100 train=0.352514 val_recursive_mse_2_3=0.447722
+[rrt_ensemble seed=29 member=3] epoch 010/100 train=0.315507 val_recursive_mse_2_3=0.435091
+[rrt_ensemble seed=29 member=3] epoch 011/100 train=0.311333 val_recursive_mse_2_3=0.435992
+[rrt_ensemble seed=29 member=3] epoch 012/100 train=0.274401 val_recursive_mse_2_3=0.423744
+[rrt_ensemble seed=29 member=3] epoch 013/100 train=0.257960 val_recursive_mse_2_3=0.441822
+[rrt_ensemble seed=29 member=3] epoch 014/100 train=0.245780 val_recursive_mse_2_3=0.433698
+[rrt_ensemble seed=29 member=3] epoch 015/100 train=0.246391 val_recursive_mse_2_3=0.451239
+[rrt_ensemble seed=29 member=3] epoch 016/100 train=0.229491 val_recursive_mse_2_3=0.447788
+[rrt_ensemble seed=29 member=3] epoch 017/100 train=0.230960 val_recursive_mse_2_3=0.461194
+[rrt_ensemble seed=29 member=3] epoch 018/100 train=0.258320 val_recursive_mse_2_3=0.458223
+[rrt_ensemble seed=29 member=3] epoch 019/100 train=0.213260 val_recursive_mse_2_3=0.453071
+[rrt_ensemble seed=29 member=3] epoch 020/100 train=0.208213 val_recursive_mse_2_3=0.443589
+[rrt_ensemble seed=29 member=3] epoch 021/100 train=0.225247 val_recursive_mse_2_3=0.443127
+[rrt_ensemble seed=29 member=3] epoch 022/100 train=0.177673 val_recursive_mse_2_3=0.487881
+[rrt_ensemble seed=29 member=3] epoch 023/100 train=0.171766 val_recursive_mse_2_3=0.471015
+[rrt_ensemble seed=29 member=3] epoch 024/100 train=0.162797 val_recursive_mse_2_3=0.451064
+[rrt_ensemble seed=29 member=3] epoch 025/100 train=0.157651 val_recursive_mse_2_3=0.447879
+[rrt_ensemble seed=29 member=3] epoch 026/100 train=0.153819 val_recursive_mse_2_3=0.465167
+[rrt_ensemble seed=29 member=3] epoch 027/100 train=0.149198 val_recursive_mse_2_3=0.462152
+[rrt_ensemble seed=29 member=4] epoch 001/100 train=0.581167 val_recursive_mse_2_3=0.501682
+[rrt_ensemble seed=29 member=4] epoch 002/100 train=0.484005 val_recursive_mse_2_3=0.509459
+[rrt_ensemble seed=29 member=4] epoch 003/100 train=0.478491 val_recursive_mse_2_3=0.442220
+[rrt_ensemble seed=29 member=4] epoch 004/100 train=0.454994 val_recursive_mse_2_3=0.425381
+[rrt_ensemble seed=29 member=4] epoch 005/100 train=0.416405 val_recursive_mse_2_3=0.435587
+[rrt_ensemble seed=29 member=4] epoch 006/100 train=0.396563 val_recursive_mse_2_3=0.429719
+[rrt_ensemble seed=29 member=4] epoch 007/100 train=0.368522 val_recursive_mse_2_3=0.432484
+[rrt_ensemble seed=29 member=4] epoch 008/100 train=0.348468 val_recursive_mse_2_3=0.419110
+[rrt_ensemble seed=29 member=4] epoch 009/100 train=0.326559 val_recursive_mse_2_3=0.434410
+[rrt_ensemble seed=29 member=4] epoch 010/100 train=0.310784 val_recursive_mse_2_3=0.436051
+[rrt_ensemble seed=29 member=4] epoch 011/100 train=0.286975 val_recursive_mse_2_3=0.434978
+[rrt_ensemble seed=29 member=4] epoch 012/100 train=0.279434 val_recursive_mse_2_3=0.445103
+[rrt_ensemble seed=29 member=4] epoch 013/100 train=0.255448 val_recursive_mse_2_3=0.448605
+[rrt_ensemble seed=29 member=4] epoch 014/100 train=0.246960 val_recursive_mse_2_3=0.441047
+[rrt_ensemble seed=29 member=4] epoch 015/100 train=0.233118 val_recursive_mse_2_3=0.437964
+[rrt_ensemble seed=29 member=4] epoch 016/100 train=0.222786 val_recursive_mse_2_3=0.456349
+[rrt_ensemble seed=29 member=4] epoch 017/100 train=0.215031 val_recursive_mse_2_3=0.465148
+[rrt_ensemble seed=29 member=4] epoch 018/100 train=0.208575 val_recursive_mse_2_3=0.445611
+[rrt_ensemble seed=29 member=4] epoch 019/100 train=0.189353 val_recursive_mse_2_3=0.440475
+[rrt_ensemble seed=29 member=4] epoch 020/100 train=0.188456 val_recursive_mse_2_3=0.464101
+[rrt_ensemble seed=29 member=4] epoch 021/100 train=0.177769 val_recursive_mse_2_3=0.439461
+[rrt_ensemble seed=29 member=4] epoch 022/100 train=0.174080 val_recursive_mse_2_3=0.437389
+[rrt_ensemble seed=29 member=4] epoch 023/100 train=0.171243 val_recursive_mse_2_3=0.450122
+Trained 9 runs under /home/tanyuejun/CLARITY_HAUWM_Minimal/outputs/stage1/mri_core
+Recursive Rollout Performance
+| Seed | Variant | MSE@1 | MSE@2 | MSE@3 | Long MSE |
+|---:|---|---:|---:|---:|---:|
+| 17 | baseline | 0.4375 | 0.4820 | 0.4017 | 0.4419 |
+| 17 | rrt | 0.4664 | 0.4717 | 0.4164 | 0.4440 |
+| 17 | rrt_ensemble | 0.4523 | 0.4798 | 0.4305 | 0.4551 |
+| 29 | baseline | 0.4291 | 0.4851 | 0.4088 | 0.4469 |
+| 29 | rrt | 0.4469 | 0.4807 | 0.4333 | 0.4570 |
+| 29 | rrt_ensemble | 0.4493 | 0.4650 | 0.4330 | 0.4490 |
+| 7 | baseline | 0.4300 | 0.4916 | 0.4202 | 0.4559 |
+| 7 | rrt | 0.4753 | 0.4906 | 0.4435 | 0.4670 |
+| 7 | rrt_ensemble | 0.4468 | 0.4654 | 0.4081 | 0.4367 |
+Ensemble Reliability
+| Seed | Variant | rho@1 | rho@2 | rho@3 | Macro rho | Macro High/Low |
+|---:|---|---:|---:|---:|---:|---:|
+| 17 | rrt_ensemble | 0.3654 | 0.4311 | 0.3903 | 0.3956 | 1.7149 |
+| 29 | rrt_ensemble | 0.3836 | 0.4699 | 0.5085 | 0.4540 | 2.1655 |
+| 7 | rrt_ensemble | 0.3243 | 0.2448 | 0.4039 | 0.3243 | 1.8161 |
+Recursive Rollout Performance (mean ± std across training seeds)
+| Variant | MSE@1 | MSE@2 | MSE@3 | Long MSE |
+|---|---:|---:|---:|---:|
+| baseline | 0.4322 ± 0.0047 | 0.4862 ± 0.0049 | 0.4102 ± 0.0093 | 0.4482 ± 0.0071 |
+| rrt | 0.4629 ± 0.0145 | 0.4810 ± 0.0095 | 0.4310 ± 0.0137 | 0.4560 ± 0.0115 |
+| rrt_ensemble | 0.4494 ± 0.0028 | 0.4700 ± 0.0084 | 0.4239 ± 0.0137 | 0.4470 ± 0.0094 |
+
+Secondary Cosine Distance (mean ± std)
+| Variant | Cos@1 | Cos@2 | Cos@3 |
+|---|---:|---:|---:|
+| baseline | 0.2942 ± 0.0083 | 0.3633 ± 0.0101 | 0.3543 ± 0.0116 |
+| rrt | 0.3239 ± 0.0144 | 0.3744 ± 0.0127 | 0.3542 ± 0.0235 |
+| rrt_ensemble | 0.3069 ± 0.0043 | 0.3601 ± 0.0091 | 0.3528 ± 0.0054 |
+
+Relative Improvement (%)
+| Comparison | RI@1 | RI@2 | RI@3 | RI Long |
+|---|---:|---:|---:|---:|
+| baseline_vs_rrt | -7.1040 ± 3.2198 | 1.0906 ± 0.9864 | -5.0633 ± 1.2452 | -1.7251 ± 1.0806 |
+
+Baseline → RRT by training seed
+| Seed | Baseline Long | RRT Long | RI Long (%) |
+|---:|---:|---:|---:|
+| 7 | 0.4559 | 0.4670 | -2.4421 |
+| 17 | 0.4419 | 0.4440 | -0.4822 |
+| 29 | 0.4469 | 0.4570 | -2.2509 |
+
+Ensemble Reliability: rrt_ensemble
+| Horizon | Spearman rho | High/Low Ratio | Risk@100 | Risk@80 | Risk Reduction (%) |
+|---:|---:|---:|---:|---:|---:|
+| 1 | 0.3578 ± 0.0304 | 2.2074 ± 0.4247 | 0.4494 ± 0.0028 | 0.3830 ± 0.0048 | 14.7791 ± 0.6666 |
+| 2 | 0.3819 ± 0.1203 | 1.7159 ± 0.2581 | 0.4700 ± 0.0084 | 0.4341 ± 0.0178 | 7.5828 ± 5.1709 |
+| 3 | 0.4342 ± 0.0647 | 1.7732 ± 0.3875 | 0.4239 ± 0.0137 | 0.4137 ± 0.0149 | 2.3969 ± 0.3559 |
+| Macro | 0.3913 ± 0.0649 | 1.8988 ± 0.2364 |  | | 8.2529 ± 1.4884 |
+
+Training Horizon Counts
+| Variant | Seed | Kmax | H1 | H2 | H3 |
+|---|---:|---:|---:|---:|---:|
+| baseline | 7 | 3 | 262 | 0 | 0 |
+| baseline | 17 | 3 | 262 | 0 | 0 |
+| baseline | 29 | 3 | 262 | 0 | 0 |
+| rrt | 7 | 3 | 107 | 76 | 79 |
+| rrt | 17 | 3 | 107 | 76 | 79 |
+| rrt | 29 | 3 | 107 | 76 | 79 |
+| rrt_ensemble | 7 | 3 | 107 | 76 | 79 |
+| rrt_ensemble | 17 | 3 | 107 | 76 | 79 |
+| rrt_ensemble | 29 | 3 | 107 | 76 | 79 |
+
+Patient Split Robustness (training seed 17)
+| Split Seed | Baseline Long | RRT Long | RRT RI (%) |
+|---:|---:|---:|---:|
+| 17 | 0.4419 | 0.4440 | -0.4822 |
+All formal Stage 1 phases completed at 2026-09-18T13:00:12Z
+Finished with exit status 0 at 2026-09-18T13:00:12Z

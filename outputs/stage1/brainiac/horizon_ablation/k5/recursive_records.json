@@ -1,0 +1,1164 @@
+[
+  {
+    "patient_id": "PatientID_0013",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.5710376501083374,
+    "cosine_distance": 0.44086307287216187
+  },
+  {
+    "patient_id": "PatientID_0013",
+    "start": 0,
+    "horizon": 2,
+    "mse": 0.3693424463272095,
+    "cosine_distance": 0.2758302688598633
+  },
+  {
+    "patient_id": "PatientID_0013",
+    "start": 0,
+    "horizon": 3,
+    "mse": 0.333972305059433,
+    "cosine_distance": 0.3578556776046753
+  },
+  {
+    "patient_id": "PatientID_0013",
+    "start": 0,
+    "horizon": 4,
+    "mse": 0.460690975189209,
+    "cosine_distance": 0.41350293159484863
+  },
+  {
+    "patient_id": "PatientID_0013",
+    "start": 1,
+    "horizon": 1,
+    "mse": 0.4292970597743988,
+    "cosine_distance": 0.32797372341156006
+  },
+  {
+    "patient_id": "PatientID_0013",
+    "start": 1,
+    "horizon": 2,
+    "mse": 0.19423997402191162,
+    "cosine_distance": 0.22110247611999512
+  },
+  {
+    "patient_id": "PatientID_0013",
+    "start": 1,
+    "horizon": 3,
+    "mse": 0.46425923705101013,
+    "cosine_distance": 0.43517768383026123
+  },
+  {
+    "patient_id": "PatientID_0013",
+    "start": 2,
+    "horizon": 1,
+    "mse": 0.2663261890411377,
+    "cosine_distance": 0.24894428253173828
+  },
+  {
+    "patient_id": "PatientID_0013",
+    "start": 2,
+    "horizon": 2,
+    "mse": 0.32019567489624023,
+    "cosine_distance": 0.2789344787597656
+  },
+  {
+    "patient_id": "PatientID_0013",
+    "start": 3,
+    "horizon": 1,
+    "mse": 0.27729368209838867,
+    "cosine_distance": 0.2589702010154724
+  },
+  {
+    "patient_id": "PatientID_0026",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.3320402204990387,
+    "cosine_distance": 0.2345259189605713
+  },
+  {
+    "patient_id": "PatientID_0031",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.3031465411186218,
+    "cosine_distance": 0.2652754783630371
+  },
+  {
+    "patient_id": "PatientID_0031",
+    "start": 0,
+    "horizon": 2,
+    "mse": 0.24370865523815155,
+    "cosine_distance": 0.24030464887619019
+  },
+  {
+    "patient_id": "PatientID_0031",
+    "start": 0,
+    "horizon": 3,
+    "mse": 0.24710749089717865,
+    "cosine_distance": 0.24486398696899414
+  },
+  {
+    "patient_id": "PatientID_0031",
+    "start": 1,
+    "horizon": 1,
+    "mse": 0.27922379970550537,
+    "cosine_distance": 0.2921113967895508
+  },
+  {
+    "patient_id": "PatientID_0031",
+    "start": 1,
+    "horizon": 2,
+    "mse": 0.4928207993507385,
+    "cosine_distance": 0.5389664173126221
+  },
+  {
+    "patient_id": "PatientID_0031",
+    "start": 2,
+    "horizon": 1,
+    "mse": 0.2878289818763733,
+    "cosine_distance": 0.3058069944381714
+  },
+  {
+    "patient_id": "PatientID_0034",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.6265270113945007,
+    "cosine_distance": 0.6121401786804199
+  },
+  {
+    "patient_id": "PatientID_0034",
+    "start": 0,
+    "horizon": 2,
+    "mse": 0.3477593660354614,
+    "cosine_distance": 0.33939915895462036
+  },
+  {
+    "patient_id": "PatientID_0034",
+    "start": 0,
+    "horizon": 3,
+    "mse": 0.3622868061065674,
+    "cosine_distance": 0.39808154106140137
+  },
+  {
+    "patient_id": "PatientID_0034",
+    "start": 0,
+    "horizon": 4,
+    "mse": 0.37736040353775024,
+    "cosine_distance": 0.35646313428878784
+  },
+  {
+    "patient_id": "PatientID_0034",
+    "start": 0,
+    "horizon": 5,
+    "mse": 0.4185829758644104,
+    "cosine_distance": 0.4431799650192261
+  },
+  {
+    "patient_id": "PatientID_0034",
+    "start": 1,
+    "horizon": 1,
+    "mse": 0.9404341578483582,
+    "cosine_distance": 0.8380531072616577
+  },
+  {
+    "patient_id": "PatientID_0034",
+    "start": 1,
+    "horizon": 2,
+    "mse": 0.9615715742111206,
+    "cosine_distance": 1.0003876686096191
+  },
+  {
+    "patient_id": "PatientID_0034",
+    "start": 1,
+    "horizon": 3,
+    "mse": 0.9479316473007202,
+    "cosine_distance": 0.9462157487869263
+  },
+  {
+    "patient_id": "PatientID_0034",
+    "start": 1,
+    "horizon": 4,
+    "mse": 0.9717086553573608,
+    "cosine_distance": 1.0719571113586426
+  },
+  {
+    "patient_id": "PatientID_0034",
+    "start": 2,
+    "horizon": 1,
+    "mse": 0.2563357353210449,
+    "cosine_distance": 0.2721264362335205
+  },
+  {
+    "patient_id": "PatientID_0034",
+    "start": 2,
+    "horizon": 2,
+    "mse": 0.4024486541748047,
+    "cosine_distance": 0.3770734667778015
+  },
+  {
+    "patient_id": "PatientID_0034",
+    "start": 2,
+    "horizon": 3,
+    "mse": 0.4059962034225464,
+    "cosine_distance": 0.42534488439559937
+  },
+  {
+    "patient_id": "PatientID_0034",
+    "start": 3,
+    "horizon": 1,
+    "mse": 0.26414066553115845,
+    "cosine_distance": 0.23707616329193115
+  },
+  {
+    "patient_id": "PatientID_0034",
+    "start": 3,
+    "horizon": 2,
+    "mse": 0.2205761969089508,
+    "cosine_distance": 0.21740961074829102
+  },
+  {
+    "patient_id": "PatientID_0034",
+    "start": 4,
+    "horizon": 1,
+    "mse": 0.2513381242752075,
+    "cosine_distance": 0.2512345314025879
+  },
+  {
+    "patient_id": "PatientID_0074",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.46250081062316895,
+    "cosine_distance": 0.3362196683883667
+  },
+  {
+    "patient_id": "PatientID_0074",
+    "start": 0,
+    "horizon": 2,
+    "mse": 0.5359032154083252,
+    "cosine_distance": 0.42939066886901855
+  },
+  {
+    "patient_id": "PatientID_0074",
+    "start": 0,
+    "horizon": 3,
+    "mse": 0.43291568756103516,
+    "cosine_distance": 0.42227840423583984
+  },
+  {
+    "patient_id": "PatientID_0074",
+    "start": 0,
+    "horizon": 4,
+    "mse": 0.9175030589103699,
+    "cosine_distance": 0.5847076773643494
+  },
+  {
+    "patient_id": "PatientID_0074",
+    "start": 0,
+    "horizon": 5,
+    "mse": 0.6370998620986938,
+    "cosine_distance": 0.610336184501648
+  },
+  {
+    "patient_id": "PatientID_0074",
+    "start": 1,
+    "horizon": 1,
+    "mse": 0.6460626125335693,
+    "cosine_distance": 0.46724987030029297
+  },
+  {
+    "patient_id": "PatientID_0074",
+    "start": 1,
+    "horizon": 2,
+    "mse": 0.42673182487487793,
+    "cosine_distance": 0.37889111042022705
+  },
+  {
+    "patient_id": "PatientID_0074",
+    "start": 1,
+    "horizon": 3,
+    "mse": 1.2214069366455078,
+    "cosine_distance": 0.7832021713256836
+  },
+  {
+    "patient_id": "PatientID_0074",
+    "start": 1,
+    "horizon": 4,
+    "mse": 0.7966498732566833,
+    "cosine_distance": 0.7319202423095703
+  },
+  {
+    "patient_id": "PatientID_0074",
+    "start": 2,
+    "horizon": 1,
+    "mse": 0.3170830011367798,
+    "cosine_distance": 0.2693054676055908
+  },
+  {
+    "patient_id": "PatientID_0074",
+    "start": 2,
+    "horizon": 2,
+    "mse": 0.6475951075553894,
+    "cosine_distance": 0.36624789237976074
+  },
+  {
+    "patient_id": "PatientID_0074",
+    "start": 2,
+    "horizon": 3,
+    "mse": 0.3915579319000244,
+    "cosine_distance": 0.3327372074127197
+  },
+  {
+    "patient_id": "PatientID_0074",
+    "start": 3,
+    "horizon": 1,
+    "mse": 0.7502541542053223,
+    "cosine_distance": 0.4332195520401001
+  },
+  {
+    "patient_id": "PatientID_0074",
+    "start": 3,
+    "horizon": 2,
+    "mse": 0.3436552882194519,
+    "cosine_distance": 0.29171228408813477
+  },
+  {
+    "patient_id": "PatientID_0074",
+    "start": 4,
+    "horizon": 1,
+    "mse": 0.3638799786567688,
+    "cosine_distance": 0.24356991052627563
+  },
+  {
+    "patient_id": "PatientID_0078",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.5279793739318848,
+    "cosine_distance": 0.3645058274269104
+  },
+  {
+    "patient_id": "PatientID_0078",
+    "start": 0,
+    "horizon": 2,
+    "mse": 0.3334946632385254,
+    "cosine_distance": 0.2842450737953186
+  },
+  {
+    "patient_id": "PatientID_0078",
+    "start": 1,
+    "horizon": 1,
+    "mse": 0.5672270059585571,
+    "cosine_distance": 0.4494144320487976
+  },
+  {
+    "patient_id": "PatientID_0079",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.2901763319969177,
+    "cosine_distance": 0.14973700046539307
+  },
+  {
+    "patient_id": "PatientID_0079",
+    "start": 0,
+    "horizon": 2,
+    "mse": 0.35831063985824585,
+    "cosine_distance": 0.18115520477294922
+  },
+  {
+    "patient_id": "PatientID_0079",
+    "start": 0,
+    "horizon": 3,
+    "mse": 1.075490951538086,
+    "cosine_distance": 0.7171078324317932
+  },
+  {
+    "patient_id": "PatientID_0079",
+    "start": 0,
+    "horizon": 4,
+    "mse": 2.3214330673217773,
+    "cosine_distance": 0.6855774521827698
+  },
+  {
+    "patient_id": "PatientID_0079",
+    "start": 0,
+    "horizon": 5,
+    "mse": 1.898427963256836,
+    "cosine_distance": 0.6232109069824219
+  },
+  {
+    "patient_id": "PatientID_0079",
+    "start": 1,
+    "horizon": 1,
+    "mse": 0.19319847226142883,
+    "cosine_distance": 0.09124362468719482
+  },
+  {
+    "patient_id": "PatientID_0079",
+    "start": 1,
+    "horizon": 2,
+    "mse": 0.8115959167480469,
+    "cosine_distance": 0.6184872388839722
+  },
+  {
+    "patient_id": "PatientID_0079",
+    "start": 1,
+    "horizon": 3,
+    "mse": 2.262265920639038,
+    "cosine_distance": 0.6950348019599915
+  },
+  {
+    "patient_id": "PatientID_0079",
+    "start": 1,
+    "horizon": 4,
+    "mse": 1.7403415441513062,
+    "cosine_distance": 0.5780836343765259
+  },
+  {
+    "patient_id": "PatientID_0079",
+    "start": 2,
+    "horizon": 1,
+    "mse": 1.005915880203247,
+    "cosine_distance": 0.7285341620445251
+  },
+  {
+    "patient_id": "PatientID_0079",
+    "start": 2,
+    "horizon": 2,
+    "mse": 2.5058631896972656,
+    "cosine_distance": 0.7965577840805054
+  },
+  {
+    "patient_id": "PatientID_0079",
+    "start": 2,
+    "horizon": 3,
+    "mse": 2.089853048324585,
+    "cosine_distance": 0.7436158657073975
+  },
+  {
+    "patient_id": "PatientID_0079",
+    "start": 3,
+    "horizon": 1,
+    "mse": 1.7169675827026367,
+    "cosine_distance": 0.4614299535751343
+  },
+  {
+    "patient_id": "PatientID_0079",
+    "start": 3,
+    "horizon": 2,
+    "mse": 1.4406425952911377,
+    "cosine_distance": 0.4372662305831909
+  },
+  {
+    "patient_id": "PatientID_0079",
+    "start": 4,
+    "horizon": 1,
+    "mse": 1.0004591941833496,
+    "cosine_distance": 0.27482712268829346
+  },
+  {
+    "patient_id": "PatientID_0080",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.24864058196544647,
+    "cosine_distance": 0.26342666149139404
+  },
+  {
+    "patient_id": "PatientID_0082",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.5029937028884888,
+    "cosine_distance": 0.29059290885925293
+  },
+  {
+    "patient_id": "PatientID_0089",
+    "start": 0,
+    "horizon": 1,
+    "mse": 3.8198962211608887,
+    "cosine_distance": 0.6538881659507751
+  },
+  {
+    "patient_id": "PatientID_0089",
+    "start": 0,
+    "horizon": 2,
+    "mse": 2.7504258155822754,
+    "cosine_distance": 0.6583278179168701
+  },
+  {
+    "patient_id": "PatientID_0089",
+    "start": 0,
+    "horizon": 3,
+    "mse": 2.9389801025390625,
+    "cosine_distance": 0.5541794300079346
+  },
+  {
+    "patient_id": "PatientID_0089",
+    "start": 0,
+    "horizon": 4,
+    "mse": 3.0178961753845215,
+    "cosine_distance": 0.679314136505127
+  },
+  {
+    "patient_id": "PatientID_0089",
+    "start": 0,
+    "horizon": 5,
+    "mse": 3.1732404232025146,
+    "cosine_distance": 0.706244170665741
+  },
+  {
+    "patient_id": "PatientID_0089",
+    "start": 1,
+    "horizon": 1,
+    "mse": 0.4950776696205139,
+    "cosine_distance": 0.09182703495025635
+  },
+  {
+    "patient_id": "PatientID_0089",
+    "start": 1,
+    "horizon": 2,
+    "mse": 1.179377794265747,
+    "cosine_distance": 0.1871711015701294
+  },
+  {
+    "patient_id": "PatientID_0089",
+    "start": 1,
+    "horizon": 3,
+    "mse": 1.054126262664795,
+    "cosine_distance": 0.20043575763702393
+  },
+  {
+    "patient_id": "PatientID_0089",
+    "start": 1,
+    "horizon": 4,
+    "mse": 1.5856537818908691,
+    "cosine_distance": 0.305452823638916
+  },
+  {
+    "patient_id": "PatientID_0089",
+    "start": 2,
+    "horizon": 1,
+    "mse": 1.0445947647094727,
+    "cosine_distance": 0.1550571322441101
+  },
+  {
+    "patient_id": "PatientID_0089",
+    "start": 2,
+    "horizon": 2,
+    "mse": 0.7466578483581543,
+    "cosine_distance": 0.1251692771911621
+  },
+  {
+    "patient_id": "PatientID_0089",
+    "start": 2,
+    "horizon": 3,
+    "mse": 1.3381595611572266,
+    "cosine_distance": 0.25370287895202637
+  },
+  {
+    "patient_id": "PatientID_0089",
+    "start": 3,
+    "horizon": 1,
+    "mse": 0.7514537572860718,
+    "cosine_distance": 0.13885843753814697
+  },
+  {
+    "patient_id": "PatientID_0089",
+    "start": 3,
+    "horizon": 2,
+    "mse": 1.337109923362732,
+    "cosine_distance": 0.2539868950843811
+  },
+  {
+    "patient_id": "PatientID_0089",
+    "start": 4,
+    "horizon": 1,
+    "mse": 0.45667433738708496,
+    "cosine_distance": 0.07943618297576904
+  },
+  {
+    "patient_id": "PatientID_0091",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.9012423753738403,
+    "cosine_distance": 0.741276741027832
+  },
+  {
+    "patient_id": "PatientID_0125",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.28079140186309814,
+    "cosine_distance": 0.1307312250137329
+  },
+  {
+    "patient_id": "PatientID_0156",
+    "start": 0,
+    "horizon": 1,
+    "mse": 3.076608657836914,
+    "cosine_distance": 0.6343364119529724
+  },
+  {
+    "patient_id": "PatientID_0156",
+    "start": 0,
+    "horizon": 2,
+    "mse": 1.675336241722107,
+    "cosine_distance": 1.0372713804244995
+  },
+  {
+    "patient_id": "PatientID_0156",
+    "start": 1,
+    "horizon": 1,
+    "mse": 1.8535563945770264,
+    "cosine_distance": 0.8659331798553467
+  },
+  {
+    "patient_id": "PatientID_0157",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.379961222410202,
+    "cosine_distance": 0.771344006061554
+  },
+  {
+    "patient_id": "PatientID_0157",
+    "start": 0,
+    "horizon": 2,
+    "mse": 0.5697416067123413,
+    "cosine_distance": 0.9734473824501038
+  },
+  {
+    "patient_id": "PatientID_0157",
+    "start": 0,
+    "horizon": 3,
+    "mse": 0.71000736951828,
+    "cosine_distance": 0.640556812286377
+  },
+  {
+    "patient_id": "PatientID_0157",
+    "start": 0,
+    "horizon": 4,
+    "mse": 0.5990591645240784,
+    "cosine_distance": 1.0305900573730469
+  },
+  {
+    "patient_id": "PatientID_0157",
+    "start": 0,
+    "horizon": 5,
+    "mse": 2.9041495323181152,
+    "cosine_distance": 0.6326926946640015
+  },
+  {
+    "patient_id": "PatientID_0157",
+    "start": 1,
+    "horizon": 1,
+    "mse": 0.16245177388191223,
+    "cosine_distance": 0.23610025644302368
+  },
+  {
+    "patient_id": "PatientID_0157",
+    "start": 1,
+    "horizon": 2,
+    "mse": 1.008749008178711,
+    "cosine_distance": 0.9672842621803284
+  },
+  {
+    "patient_id": "PatientID_0157",
+    "start": 1,
+    "horizon": 3,
+    "mse": 0.25777313113212585,
+    "cosine_distance": 0.39156317710876465
+  },
+  {
+    "patient_id": "PatientID_0157",
+    "start": 1,
+    "horizon": 4,
+    "mse": 3.672344923019409,
+    "cosine_distance": 1.081849217414856
+  },
+  {
+    "patient_id": "PatientID_0157",
+    "start": 2,
+    "horizon": 1,
+    "mse": 1.199267864227295,
+    "cosine_distance": 1.0699020624160767
+  },
+  {
+    "patient_id": "PatientID_0157",
+    "start": 2,
+    "horizon": 2,
+    "mse": 0.22096821665763855,
+    "cosine_distance": 0.3108898401260376
+  },
+  {
+    "patient_id": "PatientID_0157",
+    "start": 2,
+    "horizon": 3,
+    "mse": 4.133767604827881,
+    "cosine_distance": 1.2736845016479492
+  },
+  {
+    "patient_id": "PatientID_0157",
+    "start": 3,
+    "horizon": 1,
+    "mse": 0.7759346961975098,
+    "cosine_distance": 1.0623652935028076
+  },
+  {
+    "patient_id": "PatientID_0157",
+    "start": 3,
+    "horizon": 2,
+    "mse": 2.1729705333709717,
+    "cosine_distance": 0.3321645259857178
+  },
+  {
+    "patient_id": "PatientID_0157",
+    "start": 4,
+    "horizon": 1,
+    "mse": 4.1975226402282715,
+    "cosine_distance": 1.2717726230621338
+  },
+  {
+    "patient_id": "PatientID_0164",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.4704357981681824,
+    "cosine_distance": 0.25357019901275635
+  },
+  {
+    "patient_id": "PatientID_0164",
+    "start": 0,
+    "horizon": 2,
+    "mse": 0.6277062892913818,
+    "cosine_distance": 0.387146532535553
+  },
+  {
+    "patient_id": "PatientID_0164",
+    "start": 0,
+    "horizon": 3,
+    "mse": 0.8032333254814148,
+    "cosine_distance": 0.6005135774612427
+  },
+  {
+    "patient_id": "PatientID_0164",
+    "start": 0,
+    "horizon": 4,
+    "mse": 0.9654169082641602,
+    "cosine_distance": 0.6214697957038879
+  },
+  {
+    "patient_id": "PatientID_0164",
+    "start": 1,
+    "horizon": 1,
+    "mse": 0.40591225028038025,
+    "cosine_distance": 0.23186761140823364
+  },
+  {
+    "patient_id": "PatientID_0164",
+    "start": 1,
+    "horizon": 2,
+    "mse": 0.6732894778251648,
+    "cosine_distance": 0.49559158086776733
+  },
+  {
+    "patient_id": "PatientID_0164",
+    "start": 1,
+    "horizon": 3,
+    "mse": 0.8785204887390137,
+    "cosine_distance": 0.564720869064331
+  },
+  {
+    "patient_id": "PatientID_0164",
+    "start": 2,
+    "horizon": 1,
+    "mse": 0.1529199779033661,
+    "cosine_distance": 0.09586107730865479
+  },
+  {
+    "patient_id": "PatientID_0164",
+    "start": 2,
+    "horizon": 2,
+    "mse": 0.3156867027282715,
+    "cosine_distance": 0.1593167781829834
+  },
+  {
+    "patient_id": "PatientID_0164",
+    "start": 3,
+    "horizon": 1,
+    "mse": 0.21795754134655,
+    "cosine_distance": 0.10738223791122437
+  },
+  {
+    "patient_id": "PatientID_0171",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.5088455080986023,
+    "cosine_distance": 0.2405322790145874
+  },
+  {
+    "patient_id": "PatientID_0171",
+    "start": 0,
+    "horizon": 2,
+    "mse": 0.4285306930541992,
+    "cosine_distance": 0.4069410562515259
+  },
+  {
+    "patient_id": "PatientID_0171",
+    "start": 1,
+    "horizon": 1,
+    "mse": 0.7941616773605347,
+    "cosine_distance": 0.6714276075363159
+  },
+  {
+    "patient_id": "PatientID_0188",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.5244307518005371,
+    "cosine_distance": 0.28800690174102783
+  },
+  {
+    "patient_id": "PatientID_0191",
+    "start": 0,
+    "horizon": 1,
+    "mse": 1.7623056173324585,
+    "cosine_distance": 0.3675028085708618
+  },
+  {
+    "patient_id": "PatientID_0191",
+    "start": 0,
+    "horizon": 2,
+    "mse": 2.0202133655548096,
+    "cosine_distance": 0.5674939155578613
+  },
+  {
+    "patient_id": "PatientID_0191",
+    "start": 0,
+    "horizon": 3,
+    "mse": 1.5639865398406982,
+    "cosine_distance": 0.4676847457885742
+  },
+  {
+    "patient_id": "PatientID_0191",
+    "start": 1,
+    "horizon": 1,
+    "mse": 0.65990149974823,
+    "cosine_distance": 0.38875991106033325
+  },
+  {
+    "patient_id": "PatientID_0191",
+    "start": 1,
+    "horizon": 2,
+    "mse": 0.4515392780303955,
+    "cosine_distance": 0.31662988662719727
+  },
+  {
+    "patient_id": "PatientID_0191",
+    "start": 2,
+    "horizon": 1,
+    "mse": 0.4087500274181366,
+    "cosine_distance": 0.30386805534362793
+  },
+  {
+    "patient_id": "PatientID_0196",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.8638455271720886,
+    "cosine_distance": 0.7051181793212891
+  },
+  {
+    "patient_id": "PatientID_0196",
+    "start": 0,
+    "horizon": 2,
+    "mse": 1.086977481842041,
+    "cosine_distance": 0.586787760257721
+  },
+  {
+    "patient_id": "PatientID_0196",
+    "start": 1,
+    "horizon": 1,
+    "mse": 1.0222787857055664,
+    "cosine_distance": 0.5245552659034729
+  },
+  {
+    "patient_id": "PatientID_0205",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.40863484144210815,
+    "cosine_distance": 0.4190526604652405
+  },
+  {
+    "patient_id": "PatientID_0205",
+    "start": 0,
+    "horizon": 2,
+    "mse": 0.699140191078186,
+    "cosine_distance": 0.8351449966430664
+  },
+  {
+    "patient_id": "PatientID_0205",
+    "start": 0,
+    "horizon": 3,
+    "mse": 0.6330637335777283,
+    "cosine_distance": 0.6654687523841858
+  },
+  {
+    "patient_id": "PatientID_0205",
+    "start": 0,
+    "horizon": 4,
+    "mse": 1.0122829675674438,
+    "cosine_distance": 0.7885943651199341
+  },
+  {
+    "patient_id": "PatientID_0205",
+    "start": 1,
+    "horizon": 1,
+    "mse": 0.6151269674301147,
+    "cosine_distance": 0.7346946001052856
+  },
+  {
+    "patient_id": "PatientID_0205",
+    "start": 1,
+    "horizon": 2,
+    "mse": 0.6237967014312744,
+    "cosine_distance": 0.6771453619003296
+  },
+  {
+    "patient_id": "PatientID_0205",
+    "start": 1,
+    "horizon": 3,
+    "mse": 0.7903823852539062,
+    "cosine_distance": 0.6230671405792236
+  },
+  {
+    "patient_id": "PatientID_0205",
+    "start": 2,
+    "horizon": 1,
+    "mse": 0.27134889364242554,
+    "cosine_distance": 0.29381489753723145
+  },
+  {
+    "patient_id": "PatientID_0205",
+    "start": 2,
+    "horizon": 2,
+    "mse": 0.8404528498649597,
+    "cosine_distance": 0.6944792866706848
+  },
+  {
+    "patient_id": "PatientID_0205",
+    "start": 3,
+    "horizon": 1,
+    "mse": 0.8119999766349792,
+    "cosine_distance": 0.5992749929428101
+  },
+  {
+    "patient_id": "PatientID_0213",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.40852516889572144,
+    "cosine_distance": 0.39898681640625
+  },
+  {
+    "patient_id": "PatientID_0213",
+    "start": 0,
+    "horizon": 2,
+    "mse": 0.38232719898223877,
+    "cosine_distance": 0.3589068055152893
+  },
+  {
+    "patient_id": "PatientID_0213",
+    "start": 0,
+    "horizon": 3,
+    "mse": 0.4775577485561371,
+    "cosine_distance": 0.4986303448677063
+  },
+  {
+    "patient_id": "PatientID_0213",
+    "start": 0,
+    "horizon": 4,
+    "mse": 0.682974100112915,
+    "cosine_distance": 0.4340522289276123
+  },
+  {
+    "patient_id": "PatientID_0213",
+    "start": 1,
+    "horizon": 1,
+    "mse": 0.48780712485313416,
+    "cosine_distance": 0.5240765810012817
+  },
+  {
+    "patient_id": "PatientID_0213",
+    "start": 1,
+    "horizon": 2,
+    "mse": 0.5009011030197144,
+    "cosine_distance": 0.5965752601623535
+  },
+  {
+    "patient_id": "PatientID_0213",
+    "start": 1,
+    "horizon": 3,
+    "mse": 0.68175208568573,
+    "cosine_distance": 0.4426541328430176
+  },
+  {
+    "patient_id": "PatientID_0213",
+    "start": 2,
+    "horizon": 1,
+    "mse": 0.18122081458568573,
+    "cosine_distance": 0.1972827911376953
+  },
+  {
+    "patient_id": "PatientID_0213",
+    "start": 2,
+    "horizon": 2,
+    "mse": 0.6701814532279968,
+    "cosine_distance": 0.429862380027771
+  },
+  {
+    "patient_id": "PatientID_0213",
+    "start": 3,
+    "horizon": 1,
+    "mse": 0.7820478677749634,
+    "cosine_distance": 0.5143993496894836
+  },
+  {
+    "patient_id": "PatientID_0215",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.6483087539672852,
+    "cosine_distance": 0.6488329768180847
+  },
+  {
+    "patient_id": "PatientID_0215",
+    "start": 0,
+    "horizon": 2,
+    "mse": 0.6650957465171814,
+    "cosine_distance": 0.646774411201477
+  },
+  {
+    "patient_id": "PatientID_0215",
+    "start": 0,
+    "horizon": 3,
+    "mse": 0.6188238263130188,
+    "cosine_distance": 0.6459673047065735
+  },
+  {
+    "patient_id": "PatientID_0215",
+    "start": 0,
+    "horizon": 4,
+    "mse": 0.651939868927002,
+    "cosine_distance": 0.5331205129623413
+  },
+  {
+    "patient_id": "PatientID_0215",
+    "start": 0,
+    "horizon": 5,
+    "mse": 0.8453415632247925,
+    "cosine_distance": 0.6692899465560913
+  },
+  {
+    "patient_id": "PatientID_0215",
+    "start": 1,
+    "horizon": 1,
+    "mse": 0.19010919332504272,
+    "cosine_distance": 0.25111520290374756
+  },
+  {
+    "patient_id": "PatientID_0215",
+    "start": 1,
+    "horizon": 2,
+    "mse": 0.2442246675491333,
+    "cosine_distance": 0.3690069913864136
+  },
+  {
+    "patient_id": "PatientID_0215",
+    "start": 1,
+    "horizon": 3,
+    "mse": 0.4701208770275116,
+    "cosine_distance": 0.4503304362297058
+  },
+  {
+    "patient_id": "PatientID_0215",
+    "start": 1,
+    "horizon": 4,
+    "mse": 0.6123936176300049,
+    "cosine_distance": 0.5910366773605347
+  },
+  {
+    "patient_id": "PatientID_0215",
+    "start": 2,
+    "horizon": 1,
+    "mse": 0.3600660562515259,
+    "cosine_distance": 0.5205140113830566
+  },
+  {
+    "patient_id": "PatientID_0215",
+    "start": 2,
+    "horizon": 2,
+    "mse": 0.5484767556190491,
+    "cosine_distance": 0.5425235033035278
+  },
+  {
+    "patient_id": "PatientID_0215",
+    "start": 2,
+    "horizon": 3,
+    "mse": 0.588195264339447,
+    "cosine_distance": 0.560380220413208
+  },
+  {
+    "patient_id": "PatientID_0215",
+    "start": 3,
+    "horizon": 1,
+    "mse": 0.3041139245033264,
+    "cosine_distance": 0.25832808017730713
+  },
+  {
+    "patient_id": "PatientID_0215",
+    "start": 3,
+    "horizon": 2,
+    "mse": 0.5422836542129517,
+    "cosine_distance": 0.49291616678237915
+  },
+  {
+    "patient_id": "PatientID_0215",
+    "start": 4,
+    "horizon": 1,
+    "mse": 0.6078700423240662,
+    "cosine_distance": 0.5009992718696594
+  },
+  {
+    "patient_id": "PatientID_0236",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.6293474435806274,
+    "cosine_distance": 0.6040905117988586
+  },
+  {
+    "patient_id": "PatientID_0236",
+    "start": 0,
+    "horizon": 2,
+    "mse": 1.2271779775619507,
+    "cosine_distance": 0.8434988260269165
+  },
+  {
+    "patient_id": "PatientID_0236",
+    "start": 1,
+    "horizon": 1,
+    "mse": 1.2511365413665771,
+    "cosine_distance": 0.8439896702766418
+  },
+  {
+    "patient_id": "PatientID_0242",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.9161810278892517,
+    "cosine_distance": 0.5852727890014648
+  },
+  {
+    "patient_id": "PatientID_0242",
+    "start": 0,
+    "horizon": 2,
+    "mse": 2.064042806625366,
+    "cosine_distance": 0.7684497833251953
+  },
+  {
+    "patient_id": "PatientID_0242",
+    "start": 1,
+    "horizon": 1,
+    "mse": 2.179619550704956,
+    "cosine_distance": 0.8012188673019409
+  }
+]

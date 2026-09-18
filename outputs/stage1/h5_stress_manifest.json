@@ -1,0 +1,33 @@
+{
+  "started_utc": "2026-09-18T13:08:22.281587+00:00",
+  "purpose": "Optional Kmax=5 BrainIAC long-horizon stress test requested after the formal K1/K2/K3 experiment",
+  "source_snapshot": "/home/tanyuejun/CLARITY_HAUWM_Minimal/outputs/stage1/protocol_snapshot",
+  "config": "/home/tanyuejun/CLARITY_HAUWM_Minimal/outputs/stage1/protocol_snapshot/configs/stage1_recursive.json",
+  "gpu_physical_index": 5,
+  "training_seed": 17,
+  "split_seed": 17,
+  "checkpoint_selection": "mean validation MSE@2 and MSE@3",
+  "H5_windows": {
+    "train": 14,
+    "validation": 5,
+    "test": 6
+  },
+  "main_comparison": "K3 versus K5 on the same H1-H3 test windows",
+  "H4_H5_interpretation": "descriptive only because test counts are small",
+  "completed_utc": "2026-09-18T13:10:07.303052+00:00",
+  "exit_status": 0,
+  "checkpoint": "/home/tanyuejun/CLARITY_HAUWM_Minimal/outputs/stage1/brainiac/horizon_ablation/k5/best.pt",
+  "best_epoch": [
+    4
+  ],
+  "training_horizon_counts": {
+    "1": 107,
+    "2": 76,
+    "3": 40,
+    "4": 25,
+    "5": 14
+  },
+  "comparison_report": "/home/tanyuejun/CLARITY_HAUWM_Minimal/outputs/stage1/brainiac/reports/h5_stress_comparison.json",
+  "k5_vs_k3_long_relative_improvement_percent": -4.226956954293303,
+  "checkpoint_sha256": "884eb6537d93847e5c9b4f95fcdd3ae2349492ba0900c5878628af9eb67d3179"
+}

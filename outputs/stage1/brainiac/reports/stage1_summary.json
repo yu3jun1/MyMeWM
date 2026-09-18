@@ -1,0 +1,14 @@
+{
+  "main_encoder": "brainiac",
+  "main_split_seed": 17,
+  "main_max_horizon": 3,
+  "baseline_long_mse": 0.9720760677896795,
+  "rrt_long_mse": 0.8615503880748715,
+  "rrt_relative_improvement": 11.24185062324913,
+  "ensemble_long_mse": 0.9181819515221793,
+  "rrt_ensemble_long_mse": 0.8532577937094814,
+  "rrt_ensemble_relative_improvement": 7.064054526221369,
+  "macro_uncertainty_spearman": 0.28359407033612033,
+  "macro_high_low_ratio": 1.8424549681207816,
+  "risk_reduction_80": 16.988797718133288
+}

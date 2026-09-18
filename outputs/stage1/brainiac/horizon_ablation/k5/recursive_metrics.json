@@ -1,0 +1,42 @@
+{
+  "variant": "rrt",
+  "seed": 17,
+  "by_horizon": [
+    {
+      "horizon": 1,
+      "n_predictions": 70,
+      "n_patients": 24,
+      "mse": 0.7416935918586595,
+      "cosine_distance": 0.4312228943620409
+    },
+    {
+      "horizon": 2,
+      "n_predictions": 46,
+      "n_patients": 18,
+      "mse": 0.8093442861800608,
+      "cosine_distance": 0.48465794454450195
+    },
+    {
+      "horizon": 3,
+      "n_predictions": 28,
+      "n_patients": 12,
+      "mse": 1.0061962311821324,
+      "cosine_distance": 0.547680567417826
+    },
+    {
+      "horizon": 4,
+      "n_predictions": 16,
+      "n_patients": 10,
+      "mse": 1.2741030678153038,
+      "cosine_distance": 0.6554807499051094
+    },
+    {
+      "horizon": 5,
+      "n_predictions": 6,
+      "n_patients": 6,
+      "mse": 1.6461403866608937,
+      "cosine_distance": 0.614158978064855
+    }
+  ],
+  "long_horizon_mse": 0.9077702586810966
+}

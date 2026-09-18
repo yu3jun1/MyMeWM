@@ -1,0 +1,28 @@
+{
+  "variant": "ensemble",
+  "seed": 29,
+  "by_horizon": [
+    {
+      "horizon": 1,
+      "n_predictions": 70,
+      "n_patients": 24,
+      "mse": 0.7594882873552186,
+      "cosine_distance": 0.41255351305007937
+    },
+    {
+      "horizon": 2,
+      "n_predictions": 46,
+      "n_patients": 18,
+      "mse": 0.8470016368057417,
+      "cosine_distance": 0.46566885709762573
+    },
+    {
+      "horizon": 3,
+      "n_predictions": 28,
+      "n_patients": 12,
+      "mse": 0.9913196004927158,
+      "cosine_distance": 0.5027710029057094
+    }
+  ],
+  "long_horizon_mse": 0.9191606186492287
+}

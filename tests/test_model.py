@@ -15,6 +15,7 @@ class AddAction(nn.Module):
 
 def test_recursive_rollout_uses_each_members_own_state_and_population_disagreement():
     model = EnsembleDynamics(ModelConfig(latent_dim=1, action_dim=1, ensemble_size=2))
+    assert not any("horizon" in name for name in model.state_dict())
     model.members = nn.ModuleList([AddAction(1), AddAction(2)])
     start = torch.zeros(2, 1)
     actions = torch.ones(2, 3, 1)

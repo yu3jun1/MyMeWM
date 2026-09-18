@@ -1,0 +1,9 @@
+[
+  {
+    "split_seed": 17,
+    "training_seed": 17,
+    "baseline_long_mse": 0.4418849768637685,
+    "rrt_long_mse": 0.44401559824852843,
+    "rrt_relative_improvement": -0.48216651307808733
+  }
+]

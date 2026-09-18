@@ -1,0 +1,31 @@
+{
+  "variant": "rrt_ensemble",
+  "seed": 17,
+  "by_horizon": [
+    {
+      "horizon": 1,
+      "n_predictions": 70,
+      "n_retained": 56,
+      "risk_100": 0.4522982966686998,
+      "risk_80": 0.3886081886344722,
+      "risk_reduction": 14.081438843197638
+    },
+    {
+      "horizon": 2,
+      "n_predictions": 46,
+      "n_retained": 36,
+      "risk_100": 0.4797544157051522,
+      "risk_80": 0.41733441688120365,
+      "risk_reduction": 13.010823200491537
+    },
+    {
+      "horizon": 3,
+      "n_predictions": 28,
+      "n_retained": 22,
+      "risk_100": 0.4305225368589163,
+      "risk_80": 0.4210372394458814,
+      "risk_reduction": 2.2032057792466397
+    }
+  ],
+  "macro_risk_reduction": 9.765155940978605
+}

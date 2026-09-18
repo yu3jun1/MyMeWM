@@ -1,0 +1,1010 @@
+[
+  {
+    "patient_id": "PatientID_0013",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.2609950304031372,
+    "disagreement": 0.011169418692588806
+  },
+  {
+    "patient_id": "PatientID_0013",
+    "start": 0,
+    "horizon": 2,
+    "mse": 0.5423424243927002,
+    "disagreement": 0.026879476383328438
+  },
+  {
+    "patient_id": "PatientID_0013",
+    "start": 0,
+    "horizon": 3,
+    "mse": 0.4625120759010315,
+    "disagreement": 0.024436816573143005
+  },
+  {
+    "patient_id": "PatientID_0013",
+    "start": 1,
+    "horizon": 1,
+    "mse": 0.38790616393089294,
+    "disagreement": 0.021553359925746918
+  },
+  {
+    "patient_id": "PatientID_0013",
+    "start": 1,
+    "horizon": 2,
+    "mse": 0.3229408264160156,
+    "disagreement": 0.01985214836895466
+  },
+  {
+    "patient_id": "PatientID_0013",
+    "start": 1,
+    "horizon": 3,
+    "mse": 0.387109637260437,
+    "disagreement": 0.02007433772087097
+  },
+  {
+    "patient_id": "PatientID_0013",
+    "start": 2,
+    "horizon": 1,
+    "mse": 0.22474780678749084,
+    "disagreement": 0.0154939666390419
+  },
+  {
+    "patient_id": "PatientID_0013",
+    "start": 2,
+    "horizon": 2,
+    "mse": 0.19211532175540924,
+    "disagreement": 0.0188685841858387
+  },
+  {
+    "patient_id": "PatientID_0013",
+    "start": 3,
+    "horizon": 1,
+    "mse": 0.23902174830436707,
+    "disagreement": 0.015383683145046234
+  },
+  {
+    "patient_id": "PatientID_0026",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.4027971029281616,
+    "disagreement": 0.006685237865895033
+  },
+  {
+    "patient_id": "PatientID_0031",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.11433113366365433,
+    "disagreement": 0.008810196071863174
+  },
+  {
+    "patient_id": "PatientID_0031",
+    "start": 0,
+    "horizon": 2,
+    "mse": 0.07328344881534576,
+    "disagreement": 0.011011585593223572
+  },
+  {
+    "patient_id": "PatientID_0031",
+    "start": 0,
+    "horizon": 3,
+    "mse": 0.30191612243652344,
+    "disagreement": 0.014869004487991333
+  },
+  {
+    "patient_id": "PatientID_0031",
+    "start": 1,
+    "horizon": 1,
+    "mse": 0.11675835400819778,
+    "disagreement": 0.007613298483192921
+  },
+  {
+    "patient_id": "PatientID_0031",
+    "start": 1,
+    "horizon": 2,
+    "mse": 0.35162240266799927,
+    "disagreement": 0.010275553911924362
+  },
+  {
+    "patient_id": "PatientID_0031",
+    "start": 2,
+    "horizon": 1,
+    "mse": 0.2891230881214142,
+    "disagreement": 0.008196000941097736
+  },
+  {
+    "patient_id": "PatientID_0034",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.4655590355396271,
+    "disagreement": 0.010750573128461838
+  },
+  {
+    "patient_id": "PatientID_0034",
+    "start": 0,
+    "horizon": 2,
+    "mse": 0.40085476636886597,
+    "disagreement": 0.01696399599313736
+  },
+  {
+    "patient_id": "PatientID_0034",
+    "start": 0,
+    "horizon": 3,
+    "mse": 0.4146420657634735,
+    "disagreement": 0.03094741888344288
+  },
+  {
+    "patient_id": "PatientID_0034",
+    "start": 1,
+    "horizon": 1,
+    "mse": 0.4786735773086548,
+    "disagreement": 0.0074889324605464935
+  },
+  {
+    "patient_id": "PatientID_0034",
+    "start": 1,
+    "horizon": 2,
+    "mse": 0.34942638874053955,
+    "disagreement": 0.0203038789331913
+  },
+  {
+    "patient_id": "PatientID_0034",
+    "start": 1,
+    "horizon": 3,
+    "mse": 0.43885159492492676,
+    "disagreement": 0.034488581120967865
+  },
+  {
+    "patient_id": "PatientID_0034",
+    "start": 2,
+    "horizon": 1,
+    "mse": 0.4650452136993408,
+    "disagreement": 0.06406055390834808
+  },
+  {
+    "patient_id": "PatientID_0034",
+    "start": 2,
+    "horizon": 2,
+    "mse": 0.7785197496414185,
+    "disagreement": 0.035865772515535355
+  },
+  {
+    "patient_id": "PatientID_0034",
+    "start": 2,
+    "horizon": 3,
+    "mse": 0.6036027669906616,
+    "disagreement": 0.04326944798231125
+  },
+  {
+    "patient_id": "PatientID_0034",
+    "start": 3,
+    "horizon": 1,
+    "mse": 0.34372997283935547,
+    "disagreement": 0.012496121227741241
+  },
+  {
+    "patient_id": "PatientID_0034",
+    "start": 3,
+    "horizon": 2,
+    "mse": 0.3478376269340515,
+    "disagreement": 0.032683391124010086
+  },
+  {
+    "patient_id": "PatientID_0034",
+    "start": 4,
+    "horizon": 1,
+    "mse": 0.20638257265090942,
+    "disagreement": 0.01133912242949009
+  },
+  {
+    "patient_id": "PatientID_0074",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.22755791246891022,
+    "disagreement": 0.008232604712247849
+  },
+  {
+    "patient_id": "PatientID_0074",
+    "start": 0,
+    "horizon": 2,
+    "mse": 0.4541807174682617,
+    "disagreement": 0.017628630623221397
+  },
+  {
+    "patient_id": "PatientID_0074",
+    "start": 0,
+    "horizon": 3,
+    "mse": 0.3533608913421631,
+    "disagreement": 0.025503255426883698
+  },
+  {
+    "patient_id": "PatientID_0074",
+    "start": 1,
+    "horizon": 1,
+    "mse": 0.4116075038909912,
+    "disagreement": 0.004890576004981995
+  },
+  {
+    "patient_id": "PatientID_0074",
+    "start": 1,
+    "horizon": 2,
+    "mse": 0.1744760125875473,
+    "disagreement": 0.01231247279793024
+  },
+  {
+    "patient_id": "PatientID_0074",
+    "start": 1,
+    "horizon": 3,
+    "mse": 0.23931367695331573,
+    "disagreement": 0.019683536142110825
+  },
+  {
+    "patient_id": "PatientID_0074",
+    "start": 2,
+    "horizon": 1,
+    "mse": 0.4430626630783081,
+    "disagreement": 0.012764285318553448
+  },
+  {
+    "patient_id": "PatientID_0074",
+    "start": 2,
+    "horizon": 2,
+    "mse": 0.2601155638694763,
+    "disagreement": 0.020104214549064636
+  },
+  {
+    "patient_id": "PatientID_0074",
+    "start": 2,
+    "horizon": 3,
+    "mse": 0.2758502662181854,
+    "disagreement": 0.02548292651772499
+  },
+  {
+    "patient_id": "PatientID_0074",
+    "start": 3,
+    "horizon": 1,
+    "mse": 0.259021133184433,
+    "disagreement": 0.004979859571903944
+  },
+  {
+    "patient_id": "PatientID_0074",
+    "start": 3,
+    "horizon": 2,
+    "mse": 0.3382568657398224,
+    "disagreement": 0.01304103434085846
+  },
+  {
+    "patient_id": "PatientID_0074",
+    "start": 4,
+    "horizon": 1,
+    "mse": 0.14287729561328888,
+    "disagreement": 0.006236647255718708
+  },
+  {
+    "patient_id": "PatientID_0078",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.3311467170715332,
+    "disagreement": 0.005374027416110039
+  },
+  {
+    "patient_id": "PatientID_0078",
+    "start": 0,
+    "horizon": 2,
+    "mse": 0.8741803169250488,
+    "disagreement": 0.009406719356775284
+  },
+  {
+    "patient_id": "PatientID_0078",
+    "start": 1,
+    "horizon": 1,
+    "mse": 1.0838494300842285,
+    "disagreement": 0.017349038273096085
+  },
+  {
+    "patient_id": "PatientID_0079",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.1770176887512207,
+    "disagreement": 0.010540030896663666
+  },
+  {
+    "patient_id": "PatientID_0079",
+    "start": 0,
+    "horizon": 2,
+    "mse": 0.2508217692375183,
+    "disagreement": 0.01339593343436718
+  },
+  {
+    "patient_id": "PatientID_0079",
+    "start": 0,
+    "horizon": 3,
+    "mse": 0.3413783609867096,
+    "disagreement": 0.02224895730614662
+  },
+  {
+    "patient_id": "PatientID_0079",
+    "start": 1,
+    "horizon": 1,
+    "mse": 0.09660792350769043,
+    "disagreement": 0.009297901764512062
+  },
+  {
+    "patient_id": "PatientID_0079",
+    "start": 1,
+    "horizon": 2,
+    "mse": 0.22758397459983826,
+    "disagreement": 0.012652682140469551
+  },
+  {
+    "patient_id": "PatientID_0079",
+    "start": 1,
+    "horizon": 3,
+    "mse": 0.10168399661779404,
+    "disagreement": 0.01574862003326416
+  },
+  {
+    "patient_id": "PatientID_0079",
+    "start": 2,
+    "horizon": 1,
+    "mse": 0.22114315629005432,
+    "disagreement": 0.005805314518511295
+  },
+  {
+    "patient_id": "PatientID_0079",
+    "start": 2,
+    "horizon": 2,
+    "mse": 0.11155767738819122,
+    "disagreement": 0.014324795454740524
+  },
+  {
+    "patient_id": "PatientID_0079",
+    "start": 2,
+    "horizon": 3,
+    "mse": 0.12120819091796875,
+    "disagreement": 0.023914219811558723
+  },
+  {
+    "patient_id": "PatientID_0079",
+    "start": 3,
+    "horizon": 1,
+    "mse": 0.23964902758598328,
+    "disagreement": 0.007490803487598896
+  },
+  {
+    "patient_id": "PatientID_0079",
+    "start": 3,
+    "horizon": 2,
+    "mse": 0.2947961390018463,
+    "disagreement": 0.0338016152381897
+  },
+  {
+    "patient_id": "PatientID_0079",
+    "start": 4,
+    "horizon": 1,
+    "mse": 0.16141265630722046,
+    "disagreement": 0.006053684279322624
+  },
+  {
+    "patient_id": "PatientID_0080",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.20720118284225464,
+    "disagreement": 0.007916228845715523
+  },
+  {
+    "patient_id": "PatientID_0082",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.42938753962516785,
+    "disagreement": 0.004268609918653965
+  },
+  {
+    "patient_id": "PatientID_0089",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.6747355461120605,
+    "disagreement": 0.0085917292162776
+  },
+  {
+    "patient_id": "PatientID_0089",
+    "start": 0,
+    "horizon": 2,
+    "mse": 0.5820199251174927,
+    "disagreement": 0.0173566322773695
+  },
+  {
+    "patient_id": "PatientID_0089",
+    "start": 0,
+    "horizon": 3,
+    "mse": 0.5193966627120972,
+    "disagreement": 0.02532978355884552
+  },
+  {
+    "patient_id": "PatientID_0089",
+    "start": 1,
+    "horizon": 1,
+    "mse": 0.1431308090686798,
+    "disagreement": 0.006546110846102238
+  },
+  {
+    "patient_id": "PatientID_0089",
+    "start": 1,
+    "horizon": 2,
+    "mse": 0.2991194427013397,
+    "disagreement": 0.01315925270318985
+  },
+  {
+    "patient_id": "PatientID_0089",
+    "start": 1,
+    "horizon": 3,
+    "mse": 0.18200287222862244,
+    "disagreement": 0.02238989807665348
+  },
+  {
+    "patient_id": "PatientID_0089",
+    "start": 2,
+    "horizon": 1,
+    "mse": 0.1351768672466278,
+    "disagreement": 0.0032434631139039993
+  },
+  {
+    "patient_id": "PatientID_0089",
+    "start": 2,
+    "horizon": 2,
+    "mse": 0.08840024471282959,
+    "disagreement": 0.00923663005232811
+  },
+  {
+    "patient_id": "PatientID_0089",
+    "start": 2,
+    "horizon": 3,
+    "mse": 0.12535470724105835,
+    "disagreement": 0.02133990451693535
+  },
+  {
+    "patient_id": "PatientID_0089",
+    "start": 3,
+    "horizon": 1,
+    "mse": 0.12476720660924911,
+    "disagreement": 0.007231526542454958
+  },
+  {
+    "patient_id": "PatientID_0089",
+    "start": 3,
+    "horizon": 2,
+    "mse": 0.1596553474664688,
+    "disagreement": 0.017109904438257217
+  },
+  {
+    "patient_id": "PatientID_0089",
+    "start": 4,
+    "horizon": 1,
+    "mse": 0.09672200679779053,
+    "disagreement": 0.0031011460814625025
+  },
+  {
+    "patient_id": "PatientID_0091",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.3670351505279541,
+    "disagreement": 0.01010405458509922
+  },
+  {
+    "patient_id": "PatientID_0125",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.2240886688232422,
+    "disagreement": 0.00560940895229578
+  },
+  {
+    "patient_id": "PatientID_0156",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.3978840410709381,
+    "disagreement": 0.01790470816195011
+  },
+  {
+    "patient_id": "PatientID_0156",
+    "start": 0,
+    "horizon": 2,
+    "mse": 0.4266500771045685,
+    "disagreement": 0.02452685311436653
+  },
+  {
+    "patient_id": "PatientID_0156",
+    "start": 1,
+    "horizon": 1,
+    "mse": 0.27502331137657166,
+    "disagreement": 0.015560347586870193
+  },
+  {
+    "patient_id": "PatientID_0157",
+    "start": 0,
+    "horizon": 1,
+    "mse": 2.084832191467285,
+    "disagreement": 0.008872589096426964
+  },
+  {
+    "patient_id": "PatientID_0157",
+    "start": 0,
+    "horizon": 2,
+    "mse": 0.5501906871795654,
+    "disagreement": 0.022839687764644623
+  },
+  {
+    "patient_id": "PatientID_0157",
+    "start": 0,
+    "horizon": 3,
+    "mse": 0.3428446650505066,
+    "disagreement": 0.03735795617103577
+  },
+  {
+    "patient_id": "PatientID_0157",
+    "start": 1,
+    "horizon": 1,
+    "mse": 1.6077969074249268,
+    "disagreement": 0.0816948264837265
+  },
+  {
+    "patient_id": "PatientID_0157",
+    "start": 1,
+    "horizon": 2,
+    "mse": 0.949895977973938,
+    "disagreement": 0.13921350240707397
+  },
+  {
+    "patient_id": "PatientID_0157",
+    "start": 1,
+    "horizon": 3,
+    "mse": 0.764690637588501,
+    "disagreement": 0.16410264372825623
+  },
+  {
+    "patient_id": "PatientID_0157",
+    "start": 2,
+    "horizon": 1,
+    "mse": 0.32730478048324585,
+    "disagreement": 0.031806960701942444
+  },
+  {
+    "patient_id": "PatientID_0157",
+    "start": 2,
+    "horizon": 2,
+    "mse": 0.329655259847641,
+    "disagreement": 0.054880864918231964
+  },
+  {
+    "patient_id": "PatientID_0157",
+    "start": 2,
+    "horizon": 3,
+    "mse": 0.3210844397544861,
+    "disagreement": 0.06617067754268646
+  },
+  {
+    "patient_id": "PatientID_0157",
+    "start": 3,
+    "horizon": 1,
+    "mse": 0.2614760994911194,
+    "disagreement": 0.028096530586481094
+  },
+  {
+    "patient_id": "PatientID_0157",
+    "start": 3,
+    "horizon": 2,
+    "mse": 0.2383268177509308,
+    "disagreement": 0.04967962205410004
+  },
+  {
+    "patient_id": "PatientID_0157",
+    "start": 4,
+    "horizon": 1,
+    "mse": 0.2884120047092438,
+    "disagreement": 0.030764121562242508
+  },
+  {
+    "patient_id": "PatientID_0164",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.3145410418510437,
+    "disagreement": 0.01612052321434021
+  },
+  {
+    "patient_id": "PatientID_0164",
+    "start": 0,
+    "horizon": 2,
+    "mse": 0.3292749226093292,
+    "disagreement": 0.0283613633364439
+  },
+  {
+    "patient_id": "PatientID_0164",
+    "start": 0,
+    "horizon": 3,
+    "mse": 1.0999599695205688,
+    "disagreement": 0.0417410209774971
+  },
+  {
+    "patient_id": "PatientID_0164",
+    "start": 1,
+    "horizon": 1,
+    "mse": 0.22946101427078247,
+    "disagreement": 0.003954614512622356
+  },
+  {
+    "patient_id": "PatientID_0164",
+    "start": 1,
+    "horizon": 2,
+    "mse": 0.987159252166748,
+    "disagreement": 0.012056350708007812
+  },
+  {
+    "patient_id": "PatientID_0164",
+    "start": 1,
+    "horizon": 3,
+    "mse": 0.5530755519866943,
+    "disagreement": 0.0228451956063509
+  },
+  {
+    "patient_id": "PatientID_0164",
+    "start": 2,
+    "horizon": 1,
+    "mse": 0.7424994111061096,
+    "disagreement": 0.006839177571237087
+  },
+  {
+    "patient_id": "PatientID_0164",
+    "start": 2,
+    "horizon": 2,
+    "mse": 0.41901928186416626,
+    "disagreement": 0.01408030278980732
+  },
+  {
+    "patient_id": "PatientID_0164",
+    "start": 3,
+    "horizon": 1,
+    "mse": 0.3285011947154999,
+    "disagreement": 0.02597716450691223
+  },
+  {
+    "patient_id": "PatientID_0171",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.14128632843494415,
+    "disagreement": 0.007903337478637695
+  },
+  {
+    "patient_id": "PatientID_0171",
+    "start": 0,
+    "horizon": 2,
+    "mse": 0.6738810539245605,
+    "disagreement": 0.015750497579574585
+  },
+  {
+    "patient_id": "PatientID_0171",
+    "start": 1,
+    "horizon": 1,
+    "mse": 0.41411441564559937,
+    "disagreement": 0.008376498706638813
+  },
+  {
+    "patient_id": "PatientID_0188",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.7457479238510132,
+    "disagreement": 0.09994009882211685
+  },
+  {
+    "patient_id": "PatientID_0191",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.26141589879989624,
+    "disagreement": 0.07677851617336273
+  },
+  {
+    "patient_id": "PatientID_0191",
+    "start": 0,
+    "horizon": 2,
+    "mse": 0.33172518014907837,
+    "disagreement": 0.25544753670692444
+  },
+  {
+    "patient_id": "PatientID_0191",
+    "start": 0,
+    "horizon": 3,
+    "mse": 0.47686734795570374,
+    "disagreement": 0.22409871220588684
+  },
+  {
+    "patient_id": "PatientID_0191",
+    "start": 1,
+    "horizon": 1,
+    "mse": 0.1634305715560913,
+    "disagreement": 0.0891026183962822
+  },
+  {
+    "patient_id": "PatientID_0191",
+    "start": 1,
+    "horizon": 2,
+    "mse": 0.7552750110626221,
+    "disagreement": 0.1556224822998047
+  },
+  {
+    "patient_id": "PatientID_0191",
+    "start": 2,
+    "horizon": 1,
+    "mse": 0.4504862427711487,
+    "disagreement": 0.022394483909010887
+  },
+  {
+    "patient_id": "PatientID_0196",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.8487073183059692,
+    "disagreement": 0.053292032331228256
+  },
+  {
+    "patient_id": "PatientID_0196",
+    "start": 0,
+    "horizon": 2,
+    "mse": 0.7789865136146545,
+    "disagreement": 0.043984800577163696
+  },
+  {
+    "patient_id": "PatientID_0196",
+    "start": 1,
+    "horizon": 1,
+    "mse": 0.4565659761428833,
+    "disagreement": 0.07650789618492126
+  },
+  {
+    "patient_id": "PatientID_0205",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.37709200382232666,
+    "disagreement": 0.005399083718657494
+  },
+  {
+    "patient_id": "PatientID_0205",
+    "start": 0,
+    "horizon": 2,
+    "mse": 0.2887612581253052,
+    "disagreement": 0.02724250592291355
+  },
+  {
+    "patient_id": "PatientID_0205",
+    "start": 0,
+    "horizon": 3,
+    "mse": 0.07712655514478683,
+    "disagreement": 0.04431820660829544
+  },
+  {
+    "patient_id": "PatientID_0205",
+    "start": 1,
+    "horizon": 1,
+    "mse": 0.43399640917778015,
+    "disagreement": 0.017392996698617935
+  },
+  {
+    "patient_id": "PatientID_0205",
+    "start": 1,
+    "horizon": 2,
+    "mse": 0.07737300544977188,
+    "disagreement": 0.031271763145923615
+  },
+  {
+    "patient_id": "PatientID_0205",
+    "start": 1,
+    "horizon": 3,
+    "mse": 0.47456586360931396,
+    "disagreement": 0.04359935224056244
+  },
+  {
+    "patient_id": "PatientID_0205",
+    "start": 2,
+    "horizon": 1,
+    "mse": 0.2129601240158081,
+    "disagreement": 0.005596481263637543
+  },
+  {
+    "patient_id": "PatientID_0205",
+    "start": 2,
+    "horizon": 2,
+    "mse": 1.0831968784332275,
+    "disagreement": 0.02439858391880989
+  },
+  {
+    "patient_id": "PatientID_0205",
+    "start": 3,
+    "horizon": 1,
+    "mse": 0.6554869413375854,
+    "disagreement": 0.0057318066246807575
+  },
+  {
+    "patient_id": "PatientID_0213",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.20342577993869781,
+    "disagreement": 0.05721453204751015
+  },
+  {
+    "patient_id": "PatientID_0213",
+    "start": 0,
+    "horizon": 2,
+    "mse": 0.6229400634765625,
+    "disagreement": 0.04554557800292969
+  },
+  {
+    "patient_id": "PatientID_0213",
+    "start": 0,
+    "horizon": 3,
+    "mse": 0.4567764401435852,
+    "disagreement": 0.09956046938896179
+  },
+  {
+    "patient_id": "PatientID_0213",
+    "start": 1,
+    "horizon": 1,
+    "mse": 0.5754102468490601,
+    "disagreement": 0.039077237248420715
+  },
+  {
+    "patient_id": "PatientID_0213",
+    "start": 1,
+    "horizon": 2,
+    "mse": 0.4120545983314514,
+    "disagreement": 0.0677696019411087
+  },
+  {
+    "patient_id": "PatientID_0213",
+    "start": 1,
+    "horizon": 3,
+    "mse": 0.3040098249912262,
+    "disagreement": 0.049383532255887985
+  },
+  {
+    "patient_id": "PatientID_0213",
+    "start": 2,
+    "horizon": 1,
+    "mse": 0.33125701546669006,
+    "disagreement": 0.015333764255046844
+  },
+  {
+    "patient_id": "PatientID_0213",
+    "start": 2,
+    "horizon": 2,
+    "mse": 0.21770980954170227,
+    "disagreement": 0.020787471905350685
+  },
+  {
+    "patient_id": "PatientID_0213",
+    "start": 3,
+    "horizon": 1,
+    "mse": 0.1162106990814209,
+    "disagreement": 0.014021508395671844
+  },
+  {
+    "patient_id": "PatientID_0215",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.11373857408761978,
+    "disagreement": 0.038323983550071716
+  },
+  {
+    "patient_id": "PatientID_0215",
+    "start": 0,
+    "horizon": 2,
+    "mse": 0.14863356947898865,
+    "disagreement": 0.03910580649971962
+  },
+  {
+    "patient_id": "PatientID_0215",
+    "start": 0,
+    "horizon": 3,
+    "mse": 1.00563645362854,
+    "disagreement": 0.05013340711593628
+  },
+  {
+    "patient_id": "PatientID_0215",
+    "start": 1,
+    "horizon": 1,
+    "mse": 0.15096105635166168,
+    "disagreement": 0.027490131556987762
+  },
+  {
+    "patient_id": "PatientID_0215",
+    "start": 1,
+    "horizon": 2,
+    "mse": 0.9340696334838867,
+    "disagreement": 0.02793591096997261
+  },
+  {
+    "patient_id": "PatientID_0215",
+    "start": 1,
+    "horizon": 3,
+    "mse": 0.5009310245513916,
+    "disagreement": 0.05408734083175659
+  },
+  {
+    "patient_id": "PatientID_0215",
+    "start": 2,
+    "horizon": 1,
+    "mse": 0.6937574148178101,
+    "disagreement": 0.03801889345049858
+  },
+  {
+    "patient_id": "PatientID_0215",
+    "start": 2,
+    "horizon": 2,
+    "mse": 0.5411041975021362,
+    "disagreement": 0.05239786207675934
+  },
+  {
+    "patient_id": "PatientID_0215",
+    "start": 2,
+    "horizon": 3,
+    "mse": 0.1801101565361023,
+    "disagreement": 0.10049697756767273
+  },
+  {
+    "patient_id": "PatientID_0215",
+    "start": 3,
+    "horizon": 1,
+    "mse": 0.48967888951301575,
+    "disagreement": 0.04730731248855591
+  },
+  {
+    "patient_id": "PatientID_0215",
+    "start": 3,
+    "horizon": 2,
+    "mse": 0.2548874020576477,
+    "disagreement": 0.03776866942644119
+  },
+  {
+    "patient_id": "PatientID_0215",
+    "start": 4,
+    "horizon": 1,
+    "mse": 0.18363749980926514,
+    "disagreement": 0.06894225627183914
+  },
+  {
+    "patient_id": "PatientID_0236",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.4391400218009949,
+    "disagreement": 0.025346893817186356
+  },
+  {
+    "patient_id": "PatientID_0236",
+    "start": 0,
+    "horizon": 2,
+    "mse": 1.1475365161895752,
+    "disagreement": 0.031480856239795685
+  },
+  {
+    "patient_id": "PatientID_0236",
+    "start": 1,
+    "horizon": 1,
+    "mse": 1.9901669025421143,
+    "disagreement": 0.019863981753587723
+  },
+  {
+    "patient_id": "PatientID_0242",
+    "start": 0,
+    "horizon": 1,
+    "mse": 0.6135754585266113,
+    "disagreement": 0.016544055193662643
+  },
+  {
+    "patient_id": "PatientID_0242",
+    "start": 0,
+    "horizon": 2,
+    "mse": 1.4350011348724365,
+    "disagreement": 0.027654310688376427
+  },
+  {
+    "patient_id": "PatientID_0242",
+    "start": 1,
+    "horizon": 1,
+    "mse": 3.160451889038086,
+    "disagreement": 0.10133252292871475
+  }
+]

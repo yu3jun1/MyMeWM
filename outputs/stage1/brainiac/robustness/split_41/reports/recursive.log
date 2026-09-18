@@ -1,0 +1,5 @@
+Recursive Rollout Performance
+| Seed | Variant | MSE@1 | MSE@2 | MSE@3 | Long MSE |
+|---:|---|---:|---:|---:|---:|
+| 17 | baseline | 0.8054 | 1.0502 | 0.6761 | 0.8632 |
+| 17 | rrt | 0.8821 | 1.0478 | 0.6427 | 0.8452 |

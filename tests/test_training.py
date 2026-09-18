@@ -1,6 +1,7 @@
 import json
 from dataclasses import asdict
 
+import pytest
 import torch
 
 from clarity_hauwm.ablation import evaluate_stage1, train_horizon_ablation, train_split_robustness, train_stage1
@@ -60,6 +61,9 @@ def test_stage1_pipeline_writes_revised_reports(tmp_path, dataset_factory):
     assert len(uncertainty) == 2
     assert len(train_split_robustness(data_dir, config_path, output)) == 2
     assert len(train_horizon_ablation(data_dir, config_path, output)) == 3
+    with pytest.raises(ValueError, match="Insufficient H4/H5 windows"):
+        train_horizon_ablation(data_dir, config_path, output, include_stress=True,
+                               min_stress_windows=1)
     summary = summarize_stage1(output)
     assert "stage1_pass" not in summary
     assert summary["main_split_seed"] == 17
@@ -77,6 +81,11 @@ def test_stage1_pipeline_writes_revised_reports(tmp_path, dataset_factory):
     assert set(ablation) == {"K1", "K2", "K3"}
     assert {ablation[key]["max_horizon"] for key in ablation} == {1, 2, 3}
     assert all(ablation[key]["long_mse"] is not None for key in ablation)
+    ablation_counts = []
+    for key in ("k1", "k2", "k3"):
+        metrics = json.loads((output / "horizon_ablation" / key / "recursive_metrics.json").read_text())
+        ablation_counts.append([row["n_predictions"] for row in metrics["by_horizon"][:3]])
+    assert ablation_counts[0] == ablation_counts[1] == ablation_counts[2]
     reports = output / "reports"
     for name in ("dataset_stats", "training_summary", "prediction_metrics", "prediction_comparison",
                  "uncertainty_metrics", "selective_risk", "split_robustness", "horizon_ablation", "stage1_summary"):

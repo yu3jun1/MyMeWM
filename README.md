@@ -1,10 +1,10 @@
-# CLARITY × RHRT × Ensemble：Stage 1
+# CLARITY × RRT × Ensemble：Stage 1
 
-本仓库验证两个问题：随机 horizon 的递归训练能否减少多步 MRI latent 预测误差；独立 dynamics ensemble 的分歧能否识别高误差轨迹。主实验使用冻结的 BrainIAC encoder，MRI-CORE 采用相同协议作为稳健性实验。两个 latent space 只比较各自内部的相对改善，不比较绝对 MSE。
+本仓库验证两个问题：Recursive Rollout Training（RRT）能否改善多步 MRI latent 预测；独立 dynamics ensemble 的分歧能否识别高误差轨迹。主实验使用冻结的 BrainIAC encoder，MRI-CORE 用于 representation robustness。两个 latent space 只比较各自内部的相对改善，不直接比较绝对 MSE。
 
-五个 variant 是 baseline、recursive_max、rhrt、ensemble、rhrt_ensemble。Baseline 和 Ensemble 用一步训练；Recursive-Max 在每个起点使用最大可用 horizon；RHRT 在 1 到 min(3, 剩余步数) 中均匀采样，递归回灌预测 latent，只对终点计算 loss。Recursive-Max 用来检验随机 horizon 的作用，不作为独立 contribution。Ensemble 的 5 个 member 独立初始化、打乱 batch 和采样 horizon，且各自维护 rollout 状态。所有方法均以 validation MSE@2 和 MSE@3 的平均值选择 checkpoint。
+四个 variant 为 `baseline`、`rrt`、`ensemble`、`rrt_ensemble`。Baseline 和 Ensemble 使用一步训练；RRT 在每个起点使用不超过 `Kmax=3` 的最大可用 horizon，递归回灌模型预测的 latent，只对终点计算 MSE。两类方法共享相同的单步 transition architecture，输入均为 `(latent_state, treatment, delta_time)`，没有 target-horizon conditioning 或 teacher forcing。Ensemble 的 5 个 member 独立初始化和打乱 batch，各自维持自己的 rollout 状态。所有方法用 validation MSE@2 与 MSE@3 的均值选择 checkpoint。
 
-正式比较限定 horizon 1、2、3。主实验以患者级 70%/15%/15% 划分，split seed 为 17；training seeds 为 7、17、29。主指标是 MSE@1、MSE@2、MSE@3 和 Long MSE = (MSE@2 + MSE@3)/2，报告跨 seed 的 mean ± std 及相对改善百分比。患者划分稳健性使用 split seeds 23、41、59，并固定 training seed 17。风险信号使用逐 horizon Spearman、最高/最低 uncertainty 三分位误差比和 selective risk。程序只报告结果，不给实验自动判定。Stage 1 只评价观测治疗序列下的预测与风险排序。
+主实验在患者级 70%/15%/15% 划分上评价 H1–H3，split seed 为 17，training seeds 为 7、17、29。主指标是 MSE@1、MSE@2、MSE@3 和 Long MSE = (MSE@2 + MSE@3)/2；Cos@1–3 作为辅助指标。报告跨 seed 的 mean ± std，并按同一 seed 计算 Baseline→RRT 与 Ensemble→RRT+Ensemble 的相对改善。患者划分稳健性使用 split seeds 23、41、59，固定 training seed 17。Reliability 分析使用逐 horizon Spearman、分歧最高/最低三分位误差比及 selective risk。Ensemble disagreement 只是 prediction risk signal，不解释为校准后的不确定性。程序只报告实验事实，不做自动 Pass/Fail 判断。
 
 ## 1. 环境与数据
 
@@ -114,13 +114,13 @@ clarity-hauwm validate-data --data data/trajectories/mri_core
 
 ## 5. 运行 Stage 1
 
-先确认两套 encoder 的患者、timepoint、action 和 delta_days 对齐：
+先核对两套 encoder 的患者、timepoint、action 和 delta_days：
 
 ```bash
 clarity-hauwm validate-encoder-alignment --encoder-data brainiac=data/trajectories/brainiac mri_core=data/trajectories/mri_core
 ```
 
-BrainIAC 是主实验。使用 GPU 时，先根据实时负载把 `CUDA_VISIBLE_DEVICES` 设为 4–7 中的一张卡。先运行数据审计，核对患者数、timepoint 数和各 horizon 的合法窗口数：
+BrainIAC 是主实验。先做数据审计，再训练和评估四个 variant：
 
 ```bash
 clarity-hauwm audit-stage1 --data data/trajectories/brainiac --config configs/stage1_recursive.json --output outputs/stage1/brainiac
@@ -128,26 +128,35 @@ clarity-hauwm train-stage1 --data data/trajectories/brainiac --config configs/st
 clarity-hauwm evaluate-recursive --input outputs/stage1/brainiac
 clarity-hauwm evaluate-uncertainty --input outputs/stage1/brainiac
 clarity-hauwm train-split-robustness --data data/trajectories/brainiac --config configs/stage1_recursive.json --output outputs/stage1/brainiac
+clarity-hauwm train-horizon-ablation --data data/trajectories/brainiac --config configs/stage1_recursive.json --output outputs/stage1/brainiac
 clarity-hauwm summarize-stage1 --input outputs/stage1/brainiac
 ```
 
-`train-stage1` 默认运行五个 variant × seeds 7、17、29。`train-split-robustness` 运行三个新增 patient split，各运行 baseline、recursive_max、rhrt × seed 17，并自动评估。长时间实验可以用 `--variants` 和 `--seeds` 分批运行主实验。完成后再运行汇总。
+`train-stage1` 默认运行四个 variant × seeds 7、17、29，可以通过 `--variants` 和 `--seeds` 分批运行。`train-split-robustness` 在三个新增 patient split 上仅运行 `baseline` 与 `rrt`，固定 training seed 17，自动评估 H1–H3。`train-horizon-ablation` 在主 split 上固定 training seed 17，分别训练 Kmax=1、2、3，并使用相同的 H1–H3 测试窗口；K1 使用一步 Baseline，K2/K3 使用 RRT。RRT 的 K2/K3 消融在每个起点使用该上限内的最大可用训练 horizon；Baseline 固定一步。
 
-MRI-CORE 作为 representation robustness，先运行 baseline、rhrt、rhrt_ensemble。它使用自己的 dynamics 模型，不与 BrainIAC 比绝对 MSE：
+数据审计也列出 H4/H5 在 train、validation、test 中的窗口数。仅在每个 split 的 H4 和 H5 窗口都达到阈值时，可显式运行 Kmax=5 压力测试：
+
+```bash
+clarity-hauwm train-horizon-ablation --data data/trajectories/brainiac --config configs/stage1_recursive.json --output outputs/stage1/brainiac --include-stress --min-stress-windows 30
+```
+
+这里的阈值默认为每个 split、每个 horizon 至少 30 个窗口，可按研究设计调整。K5 的 H4/H5 指标仅作描述；主实验和 Long MSE 仍限 H1–H3。
+
+MRI-CORE 使用独立 dynamics 模型做 representation robustness，先运行以下三个 variant：
 
 ```bash
 clarity-hauwm audit-stage1 --data data/trajectories/mri_core --config configs/stage1_recursive.json --output outputs/stage1/mri_core
-clarity-hauwm train-stage1 --data data/trajectories/mri_core --config configs/stage1_recursive.json --variants baseline rhrt rhrt_ensemble --output outputs/stage1/mri_core
+clarity-hauwm train-stage1 --data data/trajectories/mri_core --config configs/stage1_recursive.json --variants baseline rrt rrt_ensemble --output outputs/stage1/mri_core
 clarity-hauwm evaluate-recursive --input outputs/stage1/mri_core
 clarity-hauwm evaluate-uncertainty --input outputs/stage1/mri_core
 clarity-hauwm summarize-stage1 --input outputs/stage1/mri_core
 ```
 
-每次 run 保存在 `seed_<training_seed>/<variant>/`，包含 checkpoint、训练记录和逐窗口评估结果。汇总写入 `reports/`：`dataset_stats.json`、`training_summary.json`、`prediction_metrics.json`、`prediction_comparison.json`、`uncertainty_metrics.json`、`selective_risk.json`、`split_robustness.json` 和 `stage1_summary.json`。终端同时打印表格；不生成 CSV。
+每次主实验 run 保存在 `seed_<training_seed>/<variant>/`，训练 horizon 消融保存在 `horizon_ablation/k1`、`k2`、`k3`（可选 `k5`）。汇总写入 `reports/`：`dataset_stats.json`、`training_summary.json`、`prediction_metrics.json`、`prediction_comparison.json`、`uncertainty_metrics.json`、`selective_risk.json`、`split_robustness.json`、`horizon_ablation.json` 和 `stage1_summary.json`。终端同步打印结果表格，不生成 CSV。训练 horizon 计数按每个 member 的唯一训练起点记录，不乘以 epoch 数。
 
-MSE@k 是该 horizon 所有合法测试窗口的平均误差；每个 seed 独立计算，跨 seed 使用样本标准差。相对改善按同一 seed 的两种方法计算，再汇总 mean ± std，单位为百分比。Spearman 和最高/最低三分位误差比在每个 horizon 的预测窗口内计算。Selective risk 删除 uncertainty 最高的 20% 窗口，对剩余窗口计算平均 MSE；Risk Reduction 的单位也是百分比。缺少有效数据时相应 JSON 值为 `null`。
+MSE@k 是所有合法测试窗口的平均 normalized latent MSE；每个 seed 独立计算，跨 seed 使用样本标准差。相对改善按同一 seed 配对计算，再汇总 mean ± std，单位为百分比。Spearman 和最高/最低三分位误差比只在同一个 horizon 内计算。Selective risk 删除 ensemble disagreement 最高的 20% 窗口，对其余窗口计算平均 MSE；Risk Reduction 的单位为百分比。缺少有效数据时相应 JSON 值为 `null`。已有旧协议 checkpoint 不能用于新版模型，需要重新训练。
 
-旧 checkpoint 属于上一版实验协议，需要重新训练。代码测试：
+代码测试：
 
 ```bash
 /home/tanyuejun/miniconda3/envs/py310/bin/python -m pytest -q

@@ -1,0 +1,25 @@
+{
+  "started_utc": "2026-09-18T12:56:45.004287+00:00",
+  "gpu_physical_index": 5,
+  "python": "/home/tanyuejun/miniconda3/envs/py310/bin/python",
+  "files_sha256": {
+    "configs/stage1_recursive.json": "48a01158be257a84f451f9702f5e644ff8572ebff986e8f1ec906d7ef3978324",
+    "src/clarity_hauwm/__init__.py": "2832166089a746c141f956db5ea8da547172ce7f99ce0c01dfa07fc9aa889388",
+    "src/clarity_hauwm/__main__.py": "d7815f9da17bcd8e79d1d47170e5795e29cc5837f97d1049664813068a9e563f",
+    "src/clarity_hauwm/ablation.py": "344bc86b0ee0e3013a39d27a89b124b6ec95407e43419f7447da5afb5cd10f1e",
+    "src/clarity_hauwm/brainiac_extract.py": "2619f3066c6c090c195bc28d01132df5ae170b8472373050f8f46027eb5e35db",
+    "src/clarity_hauwm/clarity_adapter.py": "137ecd941a0532cd46478b11cc6a6f4a1df5bc41db10cc8592ff05ef7c70e1b1",
+    "src/clarity_hauwm/cli.py": "f47bb995e5a336a2277a2dc3582712bbbc916b12f8d9fabc2b3355f8e95a9ef4",
+    "src/clarity_hauwm/data.py": "38fff3d15a651a38d06e4f2730ebf6f8ac7fbb2dfbfae36071cf69bb3d6c1564",
+    "src/clarity_hauwm/encoder_comparison.py": "3307a59d6b0cfe77ff934a366044bcc9c862f9cf00f8399da96ee554992efe00",
+    "src/clarity_hauwm/evaluation.py": "2c3918ae6bff3664a3729be89f8f8c7ecf7daea2730c7da5bd214a0837d6e7f9",
+    "src/clarity_hauwm/model.py": "dca7812af9250b6641901ecfa5ced1a3720c8c147edacdbc577f074bcbdf6047",
+    "src/clarity_hauwm/mri_core_extract.py": "1dcd9ec0c5861147ab611ddda756f347c064ad15569ac70806516fec481459c8",
+    "src/clarity_hauwm/reporting.py": "ad3db384fca2ca98c7f9667eeaf74784d93cc465da512fc7500704fdffd105ce",
+    "src/clarity_hauwm/training.py": "b7f8f75d7598393cc622d7141092d7b00f0f8bcc27762702d7c85a18333521ae"
+  },
+  "h5_stress_test": "omitted: H5 train/validation/test windows are 14/5/6, below 30",
+  "execution_snapshot": "/tmp/clarity_rrt_formal_20260918",
+  "archived_snapshot": "/home/tanyuejun/CLARITY_HAUWM_Minimal/outputs/stage1/protocol_snapshot",
+  "script_sha256_at_execution": "dff4971444ce13a083fbf71513408e8d2082a94eef5dad12b53cfc614fdb139a"
+}

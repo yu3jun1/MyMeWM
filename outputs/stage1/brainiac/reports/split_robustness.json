@@ -1,0 +1,30 @@
+[
+  {
+    "split_seed": 17,
+    "training_seed": 17,
+    "baseline_long_mse": 1.0264747700196986,
+    "rrt_long_mse": 0.8709553532672595,
+    "rrt_relative_improvement": 15.150827014428673
+  },
+  {
+    "split_seed": 23,
+    "training_seed": 17,
+    "baseline_long_mse": 0.9187617071915863,
+    "rrt_long_mse": 0.8928404006502739,
+    "rrt_relative_improvement": 2.8213307475065603
+  },
+  {
+    "split_seed": 41,
+    "training_seed": 17,
+    "baseline_long_mse": 0.8631510738575575,
+    "rrt_long_mse": 0.845222037504701,
+    "rrt_relative_improvement": 2.0771608697338233
+  },
+  {
+    "split_seed": 59,
+    "training_seed": 17,
+    "baseline_long_mse": 0.5740587424276578,
+    "rrt_long_mse": 0.5504706606809651,
+    "rrt_relative_improvement": 4.1090013971288375
+  }
+]

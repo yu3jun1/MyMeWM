@@ -1,0 +1,54 @@
+{
+  "variant": "baseline",
+  "seed": 17,
+  "split_seed": 17,
+  "horizon_strategy": "one_step",
+  "robustness_training_seed": 17,
+  "data_dir": "/home/tanyuejun/CLARITY_HAUWM_Minimal/data/trajectories/mri_core",
+  "best_epoch": [
+    5
+  ],
+  "train_loss": [
+    0.3870181573761834
+  ],
+  "validation_loss": [
+    0.41690448705140537
+  ],
+  "max_horizon": 3,
+  "num_training_windows": 262,
+  "available_horizon_counts": {
+    "1": 262,
+    "2": 155,
+    "3": 79,
+    "4": 39,
+    "5": 14
+  },
+  "training_horizon_counts": {
+    "1": 262,
+    "2": 0,
+    "3": 0
+  },
+  "checkpoint": "/home/tanyuejun/CLARITY_HAUWM_Minimal/outputs/stage1/mri_core/seed_17/baseline/best.pt",
+  "members": [
+    {
+      "member": 0,
+      "member_seed": 17,
+      "best_epoch": 5,
+      "train_loss": 0.3870181573761834,
+      "validation_loss": 0.41690448705140537,
+      "training_horizon_counts": {
+        "1": 262,
+        "2": 0,
+        "3": 0
+      }
+    }
+  ],
+  "checkpoint_metric": "val_recursive_mse_k2_k3",
+  "protocol": {
+    "main_max_horizon": 3,
+    "ensemble_size": 1,
+    "split_seed": 17,
+    "train_fraction": 0.7,
+    "validation_fraction": 0.15
+  }
+}
