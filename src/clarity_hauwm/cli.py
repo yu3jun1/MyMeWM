@@ -9,6 +9,10 @@ from .brainiac_extract import extract_brainiac_latents
 from .clarity_adapter import build_clarity_trajectories
 from .data import validate_dataset
 from .encoder_comparison import parse_encoder_datasets, validate_encoder_alignment
+from .extract_adapted_latents import extract_adapted_latents
+from .lora_adaptation import adapt_mri_core_lora
+from .lora_experiment import stage_log, train_mri_core_lora_dynamics
+from .lora_reporting import summarize_mri_core_lora
 from .mri_core_extract import extract_mri_core_latents
 from .reporting import audit_stage1_dataset, summarize_stage1
 from .training import TrainingConfig, VARIANTS
@@ -59,6 +63,32 @@ def build_parser() -> argparse.ArgumentParser:
     mri.add_argument("--slices-per-modality", type=int, default=16)
     mri.add_argument("--slice-batch-size", type=int, default=2)
     mri.add_argument("--output-kind", choices=("mean", "tokens"), default="mean")
+
+    lora_adapt = subparsers.add_parser(
+        "adapt-mri-core-lora", help="Adapt MRI-CORE Q/V LoRA on train patients only")
+    lora_adapt.add_argument("--frozen-data", default="data/trajectories/mri_core")
+    lora_adapt.add_argument("--stage1-config", default="configs/stage1_recursive.json")
+    lora_adapt.add_argument("--lora-config", default="configs/mri_core_lora.json")
+    lora_adapt.add_argument("--output", default="outputs/stage1/mri_core_lora")
+
+    lora_extract = subparsers.add_parser(
+        "extract-mri-core-lora", help="Extract frozen LoRA-adapted MRI-CORE latents")
+    lora_extract.add_argument("--frozen-data", default="data/trajectories/mri_core")
+    lora_extract.add_argument("--output", default="outputs/stage1/mri_core_lora")
+    lora_extract.add_argument("--resume", action="store_true")
+
+    lora_train = subparsers.add_parser(
+        "train-mri-core-lora-dynamics", help="Run LoRA Baseline and RRT dynamics seeds")
+    lora_train.add_argument("--frozen-data", default="data/trajectories/mri_core")
+    lora_train.add_argument("--stage1-config", default="configs/stage1_recursive.json")
+    lora_train.add_argument("--output", default="outputs/stage1/mri_core_lora")
+
+    lora_report = subparsers.add_parser(
+        "summarize-mri-core-lora", help="Compare frozen and LoRA MRI-CORE groups")
+    lora_report.add_argument("--frozen-data", default="data/trajectories/mri_core")
+    lora_report.add_argument("--frozen-results", default="outputs/stage1/mri_core")
+    lora_report.add_argument("--stage1-config", default="configs/stage1_recursive.json")
+    lora_report.add_argument("--output", default="outputs/stage1/mri_core_lora")
 
     align = subparsers.add_parser("validate-encoder-alignment", help="Check matched encoder trajectories")
     align.add_argument("--encoder-data", nargs="+", required=True, metavar="NAME=PATH")
@@ -122,6 +152,39 @@ def main(argv: list[str] | None = None) -> None:
             normalization=args.normalization, slice_policy=args.slice_policy,
             slices_per_modality=args.slices_per_modality, slice_batch_size=args.slice_batch_size,
             output_kind=args.output_kind))
+    elif args.command == "adapt-mri-core-lora":
+        import torch.distributed as dist
+        import torch
+        from datetime import timedelta
+        import os
+        distributed = int(os.environ.get("WORLD_SIZE", "1")) > 1
+        if distributed:
+            torch.cuda.set_device(int(os.environ["LOCAL_RANK"]))
+            dist.init_process_group("gloo", timeout=timedelta(hours=2))
+        try:
+            if not distributed or dist.get_rank() == 0:
+                with stage_log(args.output, "adaptation"):
+                    _print(adapt_mri_core_lora(
+                        args.frozen_data, args.stage1_config, args.lora_config, args.output))
+            else:
+                adapt_mri_core_lora(
+                    args.frozen_data, args.stage1_config, args.lora_config, args.output)
+        finally:
+            if distributed:
+                dist.destroy_process_group()
+    elif args.command == "extract-mri-core-lora":
+        with stage_log(args.output, "extraction"):
+            _print(extract_adapted_latents(
+                args.frozen_data, args.output, resume=args.resume))
+    elif args.command == "train-mri-core-lora-dynamics":
+        with stage_log(args.output, "dynamics"):
+            _print(train_mri_core_lora_dynamics(
+                args.frozen_data, args.stage1_config, args.output))
+    elif args.command == "summarize-mri-core-lora":
+        with stage_log(args.output, "reporting"):
+            _print(summarize_mri_core_lora(
+                args.output, args.frozen_data, args.frozen_results,
+                args.stage1_config))
     elif args.command == "validate-encoder-alignment":
         _print(validate_encoder_alignment(parse_encoder_datasets(args.encoder_data)))
     elif args.command == "audit-stage1":

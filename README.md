@@ -161,3 +161,46 @@ MSE@k 是所有合法测试窗口的平均 normalized latent MSE；每个 seed �
 ```bash
 /home/tanyuejun/miniconda3/envs/py310/bin/python -m pytest -q
 ```
+
+## 6. MRI-CORE LoRA 补充实验
+
+此补充实验按 [`stage1_mricore_lora_experiment_plan.md`](stage1_mricore_lora_experiment_plan.md) 运行。LoRA 适配只用主 split（seed 17）的 train 患者更新 Q/V 低秩参数和独立的一步 dynamics adapter；validation 患者只用于选择 `val_one_step_mse` 最低的 checkpoint，test 患者只用于最终评估。原 MRI-CORE 参数冻结。LoRA 默认 rank 8、alpha 16、dropout 0.05、anchor 权重 0.1，配置在 `configs/mri_core_lora.json`。当前正式运行中，冻结主干使用 BF16 计算、可训练 LoRA 与 Dynamics 参数保留 FP32；每次前向/反向使用 16 张切片，3 张 GPU 以 CPU Gloo 汇总全局 batch 32 的梯度。配置记录精度；checkpoint 和特征 provenance 另外记录参与适配的 GPU 进程数。
+
+在仓库根目录依次运行（按实际可用 GPU 修改 `CUDA_VISIBLE_DEVICES`）：
+
+```bash
+CUDA_VISIBLE_DEVICES=3,6,7 OMP_NUM_THREADS=4 torchrun --standalone --nnodes=1 --nproc-per-node=3 --no-python /home/tanyuejun/miniconda3/envs/py310/bin/clarity-hauwm adapt-mri-core-lora
+CUDA_VISIBLE_DEVICES=7 clarity-hauwm extract-mri-core-lora --resume
+CUDA_VISIBLE_DEVICES=7 clarity-hauwm train-mri-core-lora-dynamics
+clarity-hauwm summarize-mri-core-lora
+```
+
+`bash scripts/run_mri_core_lora_full.sh` 可从空目录独立执行整套实验；它在适配完成后调用 `scripts/continue_mri_core_lora_experiment.sh --completed` 自动执行后三步。启动和进度分别写入 `logs/pipeline_bootstrap.log` 与 `logs/pipeline.log`，适配器启动输出写入 `logs/launcher.log`。
+
+重抽取若被中断，使用 `clarity-hauwm extract-mri-core-lora --resume` 继续。Dynamics 阶段再次执行时会校验并跳过已完整训练的 seed run，再统一评估。要重新做 LoRA 适配，使用新的 `mri_core_lora*` 输出根目录，并为后续命令传入相同的 `--output`；已有 checkpoint 不会被覆盖。
+
+所有新增产物独立放在 `outputs/stage1/mri_core_lora/`，与 `outputs/stage1/mri_core/` 的冻结实验区分：
+
+```text
+outputs/stage1/mri_core_lora/
+├── adaptation/                # best_lora.pt、config.json、training_log.json、adaptation_summary.*
+├── features/
+│   ├── latents/               # 重新抽取的每时间点 256 维 latent
+│   ├── trajectories/          # 与原 MRI-CORE 对齐的 Stage 1 数据集
+│   ├── train.pt、validation.pt、test.pt
+│   ├── normalization.json     # 仅按 train 患者重新拟合
+│   └── provenance.json
+├── seed_7|seed_17|seed_29/
+│   └── baseline|rrt/          # 独立的 Dynamics checkpoint、训练和评估结果
+├── logs/                      # adaptation.log、extraction.log、dynamics.log、reporting.log
+└── reports/
+    ├── prediction_metrics.json、prediction_comparison.json   # LoRA 内部比较
+    ├── four_group_prediction_metrics.json                     # Frozen/LoRA × Baseline/RRT
+    ├── paired_relative_improvement.json                       # 按 seed 配对 RI
+    ├── patient_macro_metrics.json                             # 患者等权误差
+    ├── representation_diagnostics.json                        # drift 与 smoothness
+    ├── comparison_provenance.json
+    └── summary.md
+```
+
+当前冻结协议每时间点使用四个模态的全部切片（示例 MRI 共 620 张），LoRA 适配需要逐切片反向传播，计算开销较高。特征重抽取复用冻结 MRI-CORE 的模态、切片、空间预处理与 mean pooling；提取后验证患者、时间点、action 和间隔对齐。Dynamics 复用 `configs/stage1_recursive.json`，仅训练 Baseline 和 RRT，各运行 seed 7、17、29。主比较是 **LoRA Baseline 与 LoRA RRT** 在同一 representation 下的 H1–H3 和 Long MSE；跨 Frozen/LoRA 的绝对 MSE 仅作描述，因为 latent 几何可能改变。全部四组结果与患者等权指标在 `summary.md` 和对应 JSON 中分别保存。

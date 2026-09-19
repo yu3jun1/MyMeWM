@@ -1,0 +1,14 @@
+[
+  {
+    "epoch": 1,
+    "train_adaptation_loss": 2.9752354748779908e-05,
+    "train_one_step_mse": 2.3265527488547377e-05,
+    "val_one_step_mse": 6.5569565776968375e-06
+  },
+  {
+    "epoch": 2,
+    "train_adaptation_loss": 6.554555511684157e-06,
+    "train_one_step_mse": 5.3641924750991166e-06,
+    "val_one_step_mse": 4.213961801724508e-06
+  }
+]
